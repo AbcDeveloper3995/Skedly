@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-primary":"#ffffff","on-error":"#ffffff","surface-tint":"#575e70","tertiary":"#000000","secondary-container":"#4a68f0","error":"#ba1a1a","on-background":"#0b1c30","on-secondary-fixed-variant":"#0233c1","tertiary-container":"#002109","on-surface-variant":"#45464c","surface-variant":"#d3e4fe","surface-container-high":"#dce9ff","surface":"#f8f9ff","outline-variant":"#c6c6cd","surface-bright":"#f8f9ff","on-primary-container":"#7d8497","on-surface":"#0b1c30","on-primary-fixed":"#141b2b","secondary-fixed-dim":"#b9c3ff","on-secondary-fixed":"#001257","on-tertiary-fixed":"#002109","primary-container":"#141b2b","on-tertiary-container":"#009842","inverse-surface":"#213145","secondary":"#2c4dd6","background":"#f8f9ff","secondary-fixed":"#dee1ff","primary":"#000000","inverse-on-surface":"#eaf1ff","on-secondary":"#ffffff","error-container":"#ffdad6","on-tertiary":"#ffffff","inverse-primary":"#c0c6db","on-primary-fixed-variant":"#404758","surface-container-lowest":"#ffffff","outline":"#76777d","on-error-container":"#93000a","on-secondary-container":"#fffbff","surface-container":"#e5eeff","on-tertiary-fixed-variant":"#005320","primary-fixed":"#dce2f7","surface-dim":"#cbdbf5","tertiary-fixed":"#7ffc97","tertiary-fixed-dim":"#62df7d","primary-fixed-dim":"#c0c6db","surface-container-highest":"#d3e4fe","surface-container-low":"#eff4ff"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"gutter":"1.5rem","gutter-sm":"1rem","space-xs":"0.25rem","margin-sm":"1rem","margin":"2rem","space-xl":"2rem","space-lg":"1.5rem","space-sm":"0.5rem","space-md":"1rem"},fontFamily:{"label-sm":["Inter"],"headline-lg-mobile":["Inter"],"headline-md":["Inter"],"title-sm":["Inter"],"body-lg":["Inter"],"label-md":["Inter"],"headline-xl":["Inter"],"title-md":["Inter"],"headline-xl-mobile":["Inter"],"body-sm":["Inter"],"body-md":["Inter"],"headline-lg":["Inter"],"label-lg":["Inter"],"headline-sm":["Inter"]},fontSize:{"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.02em",fontWeight:"600"}],"headline-lg-mobile":["24px",{lineHeight:"30px",letterSpacing:"-0.015em",fontWeight:"600"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.015em",fontWeight:"600"}],"title-sm":["16px",{lineHeight:"24px",letterSpacing:"0em",fontWeight:"600"}],"body-lg":["16px",{lineHeight:"26px",letterSpacing:"0em",fontWeight:"400"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.01em",fontWeight:"500"}],"headline-xl":["36px",{lineHeight:"44px",letterSpacing:"-0.025em",fontWeight:"700"}],"title-md":["18px",{lineHeight:"26px",letterSpacing:"-0.005em",fontWeight:"600"}],"headline-xl-mobile":["28px",{lineHeight:"34px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-sm":["13px",{lineHeight:"18px",letterSpacing:"0.005em",fontWeight:"400"}],"body-md":["14px",{lineHeight:"22px",letterSpacing:"0em",fontWeight:"400"}],"headline-lg":["30px",{lineHeight:"38px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-lg":["14px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"500"}],"headline-sm":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[250px] bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-[72px] px-space-md flex items-center gap-space-sm bg-surface-container-lowest"><img alt="SKEDLY Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1U-SjfGiBtMeWvMajiJmItQnlamMBopo8JKzqJ2KXMulaudk79J1XJNRS21WIjqqYaifKpPj-0DZmDasjuEt4P6HwNcEF-Jb2ZhP33v94Etdj8DE7VyZ2vpJc8r1L3mJwzZ9SjrP8IwQopJOOapP8d6RtWD_XoulQ_rAbUQHi1shmGcKXkcg_vG9R3w-tubm1_T5tFouos7juC2wHkxv8FWhDuQrzd42-STgwFt6UI"/><span class="font-title-md text-title-md text-on-surface tracking-tight">SKEDLY</span></div><div class="px-space-md py-space-xs"><button class="w-full flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container text-left transition-colors"><div class="flex items-center gap-space-xs overflow-hidden"><span class="material-symbols-outlined text-secondary text-title-sm">store</span><div class="flex flex-col truncate"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Negocio</span><span class="font-title-sm text-title-sm text-on-surface truncate">Barbería Alpha</span></div></div><span class="material-symbols-outlined text-on-surface-variant text-body-md">unfold_more</span></button></div><nav class="px-space-xs py-space-xs flex flex-col gap-space-xs" data-active-classes="bg-secondary text-on-secondary font-semibold"><span class="px-space-sm pt-space-xs font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">General</span><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm" data-path="resumen" href="#"><span class="material-symbols-outlined text-title-sm">grid_view</span>Resumen</a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm" data-path="calendario" href="#"><span class="material-symbols-outlined text-title-sm">calendar_today</span>Calendario</a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm" data-path="citas" href="#"><span class="material-symbols-outlined text-title-sm">event_available</span>Citas</a><span class="px-space-sm pt-space-xs font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Gestión</span><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm" data-path="clientes" href="#"><span class="material-symbols-outlined text-title-sm">group</span>Clientes</a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm" data-path="empleados" href="#"><span class="material-symbols-outlined text-title-sm">badge</span>Empleados</a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm" data-path="servicios" href="#"><span class="material-symbols-outlined text-title-sm">content_cut</span>Servicios</a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm" data-path="categorias" href="#"><span class="material-symbols-outlined text-title-sm">category</span>Categorías</a><span class="px-space-sm pt-space-xs font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Análisis</span><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm" data-path="estadisticas" href="#"><span class="material-symbols-outlined text-title-sm">monitoring</span>Estadísticas</a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm" data-path="ingresos" href="#"><span class="material-symbols-outlined text-title-sm">payments</span>Ingresos</a><span class="px-space-sm pt-space-xs font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Presencia Online</span><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm" data-path="mi-pagina-web" href="#"><span class="material-symbols-outlined text-title-sm">language</span>Mi página web</a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm" data-path="personalizacion" href="#"><span class="material-symbols-outlined text-title-sm">palette</span>Personalización</a><span class="px-space-sm pt-space-xs font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Configuración</span><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm" data-path="experiencia-de-reservas" href="#"><span class="material-symbols-outlined text-title-sm">tune</span>Exp. de reservas</a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg bg-secondary text-on-secondary font-semibold shadow-sm transition-all font-body-sm text-body-sm" data-path="sucursales" href="#"><span class="material-symbols-outlined text-title-sm">apartment</span>Sucursales</a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm" data-path="horarios" href="#"><span class="material-symbols-outlined text-title-sm">schedule</span>Horarios</a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm" data-path="configuracion" href="#"><span class="material-symbols-outlined text-title-sm">settings</span>Configuración</a></nav></div><div class="p-space-sm m-space-xs bg-surface-container-low rounded-xl flex items-center justify-between gap-space-xs"><div class="flex items-center gap-space-xs overflow-hidden"><img alt="Profile" class="w-9 h-9 rounded-full object-cover shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHoLsUoGJ2XMjgV2OcmOiR2GZ6IJ9ppvkmp3rEADrjJifEVTbIZxcwgxikG5bRXG0GPupMXcoZ24_8iLSTQpdSSq9tJ6Dn3swaT74byXHP5NhHzSUu7cRywerGKAO4WVcxvT_EjLPzKzUbjw8FV6omPvMoJiThWIS0zUY3oOa2gXhMbTvOHat-MbzoMHm6gpTQDoqwIYETky0qvriF2MfIEtH9JcLwtkEs94s9ij8"/><div class="flex flex-col truncate"><span class="font-label-md text-label-md text-on-surface truncate font-semibold">Carlos Mendoza</span><span class="font-label-sm text-label-sm text-on-surface-variant truncate">Administrador</span></div></div><button class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-container-high"><span class="material-symbols-outlined text-body-md">logout</span></button></div></aside><div class="pl-[250px]"><header class="fixed top-0 left-[250px] right-0 h-[72px] bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md"><img alt="SKEDLY Logo" class="h-6 w-auto object-contain md:hidden" src="https://lh3.googleusercontent.com/aida/AEtjO1U-SjfGiBtMeWvMajiJmItQnlamMBopo8JKzqJ2KXMulaudk79J1XJNRS21WIjqqYaifKpPj-0DZmDasjuEt4P6HwNcEF-Jb2ZhP33v94Etdj8DE7VyZ2vpJc8r1L3mJwzZ9SjrP8IwQopJOOapP8d6RtWD_XoulQ_rAbUQHi1shmGcKXkcg_vG9R3w-tubm1_T5tFouos7juC2wHkxv8FWhDuQrzd42-STgwFt6UI"/><div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface-variant"><span class="hover:text-on-surface cursor-pointer">Inicio</span><span>/</span><span class="hover:text-on-surface cursor-pointer">Configuración</span><span>/</span><span class="text-on-surface font-semibold">Sucursales</span></div></div><div class="flex items-center gap-space-md"><div class="relative w-64 lg:w-80"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-body-md">search</span><input class="w-full h-10 pl-9 pr-3 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary/20" placeholder="Buscar cita, cliente, servicio..." type="text"/></div><div class="flex items-center gap-space-xs"><button class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors relative"><span class="material-symbols-outlined text-body-lg">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error"></span></button><button class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-body-lg">help_outline</span></button></div><div class="flex items-center gap-space-xs pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHoLsUoGJ2XMjgV2OcmOiR2GZ6IJ9ppvkmp3rEADrjJifEVTbIZxcwgxikG5bRXG0GPupMXcoZ24_8iLSTQpdSSq9tJ6Dn3swaT74byXHP5NhHzSUu7cRywerGKAO4WVcxvT_EjLPzKzUbjw8FV6omPvMoJiThWIS0zUY3oOa2gXhMbTvOHat-MbzoMHm6gpTQDoqwIYETky0qvriF2MfIEtH9JcLwtkEs94s9ij8"/><span class="material-symbols-outlined text-on-surface-variant text-body-md cursor-pointer hover:text-on-surface">keyboard_arrow_down</span></div></div></header><main class="w-full pt-[72px] px-space-lg py-space-lg min-h-screen bg-surface"><div class="flex flex-col w-full gap-space-lg">
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Multi-sede Enterprise</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">·</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">4 Ubicaciones registradas</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Gestión de Sucursales y Locales</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+        Administra múltiples ubicaciones, asigna personal, sincroniza agendas y controla el rendimiento individual de cada salón en tiempo real.
+      </p>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="h-10 px-4 rounded-lg bg-surface-container-lowest text-on-surface shadow-sm hover:bg-surface-container transition-colors flex items-center gap-space-xs font-label-lg text-label-lg">
+<span class="material-symbols-outlined text-title-sm text-on-surface-variant">download</span>
+<span>Exportar reporte de sedes</span>
+</button>
+<button class="h-10 px-4 rounded-lg bg-secondary text-on-secondary shadow-sm hover:bg-secondary-container transition-all flex items-center gap-space-xs font-label-lg text-label-lg font-medium" onclick="const m = document.getElementById('modal-nueva-sucursal'); if(m) { m.scrollIntoView(); } else { window.location.reload(); }">
+<span class="material-symbols-outlined text-title-sm">add_business</span>
+<span>Nueva Sucursal</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Sedes Activas</span>
+<div class="flex items-baseline gap-space-xs mt-1">
+<span class="font-headline-xl text-headline-xl text-on-surface">3</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">operativas</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-low text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-headline-sm">storefront</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant">
+<span class="inline-block w-2 h-2 rounded-full bg-secondary"></span>
+<span>1 en preparación para apertura</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Citas Totales Hoy</span>
+<div class="flex items-baseline gap-space-xs mt-1">
+<span class="font-headline-xl text-headline-xl text-on-surface">74</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">agendadas</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-low text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-headline-sm">event_available</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center gap-1 font-label-sm text-label-sm text-on-tertiary-container font-semibold">
+<span class="material-symbols-outlined text-body-sm">trending_up</span>
+<span>+12% vs. semana anterior</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Ocupación Media</span>
+<div class="flex items-baseline gap-space-xs mt-1">
+<span class="font-headline-xl text-headline-xl text-on-surface">88.5%</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-low text-secondary flex items-center justify-center shrink-0">
+<svg class="w-7 h-7 -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-highest" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<path class="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="88.5, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>Serrano liderando: 94%</span>
+<span class="text-secondary font-semibold">Óptimo</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Facturación Global Mes</span>
+<div class="flex items-baseline gap-space-xs mt-1">
+<span class="font-headline-xl text-headline-xl text-on-surface">28.450 €</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-low text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-headline-sm">payments</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center gap-1 font-label-sm text-label-sm text-on-tertiary-container font-semibold">
+<span class="material-symbols-outlined text-body-sm">arrow_upward</span>
+<span>+8.4% vs mes anterior (Oct)</span>
+</div>
+</div>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container-lowest shadow-sm flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-1 overflow-x-auto pb-1 lg:pb-0" id="statusFilterTabs">
+<button class="px-3 py-1.5 rounded-lg bg-secondary text-on-secondary font-label-md text-label-md transition-colors whitespace-nowrap">Todas (4)</button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low font-label-md text-label-md transition-colors whitespace-nowrap">Operativas (3)</button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low font-label-md text-label-md transition-colors whitespace-nowrap">Próxima Apertura (1)</button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low font-label-md text-label-md transition-colors whitespace-nowrap">Archivadas (0)</button>
+</div>
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm">
+<div class="relative min-w-[260px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-body-md">search</span>
+<input class="w-full h-9 pl-9 pr-3 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_rgba(44,77,214,0.2)]" placeholder="Buscar por nombre, calle o ciudad..." type="text"/>
+</div>
+<div class="relative shrink-0">
+<button class="h-9 px-3 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md flex items-center justify-between gap-2 hover:bg-surface-container transition-colors min-w-[170px]">
+<span class="truncate">Madrid, Barcelona</span>
+<span class="material-symbols-outlined text-body-md text-on-surface-variant">keyboard_arrow_down</span>
+</button>
+</div>
+<div class="flex items-center rounded-lg bg-surface-container-low p-0.5 shrink-0 self-end sm:self-auto">
+<button class="w-8 h-8 rounded-md bg-surface-container-lowest text-secondary flex items-center justify-center shadow-xs" title="Vista en tarjetas">
+<span class="material-symbols-outlined text-body-md">grid_view</span>
+</button>
+<button class="w-8 h-8 rounded-md text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" title="Vista en listado">
+<span class="material-symbols-outlined text-body-md">table_rows</span>
+</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg">
+<div class="rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden">
+<div>
+<div class="relative h-44 w-full bg-cover bg-center" data-alt="Interior view of a high-end luxury modern barbershop in Salamanca Madrid with polished leather chairs, warm ambient architectural lighting, dark walnut woodwork, and minimalist design." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5YDmXH9ki4ysa6LksU2L4AKvvO_ujEsTEJWqjbjC1q65RjXBJWHhuQKEh84Cpj2hE_T7DvDw0tdi_3NMx1uxd-_sud2pxs50E5BuOQEuM-orU3ZjIxB6lPvWl0CTeKNVqZimDBHH31kJZYxW5e6vWNZPWPBIPfhFnXAoH5bfgAhpp66D_P3GylPD2hkL7FgAlw75uiXnxm_X9_fapKNQft7x9sAcTjRUPLKBpXyY')">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/25 to-transparent"></div>
+<div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+<span class="px-2.5 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm shadow-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-label-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+              Sede Principal
+            </span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-on-tertiary-container font-label-sm text-label-sm flex items-center gap-1 shadow-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container animate-pulse"></span>
+              Abierto · 10:00 - 21:00
+            </span>
+</div>
+<div class="absolute bottom-3 left-4 right-4 flex items-end justify-between text-on-primary">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-surface-variant font-medium">Madrid Centro</span>
+<h2 class="font-title-md text-title-md font-bold tracking-tight">Sede Central - Salamanca</h2>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-lowest/20 backdrop-blur-md">ID: ALPH-01</span>
+</div>
+</div>
+<div class="p-space-md flex flex-col gap-space-md">
+<div class="flex flex-col gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-body-md text-secondary shrink-0">pin_drop</span>
+<span class="truncate">Calle Serrano 42, Barrio de Salamanca, 28001 Madrid</span>
+</div>
+<div class="flex items-center gap-2 pl-6 text-on-surface-variant">
+<span>+34 912 345 678</span>
+<span>·</span>
+<span class="truncate">serrano@barberiaalpha.es</span>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 p-space-sm rounded-lg bg-surface-container-low text-center">
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Puestos</span>
+<span class="font-title-sm text-title-sm text-on-surface font-bold mt-0.5">6 Sillones</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Hoy</span>
+<span class="font-title-sm text-title-sm text-on-surface font-bold mt-0.5">32 Citas</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Ocupación</span>
+<span class="font-title-sm text-title-sm text-on-tertiary-container font-bold mt-0.5">94%</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Mes Act.</span>
+<span class="font-title-sm text-title-sm text-on-surface font-bold mt-0.5">14.820 €</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Equipo:</span>
+<div class="flex -space-x-2 overflow-hidden">
+<img class="inline-block h-6 w-6 rounded-full object-cover shadow-xs" data-alt="Headshot of a modern stylish professional barber with styled beard and black uniform in Madrid studio." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBngIe4YKZ6nSXG1cqZ0FVURYAECdTGabKlTIwK7wiw1wOeOVr16mjB_hOcWzkrDicPFnjHm8afft92BfkoKLsnd2WzJ-8c7E_HaTI5Q6Bdm-BR_87sBg4NBvh2e3kkUI81jpVpe4qkNLoQdh55TMvl9kh25HoMv9eD6eokd9Tw4aUvKtmVgWLGY49HuQ_mns-l90UxDPNxK2b_CGIyu_2I52Ksvvfl6QBz8PipuRo"/>
+<img class="inline-block h-6 w-6 rounded-full object-cover shadow-xs" data-alt="Portrait of an expert hairstylist looking confident in an upscale minimalist hair salon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClmwGilUN6k4KlkaaUcaheBGD9J7yq_XPuAc_d76z1gfCGr4py3iL2mLV1aNunmtd93VjBwhPpgNDoQrlHvgyQVF5AxoiAwVotamAYv1i2h4z4XfUBY_QZGZWjdfwnQx2UWN55TZFphexqB-RlG00cGvhGn8dDJk_GfxBaKTNkvA19Z5O845QmzX1ZPyKBTc6RezLopfFZ4fFhsk8liIAA3K3QfLvI33e2A66NVzE"/>
+<img class="inline-block h-6 w-6 rounded-full object-cover shadow-xs" data-alt="Portrait of an experienced male master barber with scissors tattoo and professional attire." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQSW-nyPSD2FVYih9Azfkh4y-baiGPtGI6ZKfm17JCxAMgqtFHvBNYtfdjXysXSgsuLsJ8vo_JFDxxza91aCEnJgttG_y6FxnjLDFJMenfo1sXehOBjhQFyffyNFCtD8G4atZDhSorMwUMrGnqsBnLMlIIJsjy3RHdzHQooIfyWuqQ5GxihdnGPjcI2rHhNxILoh7RKxPRKTe4ErzkrYFIrovRVHLVEV5bxlTEpi4"/>
+<img class="inline-block h-6 w-6 rounded-full object-cover shadow-xs" data-alt="Portrait of a young barber specialist smiling in modern luxury barbershop background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7YV57UA7gBtQ5Y55B1ZlsfPkQxLm8KHWuOCQXxmVKNRC6IbWpciYiusp3NM6sdMfui38Yf4JWLXszpXg_kY1CQzcKZJrB0c3yo_nVhg2G-Za5w5LFfKSxQEjU4tUUruByCjDEnUyYYAF7anvkZ-28crvfYxQfm6nSNFVLpv-M6gFxgQ7L01wmqYUmiuDQWs5_A-sOEyNXTvP03vo_I_piZ9pF_rWfCC4LxI5hSyg"/>
+<div class="h-6 w-6 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm flex items-center justify-center font-bold shadow-xs">+3</div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">7 barberos en turno</span>
+</div>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="px-2 py-0.5 rounded-md bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-label-sm text-secondary">check_circle</span> Web activa
+            </span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-label-sm text-secondary">credit_card</span> Stripe Connect
+            </span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-label-sm text-secondary">shield</span> Depósito 50%
+            </span>
+</div>
+</div>
+</div>
+<div class="px-space-md py-space-sm bg-surface-container-low flex items-center justify-between mt-auto">
+<button class="h-9 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-body-md text-secondary">edit</span>
+          Editar datos
+        </button>
+<div class="flex items-center gap-2">
+<button class="w-9 h-9 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-body-md">more_vert</span>
+</button>
+<button class="h-9 px-3.5 rounded-lg bg-secondary text-on-secondary font-label-md text-label-md hover:bg-secondary-container transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-body-md">calendar_month</span>
+            Gestionar agenda
+          </button>
+</div>
+</div>
+</div>
+<div class="rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden">
+<div>
+<div class="relative h-44 w-full bg-cover bg-center" data-alt="Industrial chic barbershop interior in Chamberi Madrid with brick walls, brass mirrors, exposed beams, and contemporary barber stations." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD58Iz0elCfgiPp53Sukj6hZU4OTF6yWAB5FXcswy3a0o5Jc1ayW2dhRjGqKYMwCqrQhwPxi5SZ8j9Kfc8EH1iAdvx1xuKvYphnumCDPZRHpfSd7H0v7kgCxljW8_uMTgRTtaTGTUCG2-8uoZPvFpoTOU4VYuZwBMlW18ZvvfwBgVnROkzBcwmmWl3D69ddkDr3W1xpWj37H1akIOO_2FffIZ2qM3km98UBkVFo7xU')">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/25 to-transparent"></div>
+<div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-on-surface font-label-sm text-label-sm shadow-xs flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              Operativa
+            </span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-on-tertiary-container font-label-sm text-label-sm flex items-center gap-1 shadow-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+              Abierto · 10:00 - 20:30
+            </span>
+</div>
+<div class="absolute bottom-3 left-4 right-4 flex items-end justify-between text-on-primary">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-surface-variant font-medium">Madrid Norte</span>
+<h2 class="font-title-md text-title-md font-bold tracking-tight">Sede Chamberí - Alonso Martínez</h2>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-lowest/20 backdrop-blur-md">ID: ALPH-02</span>
+</div>
+</div>
+<div class="p-space-md flex flex-col gap-space-md">
+<div class="flex flex-col gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-body-md text-secondary shrink-0">pin_drop</span>
+<span class="truncate">Calle de Santa Engracia 18, Chamberí, 28010 Madrid</span>
+</div>
+<div class="flex items-center gap-2 pl-6 text-on-surface-variant">
+<span>+34 915 678 910</span>
+<span>·</span>
+<span class="truncate">chamberi@barberiaalpha.es</span>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 p-space-sm rounded-lg bg-surface-container-low text-center">
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Puestos</span>
+<span class="font-title-sm text-title-sm text-on-surface font-bold mt-0.5">4 Sillones</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Hoy</span>
+<span class="font-title-sm text-title-sm text-on-surface font-bold mt-0.5">26 Citas</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Ocupación</span>
+<span class="font-title-sm text-title-sm text-on-tertiary-container font-bold mt-0.5">86%</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Mes Act.</span>
+<span class="font-title-sm text-title-sm text-on-surface font-bold mt-0.5">9.410 €</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Equipo:</span>
+<div class="flex -space-x-2 overflow-hidden">
+<img class="inline-block h-6 w-6 rounded-full object-cover shadow-xs" data-alt="Portrait of a young male professional hairdresser posing confidently in modern salon environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGr32mFjC7ZJkNAFT1uoByLvTwNsomzFL6UlHcqcOOJ0tEjCnFf7rJCMykB89tdFCKMZ5RnMqzIRnwnKvNTu3wLU0ZU7YJPMY0c0PoS3VZrT44MqVo0fI3dSrcTqQ2ZorqnDLIXUTkNUOCDG1x02Pp7EY8RxtEuGr6WGL8_d2-839IImsBxwOvBHUCN5YGSb831iZ9nTC6TCSFDrLBsiD_s6SW3ModNM3fiGscFsQ"/>
+<img class="inline-block h-6 w-6 rounded-full object-cover shadow-xs" data-alt="Portrait of a female barber stylist with contemporary apron in sleek studio setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3ZeIrwjd355kW93B7vj1uak6wTj2OL2DrxovAFELib7Ih5rR5IVHnjMrtoQNCAC4aA1cICYmfP515PHim_2nrl_eg82_B060Rok4QzN0910vxBQA_ZkQb75tZTowWbA573iohUwLwuZZ4WVoQH6csXx9EjAMsqAUs66yOENwZOOE8-l1gwVdioT00m4tBLesUcy7zF9j1Ua6WEIxSWXyu10nJTSU-emDC842ffzs"/>
+<img class="inline-block h-6 w-6 rounded-full object-cover shadow-xs" data-alt="Portrait of a grooming specialist smiling warmly in urban barber shop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjdQe7lIbzOgIWODRpNuNiD7ZuWVlXXKoVNd7rGOgDOOqrjjLQb0I6zYYZbIPT41ATC-DzEJKxU9g2Cowsi3MoaR1uT-pi8bA5zA1T9kYadJnjDmA9HWhYkIqgsQ6l7m9u7UjvNnVEY9lWFUmoSdRGahXOe8mpiY9WNJ1ZLoqVHJW9xXV02OaBp5VoiIvj5n8rDVyVBoCu8tQGdQSaZ6yLkbujK38mQWFRpE7d9rg"/>
+<div class="h-6 w-6 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm flex items-center justify-center font-bold shadow-xs">+2</div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">5 barberos en turno</span>
+</div>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="px-2 py-0.5 rounded-md bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-label-sm text-secondary">check_circle</span> Web activa
+            </span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-label-sm text-secondary">credit_card</span> Stripe Connect
+            </span>
+</div>
+</div>
+</div>
+<div class="px-space-md py-space-sm bg-surface-container-low flex items-center justify-between mt-auto">
+<button class="h-9 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-body-md text-secondary">edit</span>
+          Editar datos
+        </button>
+<div class="flex items-center gap-2">
+<button class="w-9 h-9 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-body-md">more_vert</span>
+</button>
+<button class="h-9 px-3.5 rounded-lg bg-secondary text-on-secondary font-label-md text-label-md hover:bg-secondary-container transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-body-md">calendar_month</span>
+            Gestionar agenda
+          </button>
+</div>
+</div>
+</div>
+<div class="rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden">
+<div>
+<div class="relative h-44 w-full bg-cover bg-center" data-alt="Modernist elegant barbershop located in Eixample Barcelona with high vaulted Catalan ceilings, minimalist oak furniture, and sunlit windows." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB14M18big18SocA8_HeKj07z5PKw74lfH1qtmauFkEbpss4BhMk-ON7yWlfB9RfVlkjBkAL5nQDTgrl9H2v34Eh1OojLi3S4l_X3wauzPiuTk7Q_TzM7Gy5OQ-ovhWpfs0zoz6zBv_ybjiBgOiOmjyXH2JJwcxejmVtc6bDXdRroZyl8g9S9Tz9lkptNmhbQcvlfCU8Oll2yjZP6I2E_VxNiW_AXXPEGPA6eY8xis')">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/25 to-transparent"></div>
+<div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-on-surface font-label-sm text-label-sm shadow-xs flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              Operativa
+            </span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-on-tertiary-container font-label-sm text-label-sm flex items-center gap-1 shadow-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+              Abierto · 10:30 - 21:00
+            </span>
+</div>
+<div class="absolute bottom-3 left-4 right-4 flex items-end justify-between text-on-primary">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-surface-variant font-medium">Barcelona</span>
+<h2 class="font-title-md text-title-md font-bold tracking-tight">Sede Eixample - Rambla Catalunya</h2>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-lowest/20 backdrop-blur-md">ID: ALPH-03</span>
+</div>
+</div>
+<div class="p-space-md flex flex-col gap-space-md">
+<div class="flex flex-col gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-body-md text-secondary shrink-0">pin_drop</span>
+<span class="truncate">Rambla de Catalunya 65, L'Eixample, 08007 Barcelona</span>
+</div>
+<div class="flex items-center gap-2 pl-6 text-on-surface-variant">
+<span>+34 933 210 987</span>
+<span>·</span>
+<span class="truncate">barcelona@barberiaalpha.es</span>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 p-space-sm rounded-lg bg-surface-container-low text-center">
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Puestos</span>
+<span class="font-title-sm text-title-sm text-on-surface font-bold mt-0.5">4 Sillones</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Hoy</span>
+<span class="font-title-sm text-title-sm text-on-surface font-bold mt-0.5">16 Citas</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Ocupación</span>
+<span class="font-title-sm text-title-sm text-on-tertiary-container font-bold mt-0.5">78%</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Mes Act.</span>
+<span class="font-title-sm text-title-sm text-on-surface font-bold mt-0.5">4.220 €</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Equipo:</span>
+<div class="flex -space-x-2 overflow-hidden">
+<img class="inline-block h-6 w-6 rounded-full object-cover shadow-xs" data-alt="Portrait of modern beard specialist smiling in Barcelona atelier salon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1BFIwWubR1ccFXLxkUMVdjWcmIounXF0XhP6tZ1L9mnk4nQYm3yzQjB3j4Y58ACeredYZb12PPBcMb1dsq8sWGUE_McaJ1d3lgzPnzt8vskmJlJbvAha6BbI3jdEuhNJzOfz3yQ19o6jK1mQZy_1D9oZWs92Tbdo3bSwqGiW6f45Fxao1m9j6RtA5GnKryXFZY2b8_cFvzai1o15Rg3Z-HAZ-ZVjQmMusRRSjRLo"/>
+<img class="inline-block h-6 w-6 rounded-full object-cover shadow-xs" data-alt="Portrait of senior master barber in crisp uniform inside bright daylight studio." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg3pPcIJPwo_qAX7lJaIw1tbqEvz6Xy8SIKfBK1zvaTKxbQjl6P2sK46z9YPudM9siM9Z6HFE1U5_QvzwtUMR3XPqS_7zpjPlBUm7A_bqHLL0_aa61MAlyMDY1vtwBdBt1fFX-96XSBth6x-DTIiyikcPTb1BKJvpdZjW5u8LwaxDsGMCaY8G4aov2YYfImBQY5zhlWjDivpYp-GdNeyd4tGrsxkWa1R3t_vNtLL4"/>
+<img class="inline-block h-6 w-6 rounded-full object-cover shadow-xs" data-alt="Portrait of a young creative hairstylist with stylish haircut in Barcelona." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlC8Kh8MbP328YnKAznzx_Se9wRakEzy1ZfbWEKB0duoyVb5gfpQu8dSJS6dfwUtv6afg9W5zoCIWU29cdeE8B98lX_-3PrEuGIYXrp_Q18slNE5rwZ0M8PsvBK1VaiYqGYwZ4W3Qfr5T0CyKC3nRriq7TVXHA1fUEy-dYwG5R7kuIVBqAzVwfLDn_VSJZ_-DcJsV-wrL0LCJ0c5gSegCMjAkLL83Si8L5p454MOQ"/>
+<div class="h-6 w-6 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm flex items-center justify-center font-bold shadow-xs">+1</div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">4 barberos en turno</span>
+</div>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="px-2 py-0.5 rounded-md bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-label-sm text-secondary">check_circle</span> Web activa
+            </span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-label-sm text-secondary">receipt_long</span> Factura Catalana
+            </span>
+</div>
+</div>
+</div>
+<div class="px-space-md py-space-sm bg-surface-container-low flex items-center justify-between mt-auto">
+<button class="h-9 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-body-md text-secondary">edit</span>
+          Editar datos
+        </button>
+<div class="flex items-center gap-2">
+<button class="w-9 h-9 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-body-md">more_vert</span>
+</button>
+<button class="h-9 px-3.5 rounded-lg bg-secondary text-on-secondary font-label-md text-label-md hover:bg-secondary-container transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-body-md">calendar_month</span>
+            Gestionar agenda
+          </button>
+</div>
+</div>
+</div>
+<div class="rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden">
+<div>
+<div class="relative h-44 w-full bg-cover bg-center" data-alt="Architectural renovation in progress of an edgy industrial barbershop in Malasana Madrid, featuring unfinished exposed concrete, blueprint rolls, and modern lighting fixtures being mounted." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAHkPMX4FihdGUAONEFD1Aw418e89iJZ_FIluvmRsxSKPVPQh5UaGtRWUCLuEb76CDH1BXAupcUAmlJSwV3Zk8zyohd9Qk34_AMCaKeF90OAPp2WdBy-3UoA4AJh75ScOYEY_4hZ4vea5FttPuuzs7WDjsvf-jeRVajUkEjMjPv_NfgWCdT6DPOMvsPniOPFGeqHb0qB6p7NraGbs6QraXB6DOwxze0wzzhPZ26D1k')">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent"></div>
+<div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-lowest/95 backdrop-blur-md text-on-surface font-label-sm text-label-sm shadow-xs flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+              Próxima Apertura · 15 Nov
+            </span>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm shadow-xs font-semibold">
+              Configuración: 75%
+            </span>
+</div>
+<div class="absolute bottom-3 left-4 right-4 flex items-end justify-between text-on-primary">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-surface-variant font-medium">Madrid Centro</span>
+<h2 class="font-title-md text-title-md font-bold tracking-tight">Sede Malasaña - Fuencarral</h2>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-lowest/20 backdrop-blur-md">ID: ALPH-04</span>
+</div>
+</div>
+<div class="p-space-md flex flex-col gap-space-md">
+<div class="flex flex-col gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-body-md text-secondary shrink-0">pin_drop</span>
+<span class="truncate">Calle de Fuencarral 88, Malasaña, 28004 Madrid</span>
+</div>
+<div class="flex items-center gap-2 pl-6 text-on-surface-variant">
+<span class="truncate">malasana@barberiaalpha.es</span>
+<span>·</span>
+<span class="text-secondary font-semibold">Teléfono pendiente</span>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2 p-space-sm rounded-lg bg-surface-container-low text-center">
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Proyectados</span>
+<span class="font-title-sm text-title-sm text-on-surface font-bold mt-0.5">5 Sillones</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Personal</span>
+<span class="font-title-sm text-title-sm text-on-surface font-bold mt-0.5">3 Contratados</span>
+</div>
+<div class="flex flex-col items-center col-span-2 sm:col-span-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Cuenta regresiva</span>
+<span class="font-title-sm text-title-sm text-secondary font-bold mt-0.5">12 Días</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5 p-space-sm rounded-lg bg-surface-container-high/60">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface font-medium">Estado de implantación</span>
+<span class="text-secondary font-bold">Paso 3 de 4</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 75%;"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">
+              Pendiente: Sincronización de terminales TPV y configuración de horarios festivos.
+            </span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Encargado de sede:</span>
+<div class="flex items-center gap-1.5">
+<img class="h-5 w-5 rounded-full object-cover" data-alt="Portrait of an experienced salon operations manager reviewing tablet." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYt_7xEuKou5yjKH9ZzWUB3wO-DxQQsxqcFiGuFhZlkTk2S3LzuV433y0SG5UmA3Qgxk67znI87Mo6bb5tGItDrt4loBpNUKzl9r3DzTA1gbmKOVQUa_FjJqaz27JHw5z7F-InMkuN0y37SYXCch6HDG9JHd9Vvc-0VvDLhZUmkUYplHVzkeD0Hm_dk4_gQ4HoFM4YNjx0Pd-skGnsJq565bNMukI6Cwba2tGaC7Q"/>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">David Morales (Director)</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-space-md py-space-sm bg-surface-container-low flex items-center justify-between mt-auto">
+<button class="h-9 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-body-md text-on-surface-variant">visibility</span>
+          Vista previa
+        </button>
+<button class="h-9 px-4 rounded-lg bg-secondary text-on-secondary font-label-md text-label-md hover:bg-secondary-container transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-body-md">task_alt</span>
+          Completar configuración
+        </button>
+</div>
+</div>
+</div>
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-headline-sm">hub</span>
+</div>
+<div>
+<h3 class="font-title-sm text-title-sm text-on-surface font-bold">Sincronización Centralizada de Catálogo y Políticas</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Las tarifas, servicios maestros y penalizaciones por cancelación se propagan automáticamente a las sedes seleccionadas.
+          </p>
+</div>
+</div>
+<a class="font-label-md text-label-md text-secondary hover:text-secondary-container flex items-center gap-1 self-start lg:self-center font-medium" href="#">
+<span>Configurar reglas avanzadas por sede</span>
+<span class="material-symbols-outlined text-body-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md pt-2">
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-start justify-between gap-3">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Catálogo de servicios unificado</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Precios y duraciones compartidas en 4 sedes.</span>
+</div>
+<div class="w-10 h-6 bg-secondary rounded-full p-0.5 flex items-center justify-end shrink-0 cursor-pointer shadow-xs">
+<div class="w-5 h-5 rounded-full bg-on-secondary"></div>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-start justify-between gap-3">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Historial compartido de clientes</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Ficha y notas accesibles en cualquier local.</span>
+</div>
+<div class="w-10 h-6 bg-secondary rounded-full p-0.5 flex items-center justify-end shrink-0 cursor-pointer shadow-xs">
+<div class="w-5 h-5 rounded-full bg-on-secondary"></div>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-start justify-between gap-3">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Liquidación TPV independiente</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Cuentas bancarias separadas por sucursal.</span>
+</div>
+<div class="w-10 h-6 bg-secondary rounded-full p-0.5 flex items-center justify-end shrink-0 cursor-pointer shadow-xs">
+<div class="w-5 h-5 rounded-full bg-on-secondary"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('#statusFilterTabs button');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+          t.className = 'px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low font-label-md text-label-md transition-colors whitespace-nowrap';
+        });
+        tab.className = 'px-3 py-1.5 rounded-lg bg-secondary text-on-secondary font-label-md text-label-md transition-colors whitespace-nowrap';
+      });
+    });
+  });
+</script></main></div><div class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 lg:p-8 animate-fadeIn" id="modal-nueva-sucursal"><div class="relative w-full max-w-4xl bg-surface-container-lowest rounded-2xl shadow-2xl border border-surface-container-high/80 overflow-hidden flex flex-col max-h-[92vh]"><div class="px-6 pt-6 pb-4 border-b border-surface-container-high/60 bg-surface-container-lowest"><div class="flex items-start justify-between gap-4"><div class="flex flex-col gap-1"><div class="flex items-center gap-2"><span class="px-2.5 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm font-semibold flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Alta de Sede Multi-Local</span><span class="text-on-surface-variant font-label-sm text-label-sm">· Paso 1 de 4</span></div><h2 class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight">Registrar Nueva Sucursal</h2><p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl">Configura la identidad del local, dirección física, contacto y sincronización automática con el catálogo maestro de Barbería Alpha.</p></div><button class="w-9 h-9 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center shrink-0" onclick="document.getElementById('modal-nueva-sucursal').remove()"><span class="material-symbols-outlined text-body-lg">close</span></button></div><div class="mt-5 grid grid-cols-4 gap-2"><div class="flex flex-col gap-1.5"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold flex items-center justify-center shrink-0 shadow-xs">1</div><span class="font-label-sm text-label-sm font-bold text-secondary truncate">Datos &amp; Ubicación</span></div><div class="w-full h-1.5 rounded-full bg-secondary"></div></div><div class="flex flex-col gap-1.5"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-medium flex items-center justify-center shrink-0">2</div><span class="font-label-sm text-label-sm text-on-surface-variant truncate">Capacidad &amp; Horarios</span></div><div class="w-full h-1.5 rounded-full bg-surface-container-high"></div></div><div class="flex flex-col gap-1.5"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-medium flex items-center justify-center shrink-0">3</div><span class="font-label-sm text-label-sm text-on-surface-variant truncate">Equipo &amp; Barbers</span></div><div class="w-full h-1.5 rounded-full bg-surface-container-high"></div></div><div class="flex flex-col gap-1.5"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-medium flex items-center justify-center shrink-0">4</div><span class="font-label-sm text-label-sm text-on-surface-variant truncate">Políticas &amp; TPV</span></div><div class="w-full h-1.5 rounded-full bg-surface-container-high"></div></div></div></div><div class="p-6 overflow-y-auto flex flex-col gap-6"><div class="p-4 rounded-xl border border-surface-container-high/80 bg-surface-container-lowest flex flex-col gap-4"><div class="flex items-center gap-2 pb-1 border-b border-surface-container-high/40"><span class="material-symbols-outlined text-secondary text-body-lg">store</span><h3 class="font-title-sm text-title-sm font-bold text-on-surface">1. Identidad de la Sucursal</h3></div><div class="grid grid-cols-1 md:grid-cols-3 gap-4"><div class="md:col-span-2 flex flex-col gap-1.5"><label class="font-label-sm text-label-sm font-semibold text-on-surface flex items-center justify-between"><span>Nombre comercial de la sede <span class="text-error">*</span></span><span class="text-on-surface-variant font-normal text-[11px]">Aparecerá en el portal de reservas</span></label><input class="w-full h-10 px-3 rounded-lg border border-surface-container-high bg-surface-container-low text-body-sm font-body-sm text-on-surface focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all" placeholder="Ej: Sede Chamberí - Alonso Martínez" type="text" value="Sede Goya - Retiro"/></div><div class="flex flex-col gap-1.5"><label class="font-label-sm text-label-sm font-semibold text-on-surface flex items-center justify-between"><span>Código interno (ID)</span><span class="text-secondary font-bold text-[11px] bg-secondary/10 px-1.5 py-0.2 rounded">Auto-generado</span></label><div class="relative"><input class="w-full h-10 px-3 rounded-lg border border-surface-container-high bg-surface-container-high/40 font-title-sm text-title-sm font-bold text-on-surface text-center cursor-not-allowed tracking-wider" readonly="" type="text" value="ALPH-05"/><span class="material-symbols-outlined text-body-sm text-secondary absolute right-3 top-1/2 -translate-y-1/2">verified</span></div></div></div><div class="flex flex-col gap-2"><label class="font-label-sm text-label-sm font-semibold text-on-surface">Tipo de modelo operativo</label><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><label class="flex items-start gap-3 p-3 rounded-xl border-2 border-secondary bg-surface-container-low cursor-pointer transition-all"><input checked="" class="mt-1 text-secondary focus:ring-secondary" name="branch_type" type="radio"/><div class="flex flex-col"><span class="font-label-md text-label-md font-bold text-on-surface flex items-center gap-1.5">Sede Propia / Gestión Directa <span class="text-[10px] px-1.5 py-0.5 rounded bg-secondary text-on-secondary font-semibold">Principal</span></span><span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Personal en nómina propia, caja centralizada y políticas corporativas unificadas.</span></div></label><label class="flex items-start gap-3 p-3 rounded-xl border border-surface-container-high hover:border-outline-variant bg-surface-container-lowest cursor-pointer transition-all"><input class="mt-1 text-secondary focus:ring-secondary" name="branch_type" type="radio"/><div class="flex flex-col"><span class="font-label-md text-label-md font-semibold text-on-surface">Franquicia / Sucursal Asociada</span><span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Facturación segregada con royalty mensual y permisos de operador delegados.</span></div></label></div></div><div class="flex flex-col gap-2"><label class="font-label-sm text-label-sm font-semibold text-on-surface">Fotografía representativa del salón</label><div class="flex flex-col sm:flex-row items-center gap-4 p-3 rounded-xl border border-dashed border-outline-variant bg-surface-container-low"><img alt="Previsualización Sede" class="w-24 h-16 rounded-lg object-cover shadow-xs shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5YDmXH9ki4ysa6LksU2L4AKvvO_ujEsTEJWqjbjC1q65RjXBJWHhuQKEh84Cpj2hE_T7DvDw0tdi_3NMx1uxd-_sud2pxs50E5BuOQEuM-orU3ZjIxB6lPvWl0CTeKNVqZimDBHH31kJZYxW5e6vWNZPWPBIPfhFnXAoH5bfgAhpp66D_P3GylPD2hkL7FgAlw75uiXnxm_X9_fapKNQft7x9sAcTjRUPLKBpXyY"/><div class="flex flex-col gap-1 text-left flex-1"><div class="flex items-center gap-2"><span class="font-label-sm text-label-sm font-bold text-on-surface">fachada_interior_goya.jpg</span><span class="text-[11px] text-on-surface-variant">2.4 MB · 1920x1080 px</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Imagen de portada para el perfil público web y app de citas.</p></div><div class="flex items-center gap-2 shrink-0"><button class="h-8 px-3 rounded-lg bg-surface-container-lowest border border-surface-container-high text-on-surface font-label-sm text-label-sm hover:bg-surface-container transition-colors flex items-center gap-1" type="button"><span class="material-symbols-outlined text-body-sm">photo_camera</span><span>Cambiar</span></button></div></div></div></div><div class="p-4 rounded-xl border border-surface-container-high/80 bg-surface-container-lowest flex flex-col gap-4"><div class="flex items-center justify-between pb-1 border-b border-surface-container-high/40"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-body-lg">location_on</span><h3 class="font-title-sm text-title-sm font-bold text-on-surface">2. Ubicación Física &amp; Geolocalización</h3></div><span class="px-2.5 py-0.5 rounded-full bg-on-tertiary-container/10 text-on-tertiary-container font-label-sm text-label-sm font-semibold flex items-center gap-1"><span class="material-symbols-outlined text-label-sm">check_circle</span>Ubicación verificada en Google Places</span></div><div class="grid grid-cols-1 md:grid-cols-3 gap-3"><div class="md:col-span-2 flex flex-col gap-1.5"><label class="font-label-sm text-label-sm font-semibold text-on-surface">Dirección completa de la calle <span class="text-error">*</span></label><input class="w-full h-10 px-3 rounded-lg border border-surface-container-high bg-surface-container-low text-body-sm font-body-sm text-on-surface focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all" placeholder="Ej. Calle Serrano 42" type="text" value="Calle de Alcalá 114, Barrio de Salamanca"/></div><div class="flex flex-col gap-1.5"><label class="font-label-sm text-label-sm font-semibold text-on-surface">Código Postal <span class="text-error">*</span></label><input class="w-full h-10 px-3 rounded-lg border border-surface-container-high bg-surface-container-low text-body-sm font-body-sm text-on-surface focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all" placeholder="28001" type="text" value="28009"/></div><div class="flex flex-col gap-1.5"><label class="font-label-sm text-label-sm font-semibold text-on-surface">Ciudad / Municipio <span class="text-error">*</span></label><select class="w-full h-10 px-3 rounded-lg border border-surface-container-high bg-surface-container-low text-body-sm font-body-sm text-on-surface focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all"><option selected="">Madrid</option><option>Barcelona</option><option>Valencia</option><option>Sevilla</option><option>Málaga</option></select></div><div class="flex flex-col gap-1.5"><label class="font-label-sm text-label-sm font-semibold text-on-surface">Zona / Barrio</label><input class="w-full h-10 px-3 rounded-lg border border-surface-container-high bg-surface-container-low text-body-sm font-body-sm text-on-surface focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all" placeholder="Ej. Centro" type="text" value="Goya / Retiro"/></div><div class="flex flex-col gap-1.5"><label class="font-label-sm text-label-sm font-semibold text-on-surface">País</label><input class="w-full h-10 px-3 rounded-lg border border-surface-container-high bg-surface-container-high/40 text-body-sm font-body-sm text-on-surface-variant cursor-not-allowed" readonly="" type="text" value="España (ES)"/></div></div><div class="relative h-32 w-full rounded-xl overflow-hidden border border-surface-container-high bg-surface-container-high/30 flex items-center justify-center"><div class="absolute inset-0 opacity-40 bg-[radial-gradient(#2c4dd6_1px,transparent_1px)] [background-size:16px_16px]"></div><div class="relative z-10 flex items-center gap-3 bg-surface-container-lowest/90 backdrop-blur-md px-4 py-2 rounded-xl shadow-md border border-surface-container-high/60"><div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-body-md">pin_drop</span></div><div class="flex flex-col text-left"><span class="font-label-sm text-label-sm font-bold text-on-surface">Coordenadas GPS fijadas</span><span class="font-body-sm text-body-sm text-on-surface-variant">Lat: 40.4239 · Long: -3.6763 (Alcalá / Goya)</span></div><button class="ml-2 text-secondary font-label-sm text-label-sm hover:underline font-semibold" type="button">Ajustar pin</button></div></div></div><div class="p-4 rounded-xl border border-surface-container-high/80 bg-surface-container-lowest flex flex-col gap-4"><div class="flex items-center gap-2 pb-1 border-b border-surface-container-high/40"><span class="material-symbols-outlined text-secondary text-body-lg">contact_phone</span><h3 class="font-title-sm text-title-sm font-bold text-on-surface">3. Contacto &amp; Store Manager Asignado</h3></div><div class="grid grid-cols-1 md:grid-cols-3 gap-3"><div class="flex flex-col gap-1.5"><label class="font-label-sm text-label-sm font-semibold text-on-surface">Teléfono directo sede <span class="text-error">*</span></label><input class="w-full h-10 px-3 rounded-lg border border-surface-container-high bg-surface-container-low text-body-sm font-body-sm text-on-surface focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all" placeholder="+34 910 000 000" type="tel" value="+34 918 234 567"/></div><div class="flex flex-col gap-1.5"><label class="font-label-sm text-label-sm font-semibold text-on-surface">Email de atención al cliente <span class="text-error">*</span></label><input class="w-full h-10 px-3 rounded-lg border border-surface-container-high bg-surface-container-low text-body-sm font-body-sm text-on-surface focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all" placeholder="sucursal@barberiaalpha.es" type="email" value="goya@barberiaalpha.es"/></div><div class="flex flex-col gap-1.5"><label class="font-label-sm text-label-sm font-semibold text-on-surface">Responsable / Director de Salón <span class="text-error">*</span></label><select class="w-full h-10 px-3 rounded-lg border border-surface-container-high bg-surface-container-low text-body-sm font-body-sm text-on-surface focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all"><option selected="">David Morales (Director Operaciones)</option><option>Carlos Mendoza (Administrador General)</option><option>Marcos Varela (Senior Barber Manager)</option><option>+ Invitar a nuevo responsable externo...</option></select></div></div><div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low border border-surface-container-high/60"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-on-tertiary-container/15 text-on-tertiary-container flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-body-lg">chat</span></div><div class="flex flex-col"><span class="font-label-md text-label-md font-semibold text-on-surface">Canal exclusivo de WhatsApp Business</span><span class="font-body-sm text-body-sm text-on-surface-variant">Permite enviar recordatorios automáticos con el número asignado a este local.</span></div></div><div class="w-10 h-6 bg-secondary rounded-full p-0.5 flex items-center justify-end shrink-0 cursor-pointer shadow-xs"><div class="w-5 h-5 rounded-full bg-on-secondary"></div></div></div></div><div class="p-4 rounded-xl border border-secondary/30 bg-surface-container-low/60 flex flex-col gap-3"><div class="flex items-start justify-between gap-4"><div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-secondary text-on-secondary flex items-center justify-center shrink-0 shadow-xs"><span class="material-symbols-outlined text-body-lg">sync</span></div><div class="flex flex-col"><div class="flex items-center gap-2"><span class="font-title-sm text-title-sm font-bold text-on-surface">Clonar Catálogo de Servicios Inicial</span><span class="px-2 py-0.5 rounded-full bg-secondary/15 text-secondary font-label-sm text-label-sm font-semibold">Recomendado</span></div><p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Importa inmediatamente 24 servicios, tarifas estándar y tiempos desde <strong>Sede Central - Salamanca</strong> para agilizar la puesta en marcha.</p></div></div><div class="w-10 h-6 bg-secondary rounded-full p-0.5 flex items-center justify-end shrink-0 cursor-pointer shadow-xs"><div class="w-5 h-5 rounded-full bg-on-secondary"></div></div></div></div></div><div class="px-6 py-4 border-t border-surface-container-high/60 bg-surface-container-lowest flex flex-col sm:flex-row items-center justify-between gap-3"><div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start"><button class="h-10 px-4 rounded-lg border border-surface-container-high text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low font-label-md text-label-md transition-colors flex items-center gap-1.5" type="button"><span class="material-symbols-outlined text-body-md">save</span><span>Guardar borrador</span></button><span class="font-label-sm text-label-sm text-on-surface-variant">25% completado</span></div><div class="flex items-center gap-3 w-full sm:w-auto justify-end"><button class="h-10 px-4 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors" onclick="document.getElementById('modal-nueva-sucursal').remove()" type="button">Cancelar</button><button class="h-10 px-5 rounded-lg bg-secondary text-on-secondary font-label-md text-label-md font-semibold hover:bg-secondary-container transition-all shadow-sm flex items-center gap-2" type="button"><span>Continuar a Capacidad &amp; Horarios</span><span class="material-symbols-outlined text-body-md">arrow_forward</span></button></div></div></div></div></body></html>
