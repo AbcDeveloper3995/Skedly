@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-primary":"#ffffff","on-primary-container":"#fffbff","on-primary-fixed-variant":"#0233c1","on-surface-variant":"#444654","primary-fixed-dim":"#b9c3ff","on-secondary":"#ffffff","on-tertiary-container":"#fefcff","surface-tint":"#2f50d8","tertiary-container":"#2170e4","surface-container-low":"#f2f4f6","on-tertiary":"#ffffff","outline-variant":"#c4c5d7","error":"#ba1a1a","tertiary":"#0058be","primary-container":"#4a68f0","error-container":"#ffdad6","secondary":"#575e70","background":"#f7f9fb","outline":"#747686","surface-container-lowest":"#ffffff","on-tertiary-fixed-variant":"#004395","surface-container-high":"#e6e8ea","tertiary-fixed":"#d8e2ff","surface":"#f7f9fb","secondary-container":"#d9dff5","on-error":"#ffffff","surface-container-highest":"#e0e3e5","secondary-fixed":"#dce2f7","primary":"#2c4dd6","on-background":"#191c1e","primary-fixed":"#dee1ff","surface-bright":"#f7f9fb","on-secondary-fixed-variant":"#404758","surface-variant":"#e0e3e5","secondary-fixed-dim":"#c0c6db","inverse-surface":"#2d3133","inverse-on-surface":"#eff1f3","tertiary-fixed-dim":"#adc6ff","surface-container":"#eceef0","on-secondary-container":"#5c6274","on-error-container":"#93000a","surface-dim":"#d8dadc","on-secondary-fixed":"#141b2b","on-primary-fixed":"#001257","on-tertiary-fixed":"#001a42","inverse-primary":"#b9c3ff","on-surface":"#191c1e"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-xl":"2rem","space-sm":"0.5rem","space-xs":"0.25rem","margin-mobile":"1rem","gutter-mobile":"1rem","gutter":"1.5rem","space-md":"1rem","margin":"2rem","space-lg":"1.5rem"},"fontFamily":{"body-md":["Inter"],"headline-lg-mobile":["Inter"],"body-lg":["Inter"],"body-sm":["Inter"],"headline-lg":["Inter"],"display-hero-mobile":["Inter"],"display-hero":["Inter"],"caption":["Inter"],"headline-md":["Inter"],"label-md":["Inter"],"label-sm":["Inter"],"title-md":["Inter"],"headline-sm":["Inter"]},"fontSize":{"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"400"}],"body-sm":["13px",{"lineHeight":"18px","letterSpacing":"0.005em","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"display-hero-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"display-hero":["48px",{"lineHeight":"56px","letterSpacing":"-0.025em","fontWeight":"700"}],"caption":["11px",{"lineHeight":"14px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"500"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.015em","fontWeight":"500"}],"title-md":["16px",{"lineHeight":"24px","letterSpacing":"-0.005em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen flex flex-col"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-lg bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">calendar_month</span></div><span class="font-title-md text-title-md text-on-surface tracking-tight font-bold">Skedly</span></div><nav class="flex items-center gap-6" data-active-classes="text-primary font-bold"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="iniciar-sesion" href="#">Iniciar sesión</a><a aria-current="page" class="transition-colors text-primary font-bold" data-path="crear-cuenta" href="#">Crear cuenta</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="recuperar-contrasena" href="#">Recuperar contraseña</a></nav><div class="flex items-center gap-4"><a class="inline-flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#"><span class="material-symbols-outlined text-[16px]">arrow_back</span><span>Volver al inicio</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface flex-1 flex flex-col justify-center"><div class="flex flex-col w-full">
+<div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+<!-- Lado del Formulario (7 columnas) -->
+<div class="lg:col-span-7 flex flex-col justify-center">
+<div class="w-full max-w-xl mx-auto bg-surface-container-lowest p-6 sm:p-10 rounded-2xl shadow-xl">
+<!-- Encabezado del Formulario -->
+<div class="mb-8">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-on-primary text-[22px]" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface tracking-tight font-bold text-lg">Skedly</span>
+<span class="ml-auto inline-flex items-center px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">
+                Propietarios
+              </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mb-2">
+              Crea tu cuenta de propietario
+            </h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Comienza a organizar tu negocio y gestionar tus citas con Skedly.
+            </p>
+</div>
+<!-- Botón de Registro Social con Google -->
+<button class="w-full h-11 px-4 bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md rounded-lg flex items-center justify-center gap-3 transition-all duration-200 active:scale-[0.99] shadow-sm mb-6" type="button">
+<svg aria-hidden="true" class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"></path>
+</svg>
+<span>Registrarse con Google</span>
+</button>
+<!-- Separador -->
+<div class="relative flex items-center justify-center mb-6">
+<div class="w-full h-px bg-surface-container-high"></div>
+<span class="absolute px-3 bg-surface-container-lowest font-caption text-caption text-on-surface-variant uppercase tracking-wider">
+              O regístrate con tu correo
+            </span>
+</div>
+<!-- Formulario de Registro -->
+<form class="space-y-4" id="registerForm" onsubmit="event.preventDefault(); handleRegistration();">
+<!-- Campo Nombre Completo -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-medium" for="fullName">
+                Nombre completo
+              </label>
+<div class="relative">
+<input class="w-full h-11 px-4 bg-surface-container-low focus:bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-md text-body-md rounded-lg outline-none transition-all duration-200 focus:shadow-md" id="fullName" name="fullName" placeholder="Ej. Mateo Ramos" required="" type="text"/>
+</div>
+</div>
+<!-- Campo Correo Electrónico -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-medium" for="email">
+                Correo electrónico profesional
+              </label>
+<div class="relative">
+<input class="w-full h-11 px-4 bg-surface-container-low focus:bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-md text-body-md rounded-lg outline-none transition-all duration-200 focus:shadow-md" id="email" name="email" placeholder="tu@negocio.com" required="" type="email"/>
+</div>
+</div>
+<!-- Campo Contraseña -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-medium" for="password">
+                Contraseña
+              </label>
+<div class="relative flex items-center">
+<input class="w-full h-11 pl-4 pr-11 bg-surface-container-low focus:bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-md text-body-md rounded-lg outline-none transition-all duration-200 focus:shadow-md" id="password" name="password" oninput="checkPasswordStrength(this.value)" placeholder="Mínimo 8 caracteres" required="" type="password"/>
+<button aria-label="Mostrar u ocultar contraseña" class="absolute right-3 p-1 text-on-surface-variant hover:text-on-surface transition-colors" onclick="togglePasswordVisibility('password', this)" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+<!-- Indicador de Fortaleza -->
+<div class="mt-2 space-y-1.5">
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden flex gap-1">
+<div class="h-full w-1/3 bg-surface-container-highest transition-colors duration-300" id="strengthBar1"></div>
+<div class="h-full w-1/3 bg-surface-container-highest transition-colors duration-300" id="strengthBar2"></div>
+<div class="h-full w-1/3 bg-surface-container-highest transition-colors duration-300" id="strengthBar3"></div>
+</div>
+<div class="flex items-center justify-between text-caption font-caption">
+<span class="text-on-surface-variant" id="strengthText">Seguridad: Ingresa al menos 8 caracteres</span>
+<span class="text-outline">Números o símbolos recomendados</span>
+</div>
+</div>
+</div>
+<!-- Campo Confirmar Contraseña -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-medium" for="confirmPassword">
+                Confirmar contraseña
+              </label>
+<div class="relative flex items-center">
+<input class="w-full h-11 pl-4 pr-11 bg-surface-container-low focus:bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-md text-body-md rounded-lg outline-none transition-all duration-200 focus:shadow-md" id="confirmPassword" name="confirmPassword" oninput="validatePasswordMatch()" placeholder="Repite tu contraseña" required="" type="password"/>
+<button aria-label="Mostrar u ocultar confirmación de contraseña" class="absolute right-3 p-1 text-on-surface-variant hover:text-on-surface transition-colors" onclick="togglePasswordVisibility('confirmPassword', this)" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+<p class="hidden mt-1 font-label-sm text-label-sm text-error" id="matchWarning">
+                Las contraseñas no coinciden.
+              </p>
+</div>
+<!-- Términos y Condiciones Checkbox -->
+<div class="pt-2">
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="mt-1 w-4 h-4 rounded bg-surface-container-low text-primary accent-primary cursor-pointer transition-all" id="termsCheckbox" required="" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant select-none">
+                  Acepto los <a class="text-primary hover:underline font-medium" href="#">Términos del Servicio</a> y la <a class="text-primary hover:underline font-medium" href="#">Política de Privacidad</a> de Skedly.
+                </span>
+</label>
+</div>
+<!-- Botón Principal -->
+<div class="pt-2">
+<button class="w-full h-12 bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.99] font-semibold cursor-pointer" type="submit">
+<span>Crear mi cuenta</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<!-- Nota de Valor Sin Fricción -->
+<div class="p-3 bg-surface-container-low rounded-lg flex items-center justify-center text-center">
+<p class="font-caption text-caption text-on-surface-variant font-medium">
+                ✨ Prueba gratuita de 14 días • Sin tarjeta de crédito requerida • Listo en minutos
+              </p>
+</div>
+<!-- Link Iniciar Sesión -->
+<div class="text-center pt-2">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                ¿Ya tienes una cuenta? 
+                <a class="text-primary font-semibold hover:underline ml-1" href="#">
+                  Iniciar sesión
+                </a>
+</p>
+</div>
+</form>
+</div>
+</div>
+<!-- Panel Lateral de Soporte de Marca (5 columnas) -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Tarjeta Principal de Beneficios -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-lg relative overflow-hidden">
+<!-- Elemento Gráfico de Fondo Sutil -->
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-primary/5 rounded-full pointer-events-none blur-2xl"></div>
+<div class="relative z-10">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm mb-4">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>Plataforma Todo en Uno</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-4">
+              Todo lo que necesitas para tu negocio en una sola cuenta
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">
+              Digitaliza tu agenda en minutos. Skedly elimina las llamadas innecesarias y reduce el ausentismo con confirmaciones automáticas.
+            </p>
+<!-- Lista de Viñetas Destacadas -->
+<div class="space-y-6">
+<!-- Viñeta 1 -->
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-surface-container-low text-primary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[22px]">schedule</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-on-surface font-semibold">
+                    Control de citas en tiempo real
+                  </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                    Sincronización instantánea en tu móvil y ordenador para evitar duplicidades de reservas.
+                  </p>
+</div>
+</div>
+<!-- Viñeta 2 -->
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-surface-container-low text-primary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[22px]">public</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-on-surface font-semibold">
+                    Página web pública de reservas
+                  </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                    Un portal personalizado y elegante con tu enlace propio listo para compartir en Instagram o WhatsApp sin coste adicional.
+                  </p>
+</div>
+</div>
+<!-- Viñeta 3 -->
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-surface-container-low text-primary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[22px]">group</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-on-surface font-semibold">
+                    Multi-profesional y horarios flexibles
+                  </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                    Gestiona agendas individuales para tu equipo, descansos personalizados y bloqueos por vacaciones.
+                  </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Métrica / Prueba Social Compacta -->
+<div class="bg-surface-container-low p-6 rounded-2xl flex items-center gap-5 shadow-sm">
+<div class="flex -space-x-3 overflow-hidden">
+<img class="inline-block h-11 w-11 rounded-full object-cover shadow-sm ring-2 ring-surface-container-lowest" data-alt="Retrato profesional de una mujer sonriente propietaria de un salón de estética moderno con iluminación suave y fondo minimalista en tonos neutros." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbssvoomkB84vLJESO0fog5pntkrs6N1sLbFode6BN-HygwRsP3KjRVQLB6sXopzanVvK6unqyr-jobO6MR4D0Of_r415QBVLAMU0HugKXbi3_K2pHWN0r5D82PNn-lCEQ-aJ9LjdJrFMUpOsf3SEqGR-tsrmhpUOs6WnhOelpBoka_m8JA-ixb9aTbsh5hr_JRLELnhyPgjWGKk62_pqb0CW5oNlwbLacOl9bW66q"/>
+<img class="inline-block h-11 w-11 rounded-full object-cover shadow-sm ring-2 ring-surface-container-lowest" data-alt="Retrato de un hombre barbero profesional con delantal de cuero sonriendo en un estudio de barbería contemporáneo con luz cálida." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY_KS7vPdYgc2XiFOX4FQcg3qj4iRukbWZDGaIIOxUMKL4DLL_Ehf6h24asg8kzcWqNmWq4hIx8KQ7Tfgn1Vz5VEZmc5-ALGg_XsNLm-5QZKbXMHOrbQf9-5Iqy484o15HqdimV9g2fS4FuRgiCywbJGcvnW8dqYu7fitmlWStv4qB_Ma7CzDE9fCp2_rvsbdzdWiiZFY5qxwH1dyG5nqSw9bDjMaz0cIp6XfKjeWi"/>
+<img class="inline-block h-11 w-11 rounded-full object-cover shadow-sm ring-2 ring-surface-container-lowest" data-alt="Retrato de una fisioterapeuta en clínica de rehabilitación moderna y limpia con uniforme médico claro y ambiente cálido y profesional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl7XLi6LkjUnisB_T1DKzix8EeQjOKx1s177oXY7Opg4A5Xf_8gWJzTF9TTgpidVAOUfU10LXQvVuUmWTSaDSONDFOfzUoEwOhK-HB_BvqhOBaXf7soVVWAHVxeespgPRSFrhE-ey7vvrwqJa4a8kSGz0VWd91ApH_9udsZZzrGTUwaypBem18DfAt_Bgsz-0Es6uMMZl1LjldRrpb_MxgbRDD5Ft7gDEoQGmfguZu"/>
+</div>
+<div>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface ml-1">4.9/5</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Más de <strong>3,400 profesionales</strong> confían en Skedly cada mes.
+            </p>
+</div>
+</div>
+<!-- Gráfico Visual de Reserva en Vivo -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-md">
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+              Demostración de agenda activa
+            </span>
+<span class="font-caption text-caption px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container">Hoy</span>
+</div>
+<div class="space-y-2.5">
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-3">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">10:00 AM</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Cita confirmada (45 min)</span>
+</div>
+<span class="font-caption text-caption text-primary font-semibold">Agendada</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container">
+<div class="flex items-center gap-3">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">11:30 AM</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Espacio libre disponible</span>
+</div>
+<span class="font-caption text-caption text-on-surface-variant font-medium">Reservable</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function togglePasswordVisibility(fieldId, button) {
+    const input = document.getElementById(fieldId);
+    const icon = button.querySelector('span');
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.textContent = 'visibility_off';
+    } else {
+      input.type = 'password';
+      icon.textContent = 'visibility';
+    }
+  }
+
+  function checkPasswordStrength(val) {
+    const bar1 = document.getElementById('strengthBar1');
+    const bar2 = document.getElementById('strengthBar2');
+    const bar3 = document.getElementById('strengthBar3');
+    const text = document.getElementById('strengthText');
+
+    let score = 0;
+    if (val.length >= 8) score++;
+    if (/[0-9]/.test(val) || /[^A-Za-z0-9]/.test(val)) score++;
+    if (val.length >= 12 && /[A-Z]/.test(val) && /[0-9]/.test(val)) score++;
+
+    bar1.className = 'h-full w-1/3 transition-colors duration-300 ' + (score >= 1 ? 'bg-error' : 'bg-surface-container-highest');
+    bar2.className = 'h-full w-1/3 transition-colors duration-300 ' + (score >= 2 ? 'bg-secondary' : 'bg-surface-container-highest');
+    bar3.className = 'h-full w-1/3 transition-colors duration-300 ' + (score >= 3 ? 'bg-primary' : 'bg-surface-container-highest');
+
+    if (val.length === 0) {
+      text.textContent = 'Seguridad: Ingresa al menos 8 caracteres';
+      text.className = 'text-on-surface-variant';
+      bar1.className = 'h-full w-1/3 bg-surface-container-highest';
+      bar2.className = 'h-full w-1/3 bg-surface-container-highest';
+      bar3.className = 'h-full w-1/3 bg-surface-container-highest';
+    } else if (score === 1) {
+      text.textContent = 'Seguridad débil (agrega números o símbolos)';
+      text.className = 'text-error font-medium';
+    } else if (score === 2) {
+      text.textContent = 'Seguridad media (buena para comenzar)';
+      text.className = 'text-secondary font-medium';
+    } else {
+      text.textContent = 'Seguridad excelente y robusta';
+      text.className = 'text-primary font-medium';
+    }
+
+    validatePasswordMatch();
+  }
+
+  function validatePasswordMatch() {
+    const pwd = document.getElementById('password').value;
+    const confirmPwd = document.getElementById('confirmPassword').value;
+    const warning = document.getElementById('matchWarning');
+
+    if (confirmPwd.length > 0 && pwd !== confirmPwd) {
+      warning.classList.remove('hidden');
+    } else {
+      warning.classList.add('hidden');
+    }
+  }
+
+  function handleRegistration() {
+    const pwd = document.getElementById('password').value;
+    const confirmPwd = document.getElementById('confirmPassword').value;
+    if (pwd !== confirmPwd) {
+      document.getElementById('matchWarning').classList.remove('hidden');
+      return;
+    }
+    
+    // Simulación de navegación hacia el onboarding posterior
+    const btn = document.querySelector('button[type="submit"]');
+    btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[20px]">progress_activity</span><span>Creando cuenta...</span>';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      window.location.href = '#';
+    }, 900);
+  }
+</script></main><footer class="w-full bg-surface-container-low py-6"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4"><p class="font-caption text-caption text-on-surface-variant">© 2024 Skedly Technologies S.L. Todos los derechos reservados.</p><div class="flex items-center gap-6"><a class="font-caption text-caption text-on-surface-variant hover:text-on-surface transition-colors" href="#">Términos del Servicio</a><a class="font-caption text-caption text-on-surface-variant hover:text-on-surface transition-colors" href="#">Política de Privacidad</a><a class="font-caption text-caption text-on-surface-variant hover:text-on-surface transition-colors" href="#">Centro de Ayuda</a></div></div></footer></body></html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;font-family:'Inter',sans-serif;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'on-primary-fixed': '#001257', 'primary': '#2c4dd6', 'surface-tint': '#2f50d8', 'outline-variant': '#c4c5d7', 'tertiary-fixed': '#d8e2ff', 'surface-container-high': '#e6e8ea', 'surface-variant': '#e0e3e5', 'surface-bright': '#f7f9fb', 'outline': '#747686', 'on-error-container': '#93000a', 'on-surface': '#191c1e', 'on-tertiary': '#ffffff', 'surface': '#f7f9fb', 'on-tertiary-fixed': '#001a42', 'error-container': '#ffdad6', 'surface-container-low': '#f2f4f6', 'on-primary-container': '#fffbff', 'secondary-fixed-dim': '#c0c6db', 'error': '#ba1a1a', 'secondary-container': '#d9dff5', 'surface-dim': '#d8dadc', 'inverse-surface': '#2d3133', 'inverse-on-surface': '#eff1f3', 'on-primary-fixed-variant': '#0233c1', 'on-secondary-container': '#5c6274', 'tertiary': '#0058be', 'on-surface-variant': '#444654', 'on-error': '#ffffff', 'primary-fixed-dim': '#b9c3ff', 'background': '#f7f9fb', 'on-primary': '#ffffff', 'surface-container-highest': '#e0e3e5', 'on-tertiary-fixed-variant': '#004395', 'secondary': '#575e70', 'on-secondary-fixed': '#141b2b', 'primary-fixed': '#dee1ff', 'on-tertiary-container': '#fefcff', 'tertiary-container': '#2170e4', 'on-secondary-fixed-variant': '#404758', 'on-secondary': '#ffffff', 'primary-container': '#4a68f0', 'inverse-primary': '#b9c3ff', 'tertiary-fixed-dim': '#adc6ff', 'on-background': '#191c1e', 'surface-container': '#eceef0', 'secondary-fixed': '#dce2f7', 'surface-container-lowest': '#ffffff' }, borderRadius: { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, spacing: { 'margin-mobile': '1rem', 'margin': '2rem', 'space-xs': '0.25rem', 'space-lg': '1.5rem', 'space-sm': '0.5rem', 'gutter-mobile': '1rem', 'space-md': '1rem', 'gutter': '1.5rem', 'space-xl': '2rem' }, fontFamily: { 'title-md': ['Inter'], 'headline-lg-mobile': ['Inter'], 'body-sm': ['Inter'], 'headline-sm': ['Inter'], 'display-hero-mobile': ['Inter'], 'body-lg': ['Inter'], 'headline-lg': ['Inter'], 'headline-md': ['Inter'], 'label-md': ['Inter'], 'display-hero': ['Inter'], 'label-sm': ['Inter'], 'caption': ['Inter'], 'body-md': ['Inter'] }, fontSize: { 'title-md': ['16px', { lineHeight: '24px', letterSpacing: '-0.005em', fontWeight: '600' }], 'headline-lg-mobile': ['24px', { lineHeight: '32px', letterSpacing: '-0.015em', fontWeight: '600' }], 'body-sm': ['13px', { lineHeight: '18px', letterSpacing: '0.005em', fontWeight: '400' }], 'headline-sm': ['20px', { lineHeight: '28px', letterSpacing: '-0.01em', fontWeight: '600' }], 'display-hero-mobile': ['32px', { lineHeight: '40px', letterSpacing: '-0.02em', fontWeight: '700' }], 'body-lg': ['16px', { lineHeight: '26px', letterSpacing: '0em', fontWeight: '400' }], 'headline-lg': ['32px', { lineHeight: '40px', letterSpacing: '-0.02em', fontWeight: '600' }], 'headline-md': ['24px', { lineHeight: '32px', letterSpacing: '-0.015em', fontWeight: '600' }], 'label-md': ['14px', { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' }], 'display-hero': ['48px', { lineHeight: '56px', letterSpacing: '-0.025em', fontWeight: '700' }], 'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.015em', fontWeight: '500' }], 'caption': ['11px', { lineHeight: '14px', letterSpacing: '0.02em', fontWeight: '500' }], 'body-md': ['14px', { lineHeight: '22px', letterSpacing: '0em', fontWeight: '400' }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><div class="w-9 h-9 rounded-lg bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[20px]">schedule</span></div><button class="flex items-center gap-space-xs text-left px-space-xs py-1 rounded-lg hover:bg-surface-container transition-colors min-w-0"><div class="flex flex-col min-w-0"><span class="font-caption text-caption text-secondary uppercase font-semibold leading-none">Skedly</span><span class="font-title-md text-title-md text-on-surface truncate leading-tight">Barbería Élite</span></div><span class="material-symbols-outlined text-outline text-[18px] shrink-0">unfold_more</span></button></div><div class="flex items-center gap-space-xs shrink-0"><button aria-label="Notificaciones" class="w-11 h-11 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors relative text-on-surface-variant"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface"><div class="px-margin-mobile pt-space-md pb-space-xs flex items-center justify-between"><h1 class="font-headline-sm text-headline-sm text-on-surface">Inicio</h1></div><div class="flex flex-col w-full pb-6 space-y-5 px-margin-mobile">
+<!-- Saludo & Estado Operativo -->
+<section class="flex flex-col space-y-3 pt-1">
+<div class="flex items-center justify-between">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant shadow-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="font-caption text-caption font-medium tracking-wide">Abierto hoy • Barbería Élite</span>
+</div>
+<button class="text-secondary hover:text-primary transition-colors flex items-center gap-1 text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+<span>Actualizado</span>
+</button>
+</div>
+<div class="flex items-end justify-between gap-2">
+<div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-semibold tracking-tight">¡Hola, María!</h2>
+<p class="font-body-sm text-body-sm text-secondary font-medium">Miércoles, 24 de Octubre • Día de alta demanda</p>
+</div>
+<button class="shrink-0 h-10 px-3.5 rounded-xl bg-primary text-on-primary font-label-md text-label-md flex items-center gap-1.5 shadow-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+<span>+ Rápida</span>
+</button>
+</div>
+</section>
+<!-- Métricas Clave (2x2 Mobile Grid) -->
+<section class="grid grid-cols-2 gap-3">
+<!-- Citas Hoy -->
+<div class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex flex-col justify-between space-y-2">
+<div class="flex items-center justify-between">
+<span class="w-8 h-8 rounded-lg bg-primary-fixed text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[19px]">calendar_today</span>
+</span>
+<span class="inline-flex items-center text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full font-caption text-caption font-semibold">
+          +4 hoy
+        </span>
+</div>
+<div>
+<p class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold leading-none">18</p>
+<p class="font-label-sm text-label-sm text-secondary mt-1">Citas de hoy</p>
+</div>
+</div>
+<!-- Próximas Citas -->
+<div class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex flex-col justify-between space-y-2">
+<div class="flex items-center justify-between">
+<span class="w-8 h-8 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[19px]">date_range</span>
+</span>
+<span class="text-secondary font-caption text-caption font-medium">
+          7 días
+        </span>
+</div>
+<div>
+<p class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold leading-none">12</p>
+<p class="font-label-sm text-label-sm text-secondary mt-1">Próximas citas</p>
+</div>
+</div>
+<!-- Clientes Totales -->
+<div class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex flex-col justify-between space-y-2">
+<div class="flex items-center justify-between">
+<span class="w-8 h-8 rounded-lg bg-tertiary-fixed text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[19px]">group</span>
+</span>
+<span class="inline-flex items-center text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full font-caption text-caption font-semibold">
+          +16 mes
+        </span>
+</div>
+<div>
+<p class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold leading-none">248</p>
+<p class="font-label-sm text-label-sm text-secondary mt-1">Clientes activos</p>
+</div>
+</div>
+<!-- Tasa Cancelación -->
+<div class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex flex-col justify-between space-y-2">
+<div class="flex items-center justify-between">
+<span class="w-8 h-8 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[19px]">trending_down</span>
+</span>
+<span class="inline-flex items-center text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full font-caption text-caption font-semibold">
+          -2.4%
+        </span>
+</div>
+<div>
+<p class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold leading-none">8%</p>
+<p class="font-label-sm text-label-sm text-secondary mt-1">Cancelaciones</p>
+</div>
+</div>
+</section>
+<!-- Acciones Rápidas (Horizontal Scroll) -->
+<section class="space-y-2">
+<div class="flex items-center justify-between px-0.5">
+<h3 class="font-title-md text-title-md text-on-surface font-semibold">Acciones rápidas</h3>
+<span class="font-caption text-caption text-secondary">Acceso rápido</span>
+</div>
+<div class="flex items-center gap-2.5 overflow-x-auto pb-1 pt-0.5 -mx-margin-mobile px-margin-mobile">
+<button class="shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-primary text-on-primary font-label-md text-label-md shadow-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Nueva Cita</span>
+</button>
+<button class="shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary text-[18px]">person_add</span>
+<span>Nuevo Cliente</span>
+</button>
+<button class="shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-tertiary text-[18px]">content_cut</span>
+<span>Servicios</span>
+</button>
+<button class="shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-secondary text-[18px]">share</span>
+<span>Compartir Link</span>
+</button>
+</div>
+</section>
+<!-- Citas de Hoy -->
+<section class="space-y-3">
+<div class="flex items-center justify-between px-0.5">
+<div class="flex items-center gap-2">
+<h3 class="font-title-md text-title-md text-on-surface font-semibold">Citas de hoy</h3>
+<span class="w-5 h-5 rounded-full bg-primary-fixed text-primary text-caption font-caption font-bold flex items-center justify-center">18</span>
+</div>
+<a class="font-label-sm text-label-sm text-primary font-medium hover:underline" href="#">Ver agenda</a>
+</div>
+<!-- Filter Pills -->
+<div class="flex items-center gap-2 overflow-x-auto pb-0.5" id="appointment-filters">
+<button class="filter-chip px-3 py-1.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-medium shadow-sm transition-all" data-filter="all">
+        Todas (18)
+      </button>
+<button class="filter-chip px-3 py-1.5 rounded-full bg-surface-container-lowest text-secondary font-label-sm text-label-sm font-medium shadow-sm hover:text-on-surface transition-all" data-filter="confirmed">
+        Confirmadas (11)
+      </button>
+<button class="filter-chip px-3 py-1.5 rounded-full bg-surface-container-lowest text-secondary font-label-sm text-label-sm font-medium shadow-sm hover:text-on-surface transition-all" data-filter="pending">
+        Pendientes (2)
+      </button>
+</div>
+<!-- Appointment Cards Stack -->
+<div class="space-y-2.5">
+<!-- Cita 1: Completada -->
+<article class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex flex-col space-y-2.5 transition-all">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-md bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold">09:30</span>
+<span class="text-caption font-caption text-secondary">30 min</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container-high text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Completada</span>
+</span>
+</div>
+<div class="flex items-center justify-between gap-3">
+<div class="flex items-center gap-2.5 min-w-0">
+<img class="w-10 h-10 rounded-full object-cover shrink-0" data-alt="Close up modern male portrait studio photography with clean haircut style against neutral warm grey background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrzN3x_WS1V-yZlGjGQrSr5OA2lpDWl52rjaZlk75qAiyGKpwvguIXVoSB0ttSg6ASa5Bjpqc0TZ_DlHRupuJK_vNFCvS1MjFSsa34lH_XoC0HEFV5rEUY7r2vNR-AqW87oOpeZ-CJZT5VMWuS1Qkh424UqCVGaPMSNx2ZWea_uoFAPmWmMZzO5sR4Lt2a90jAy1v3LZ0ctzsrZRknDf5KP0r921HEbtBnMLjo0fP-"/>
+<div class="min-w-0">
+<h4 class="font-label-md text-label-md text-on-surface font-semibold truncate">Carlos Mendoza</h4>
+<p class="font-body-sm text-body-sm text-secondary truncate">Corte Degradado</p>
+</div>
+</div>
+<div class="text-right shrink-0">
+<span class="font-caption text-caption text-secondary block">Atendido por</span>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Mateo R.</span>
+</div>
+</div>
+</article>
+<!-- Cita 2: En curso -->
+<article class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex flex-col space-y-2.5 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex items-center justify-between pl-1">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-md bg-primary-fixed text-primary font-label-sm text-label-sm font-bold">11:15</span>
+<span class="text-caption font-caption text-primary font-semibold">En sillón</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+<span>En curso</span>
+</span>
+</div>
+<div class="flex items-center justify-between gap-3 pl-1">
+<div class="flex items-center gap-2.5 min-w-0">
+<img class="w-10 h-10 rounded-full object-cover shrink-0" data-alt="Smiling young urban customer professional headshot with stylish fade haircut soft ambient barber salon lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTjLQgBLT_OuyXa__5F4Q9HLejHkh3UoWns9vInEOLGXHYOrZ144RaotEMdUfhEDHL2fmOGUbwBYuLeNwI0RrVuxu38J2En60_Zqb48VgPG-5W9uH1TDXLbUeIYGhZG1nsi6bs19EH5B-ds3ujXAX--bAB5xAyVHH5SDIV4SeT5Ah1FRL7OgvoAm0dOffYvAgf4UE7D7U3Fro-J5cs_0C9BAa8A8bVQ3LZ-WgVVM89"/>
+<div class="min-w-0">
+<h4 class="font-label-md text-label-md text-on-surface font-semibold truncate">Alejandro Peña</h4>
+<p class="font-body-sm text-body-sm text-secondary truncate">Pack Completo (Corte + Barba)</p>
+</div>
+</div>
+<div class="text-right shrink-0">
+<span class="font-caption text-caption text-secondary block">Atendido por</span>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Mateo R.</span>
+</div>
+</div>
+</article>
+<!-- Cita 3: Pendiente con aprobación inline -->
+<article class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex flex-col space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 font-label-sm text-label-sm font-semibold">13:30</span>
+<span class="text-caption font-caption text-secondary">45 min</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px]">hourglass_top</span>
+<span>Pendiente</span>
+</span>
+</div>
+<div class="flex items-center justify-between gap-3">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-label-md text-label-md font-semibold shrink-0">
+              LN
+            </div>
+<div class="min-w-0">
+<h4 class="font-label-md text-label-md text-on-surface font-semibold truncate">Lucas Navarro</h4>
+<p class="font-body-sm text-body-sm text-secondary truncate">Ritual Barba • Primera vez</p>
+</div>
+</div>
+<div class="text-right shrink-0">
+<span class="font-caption text-caption text-secondary block">Especialista</span>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Sofía G.</span>
+</div>
+</div>
+<!-- Botones de Acción Inline -->
+<div class="grid grid-cols-2 gap-2 pt-1">
+<button class="h-9 rounded-lg bg-surface-container-high text-secondary hover:text-error hover:bg-error-container font-label-sm text-label-sm font-medium transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">close</span>
+<span>Rechazar</span>
+</button>
+<button class="h-9 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm active:scale-95 transition-transform flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span>Aprobar</span>
+</button>
+</div>
+</article>
+<!-- Cita 4: Cancelada -->
+<article class="bg-surface-container-lowest/80 p-3.5 rounded-xl shadow-sm flex flex-col space-y-2 opacity-75">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-secondary font-label-sm text-label-sm">16:00</span>
+<span class="text-caption font-caption text-secondary">30 min</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px]">cancel</span>
+<span>Cancelada</span>
+</span>
+</div>
+<div class="flex items-center justify-between gap-3">
+<div class="flex items-center gap-2.5 min-w-0">
+<img class="w-10 h-10 rounded-full object-cover grayscale shrink-0" data-alt="Customer looking away lifestyle portrait in minimalist barbershop surroundings modern tone" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADnlQM-YGd-FuGSeDNwUtVqL0Mv8lOzdCzRsMYju0-uKyvu3xDlOn0_c6DYyrnO4ptFEQBGOYClKMxUl0kYrduCT6aVkjLdjjP3m0l6e87zTtrBqxDhnh7j0o82Rrfq9UPBxzoK1-01k96N7S1fTyjHOUt4ZjBduUKJrTtekRHOVV2NepKOpzC8vqolcPhYr5IyXwpdfS_8qIgqlcRL5n7qMAnQ94TSmVKyr_7jQ3o"/>
+<div class="min-w-0">
+<h4 class="font-label-md text-label-md text-on-surface font-medium line-through truncate">Daniel Ortiz</h4>
+<p class="font-body-sm text-body-sm text-secondary truncate">Corte Degradado</p>
+</div>
+</div>
+<div class="text-right shrink-0">
+<span class="font-caption text-caption text-secondary block">Asignado</span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Mateo R.</span>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- Rendimiento Semanal & Servicios Top -->
+<section class="bg-surface-container-lowest p-4 rounded-xl shadow-sm space-y-4">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface font-semibold">Rendimiento semanal</h3>
+<p class="font-caption text-caption text-secondary">92 reservas completadas</p>
+</div>
+<span class="font-label-sm text-label-sm font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">+12% vs sem. ant.</span>
+</div>
+<!-- Mini Bar Chart Semanal -->
+<div class="flex items-end justify-between gap-2 h-24 pt-2 px-1">
+<div class="flex flex-col items-center gap-1.5 flex-1">
+<div class="w-full bg-surface-container-high rounded-t-md h-12"></div>
+<span class="font-caption text-caption text-secondary">L</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1">
+<div class="w-full bg-surface-container-high rounded-t-md h-16"></div>
+<span class="font-caption text-caption text-secondary">M</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1">
+<div class="w-full bg-primary rounded-t-md h-20 shadow-sm relative">
+<span class="absolute -top-5 left-1/2 -translate-x-1/2 font-caption text-caption font-bold text-primary">18</span>
+</div>
+<span class="font-caption text-caption text-primary font-bold">X</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1">
+<div class="w-full bg-surface-container-high rounded-t-md h-14"></div>
+<span class="font-caption text-caption text-secondary">J</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1">
+<div class="w-full bg-surface-container-high rounded-t-md h-16"></div>
+<span class="font-caption text-caption text-secondary">V</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1">
+<div class="w-full bg-secondary-container rounded-t-md h-18"></div>
+<span class="font-caption text-caption text-secondary">S</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1">
+<div class="w-full bg-surface-container rounded-t-md h-6"></div>
+<span class="font-caption text-caption text-secondary">D</span>
+</div>
+</div>
+<!-- Servicios Populares -->
+<div class="space-y-2.5 pt-2">
+<span class="font-label-sm text-label-sm text-secondary font-medium block">Servicios más solicitados</span>
+<!-- Servicio 1 -->
+<div class="space-y-1">
+<div class="flex justify-between items-center text-label-sm font-label-sm">
+<span class="text-on-surface font-medium">Corte Degradado</span>
+<span class="text-secondary font-semibold">42% (38 citas)</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 42%;"></div>
+</div>
+</div>
+<!-- Servicio 2 -->
+<div class="space-y-1">
+<div class="flex justify-between items-center text-label-sm font-label-sm">
+<span class="text-on-surface font-medium">Perfilado &amp; Ritual Barba</span>
+<span class="text-secondary font-semibold">28% (25 citas)</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full" style="width: 28%;"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Banner de Compartir Enlace Público -->
+<section class="bg-primary-fixed p-4 rounded-xl flex items-center justify-between gap-3">
+<div class="space-y-0.5 min-w-0">
+<h4 class="font-title-md text-title-md text-on-primary-fixed font-semibold truncate">Tu página de reservas</h4>
+<p class="font-body-sm text-body-sm text-on-primary-fixed-variant truncate">skedly.io/barberia-elite</p>
+</div>
+<button class="shrink-0 h-9 px-3 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold flex items-center gap-1 shadow-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span>Copiar</span>
+</button>
+</section>
+</div>
+<script>
+  // Simple micro-interactions for tab filter chips
+  document.querySelectorAll('#appointment-filters .filter-chip').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('#appointment-filters .filter-chip').forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-on-primary');
+        btn.classList.add('bg-surface-container-lowest', 'text-secondary');
+      });
+      button.classList.add('bg-primary', 'text-on-primary');
+      button.classList.remove('bg-surface-container-lowest', 'text-secondary');
+    });
+  });
+</script></main><div class="fixed bottom-20 right-margin-mobile z-40 pb-safe"><a class="inline-flex items-center gap-space-xs h-12 pl-space-md pr-space-lg rounded-full bg-primary-container text-on-primary-container shadow-[0_4px_16px_rgba(74,104,240,0.36)] hover:bg-primary transition-all active:scale-95" data-path="nueva-cita" href="#"><span class="material-symbols-outlined text-[20px]">add</span><span class="font-label-md text-label-md font-semibold tracking-wide">+ Cita</span></a></div><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.05)]" data-active-classes="text-primary font-semibold"><div class="grid grid-cols-5 items-center h-16 px-space-xs"><a aria-current="page" class="flex flex-col items-center justify-center min-h-[44px] gap-0.5 transition-colors text-primary font-semibold" data-path="inicio" href="#"><span class="material-symbols-outlined text-[22px]">dashboard</span><span class="font-label-sm text-label-sm">Inicio</span></a><a class="flex flex-col items-center justify-center min-h-[44px] gap-0.5 text-secondary hover:text-on-surface transition-colors" data-path="calendario" href="#"><span class="material-symbols-outlined text-[22px]">calendar_month</span><span class="font-label-sm text-label-sm">Calendario</span></a><a class="flex flex-col items-center justify-center min-h-[44px] gap-0.5 text-secondary hover:text-on-surface transition-colors" data-path="citas" href="#"><span class="material-symbols-outlined text-[22px]">event_available</span><span class="font-label-sm text-label-sm">Citas</span></a><a class="flex flex-col items-center justify-center min-h-[44px] gap-0.5 text-secondary hover:text-on-surface transition-colors" data-path="clientes" href="#"><span class="material-symbols-outlined text-[22px]">group</span><span class="font-label-sm text-label-sm">Clientes</span></a><a class="flex flex-col items-center justify-center min-h-[44px] gap-0.5 text-secondary hover:text-on-surface transition-colors" data-path="menu" href="#"><span class="material-symbols-outlined text-[22px]">menu</span><span class="font-label-sm text-label-sm">Menú</span></a></div></nav></body></html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary-container":"#5c6274","primary-fixed-dim":"#b9c3ff","surface-container-lowest":"#ffffff","surface-container":"#eceef0","on-secondary":"#ffffff","on-tertiary":"#ffffff","outline":"#747686","on-surface-variant":"#444654","primary":"#2c4dd6","error-container":"#ffdad6","outline-variant":"#c4c5d7","on-primary":"#ffffff","tertiary-fixed-dim":"#adc6ff","on-secondary-fixed":"#141b2b","on-secondary-fixed-variant":"#404758","inverse-on-surface":"#eff1f3","on-error":"#ffffff","secondary-fixed-dim":"#c0c6db","surface":"#f7f9fb","on-primary-fixed-variant":"#0233c1","on-tertiary-fixed":"#001a42","error":"#ba1a1a","on-surface":"#191c1e","surface-bright":"#f7f9fb","on-background":"#191c1e","secondary-fixed":"#dce2f7","on-error-container":"#93000a","background":"#f7f9fb","surface-container-high":"#e6e8ea","tertiary-container":"#2170e4","surface-tint":"#2f50d8","on-tertiary-container":"#fefcff","surface-variant":"#e0e3e5","tertiary-fixed":"#d8e2ff","surface-container-highest":"#e0e3e5","inverse-surface":"#2d3133","primary-fixed":"#dee1ff","secondary":"#575e70","tertiary":"#0058be","on-primary-container":"#fffbff","secondary-container":"#d9dff5","primary-container":"#4a68f0","surface-container-low":"#f2f4f6","on-primary-fixed":"#001257","surface-dim":"#d8dadc","inverse-primary":"#b9c3ff","on-tertiary-fixed-variant":"#004395"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin-mobile":"1rem","gutter":"1.5rem","space-xs":"0.25rem","space-lg":"1.5rem","space-sm":"0.5rem","space-md":"1rem","gutter-mobile":"1rem","space-xl":"2rem","margin":"2rem"},"fontFamily":{"headline-sm":["Inter"],"label-sm":["Inter"],"caption":["Inter"],"headline-lg-mobile":["Inter"],"label-md":["Inter"],"display-hero":["Inter"],"display-hero-mobile":["Inter"],"body-md":["Inter"],"body-lg":["Inter"],"headline-lg":["Inter"],"body-sm":["Inter"],"headline-md":["Inter"],"title-md":["Inter"]},"fontSize":{"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.015em","fontWeight":"500"}],"caption":["11px",{"lineHeight":"14px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"500"}],"display-hero":["48px",{"lineHeight":"56px","letterSpacing":"-0.025em","fontWeight":"700"}],"display-hero-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","letterSpacing":"0.005em","fontWeight":"400"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"title-md":["16px",{"lineHeight":"24px","letterSpacing":"-0.005em","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between"><div class="flex items-center gap-space-lg"><a class="flex items-center gap-space-sm group" href="#"><div class="w-9 h-9 rounded-lg bg-primary flex items-center justify-center text-on-primary font-headline-sm font-bold text-headline-sm shadow-sm"><span class="material-symbols-outlined text-[20px]">event_available</span></div><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface">Skedly</span></a><div class="h-5 w-px bg-surface-container-highest hidden sm:block"></div><nav class="flex items-center gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-fixed-variant font-medium"><a class="px-3 py-1 rounded-full text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container-high hover:text-on-surface transition-colors hidden md:inline-block" data-path="configuracion-inicial" href="#">Paso 1: Negocio</a><a class="px-3 py-1 rounded-full text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container-high hover:text-on-surface transition-colors hidden md:inline-block" data-path="servicios-y-horarios" href="#">Paso 2: Servicios</a><a aria-current="page" class="px-3 py-1 rounded-full transition-colors hidden md:inline-block bg-secondary-container text-on-secondary-fixed-variant font-medium" data-path="personalizacion-agenda" href="#">Paso 3: Agenda</a><a class="px-3 py-1 rounded-full text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container-high hover:text-on-surface transition-colors hidden md:inline-block" data-path="confirmacion-final" href="#">Paso 4: Confirmación</a></nav></div><div class="flex items-center gap-space-md"><div class="hidden sm:flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-container-low text-on-secondary-container font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span><span>Paso guiado</span></div><button class="inline-flex items-center gap-space-xs px-3.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container hover:text-on-surface text-on-surface-variant font-label-md text-label-md transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">bookmark</span><span class="hidden sm:inline">Guardar y salir</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface flex-1 flex flex-col"><div class="flex flex-col w-full">
+<div class="max-w-7xl mx-auto px-6 lg:px-12 py-8 w-full flex flex-col gap-space-xl">
+<!-- Stepper Navigation Header -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center font-headline-sm text-headline-sm shadow-sm">
+<span class="material-symbols-outlined text-[26px]">groups</span>
+</div>
+<div>
+<span class="font-caption text-caption text-secondary uppercase tracking-widest font-semibold block">Configuración de Plataforma</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Paso 4 de 5: Tu Equipo Operativo</span>
+</div>
+</div>
+<!-- Segmented Stepper Indicator -->
+<div class="flex items-center gap-2 sm:gap-3">
+<!-- Step 1 Complete -->
+<div class="flex items-center gap-1.5" title="Negocio (Completado)">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-primary flex items-center justify-center text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<span class="hidden xl:inline text-label-sm font-label-sm text-secondary font-medium">Negocio</span>
+</div>
+<div class="w-6 h-0.5 bg-primary-fixed-dim"></div>
+<!-- Step 2 Complete -->
+<div class="flex items-center gap-1.5" title="Servicios (Completado)">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-primary flex items-center justify-center text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<span class="hidden xl:inline text-label-sm font-label-sm text-secondary font-medium">Servicios</span>
+</div>
+<div class="w-6 h-0.5 bg-primary-fixed-dim"></div>
+<!-- Step 3 Complete -->
+<div class="flex items-center gap-1.5" title="Horarios (Completado)">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-primary flex items-center justify-center text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<span class="hidden xl:inline text-label-sm font-label-sm text-secondary font-medium">Horarios</span>
+</div>
+<div class="w-6 h-0.5 bg-primary-fixed-dim"></div>
+<!-- Step 4 Active -->
+<div class="flex items-center gap-1.5" title="Equipo (En progreso)">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center text-label-sm font-label-sm shadow-sm ring-4 ring-primary-fixed">
+            4
+          </div>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Equipo</span>
+</div>
+<div class="w-6 h-0.5 bg-surface-container-high"></div>
+<!-- Step 5 Future -->
+<div class="flex items-center gap-1.5 opacity-50" title="Perfil Público">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center text-label-sm font-label-sm">
+            5
+          </div>
+<span class="hidden xl:inline text-label-sm font-label-sm text-on-surface-variant">Publicar</span>
+</div>
+</div>
+</div>
+<!-- Main Title & Intro Banner -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+<div class="max-w-2xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-label-sm mb-3">
+<span class="material-symbols-outlined text-[16px]">badge</span>
+<span>Gestión de Personal &amp; Roles</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Conoce a tu equipo</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">
+          Agrega a las personas que atenderán tus citas o continúa solo si trabajas de forma individual. Cada colaborador tendrá su propio horario sincronizado y enlace de reserva.
+        </p>
+</div>
+<!-- Quick Option: Solo Practitioner Notice Card -->
+<div class="bg-surface-container-low p-4 rounded-xl flex items-center gap-4 max-w-md shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">person_check</span>
+</div>
+<div class="flex-1">
+<span class="font-label-md text-label-md text-on-surface font-medium block">¿Atiendes sin personal?</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Puedes saltar este paso ahora y sumarlos cuando tu negocio crezca.</span>
+</div>
+</div>
+</div>
+<!-- Asymmetrical Grid: Left (Form), Right (Team Cards & Metrics) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- LEFT COLUMN: Form to add team member (7 cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-xl p-6 sm:p-8 shadow-sm flex flex-col gap-6 relative">
+<div class="flex items-center justify-between pb-2">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Registrar nuevo colaborador</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Configura el acceso y las especialidades del profesional.</p>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+            Paso guiado
+          </span>
+</div>
+<form class="flex flex-col gap-6" id="teamMemberForm" onsubmit="event.preventDefault(); window.addNewMember();">
+<!-- Avatar Uploader Row -->
+<div class="flex items-center gap-5 p-4 rounded-xl bg-surface-container-low">
+<div class="relative group">
+<div class="w-20 h-20 rounded-full bg-surface-container-high overflow-hidden flex items-center justify-center shadow-sm" id="avatarPreviewContainer">
+<img alt="Avatar colaborador" class="w-full h-full object-cover hidden" data-alt="Fotografía de retrato profesional en primer plano de un estilista joven y amigable, fondo de estudio limpio y desenfocado con tonalidades azules suaves, iluminación natural, alta calidad estética corporativa." id="avatarImagePlaceholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC_u2Ip-iOMe5zXQKAqv8vhafFNlGUDAeqY8qZDoR-kVPIW7djmwTEBBW-PNPntVOOKT3-bpEQhSDrfbw3YWwu2zcRVUdqjdiuTTcgdoXHnaW6Wn85AxrzkhDPXVbKRtGEuI_-dfY3wavDYY66PBcl_8kWoMijn9F7IelAYtsBMXeO8GTw9_9QZOK_kEc4nQsC71c55GwloHXFB14TrTWm05Tp-s8_W8RJegBNSkFP"/>
+<span class="material-symbols-outlined text-outline text-[36px]" id="avatarIconFallback">account_circle</span>
+</div>
+<button class="absolute bottom-0 right-0 w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-md hover:bg-primary-container transition-colors" onclick="document.getElementById('avatarInput').click();" title="Cambiar foto" type="button">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span>
+</button>
+</div>
+<div class="flex-1">
+<span class="font-label-md text-label-md text-on-surface font-medium block">Fotografía del profesional</span>
+<p class="font-caption text-caption text-on-surface-variant mt-0.5">Recomendado JPG o PNG de al menos 400x400 px. Da cercanía a tus clientes al reservar.</p>
+<div class="flex items-center gap-3 mt-2">
+<button class="px-3 py-1 rounded-lg bg-surface-container-lowest text-on-surface font-label-sm text-label-sm hover:bg-surface-container shadow-sm transition-colors flex items-center gap-1.5" onclick="document.getElementById('avatarInput').click();" type="button">
+<span class="material-symbols-outlined text-[16px]">upload</span>
+<span>Seleccionar imagen</span>
+</button>
+<input accept="image/*" class="hidden" id="avatarInput" onchange="window.previewAvatar(event)" type="file"/>
+</div>
+</div>
+</div>
+<!-- Name & Contact Inputs -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium flex items-center justify-between" for="memberName">
+<span>Nombre completo</span>
+<span class="text-primary font-caption text-caption">*Obligatorio</span>
+</label>
+<input class="w-full h-11 px-4 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" id="memberName" placeholder="Ej. Camila Morales" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-medium flex items-center justify-between" for="memberEmail">
+<span>Correo electrónico</span>
+<span class="text-secondary font-caption text-caption">Opcional</span>
+</label>
+<input class="w-full h-11 px-4 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" id="memberEmail" placeholder="camila@estudio.com" type="email"/>
+</div>
+</div>
+<!-- Notice on Invite -->
+<div class="flex items-start gap-2.5 p-3 rounded-lg bg-secondary-container/50 text-on-secondary-fixed">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">info</span>
+<p class="font-body-sm text-body-sm">
+              No necesita crear contraseña de inmediato; podrás invitarlo luego por email para que configure su propia disponibilidad y sincronice con Google Calendar.
+            </p>
+</div>
+<!-- Multi-select Checkboxes: Services -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Servicios que puede atender:</span>
+<span class="font-caption text-caption text-secondary">Selecciona todos los que apliquen</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<!-- Service Option 1 -->
+<label class="group relative flex flex-col p-3 rounded-xl bg-surface-container-low cursor-pointer hover:bg-surface-container transition-all">
+<div class="flex items-center justify-between mb-2">
+<span class="material-symbols-outlined text-primary text-[22px]">content_cut</span>
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary" name="services" type="checkbox" value="Corte Clásico"/>
+</div>
+<span class="font-title-md text-title-md text-on-surface">Corte Clásico</span>
+<span class="font-caption text-caption text-on-surface-variant mt-1">45 min • $18.000</span>
+</label>
+<!-- Service Option 2 -->
+<label class="group relative flex flex-col p-3 rounded-xl bg-surface-container-low cursor-pointer hover:bg-surface-container transition-all">
+<div class="flex items-center justify-between mb-2">
+<span class="material-symbols-outlined text-primary text-[22px]">face</span>
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary" name="services" type="checkbox" value="Arreglo de Barba"/>
+</div>
+<span class="font-title-md text-title-md text-on-surface">Arreglo de Barba</span>
+<span class="font-caption text-caption text-on-surface-variant mt-1">30 min • $12.000</span>
+</label>
+<!-- Service Option 3 -->
+<label class="group relative flex flex-col p-3 rounded-xl bg-surface-container-low cursor-pointer hover:bg-surface-container transition-all">
+<div class="flex items-center justify-between mb-2">
+<span class="material-symbols-outlined text-primary text-[22px]">auto_fix_high</span>
+<input class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary" name="services" type="checkbox" value="Pack Completo"/>
+</div>
+<span class="font-title-md text-title-md text-on-surface">Pack Completo</span>
+<span class="font-caption text-caption text-on-surface-variant mt-1">75 min • $27.000</span>
+</label>
+</div>
+</div>
+<!-- Submit Button -->
+<div class="pt-2 flex justify-end">
+<button class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 h-11 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md transition-all shadow-sm active:scale-[0.98]" type="submit">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+<span>+ Agregar miembro al equipo</span>
+</button>
+</div>
+</form>
+</div>
+<!-- RIGHT COLUMN: Team Overview & List (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Header of list + counter badge -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[22px]">badge</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Equipo actual</h3>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm font-semibold" id="memberCountBadge">
+              2 integrantes
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Estos profesionales aparecerán en el selector de turnos para que tus clientes elijan con quién atenderse.
+          </p>
+<!-- List of Added Cards -->
+<div class="flex flex-col gap-3.5 mt-1" id="teamCardsList">
+<!-- Card 1: Mateo Ramos -->
+<div class="p-4 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-start justify-between gap-3 shadow-sm group">
+<div class="flex items-center gap-3.5">
+<div class="relative w-12 h-12 rounded-full overflow-hidden shrink-0 shadow-sm">
+<img alt="Mateo Ramos" class="w-full h-full object-cover" data-alt="Retrato fotográfico nítido de Mateo Ramos, profesional de 32 años con barba cuidada y sonrisa sutil, vistiendo camisa oscura de trabajo, iluminación de estudio suave, paleta de colores azules cálidos y neutros corporativos." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZVOX3Xty27exbxIya218XTHgHc-rqJ0IoTuzkQGRL6rXI5nhya2uoNAy_dOc3OFOynhEvyjrcjUx9pUW8VLO53kfTiknk3QbBopXR3oBjZGNB_9G0tLbyagX5B7RsEXiX9JsngUl1InytV8HOj2MIwUCE6qLwOhcCNJZywhoN2eiJ8kIvcqEiSH35gDSiy70NYdWJ_DEonwLIHXa2nSPNh8QRv942pWgbugJg9kMc"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-primary ring-2 ring-surface-container-lowest" title="En línea"></span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md text-on-surface font-semibold">Mateo Ramos</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-caption text-caption font-semibold">
+                      Propietario / Activo
+                    </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+<span>3 servicios asignados</span>
+</span>
+<span class="font-caption text-caption text-outline block mt-0.5">mateo@barberiastudio.com</span>
+</div>
+</div>
+<div class="flex items-center">
+<button class="w-8 h-8 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container-high flex items-center justify-center transition-colors" title="Editar horario y servicios" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Sofía Gómez -->
+<div class="p-4 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-start justify-between gap-3 shadow-sm group">
+<div class="flex items-center gap-3.5">
+<div class="relative w-12 h-12 rounded-full overflow-hidden shrink-0 shadow-sm">
+<img alt="Sofía Gómez" class="w-full h-full object-cover" data-alt="Fotografía de primer plano de Sofía Gómez, especialista en estilismo de 28 años, expresión cálida y profesional, cabello recogido moderno, fondo con luz ambiental suave y tonos azules sutiles de estudio." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6xuhlK5X65Tiz40kRRKi8B23uKzjZJeX3MUqz3DjRO04FKB0afieRTjWV7ZP_fvCFx4g7cVdbP1NzRP_FftDKdf7GRE8xRtSvLyO1a8C704C-8eMcXvy2hin7-ifGGq2ETAfyxsfUJM_stBFyavvjeWdNl9YP_kBAIJwA5Bcld4B1jY9wDM0qK4lUVZ4FN7tGIF9dwxZGaqu_GrG_T5DQNh2BqZn_wfGwrUhdFfpR"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-primary ring-2 ring-surface-container-lowest" title="Activa"></span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md text-on-surface font-semibold">Sofía Gómez</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-caption text-caption font-semibold">
+                      Especialista
+                    </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+<span>2 servicios asignados</span>
+</span>
+<span class="font-caption text-caption text-outline block mt-0.5">Pendiente de activación</span>
+</div>
+</div>
+<div class="flex items-center">
+<button class="w-8 h-8 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container-high flex items-center justify-center transition-colors" title="Editar miembro" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Capacity Data Ring SVG Visualization -->
+<div class="mt-2 p-3.5 rounded-xl bg-surface-container-low flex items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="relative w-11 h-11 flex items-center justify-center">
+<svg class="w-11 h-11 -rotate-90 transform" viewbox="0 0 36 36">
+<path class="text-surface-container-high" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="80, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<span class="absolute font-caption text-caption text-primary font-bold">80%</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface block">Cobertura de Agenda</span>
+<span class="font-caption text-caption text-on-surface-variant">Lunes a Sábado cubiertos con turnos simultáneos</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[20px]">calendar_month</span>
+</div>
+</div>
+<!-- Prominently Displayed "Solo Practitioner" Option -->
+<div class="bg-gradient-to-br from-primary-fixed/30 via-surface-container-lowest to-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-primary-fixed text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-surface font-semibold">¿Trabajas por tu cuenta?</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Puedes avanzar directamente si no tienes colaboradores en tu local.</p>
+</div>
+</div>
+<label class="flex items-start gap-3 p-3 rounded-lg bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer">
+<input class="mt-0.5 w-4 h-4 rounded text-primary focus:ring-primary accent-primary" id="workSoloCheckbox" onchange="window.toggleSoloMode(this.checked)" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Continuar sin agregar más empleados (trabajo solo por ahora)</span>
+<span class="font-caption text-caption text-on-surface-variant">Tu perfil será el único prestador y simplificaremos la vista de tus clientes.</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- Bottom Actions Toolbar -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4 mt-2">
+<!-- Back Action -->
+<a class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors w-full sm:w-auto justify-center" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Volver al paso de Horarios</span>
+</a>
+<!-- Right Hand Actions -->
+<div class="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto justify-end">
+<button class="w-full sm:w-auto px-4 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-md text-label-md transition-colors flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Guardar y continuar después</span>
+</button>
+<!-- Primary CTA to next public page -->
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold transition-all shadow-md hover:shadow-lg active:scale-[0.98]" href="#" id="continueButton">
+<span>Continuar a página pública</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple interactive logic for adding a team member dynamically
+  let memberCount = 2;
+
+  window.previewAvatar = function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = document.getElementById('avatarImagePlaceholder');
+        const fallback = document.getElementById('avatarIconFallback');
+        img.src = e.target.result;
+        img.classList.remove('hidden');
+        if (fallback) fallback.classList.add('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  window.addNewMember = function() {
+    const nameInput = document.getElementById('memberName');
+    const emailInput = document.getElementById('memberEmail');
+    const checkedBoxes = document.querySelectorAll('input[name="services"]:checked');
+
+    if (!nameInput.value.trim()) {
+      nameInput.focus();
+      return;
+    }
+
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim() || 'Sin correo asociado';
+    const serviceCount = checkedBoxes.length;
+
+    // Create a new card element
+    const container = document.getElementById('teamCardsList');
+    const newCard = document.createElement('div');
+    newCard.className = 'p-4 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-start justify-between gap-3 shadow-sm group animate-fadeIn';
+    newCard.innerHTML = `
+      <div class="flex items-center gap-3.5">
+        <div class="relative w-12 h-12 rounded-full overflow-hidden shrink-0 bg-primary-fixed text-primary flex items-center justify-center font-bold text-headline-sm shadow-sm">
+          ${name.charAt(0).toUpperCase()}
+          <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-primary ring-2 ring-surface-container-lowest" title="Activo"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-title-md text-title-md text-on-surface font-semibold">${name}</span>
+            <span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-caption text-caption font-semibold">
+              Especialista
+            </span>
+          </div>
+          <span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+            <span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+            <span>${serviceCount} servicio${serviceCount === 1 ? '' : 's'} asignado${serviceCount === 1 ? '' : 's'}</span>
+          </span>
+          <span class="font-caption text-caption text-outline block mt-0.5">${email}</span>
+        </div>
+      </div>
+      <div class="flex items-center">
+        <button type="button" class="w-8 h-8 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container-high flex items-center justify-center transition-colors" title="Editar miembro">
+          <span class="material-symbols-outlined text-[18px]">edit</span>
+        </button>
+      </div>
+    `;
+
+    container.appendChild(newCard);
+
+    // Update count
+    memberCount++;
+    document.getElementById('memberCountBadge').textContent = `${memberCount} integrantes`;
+
+    // Clear form
+    nameInput.value = '';
+    emailInput.value = '';
+    const previewImg = document.getElementById('avatarImagePlaceholder');
+    const fallback = document.getElementById('avatarIconFallback');
+    if (previewImg && fallback) {
+      previewImg.classList.add('hidden');
+      previewImg.src = 'placeholder';
+      fallback.classList.remove('hidden');
+    }
+  };
+
+  window.toggleSoloMode = function(isSolo) {
+    const formContainer = document.getElementById('teamMemberForm');
+    const continueBtn = document.getElementById('continueButton');
+    if (isSolo) {
+      formContainer.classList.add('opacity-60', 'pointer-events-none');
+      continueBtn.innerHTML = `
+        <span>Continuar como profesional único</span>
+        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+      `;
+    } else {
+      formContainer.classList.remove('opacity-60', 'pointer-events-none');
+      continueBtn.innerHTML = `
+        <span>Continuar a página pública</span>
+        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+      `;
+    }
+  };
+</script></main><footer class="w-full bg-surface-container-lowest/80 py-6 border-t-0 shadow-[0_-1px_6px_rgba(0,0,0,0.02)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-label-sm text-label-sm"><div class="flex items-center gap-space-sm"><div class="flex items-center gap-1.5 text-secondary"><span class="material-symbols-outlined text-[16px] text-tertiary">lock</span><span>Conexión encriptada SSL de 256 bits</span></div><span class="hidden sm:inline text-outline-variant">•</span><span class="hidden sm:inline text-on-surface-variant">Tus datos comerciales están protegidos</span></div><div class="flex items-center gap-space-md"><a class="inline-flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-[16px]">help_outline</span><span>Centro de ayuda</span></a><span class="text-outline-variant">•</span><span class="text-outline">© 2025 Skedly Inc.</span></div></div></footer></body></html>

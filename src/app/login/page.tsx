@@ -8,15 +8,14 @@ import { supabase } from "@/lib/supabase/client";
 export default function LoginPage() {
   const router = useRouter();
 
-  const [activeTab, setActiveTab] = useState<"login" | "forgot">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
 
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [forgotSuccess, setForgotSuccess] = useState<string | null>(null);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,376 +56,378 @@ export default function LoginPage() {
     }
   };
 
-  const handleForgotPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleGoogleLogin = async () => {
     setErrorMsg(null);
-    setForgotSuccess(null);
-
-    if (!email.trim()) {
-      setErrorMsg("Ingresa tu correo electrónico para enviar el enlace de recuperación.");
-      return;
-    }
-
-    setLoading(true);
-
+    setGoogleLoading(true);
     try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
-        redirectTo: `${window.location.origin}/login?reset=true`,
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: `${window.location.origin}/dashboard`,
+        },
       });
-
       if (error) throw error;
-
-      setForgotSuccess(
-        "Se ha enviado un enlace de restablecimiento a tu correo electrónico. Por favor verifica tu bandeja."
-      );
     } catch (err: unknown) {
       const error = err as Error;
-      setErrorMsg(error.message || "Error al solicitar restablecimiento.");
-    } finally {
-      setLoading(false);
+      console.error("Google login error:", error);
+      setErrorMsg(error.message || "Error al conectar con Google.");
+      setGoogleLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#111827] flex flex-col justify-between antialiased">
-      <div className="flex-1 flex flex-col lg:flex-row w-full min-h-screen">
-        {/* LEFT SIDE: Brand & Dashboard Preview Panel (~45%) */}
-        <div className="w-full lg:w-[45%] bg-[#111827] p-8 lg:p-14 text-white flex flex-col justify-between relative overflow-hidden">
-          {/* Subtle Glows */}
-          <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#4F6DF5]/15 rounded-full blur-3xl pointer-events-none"></div>
-          <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div className="bg-surface font-sans text-on-surface min-h-screen flex flex-col selection:bg-primary-fixed selection:text-on-primary-fixed">
+      {/* HEADER NAVEGACIÓN SUPERIOR */}
+      <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-surface-container-high shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+        <div className="h-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm font-bold text-sm tracking-wider">
+              SK
+            </div>
+            <span className="font-bold text-lg text-on-surface tracking-tight">Skedly</span>
+          </Link>
 
-          {/* Top: Brand Logo */}
-          <div className="relative z-10">
-            <Link href="/" className="flex items-center space-x-3 mb-10 w-fit">
-              <div className="w-10 h-10 rounded-xl bg-[#4F6DF5] flex items-center justify-center shadow-lg shadow-[#4F6DF5]/30">
-                <svg
-                  className="w-6 h-6 text-white"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect x="3" y="4" width="18" height="18" rx="3" ry="3"></rect>
-                  <line x1="16" y1="2" x2="16" y2="6"></line>
-                  <line x1="8" y1="2" x2="8" y2="6"></line>
-                  <line x1="3" y1="10" x2="21" y2="10"></line>
-                  <path d="m9 16 2 2 4-4"></path>
-                </svg>
-              </div>
-              <span className="text-2xl font-bold tracking-tight text-white">
-                SKEDLY
-              </span>
+          <nav className="hidden md:flex items-center gap-6 text-sm">
+            <Link
+              href="/login"
+              className="text-primary font-bold transition-colors"
+            >
+              Iniciar sesión
             </Link>
+            <Link
+              href="/register"
+              className="font-medium text-on-surface-variant hover:text-on-surface transition-colors"
+            >
+              Crear cuenta
+            </Link>
+            <Link
+              href="/forgot-password"
+              className="font-medium text-on-surface-variant hover:text-on-surface transition-colors"
+            >
+              Recuperar contraseña
+            </Link>
+          </nav>
 
-            {/* Headline */}
-            <div className="max-w-md">
-              <h1 className="text-3xl lg:text-4xl font-bold tracking-tight text-white mb-4 leading-tight">
-                El control de tu agenda, en un solo lugar.
-              </h1>
-              <p className="text-slate-400 text-sm lg:text-base leading-relaxed">
-                Accede a tu panel para gestionar tus citas de hoy, coordinar a
-                tu equipo y atender a tus clientes con la máxima precisión.
-              </p>
-            </div>
-          </div>
-
-          {/* Middle: Rich Glass Card UI Mockup */}
-          <div className="relative z-10 my-8">
-            <div className="bg-white/5 backdrop-blur-md rounded-2xl p-5 border border-white/10 shadow-2xl">
-              <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/10">
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#4F6DF5] flex items-center justify-center font-bold text-xs text-white">
-                    BA
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-white">
-                      Barbería Alpha
-                    </p>
-                    <p className="text-[11px] text-slate-400">Panel en vivo</p>
-                  </div>
-                </div>
-                <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                  Operando
-                </span>
-              </div>
-
-              {/* Quick stats strip */}
-              <div className="grid grid-cols-2 gap-3 mb-4">
-                <div className="p-3 bg-white/5 rounded-xl border border-white/5">
-                  <p className="text-[11px] text-slate-400">Citas programadas</p>
-                  <p className="text-lg font-bold text-white mt-0.5">24 hoy</p>
-                  <span className="text-[10px] text-emerald-400">
-                    +14% vs ayer
-                  </span>
-                </div>
-                <div className="p-3 bg-white/5 rounded-xl border border-white/5">
-                  <p className="text-[11px] text-slate-400">Ocupación equipo</p>
-                  <p className="text-lg font-bold text-white mt-0.5">92%</p>
-                  <span className="text-[10px] text-[#4F6DF5]">4 barberos</span>
-                </div>
-              </div>
-
-              {/* Sample appointment */}
-              <div className="flex items-center justify-between p-2.5 bg-white/5 rounded-lg border border-white/5">
-                <div className="flex items-center space-x-2.5">
-                  <div className="w-1.5 h-7 rounded-full bg-[#4F6DF5]"></div>
-                  <div>
-                    <p className="text-xs font-medium text-white">
-                      Alejandro Torres
-                    </p>
-                    <p className="text-[11px] text-slate-400">
-                      Corte + Barba · 11:30 AM
-                    </p>
-                  </div>
-                </div>
-                <span className="text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">
-                  Confirmada
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom */}
-          <div className="relative z-10 pt-4 border-t border-slate-800 text-xs text-slate-500 flex items-center justify-between">
-            <span>© 2026 SKEDLY SaaS</span>
-            <span>Seguridad SSL 256-bit</span>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors"
+            >
+              <span className="material-symbols-outlined text-[16px]">arrow_back</span>
+              <span>Volver al inicio</span>
+            </Link>
           </div>
         </div>
+      </header>
 
-        {/* RIGHT SIDE: Auth Form (~55%) */}
-        <div className="w-full lg:w-[55%] flex items-center justify-center p-6 sm:p-12 lg:p-16">
-          <div className="w-full max-w-md">
-            {activeTab === "login" ? (
-              <>
-                {/* Header */}
-                <div className="mb-8">
-                  <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-                    Bienvenido de nuevo
-                  </h2>
-                  <p className="text-sm text-slate-500 mt-1">
-                    Ingresa tus credenciales para acceder a tu panel.
-                  </p>
+      {/* CONTENIDO PRINCIPAL */}
+      <main className="w-full pt-16 bg-surface flex-1 flex flex-col justify-center">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 flex items-center justify-center">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-12 rounded-3xl bg-white shadow-xl border border-surface-container-high overflow-hidden min-h-[640px]">
+            {/* Columna Izquierda: Formulario de inicio de sesión */}
+            <div className="lg:col-span-6 xl:col-span-7 p-6 sm:p-10 lg:p-14 flex flex-col justify-between">
+              <div className="w-full max-w-md mx-auto">
+                {/* Identidad de Marca */}
+                <div className="flex items-center gap-3 mb-6 sm:mb-8">
+                  <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-md text-white font-bold text-base">
+                    SK
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-bold text-lg text-on-surface tracking-tight leading-none">Skedly</span>
+                    <span className="text-xs text-on-surface-variant font-medium mt-0.5">Control de agenda pro</span>
+                  </div>
                 </div>
 
-                {/* Error Banner */}
+                {/* Titulares */}
+                <div className="space-y-1.5 mb-6 sm:mb-8">
+                  <h1 className="text-2xl sm:text-3xl font-bold text-on-surface tracking-tight">Bienvenido de nuevo</h1>
+                  <p className="text-sm text-on-surface-variant">Accede a tu cuenta y mantén tu negocio organizado.</p>
+                </div>
+
+                {/* Mensaje de Error */}
                 {errorMsg && (
-                  <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm flex items-start gap-3">
-                    <span className="material-symbols-outlined text-red-500 shrink-0 text-xl">
-                      error
-                    </span>
+                  <div className="mb-5 p-3.5 rounded-xl bg-error-container text-on-error-container text-xs sm:text-sm flex items-start gap-2 border border-error/20">
+                    <span className="material-symbols-outlined text-[18px] shrink-0 mt-0.5 text-error">error</span>
                     <span>{errorMsg}</span>
                   </div>
                 )}
 
-                {/* Form */}
-                <form onSubmit={handleLogin} className="space-y-4">
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5"
-                    >
-                      Correo Electrónico
+                {/* Botón Social Google */}
+                <button
+                  type="button"
+                  onClick={handleGoogleLogin}
+                  disabled={googleLoading}
+                  className="w-full h-11 px-4 rounded-lg bg-white border border-surface-container-high shadow-xs hover:bg-surface-container-low transition-all duration-200 flex items-center justify-center gap-3 text-sm text-on-surface font-medium cursor-pointer disabled:opacity-50"
+                >
+                  <svg aria-hidden="true" className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24">
+                    <path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z" fill="#4285F4" />
+                    <path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24Z" fill="#34A853" />
+                    <path d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.03 0 12s.45 3.82 1.25 5.42l4.03-3.15Z" fill="#FBBC05" />
+                    <path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98Z" fill="#EA4335" />
+                  </svg>
+                  <span>{googleLoading ? "Conectando..." : "Continuar con Google"}</span>
+                </button>
+
+                {/* Separador */}
+                <div className="relative my-6 flex items-center justify-center">
+                  <div className="w-full h-px bg-surface-container-high" />
+                  <span className="absolute bg-white px-3 text-xs uppercase text-on-surface-variant font-medium tracking-wider">
+                    o con tu correo
+                  </span>
+                </div>
+
+                {/* Formulario Principal */}
+                <form className="space-y-4" onSubmit={handleLogin}>
+                  {/* Campo Correo */}
+                  <div className="space-y-1.5">
+                    <label className="block text-xs sm:text-sm font-medium text-on-surface" htmlFor="email">
+                      Correo electrónico
                     </label>
-                    <input
-                      id="email"
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="nombre@negocio.com"
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#4F6DF5]/20 focus:border-[#4F6DF5] text-sm text-slate-800 bg-white placeholder-slate-400"
-                    />
+                    <div className="relative flex items-center">
+                      <span className="material-symbols-outlined absolute left-3.5 text-on-surface-variant pointer-events-none text-[20px]">
+                        mail
+                      </span>
+                      <input
+                        className="w-full h-11 pl-11 pr-4 rounded-lg bg-white border border-surface-container-high text-sm text-on-surface placeholder:text-outline shadow-xs focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        id="email"
+                        name="email"
+                        placeholder="tu@negocio.com"
+                        required
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </div>
                   </div>
 
-                  <div>
-                    <div className="flex items-center justify-between mb-1.5">
-                      <label
-                        htmlFor="password"
-                        className="block text-xs font-semibold text-slate-700 uppercase tracking-wider"
-                      >
+                  {/* Campo Contraseña */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <label className="block text-xs sm:text-sm font-medium text-on-surface" htmlFor="password">
                         Contraseña
                       </label>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setErrorMsg(null);
-                          setActiveTab("forgot");
-                        }}
-                        className="text-xs text-[#4F6DF5] hover:text-[#3D5AE8] hover:underline"
+                      <Link
+                        className="text-xs font-semibold text-primary hover:underline transition-colors"
+                        href="/forgot-password"
                       >
                         ¿Olvidaste tu contraseña?
-                      </button>
+                      </Link>
                     </div>
-
-                    <div className="relative">
+                    <div className="relative flex items-center">
+                      <span className="material-symbols-outlined absolute left-3.5 text-on-surface-variant pointer-events-none text-[20px]">
+                        lock
+                      </span>
                       <input
+                        className="w-full h-11 pl-11 pr-11 rounded-lg bg-white border border-surface-container-high text-sm text-on-surface placeholder:text-outline shadow-xs focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                         id="password"
-                        type={showPassword ? "text" : "password"}
+                        name="password"
+                        placeholder="••••••••••••"
                         required
+                        type={showPassword ? "text" : "password"}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder="••••••••"
-                        className="w-full px-3.5 py-2.5 pr-10 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#4F6DF5]/20 focus:border-[#4F6DF5] text-sm text-slate-800 bg-white placeholder-slate-400"
                       />
                       <button
+                        aria-label="Mostrar u ocultar contraseña"
+                        className="absolute right-3 p-1 rounded-md text-on-surface-variant hover:text-on-surface transition-colors focus:outline-none cursor-pointer"
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
                       >
-                        <span className="material-symbols-outlined text-[18px]">
+                        <span className="material-symbols-outlined text-[20px]">
                           {showPassword ? "visibility_off" : "visibility"}
                         </span>
                       </button>
                     </div>
                   </div>
 
+                  {/* Recordar Sesión */}
                   <div className="flex items-center justify-between pt-1">
-                    <div className="flex items-center space-x-2">
+                    <label className="flex items-center gap-2 cursor-pointer select-none">
                       <input
-                        id="rememberMe"
+                        className="w-4 h-4 rounded text-primary focus:ring-primary/20 accent-primary cursor-pointer"
+                        id="remember"
+                        name="remember"
                         type="checkbox"
                         checked={rememberMe}
                         onChange={(e) => setRememberMe(e.target.checked)}
-                        className="h-4 w-4 rounded border-slate-300 text-[#4F6DF5] focus:ring-[#4F6DF5]"
                       />
-                      <label
-                        htmlFor="rememberMe"
-                        className="text-xs text-slate-600 cursor-pointer"
-                      >
-                        Recordar mi sesión
-                      </label>
-                    </div>
+                      <span className="text-xs sm:text-sm text-on-surface-variant">
+                        Recordar mi sesión en este dispositivo
+                      </span>
+                    </label>
                   </div>
 
+                  {/* Botón Submit */}
                   <button
+                    className="w-full h-11 rounded-lg bg-primary hover:bg-primary-container text-on-primary text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer mt-2 disabled:opacity-60"
                     type="submit"
                     disabled={loading}
-                    className="w-full mt-2 py-3 bg-[#4F6DF5] hover:bg-[#3D5AE8] disabled:opacity-60 text-white font-semibold text-sm rounded-lg shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    {loading ? (
-                      <>
-                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                        <span>Verificando credenciales...</span>
-                      </>
-                    ) : (
-                      <span>Iniciar Sesión</span>
-                    )}
+                    <span>{loading ? "Accediendo..." : "Iniciar sesión"}</span>
+                    <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
                   </button>
                 </form>
 
-                {/* Footer switcher */}
-                <div className="mt-8 pt-6 border-t border-slate-200 text-center">
-                  <p className="text-xs text-slate-500">
-                    ¿Todavía no tienes una cuenta de negocio?{" "}
-                    <Link
-                      href="/register"
-                      className="font-semibold text-[#4F6DF5] hover:text-[#3D5AE8] hover:underline"
-                    >
-                      Comenzar gratis
+                {/* Pie del Formulario */}
+                <div className="mt-8 text-center space-y-3">
+                  <p className="text-xs sm:text-sm text-on-surface-variant">
+                    ¿Todavía no tienes una cuenta?
+                    <Link className="font-semibold text-primary hover:underline ml-1" href="/register">
+                      Crear cuenta
                     </Link>
                   </p>
-                </div>
-              </>
-            ) : (
-              <>
-                {/* Recuperar Contraseña Tab */}
-                <div className="mb-8">
-                  <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-                    Recuperar contraseña
-                  </h2>
-                  <p className="text-sm text-slate-500 mt-1">
-                    Introduce el correo con el que te registraste y te enviaremos
-                    un enlace seguro para restablecer tu clave.
+                  <p className="text-[11px] text-on-surface-variant/80 leading-relaxed">
+                    Al continuar, aceptas nuestros{" "}
+                    <Link className="underline hover:text-on-surface" href="#">
+                      Términos de servicio
+                    </Link>{" "}
+                    y{" "}
+                    <Link className="underline hover:text-on-surface" href="#">
+                      Política de privacidad
+                    </Link>
+                    .
                   </p>
                 </div>
+              </div>
 
-                {errorMsg && (
-                  <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm flex items-start gap-3">
-                    <span className="material-symbols-outlined text-red-500 shrink-0 text-xl">
-                      error
+              {/* Micro-indicador de estado en esquina inferior */}
+              <div className="w-full max-w-md mx-auto pt-6 flex items-center justify-between text-on-surface-variant text-[11px] border-t border-surface-container-high/60 mt-4">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>Sistemas operativos en línea</span>
+                </div>
+                <span>Cifrado SSL de 256 bits</span>
+              </div>
+            </div>
+
+            {/* Columna Derecha: Panel de Soporte Visual / Showcase de Marca */}
+            <div className="lg:col-span-6 xl:col-span-5 bg-surface-container-low p-6 sm:p-10 lg:p-12 flex flex-col justify-between relative overflow-hidden border-t lg:border-t-0 lg:border-l border-surface-container-high">
+              {/* Elemento decorativo atmosférico */}
+              <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-primary-fixed filter blur-3xl opacity-60 pointer-events-none" />
+              <div className="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-secondary-container filter blur-3xl opacity-50 pointer-events-none" />
+
+              <div className="relative z-10">
+                {/* Tag de Estado en vivo */}
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white shadow-xs mb-6 border border-surface-container-high">
+                  <span className="material-symbols-outlined text-primary text-[16px]">sync</span>
+                  <span className="text-xs text-on-surface font-semibold">Sincronización en tiempo real activa</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-bold text-on-surface tracking-tight mb-3">
+                  La plataforma de gestión para profesionales de alto rendimiento.
+                </h2>
+                <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+                  Automatiza recordatorios, reduce inasistencias y mantén el control financiero de tus citas en una sola vista.
+                </p>
+              </div>
+
+              {/* Tarjeta de Demostración Interactiva / Preview de Agenda */}
+              <div className="relative z-10 my-8 space-y-3">
+                <div className="flex items-center justify-between px-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold text-on-surface">Agenda de Hoy</span>
+                    <span className="px-2 py-0.5 rounded-full bg-primary-fixed text-primary text-[11px] font-semibold">
+                      4 Citas
                     </span>
-                    <span>{errorMsg}</span>
                   </div>
-                )}
+                  <span className="text-[11px] text-on-surface-variant">Miércoles, 24 Mayo</span>
+                </div>
 
-                {forgotSuccess ? (
-                  <div className="p-5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex flex-col gap-2">
-                    <div className="flex items-center gap-2 font-semibold">
-                      <span className="material-symbols-outlined text-emerald-600 text-xl">
-                        mark_email_read
-                      </span>
-                      <span>Enlace enviado</span>
+                {/* Cita 1: Confirmada */}
+                <div className="p-3.5 rounded-2xl bg-white shadow-xs border border-surface-container-high/60 flex items-center justify-between hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center shrink-0">
+                      <span className="text-xs font-bold text-primary">DR</span>
                     </div>
-                    <p className="text-xs leading-relaxed">{forgotSuccess}</p>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setActiveTab("login");
-                        setForgotSuccess(null);
-                      }}
-                      className="mt-3 text-xs font-semibold text-emerald-700 underline text-left hover:text-emerald-900"
-                    >
-                      ← Volver a Iniciar Sesión
-                    </button>
-                  </div>
-                ) : (
-                  <form onSubmit={handleForgotPassword} className="space-y-4">
                     <div>
-                      <label
-                        htmlFor="recovery-email"
-                        className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5"
-                      >
-                        Correo Electrónico
-                      </label>
-                      <input
-                        id="recovery-email"
-                        type="email"
-                        required
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="nombre@negocio.com"
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#4F6DF5]/20 focus:border-[#4F6DF5] text-sm text-slate-800 bg-white placeholder-slate-400"
-                      />
+                      <p className="text-xs sm:text-sm font-semibold text-on-surface leading-snug">Dr. Rafael Méndez</p>
+                      <p className="text-[11px] text-on-surface-variant">Consulta Integral • 09:30 AM</p>
                     </div>
+                  </div>
+                  <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-semibold flex items-center gap-1 border border-emerald-100">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    Confirmada
+                  </span>
+                </div>
 
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="w-full mt-2 py-3 bg-[#4F6DF5] hover:bg-[#3D5AE8] disabled:opacity-60 text-white font-semibold text-sm rounded-lg shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
-                    >
-                      {loading ? (
-                        <>
-                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                          <span>Enviando enlace...</span>
-                        </>
-                      ) : (
-                        <span>Enviar enlace de recuperación</span>
-                      )}
-                    </button>
-
-                    <div className="pt-4 text-center">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setErrorMsg(null);
-                          setActiveTab("login");
-                        }}
-                        className="text-xs font-semibold text-slate-600 hover:text-slate-900"
-                      >
-                        ← Volver a Iniciar Sesión
-                      </button>
+                {/* Cita 2: En curso */}
+                <div className="p-3.5 rounded-2xl bg-white shadow-xs border border-surface-container-high/60 flex items-center justify-between hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+                      <span className="text-xs font-bold text-secondary">CL</span>
                     </div>
-                  </form>
-                )}
-              </>
-            )}
+                    <div>
+                      <p className="text-xs sm:text-sm font-semibold text-on-surface leading-snug">Clara Lozano &amp; Asoc.</p>
+                      <p className="text-[11px] text-on-surface-variant">Revisión Fiscal • 11:00 AM</p>
+                    </div>
+                  </div>
+                  <span className="px-2.5 py-1 rounded-full bg-blue-50 text-primary text-[11px] font-semibold flex items-center gap-1 border border-blue-100">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                    En curso
+                  </span>
+                </div>
+
+                {/* Cita 3: WhatsApp OK */}
+                <div className="p-3.5 rounded-2xl bg-white shadow-xs border border-surface-container-high/60 flex items-center justify-between hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center shrink-0">
+                      <span className="text-xs font-bold text-tertiary">MA</span>
+                    </div>
+                    <div>
+                      <p className="text-xs sm:text-sm font-semibold text-on-surface leading-snug">Marco Antonio Silva</p>
+                      <p className="text-[11px] text-on-surface-variant">Sesión Estratégica • 02:15 PM</p>
+                    </div>
+                  </div>
+                  <span className="px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 text-[11px] font-semibold flex items-center gap-1 border border-amber-100">
+                    <span className="material-symbols-outlined text-[13px]">schedule</span>
+                    WhatsApp OK
+                  </span>
+                </div>
+              </div>
+
+              {/* Métrica de Confianza y Testimonio Compacto */}
+              <div className="relative z-10 rounded-2xl bg-white border border-surface-container-high p-4 mt-auto shadow-xs">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="flex -space-x-2 overflow-hidden">
+                    <div className="inline-block h-7 w-7 rounded-full bg-primary text-on-primary text-[11px] flex items-center justify-center ring-2 ring-white font-semibold">
+                      LM
+                    </div>
+                    <div className="inline-block h-7 w-7 rounded-full bg-tertiary text-on-tertiary text-[11px] flex items-center justify-center ring-2 ring-white font-semibold">
+                      CR
+                    </div>
+                    <div className="inline-block h-7 w-7 rounded-full bg-secondary text-on-secondary text-[11px] flex items-center justify-center ring-2 ring-white font-semibold">
+                      AT
+                    </div>
+                  </div>
+                  <span className="text-xs font-bold text-on-surface">Red de +1,200 profesionales</span>
+                </div>
+                <p className="text-xs text-on-surface-variant italic leading-relaxed">
+                  &ldquo;Skedly redujo nuestras citas olvidadas en un 42% desde el primer mes. Es simple, elegante e infalible.&rdquo;
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </main>
+
+      {/* FOOTER */}
+      <footer className="w-full bg-surface-container-low py-6 border-t border-surface-container-high">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-on-surface-variant">
+            © 2025 Skedly SaaS. Todos los derechos reservados.
+          </p>
+          <div className="flex items-center gap-6 text-xs text-on-surface-variant">
+            <Link className="hover:text-primary transition-colors" href="#">
+              Términos del Servicio
+            </Link>
+            <Link className="hover:text-primary transition-colors" href="#">
+              Política de Privacidad
+            </Link>
+            <Link className="hover:text-primary transition-colors" href="#">
+              Centro de Ayuda
+            </Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

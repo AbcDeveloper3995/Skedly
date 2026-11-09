@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary-container":"#5c6274","primary-fixed-dim":"#b9c3ff","surface-container-lowest":"#ffffff","surface-container":"#eceef0","on-secondary":"#ffffff","on-tertiary":"#ffffff","outline":"#747686","on-surface-variant":"#444654","primary":"#2c4dd6","error-container":"#ffdad6","outline-variant":"#c4c5d7","on-primary":"#ffffff","tertiary-fixed-dim":"#adc6ff","on-secondary-fixed":"#141b2b","on-secondary-fixed-variant":"#404758","inverse-on-surface":"#eff1f3","on-error":"#ffffff","secondary-fixed-dim":"#c0c6db","surface":"#f7f9fb","on-primary-fixed-variant":"#0233c1","on-tertiary-fixed":"#001a42","error":"#ba1a1a","on-surface":"#191c1e","surface-bright":"#f7f9fb","on-background":"#191c1e","secondary-fixed":"#dce2f7","on-error-container":"#93000a","background":"#f7f9fb","surface-container-high":"#e6e8ea","tertiary-container":"#2170e4","surface-tint":"#2f50d8","on-tertiary-container":"#fefcff","surface-variant":"#e0e3e5","tertiary-fixed":"#d8e2ff","surface-container-highest":"#e0e3e5","inverse-surface":"#2d3133","primary-fixed":"#dee1ff","secondary":"#575e70","tertiary":"#0058be","on-primary-container":"#fffbff","secondary-container":"#d9dff5","primary-container":"#4a68f0","surface-container-low":"#f2f4f6","on-primary-fixed":"#001257","surface-dim":"#d8dadc","inverse-primary":"#b9c3ff","on-tertiary-fixed-variant":"#004395"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin-mobile":"1rem","gutter":"1.5rem","space-xs":"0.25rem","space-lg":"1.5rem","space-sm":"0.5rem","space-md":"1rem","gutter-mobile":"1rem","space-xl":"2rem","margin":"2rem"},"fontFamily":{"headline-sm":["Inter"],"label-sm":["Inter"],"caption":["Inter"],"headline-lg-mobile":["Inter"],"label-md":["Inter"],"display-hero":["Inter"],"display-hero-mobile":["Inter"],"body-md":["Inter"],"body-lg":["Inter"],"headline-lg":["Inter"],"body-sm":["Inter"],"headline-md":["Inter"],"title-md":["Inter"]},"fontSize":{"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.015em","fontWeight":"500"}],"caption":["11px",{"lineHeight":"14px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"500"}],"display-hero":["48px",{"lineHeight":"56px","letterSpacing":"-0.025em","fontWeight":"700"}],"display-hero-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","letterSpacing":"0.005em","fontWeight":"400"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"title-md":["16px",{"lineHeight":"24px","letterSpacing":"-0.005em","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between"><div class="flex items-center gap-space-lg"><a class="flex items-center gap-space-sm group" href="#"><div class="w-9 h-9 rounded-lg bg-primary flex items-center justify-center text-on-primary font-headline-sm font-bold text-headline-sm shadow-sm"><span class="material-symbols-outlined text-[20px]">event_available</span></div><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface">Skedly</span></a><div class="h-5 w-px bg-surface-container-highest hidden sm:block"></div><nav class="flex items-center gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-fixed-variant font-medium"><a aria-current="page" class="px-3 py-1 rounded-full transition-colors hidden md:inline-block bg-secondary-container text-on-secondary-fixed-variant font-medium" data-path="configuracion-inicial" href="#">Paso 1: Negocio</a><a class="px-3 py-1 rounded-full text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container-high hover:text-on-surface transition-colors hidden md:inline-block" data-path="servicios-y-horarios" href="#">Paso 2: Servicios</a><a class="px-3 py-1 rounded-full text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container-high hover:text-on-surface transition-colors hidden md:inline-block" data-path="personalizacion-agenda" href="#">Paso 3: Agenda</a><a class="px-3 py-1 rounded-full text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container-high hover:text-on-surface transition-colors hidden md:inline-block" data-path="confirmacion-final" href="#">Paso 4: Confirmación</a></nav></div><div class="flex items-center gap-space-md"><div class="hidden sm:flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-container-low text-on-secondary-container font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span><span>Paso guiado</span></div><button class="inline-flex items-center gap-space-xs px-3.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container hover:text-on-surface text-on-surface-variant font-label-md text-label-md transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">bookmark</span><span class="hidden sm:inline">Guardar y salir</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface flex-1 flex flex-col"><div class="flex flex-col w-full">
+<!-- Dynamic subtle aura backdrop -->
+<div class="relative w-full overflow-hidden py-10 px-4 sm:px-6 lg:px-12">
+<div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[720px] h-[360px] bg-gradient-to-b from-primary/10 via-secondary-container/20 to-transparent blur-3xl pointer-events-none -z-10 rounded-full"></div>
+<div class="max-w-6xl mx-auto flex flex-col gap-10">
+<!-- Step Progress Bar & Stepper -->
+<section class="w-full bg-surface-container-lowest rounded-xl shadow-sm p-6 flex flex-col gap-4">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div class="flex items-center gap-space-sm">
+<span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-semibold tracking-wide uppercase">Paso 1 de 5</span>
+<span class="font-title-md text-title-md text-on-surface">Configuración inicial del perfil</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary">timelapse</span> Tiempo estimado: 2 minutos
+          </span>
+</div>
+<!-- Custom Visual Progress Track -->
+<div class="w-full bg-surface-container rounded-full h-2 overflow-hidden flex">
+<div class="bg-primary h-full w-1/5 transition-all duration-500 rounded-full shadow-[0_0_8px_rgba(44,77,214,0.4)]"></div>
+<div class="bg-transparent h-full w-4/5"></div>
+</div>
+<!-- Step Markers Responsive Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-5 gap-2 pt-2">
+<div class="flex items-center gap-2 text-primary font-label-sm text-label-sm font-semibold">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-[12px] shadow-sm">1</span>
+<span class="truncate">Información</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-6 h-6 rounded-full bg-surface-container text-secondary flex items-center justify-center text-[12px]">2</span>
+<span class="truncate">Horarios</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-6 h-6 rounded-full bg-surface-container text-secondary flex items-center justify-center text-[12px]">3</span>
+<span class="truncate">Servicios</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-6 h-6 rounded-full bg-surface-container text-secondary flex items-center justify-center text-[12px]">4</span>
+<span class="truncate">Equipo</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm col-span-2 sm:col-span-1">
+<span class="w-6 h-6 rounded-full bg-surface-container text-secondary flex items-center justify-center text-[12px]">5</span>
+<span class="truncate">Página Pública</span>
+</div>
+</div>
+</section>
+<!-- Main Layout: Form & Dynamic Preview Sidebar -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left: Form Column (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<!-- Heading Area -->
+<div class="flex flex-col gap-2">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-fixed-variant w-fit font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">store</span>
+<span>Identidad de marca</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Cuéntanos sobre tu negocio</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Comencemos con la información básica para activar tu central de reservas personalizada.</p>
+</div>
+<!-- Main Input Card -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-sm p-6 sm:p-8 flex flex-col gap-8">
+<!-- Logo Dropzone Area -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<label class="font-title-md text-title-md text-on-surface flex items-center gap-1.5">
+                  Logo comercial
+                  <span class="material-symbols-outlined text-outline text-[16px]" title="Formato PNG, JPG o WEBP hasta 5MB">info</span>
+</label>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-on-secondary-container font-label-sm text-label-sm">Opcional</span>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-5 p-5 rounded-xl bg-surface-container-low transition-colors hover:bg-surface-container group cursor-pointer" id="dropzone-area">
+<div class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col items-center justify-center text-primary group-hover:scale-105 transition-transform flex-shrink-0 relative overflow-hidden">
+<span class="material-symbols-outlined text-[36px] text-primary">add_a_photo</span>
+<span class="font-caption text-caption text-secondary mt-1">1:1 Ratio</span>
+</div>
+<div class="flex flex-col gap-1.5 text-center sm:text-left">
+<div class="font-label-md text-label-md text-on-surface font-semibold flex items-center justify-center sm:justify-start gap-1 text-primary">
+<span class="material-symbols-outlined text-[18px]">cloud_upload</span>
+<span>Arrastra tu archivo aquí o haz clic para examinar</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Se recomienda archivo cuadrado de al menos 400x400 px. Formatos válidos: PNG, JPG, SVG o WEBP (máx. 5 MB).</p>
+<div class="flex items-center justify-center sm:justify-start gap-2 pt-1 font-label-sm text-label-sm text-secondary">
+<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-tertiary">check_circle</span> Alta resolución</span>
+<span>•</span>
+<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-tertiary">check_circle</span> Fondo transparente ideal</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Field: Business Name -->
+<div class="flex flex-col gap-2">
+<label class="font-title-md text-title-md text-on-surface flex items-center justify-between" for="business-name">
+<span>Nombre del negocio <span class="text-error">*</span></span>
+<span class="font-caption text-caption text-outline">Obligatorio</span>
+</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3.5 text-outline text-[20px] pointer-events-none">domain</span>
+<input class="w-full h-11 pl-11 pr-4 bg-surface-container-lowest text-on-surface rounded-lg shadow-sm placeholder:text-outline font-body-md text-body-md focus:outline-none focus:shadow-[0_0_0_3px_rgba(44,77,214,0.18)] transition-all" id="business-name" name="business-name" placeholder="Ej. Barbería Élite Central" type="text" value="Barbería Élite Central"/>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">visibility</span> Este nombre se mostrará en los recibos y notificaciones de WhatsApp.
+              </p>
+</div>
+<!-- Field: Business Category / Chips -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<label class="font-title-md text-title-md text-on-surface">Tipo de negocio <span class="text-error">*</span></label>
+<span class="font-label-sm text-label-sm text-secondary">Selecciona el que mejor aplique</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="category-selector">
+<!-- Option 1: Selected -->
+<button class="category-chip text-left p-3.5 rounded-xl bg-surface-container-low text-primary flex flex-col justify-between gap-3 shadow-sm hover:bg-surface-container transition-all" data-selected="true" type="button">
+<div class="flex items-center justify-between w-full">
+<span class="material-symbols-outlined text-[24px]">content_cut</span>
+<span class="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-[12px] shadow-xs">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+</div>
+<div>
+<span class="font-label-md text-label-md font-semibold block text-on-surface">Barbería</span>
+<span class="font-caption text-caption text-secondary">Cortes y afeitado</span>
+</div>
+</button>
+<!-- Option 2 -->
+<button class="category-chip text-left p-3.5 rounded-xl bg-surface-container-low text-on-surface flex flex-col justify-between gap-3 shadow-sm hover:bg-surface-container transition-all" data-selected="false" type="button">
+<div class="flex items-center justify-between w-full">
+<span class="material-symbols-outlined text-[24px] text-secondary">spa</span>
+<span class="w-5 h-5 rounded-full bg-surface-container-highest text-transparent flex items-center justify-center text-[12px]"></span>
+</div>
+<div>
+<span class="font-label-md text-label-md font-semibold block text-on-surface">Salón de belleza</span>
+<span class="font-caption text-caption text-secondary">Estilismo e imagen</span>
+</div>
+</button>
+<!-- Option 3 -->
+<button class="category-chip text-left p-3.5 rounded-xl bg-surface-container-low text-on-surface flex flex-col justify-between gap-3 shadow-sm hover:bg-surface-container transition-all" data-selected="false" type="button">
+<div class="flex items-center justify-between w-full">
+<span class="material-symbols-outlined text-[24px] text-secondary">hot_tub</span>
+<span class="w-5 h-5 rounded-full bg-surface-container-highest text-transparent flex items-center justify-center text-[12px]"></span>
+</div>
+<div>
+<span class="font-label-md text-label-md font-semibold block text-on-surface">Spa &amp; Relajación</span>
+<span class="font-caption text-caption text-secondary">Masajes y faciales</span>
+</div>
+</button>
+<!-- Option 4 -->
+<button class="category-chip text-left p-3.5 rounded-xl bg-surface-container-low text-on-surface flex flex-col justify-between gap-3 shadow-sm hover:bg-surface-container transition-all" data-selected="false" type="button">
+<div class="flex items-center justify-between w-full">
+<span class="material-symbols-outlined text-[24px] text-secondary">self_improvement</span>
+<span class="w-5 h-5 rounded-full bg-surface-container-highest text-transparent flex items-center justify-center text-[12px]"></span>
+</div>
+<div>
+<span class="font-label-md text-label-md font-semibold block text-on-surface">Centro bienestar</span>
+<span class="font-caption text-caption text-secondary">Yoga, pilates, fisio</span>
+</div>
+</button>
+<!-- Option 5 -->
+<button class="category-chip text-left p-3.5 rounded-xl bg-surface-container-low text-on-surface flex flex-col justify-between gap-3 shadow-sm hover:bg-surface-container transition-all" data-selected="false" type="button">
+<div class="flex items-center justify-between w-full">
+<span class="material-symbols-outlined text-[24px] text-secondary">medical_services</span>
+<span class="w-5 h-5 rounded-full bg-surface-container-highest text-transparent flex items-center justify-center text-[12px]"></span>
+</div>
+<div>
+<span class="font-label-md text-label-md font-semibold block text-on-surface">Consultorio</span>
+<span class="font-caption text-caption text-secondary">Salud y terapias</span>
+</div>
+</button>
+<!-- Option 6 -->
+<button class="category-chip text-left p-3.5 rounded-xl bg-surface-container-low text-on-surface flex flex-col justify-between gap-3 shadow-sm hover:bg-surface-container transition-all" data-selected="false" type="button">
+<div class="flex items-center justify-between w-full">
+<span class="material-symbols-outlined text-[24px] text-secondary">more_horiz</span>
+<span class="w-5 h-5 rounded-full bg-surface-container-highest text-transparent flex items-center justify-center text-[12px]"></span>
+</div>
+<div>
+<span class="font-label-md text-label-md font-semibold block text-on-surface">Otro rubro</span>
+<span class="font-caption text-caption text-secondary">Servicios genéricos</span>
+</div>
+</button>
+</div>
+</div>
+<!-- Fields: Contact Details (Dual Grid) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+<!-- Teléfono -->
+<div class="flex flex-col gap-2">
+<label class="font-title-md text-title-md text-on-surface flex items-center justify-between" for="phone-contact">
+<span>Teléfono comercial <span class="text-error">*</span></span>
+</label>
+<div class="relative flex items-center">
+<div class="absolute left-3 flex items-center gap-1 text-on-surface-variant font-label-md text-label-md pointer-events-none">
+<span class="material-symbols-outlined text-[18px] text-outline">call</span>
+<span class="font-semibold text-on-surface">+34</span>
+</div>
+<input class="w-full h-11 pl-20 pr-4 bg-surface-container-lowest text-on-surface rounded-lg shadow-sm placeholder:text-outline font-body-md text-body-md focus:outline-none focus:shadow-[0_0_0_3px_rgba(44,77,214,0.18)] transition-all" id="phone-contact" name="phone-contact" placeholder="600 000 000" type="tel" value="600 000 000"/>
+</div>
+<span class="font-label-sm text-label-sm text-secondary">Usado para enviar confirmaciones por SMS o WhatsApp.</span>
+</div>
+<!-- Correo -->
+<div class="flex flex-col gap-2">
+<label class="font-title-md text-title-md text-on-surface flex items-center justify-between" for="email-contact">
+<span>Correo electrónico <span class="text-error">*</span></span>
+</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3.5 text-outline text-[20px] pointer-events-none">mail</span>
+<input class="w-full h-11 pl-11 pr-4 bg-surface-container-lowest text-on-surface rounded-lg shadow-sm placeholder:text-outline font-body-md text-body-md focus:outline-none focus:shadow-[0_0_0_3px_rgba(44,77,214,0.18)] transition-all" id="email-contact" name="email-contact" placeholder="contacto@minegocio.com" type="email" value="contacto@minegocio.com"/>
+</div>
+<span class="font-label-sm text-label-sm text-secondary">Para notificaciones administrativas de reservas.</span>
+</div>
+</div>
+<!-- Action Controls Strip -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4">
+<button class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">save</span>
+<span>Guardar y continuar después</span>
+</button>
+<button class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-md hover:bg-primary-container active:scale-95 transition-all" type="button">
+<span>Continuar a horarios</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right: Helper & Live Preview Sidebar (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-6 sticky top-20">
+<!-- Trust & Value Helper Card -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-sm p-6 flex flex-col gap-4 relative overflow-hidden">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px] text-primary">verified_user</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface font-semibold">¿Por qué es importante?</span>
+<span class="font-label-sm text-label-sm text-secondary">Confianza inmediata</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Configurar tus datos básicos permite que tus clientes te identifiquen de inmediato al reservar. Una marca bien definida reduce en un <strong>38% el abandono de citas</strong> y proyecta seriedad profesional.
+            </p>
+<div class="flex items-center gap-2 text-primary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span>Cumplimiento con RGPD y privacidad garantizada</span>
+</div>
+</div>
+<!-- Realistic Public Booking Card Live Preview -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-md p-6 flex flex-col gap-5">
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold uppercase tracking-wider">Vista previa en vivo</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">Versión móvil cliente</span>
+</div>
+<!-- Simulated Client Mobile Preview Container -->
+<div class="w-full bg-surface rounded-xl p-4 shadow-sm flex flex-col gap-4">
+<!-- Business Header in Preview -->
+<div class="flex items-center gap-3 bg-surface-container-lowest p-3 rounded-lg shadow-xs">
+<div class="w-12 h-12 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold text-headline-sm shadow-xs flex-shrink-0" id="preview-logo-badge">
+                  B
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-title-md text-title-md font-semibold text-on-surface truncate" id="preview-name-display">Barbería Élite Central</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary truncate" id="preview-category-display">Barbería • Madrid, ES</span>
+</div>
+</div>
+<!-- Visual Representation of a service selection -->
+<div class="bg-surface-container-lowest p-3 rounded-lg flex flex-col gap-2.5 shadow-xs">
+<div class="flex justify-between items-center text-on-surface">
+<span class="font-label-md text-label-md font-semibold">Corte de Cabello Clásico</span>
+<span class="font-label-md text-label-md font-bold text-primary">22,00 €</span>
+</div>
+<div class="flex items-center gap-3 text-secondary font-caption text-caption">
+<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span> 35 min</span>
+<span>•</span>
+<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">person</span> 1 estilista</span>
+</div>
+<!-- Time slot pill simulation -->
+<div class="pt-2 flex gap-1.5 overflow-x-auto">
+<span class="px-2.5 py-1 rounded bg-primary text-on-primary font-caption text-caption font-semibold">10:30</span>
+<span class="px-2.5 py-1 rounded bg-surface-container-low text-on-surface font-caption text-caption">11:15</span>
+<span class="px-2.5 py-1 rounded bg-surface-container-low text-on-surface font-caption text-caption">12:00</span>
+<span class="px-2.5 py-1 rounded bg-surface-container-low text-on-surface font-caption text-caption">13:30</span>
+</div>
+</div>
+<!-- Public Page URL Snippet -->
+<div class="flex items-center justify-between p-2.5 bg-secondary-container/40 rounded-lg text-on-secondary-fixed-variant font-caption text-caption">
+<div class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-[16px] text-primary">link</span>
+<span class="truncate">skedly.me/<strong class="text-primary" id="preview-slug">barberia-elite-central</strong></span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-secondary cursor-pointer hover:text-primary" title="Copiar enlace">content_copy</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-3 rounded-lg bg-surface-container-low text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[18px] text-tertiary">bolt</span>
+<span>Tu enlace público se generará automáticamente con estos datos.</span>
+</div>
+</div>
+<!-- Quick Tip Card -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-xs flex items-start gap-3">
+<span class="material-symbols-outlined text-[20px] text-primary mt-0.5">lightbulb</span>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Consejo de onboarding</span>
+<p class="font-caption text-caption text-on-surface-variant">
+                Podrás cambiar tu información comercial y agregar sucursales adicionales en cualquier momento desde los Ajustes de Configuración.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive State Synchronizer Script -->
+<script>
+    (function initOnboardingInteraction() {
+      const nameInput = document.getElementById('business-name');
+      const previewName = document.getElementById('preview-name-display');
+      const previewSlug = document.getElementById('preview-slug');
+      const previewLogoBadge = document.getElementById('preview-logo-badge');
+      const categoryButtons = document.querySelectorAll('.category-chip');
+      const previewCategory = document.getElementById('preview-category-display');
+
+      // Live Business Name and Slug Reflection
+      if (nameInput) {
+        nameInput.addEventListener('input', function (e) {
+          const val = e.target.value.trim();
+          if (val.length > 0) {
+            previewName.textContent = val;
+            previewLogoBadge.textContent = val.charAt(0).toUpperCase();
+            
+            // Format slug
+            const slug = val.toLowerCase()
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .replace(/[^a-z0-9]/g, "-")
+              .replace(/-+/g, "-")
+              .replace(/^-|-$/g, "");
+            previewSlug.textContent = slug || 'tu-negocio';
+          } else {
+            previewName.textContent = 'Nombre de tu negocio';
+            previewLogoBadge.textContent = 'N';
+            previewSlug.textContent = 'tu-negocio';
+          }
+        });
+      }
+
+      // Business Category Chips Selection
+      categoryButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          categoryButtons.forEach(btn => {
+            btn.setAttribute('data-selected', 'false');
+            btn.classList.remove('bg-secondary-container', 'text-primary');
+            btn.classList.add('bg-surface-container-low', 'text-on-surface');
+            const check = btn.querySelector('.material-symbols-outlined:last-child');
+            const checkContainer = btn.querySelector('div:first-child > span:last-child');
+            if (checkContainer) {
+              checkContainer.className = 'w-5 h-5 rounded-full bg-surface-container-highest text-transparent flex items-center justify-center text-[12px]';
+              checkContainer.innerHTML = '';
+            }
+          });
+
+          this.setAttribute('data-selected', 'true');
+          this.classList.remove('bg-surface-container-low', 'text-on-surface');
+          this.classList.add('bg-secondary-container', 'text-primary');
+          
+          const iconSpan = this.querySelector('div:first-child > span:last-child');
+          if (iconSpan) {
+            iconSpan.className = 'w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-[12px] shadow-xs';
+            iconSpan.innerHTML = '<span class="material-symbols-outlined text-[14px]">check</span>';
+          }
+
+          const categoryTitle = this.querySelector('.font-label-md').textContent.trim();
+          if (previewCategory) {
+            previewCategory.textContent = categoryTitle + ' • Madrid, ES';
+          }
+        });
+      });
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest/80 py-6 border-t-0 shadow-[0_-1px_6px_rgba(0,0,0,0.02)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-label-sm text-label-sm"><div class="flex items-center gap-space-sm"><div class="flex items-center gap-1.5 text-secondary"><span class="material-symbols-outlined text-[16px] text-tertiary">lock</span><span>Conexión encriptada SSL de 256 bits</span></div><span class="hidden sm:inline text-outline-variant">•</span><span class="hidden sm:inline text-on-surface-variant">Tus datos comerciales están protegidos</span></div><div class="flex items-center gap-space-md"><a class="inline-flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-[16px]">help_outline</span><span>Centro de ayuda</span></a><span class="text-outline-variant">•</span><span class="text-outline">© 2025 Skedly Inc.</span></div></div></footer></body></html>
