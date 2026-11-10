@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>Urban Cuts - Reservas Online</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "tertiary-fixed": "#d8e2ff", "secondary": "#575e70", "on-surface-variant": "#444654", "surface-container-high": "#e6e8ea", "surface-variant": "#e0e3e5", "on-surface": "#191c1e", "inverse-surface": "#2d3133", "tertiary-container": "#2170e4", "on-primary-fixed-variant": "#0233c1", "on-secondary-container": "#5c6274", "on-error": "#ffffff", "primary": "#2c4dd6", "on-primary-fixed": "#001257", "surface-tint": "#2f50d8", "surface-container": "#eceef0", "primary-fixed-dim": "#b9c3ff", "secondary-fixed-dim": "#c0c6db", "surface": "#f7f9fb", "inverse-on-surface": "#eff1f3", "on-primary": "#ffffff", "surface-bright": "#f7f9fb", "error-container": "#ffdad6", "on-secondary-fixed": "#141b2b", "secondary-container": "#d9dff5", "on-background": "#191c1e", "surface-container-highest": "#e0e3e5", "surface-dim": "#d8dadc", "surface-container-lowest": "#ffffff", "on-tertiary": "#ffffff", "on-tertiary-fixed-variant": "#004395", "on-tertiary-fixed": "#001a42", "outline-variant": "#c4c5d7", "on-tertiary-container": "#fefcff", "tertiary": "#0058be", "primary-fixed": "#dee1ff", "error": "#ba1a1a", "on-error-container": "#93000a", "secondary-fixed": "#dce2f7", "tertiary-fixed-dim": "#adc6ff", "inverse-primary": "#b9c3ff", "primary-container": "#4a68f0", "on-secondary-fixed-variant": "#404758", "surface-container-low": "#f2f4f6", "on-primary-container": "#fffbff", "outline": "#747686", "on-secondary": "#ffffff", "background": "#f7f9fb" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-lg": "1.5rem", "space-xl": "2rem", "space-md": "1rem", "margin": "2rem", "gutter": "1.5rem", "space-xs": "0.25rem", "gutter-mobile": "1rem", "space-sm": "0.5rem", "margin-mobile": "1rem" }, "fontFamily": { "body-md": ["Inter"], "body-sm": ["Inter"], "display-hero": ["Inter"], "title-md": ["Inter"], "headline-sm": ["Inter"], "body-lg": ["Inter"], "headline-lg": ["Inter"], "headline-lg-mobile": ["Inter"], "label-sm": ["Inter"], "label-md": ["Inter"], "display-hero-mobile": ["Inter"], "caption": ["Inter"], "headline-md": ["Inter"] }, "fontSize": { "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" }], "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "title-md": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.015em", "fontWeight": "500" }], "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }], "display-hero-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "caption": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-[1280px] mx-auto px-6 lg:px-12 flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container"><span class="material-symbols-outlined text-[22px]">content_cut</span></div><div class="flex flex-col"><span class="font-title-md text-title-md text-on-surface tracking-tight leading-none">Urban Cuts</span><span class="font-caption text-caption text-secondary mt-0.5">Barbería Clásica &amp; Moderna</span></div></div><nav class="hidden lg:flex items-center gap-8" data-active-classes="text-primary font-title-md font-semibold"><a aria-current="page" class="transition-colors text-primary font-title-md font-semibold" data-path="inicio" href="#">Inicio</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="servicios" href="#">Servicios</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="profesionales" href="#">Profesionales</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="galeria" href="#">Galería</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="reseñas" href="#">Reseñas</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="contacto" href="#">Contacto</a></nav><div class="flex items-center gap-4"><a class="inline-flex items-center justify-center h-11 px-5 rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md hover:bg-primary transition-all shadow-[0_1px_3px_0_rgba(17,24,39,0.05)] hover:shadow-[0_4px_6px_-1px_rgba(17,24,39,0.06)] active:translate-y-px" data-path="reservar-cita" href="#">Reservar cita</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]"><div class="flex flex-col w-full relative">
+<!-- Interactive State Controller Bar (Skedly Dev/Simulator Tooling) -->
+<div class="w-full bg-inverse-surface text-inverse-on-surface px-6 py-3.5 z-40 shadow-md">
+<div class="max-w-[1280px] mx-auto flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary text-on-primary">
+<span class="material-symbols-outlined text-[16px]">touch_app</span>
+</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md tracking-wide">Puntos de Entrada Inteligentes • Urban Cuts</span>
+<span class="font-caption text-caption text-outline-variant">Prueba cómo responde el modal según el elemento clicado en la web</span>
+</div>
+</div>
+<div class="flex items-center flex-wrap gap-2">
+<span class="font-label-sm text-label-sm text-outline-variant mr-1">Simular origen:</span>
+<button class="px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm shadow-sm transition-all hover:bg-tertiary-container active:scale-95 flex items-center gap-1.5" id="sim-btn-service" onclick="setOrigin('service')">
+<span class="material-symbols-outlined text-[15px]">content_cut</span>
+<span>Desde Servicio ("Corte Premium")</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-all hover:bg-surface-container-highest active:scale-95 flex items-center gap-1.5" id="sim-btn-pro" onclick="setOrigin('pro')">
+<span class="material-symbols-outlined text-[15px]">badge</span>
+<span>Desde Barbero ("Carlos")</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-all hover:bg-surface-container-highest active:scale-95 flex items-center gap-1.5" id="sim-btn-hero" onclick="setOrigin('hero')">
+<span class="material-symbols-outlined text-[15px]">arrow_back_ios_new</span>
+<span>Genérico (Hero / Menú)</span>
+</button>
+<button class="ml-2 px-3 py-1.5 rounded-lg bg-secondary text-on-secondary font-label-sm text-label-sm transition-all hover:bg-on-secondary-container" id="toggle-modal-btn" onclick="toggleModal()">
+<span id="toggle-label">Ocultar Modal</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Background Public Landing Context (Dimmed and blurred when modal is open) -->
+<div class="w-full relative pointer-events-none select-none transition-all duration-300 filter blur-[2px] opacity-40" id="landing-backdrop">
+<!-- Hero Mockup Section -->
+<section class="max-w-[1280px] mx-auto px-6 lg:px-12 py-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-7 space-y-6">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+<span>La barbería #1 de Gran Vía, Madrid</span>
+</div>
+<h1 class="font-display-hero text-display-hero text-on-surface tracking-tight">
+            El arte del corte clásico con precisión moderna.
+          </h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-xl">
+            Sillas de barbero tradicionales, toalla caliente y los mejores estilistas urbanos. Reserva en menos de 60 segundos sin llamadas.
+          </p>
+<div class="flex items-center gap-4 pt-2">
+<div class="h-12 px-6 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center gap-2 shadow-md">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+<span>Reservar cita online</span>
+</div>
+<div class="h-12 px-5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span>+34 912 345 678</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="w-full h-80 rounded-2xl overflow-hidden shadow-lg bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Modern high-end barber shop interior in Madrid, warm directional lighting on vintage leather chairs, clean minimalist grooming stations, deep blue and slate architectural accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhf2Ug7nr5ck18Le-Lhnv-GACFecl3_efSAMGVf1XNOWZnjBv5u1HOrzeWKHoWNyRx9zzXahM_qQHMmRc6A6GoJJGuiTWNwV3tyM0T-wHiAH-gZAF4J3WU4PjB53z7_M4cs4ZZ3owyfFvMkyWgkvJO-18pmhsblhp2yoIC_OXSHxCtU5CDliPoJROxu-_FjckGoC7vh_qv1T1CoFiEP6ly2Dg1lrXlrR5L6u27f-94"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Grid Background Preview -->
+<section class="max-w-[1280px] mx-auto px-6 lg:px-12 py-8">
+<div class="flex items-center justify-between mb-6">
+<div>
+<span class="font-caption text-caption text-primary uppercase tracking-widest font-semibold">Menú Destacado</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Nuestros Servicios</h2>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-title-md text-title-md text-on-surface">Corte Clásico</h3>
+<span class="font-title-md text-title-md text-primary font-bold">18€</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Lavado refrescante, degradado a tijera o máquina y peinado final.</p>
+</div>
+<div class="mt-6 pt-4 flex justify-between items-center">
+<span class="font-caption text-caption text-secondary">30 min</span>
+<span class="px-4 py-2 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm">Reservar</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 right-0 px-3 py-1 bg-primary text-on-primary font-caption text-caption rounded-bl-lg">Popular</div>
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-title-md text-title-md text-on-surface">Corte Premium + Barba</h3>
+<span class="font-title-md text-title-md text-primary font-bold">28€</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Corte personalizado, toalla caliente de eucalipto, perfilado a navaja y bálsamo.</p>
+</div>
+<div class="mt-6 pt-4 flex justify-between items-center">
+<span class="font-caption text-caption text-secondary">45 min</span>
+<span class="px-4 py-2 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm">Reservar</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-title-md text-title-md text-on-surface">Ritual Barba Tradicional</h3>
+<span class="font-title-md text-title-md text-primary font-bold">16€</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Afeitado completo o recorte meticuloso con tratamiento hidratante de ozono.</p>
+</div>
+<div class="mt-6 pt-4 flex justify-between items-center">
+<span class="font-caption text-caption text-secondary">25 min</span>
+<span class="px-4 py-2 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm">Reservar</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Interactive Backdrop Scrim Overlay -->
+<div class="fixed inset-0 z-50 bg-on-surface/40 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 lg:p-10 overflow-y-auto" id="modal-overlay">
+<!-- Outer Container Holding Guided Annotations + Modal Window -->
+<div class="relative w-full max-w-5xl my-auto flex flex-col lg:flex-row items-center justify-center gap-6">
+<!-- ================= MODAL WINDOW ================= -->
+<div class="w-full max-w-2xl bg-surface-container-lowest rounded-2xl shadow-xl flex flex-col overflow-hidden relative z-20 transition-all duration-300" id="booking-modal-card">
+<!-- Header -->
+<div class="px-6 sm:px-8 pt-6 pb-4 bg-surface-container-low flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm">
+<span class="material-symbols-outlined text-[24px]">calendar_month</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Reservar en Urban Cuts</h2>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-caption text-caption">En vivo</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary mt-0.5">Paso 1 de 3: Confirma tu servicio y especialista</p>
+</div>
+</div>
+<button class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" onclick="toggleModal()" title="Cerrar modal">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Progress Indicator -->
+<div class="w-full bg-surface-container h-1.5 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1/3 bg-primary transition-all duration-500 rounded-full"></div>
+</div>
+<!-- Modal Body Content -->
+<div class="p-6 sm:p-8 space-y-6 max-h-[716px] overflow-y-auto">
+<!-- Section 1: Pre-Selected Service Card (Dynamic Origin) -->
+<div class="space-y-2.5">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]">content_cut</span>
+<span>Servicio seleccionado</span>
+</label>
+<button class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-1" onclick="simulateChangeService()">
+<span class="material-symbols-outlined text-[15px]">sync_alt</span>
+<span id="service-action-label">Cambiar servicio</span>
+</button>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-low transition-all duration-200" id="service-preview-card">
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-fixed shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">cut</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-on-surface leading-tight" id="selected-service-title">Corte Premium + Barba Completa</h3>
+<p class="font-body-sm text-body-sm text-secondary mt-0.5" id="selected-service-desc">Corte a tijera o degradado pulido, toalla caliente y perfilado a navaja tradicional.</p>
+<div class="flex items-center gap-3 mt-2.5">
+<span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold" id="selected-service-price">28,00 €</span>
+<span class="flex items-center gap-1 text-secondary font-caption text-caption" id="selected-service-time">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                        45 minutos
+                      </span>
+<span class="flex items-center gap-1 text-secondary font-caption text-caption">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                        Lavado incluido
+                      </span>
+</div>
+</div>
+</div>
+<div class="shrink-0 flex items-center">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Optional Add-on trigger -->
+<button class="w-full py-2.5 px-3 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-label-sm text-label-sm flex items-center justify-center gap-2" onclick="alert('Permite sumar servicios complementarios (ej. Lavado dérmico, Cera modeladora o Tinte) calculando la duración acumulada.')">
+<span class="material-symbols-outlined text-[16px] text-primary">add_circle</span>
+<span>+ Añadir servicio adicional (ej. Afeitado express o Mascarilla negra)</span>
+</button>
+</div>
+<!-- Section 2: Professional Selector -->
+<div class="space-y-3 pt-2">
+<div class="flex items-center justify-between">
+<div>
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]">badge</span>
+<span>Especialista / Barbero</span>
+</label>
+<p class="font-caption text-caption text-secondary">Elige quién realizará tu servicio o solicita el turno más rápido.</p>
+</div>
+<span class="font-caption text-caption px-2 py-0.5 rounded bg-surface-container text-secondary" id="pro-badge-filter">4 opciones disponibles</span>
+</div>
+<!-- Professional Options Matrix -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="pro-options-container">
+<!-- Option A: Any Professional -->
+<div class="pro-card cursor-pointer p-3.5 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-center gap-3" id="pro-card-any" onclick="selectProfessional('any')">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed shrink-0">
+<span class="material-symbols-outlined text-[20px]">group</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface truncate">Cualquiera disponible</span>
+</div>
+<p class="font-caption text-caption text-secondary truncate">Mayor disponibilidad horaria</p>
+</div>
+<div class="radio-indicator w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center">
+<div class="pip w-2.5 h-2.5 rounded-full bg-transparent"></div>
+</div>
+</div>
+<!-- Option B: Carlos Ramirez (Pre-Selected by Default) -->
+<div class="pro-card cursor-pointer p-3.5 rounded-xl bg-surface-container-lowest shadow-md transition-all flex items-center gap-3 relative" id="pro-card-carlos" onclick="selectProfessional('carlos')">
+<div class="relative shrink-0">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Portrait photo of a young professional master barber in modern studio with clean trimmed beard, friendly confident expression, wearing dark denim apron and minimal work shirt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD36W1Ip4Q3ldAAlzNyUh7B2lSsA9h_UYaxG7Y4t_Ysx4ayRy8EZFzaiZw7UkxbxFKxW_3wHboAYLr5u7A4HTTg5cM9fNOkg-CYGhEYnEnlSNjMhn8edepbRZ0gIdOjZmfcgsuIWXzEp9rhkR_xClEdqHmfMGPsCljtIhNItCsPTuOzNpo63ZrVkod8T9XJ9pI2aUK4tcty3grorxcQ03aSpjMIVgjcASXASvYQ_cGv"/>
+</div>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-primary text-on-primary flex items-center justify-center text-[10px]">
+<span class="material-symbols-outlined text-[10px]">star</span>
+</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface truncate">Carlos Ramírez</span>
+<span class="px-1.5 py-0.2 rounded bg-tertiary-fixed text-on-tertiary-fixed font-caption text-caption">Master</span>
+</div>
+<p class="font-caption text-caption text-secondary truncate">Especialista en Degradados y Barbas</p>
+</div>
+<div class="radio-indicator w-5 h-5 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+</div>
+<!-- Option C: Mateo Ramos -->
+<div class="pro-card cursor-pointer p-3.5 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-center gap-3" id="pro-card-mateo" onclick="selectProfessional('mateo')">
+<div class="relative shrink-0">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Portrait photo of an experienced male barber in urban salon, warm studio lighting, subtle smile, neatly styled pompadour hair, clean neutral aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFRhDvKPmUCt0U3c42MIiEPB2Rfv7rDVHnAT1ENPH7Mp9GUCeN2xAXrbRyGKIphszTnAvminY_nqz6D6QD8nhNQ2e8KjAPiIVDX-qjkUtVRgqpyguokE80HZqOWTgjvBY97YaG8_Ic6KLxV0Ccir1C6biu83pvPBSVbZ71Jezwn9FCaNwY9_v2Suduuuf2UWle-MCmr3SoEPe3Tp8RTnBbwwW3eiAjohY1reSQYJWb"/>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface truncate">Mateo Ramos</span>
+</div>
+<p class="font-caption text-caption text-secondary truncate">Cortes Clásicos &amp; Tijera fina</p>
+</div>
+<div class="radio-indicator w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center">
+<div class="pip w-2.5 h-2.5 rounded-full bg-transparent"></div>
+</div>
+</div>
+<!-- Option D: Sofia Gomez -->
+<div class="pro-card cursor-pointer p-3.5 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-center gap-3" id="pro-card-sofia" onclick="selectProfessional('sofia')">
+<div class="relative shrink-0">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Portrait photo of a skilled modern female hair stylist in contemporary salon, approachable relaxed look with chic black shirt, soft natural indoor daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-XhN9wKU5qm3zW2HL1xQDM3doEjfmeFRiVzS2K4wBiaIcprL6AAYcNZQvJLJBtddoTsln1Cu280OZo6kO6h25WHZupvz9-fRWTK8i8pKFO7Afhe_sFSUb74DqD6r5J6AA7Nw7CjvyB_iMMOxTAK77E7eYE57POru2rAXev1w1CnmWnqrWQyxhpAk7hb5i7-T3MQMOd__eiM4vNTZDFbldLxnsfCDGZ6jBGmEgo-Bb"/>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface truncate">Sofía Gómez</span>
+<span class="px-1.5 py-0.2 rounded bg-secondary-fixed text-on-secondary-fixed font-caption text-caption">Estilista</span>
+</div>
+<p class="font-caption text-caption text-secondary truncate">Diseño de Imagen &amp; Colorimetría</p>
+</div>
+<div class="radio-indicator w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center">
+<div class="pip w-2.5 h-2.5 rounded-full bg-transparent"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: Next Step Teaser / Instant Slots Preview -->
+<div class="p-4 rounded-xl bg-surface-container flex flex-col sm:flex-row items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[22px]">event_available</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface leading-tight">Primeros horarios libres hoy con <span class="font-semibold text-primary" id="current-pro-label">Carlos Ramírez</span>:</p>
+<div class="flex items-center gap-2 mt-1.5">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest text-on-surface font-caption text-caption shadow-sm">16:30</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest text-on-surface font-caption text-caption shadow-sm">17:15</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest text-on-surface font-caption text-caption shadow-sm">18:45</span>
+<span class="text-secondary font-caption text-caption">+ 6 más</span>
+</div>
+</div>
+</div>
+<span class="font-caption text-caption text-primary font-semibold shrink-0">Paso siguiente ➔</span>
+</div>
+</div>
+<!-- Modal Footer Actions -->
+<div class="px-6 sm:px-8 py-5 bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-2 text-secondary font-caption text-caption text-center sm:text-left">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0">lock</span>
+<span>Sin cuenta obligatoria. Confirmación inmediata vía WhatsApp y correo.</span>
+</div>
+<button class="w-full sm:w-auto px-7 h-12 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-tertiary-container shadow-md transition-all active:scale-[0.98] flex items-center justify-center gap-2" onclick="handleContinue()">
+<span>Continuar a Fecha y Hora</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- ================= INTERACTIVE GUIDANCE CALLOUTS (Skedly Educational Overlays) ================= -->
+<div class="w-full lg:w-72 flex flex-col gap-4 z-30 shrink-0">
+<!-- Callout 1 -->
+<div class="p-4 rounded-xl bg-surface-container-lowest shadow-lg space-y-2">
+<div class="flex items-center gap-2 text-primary font-label-sm text-label-sm font-semibold">
+<span class="w-5 h-5 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center text-[11px] font-bold">1</span>
+<span>Contexto Preservado</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">
+            Al pulsar <strong class="text-on-surface">"Reservar"</strong> en cualquier tarjeta de la web pública, el modal emerge directamente con el ítem preseleccionado sin recargar ni navegar.
+          </p>
+<div class="pt-1 flex items-center gap-1.5 text-primary font-caption text-caption">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+<span>Cero pérdida de conversión</span>
+</div>
+</div>
+<!-- Callout 2 -->
+<div class="p-4 rounded-xl bg-surface-container-lowest shadow-lg space-y-2">
+<div class="flex items-center gap-2 text-primary font-label-sm text-label-sm font-semibold">
+<span class="w-5 h-5 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center text-[11px] font-bold">2</span>
+<span>Preselección de Colaborador</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">
+            Si el cliente hizo clic en <em class="text-on-surface font-medium">"Reservar con Carlos"</em> en el equipo, el sistema filtra su agenda automáticamente. Si pulsa el botón general, sugiere <em class="text-on-surface font-medium">"Cualquiera"</em> para máxima agilidad.
+          </p>
+</div>
+<!-- Callout 3 -->
+<div class="p-4 rounded-xl bg-surface-container-lowest shadow-lg space-y-2">
+<div class="flex items-center gap-2 text-primary font-label-sm text-label-sm font-semibold">
+<span class="w-5 h-5 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center text-[11px] font-bold">3</span>
+<span>Configuración Flexible</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">
+            En Skedly, los negocios individuales pueden apagar el selector de barberos con 1 clic: el paso salta directo al calendario si solo hay un prestador.
+          </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  let currentSelection = {
+    service: 'Corte Premium + Barba Completa',
+    price: '28,00 €',
+    duration: '45 minutos',
+    pro: 'carlos',
+    proName: 'Carlos Ramírez'
+  };
+
+  const proNames = {
+    'any': 'Cualquier profesional disponible',
+    'carlos': 'Carlos Ramírez',
+    'mateo': 'Mateo Ramos',
+    'sofia': 'Sofía Gómez'
+  };
+
+  function selectProfessional(proId) {
+    currentSelection.pro = proId;
+    currentSelection.proName = proNames[proId];
+
+    // Reset styles
+    const cards = document.querySelectorAll('.pro-card');
+    cards.forEach(card => {
+      card.className = 'pro-card cursor-pointer p-3.5 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-center gap-3';
+      const ind = card.querySelector('.radio-indicator');
+      if (ind) {
+        ind.className = 'radio-indicator w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center text-on-primary';
+        ind.innerHTML = '<div class="pip w-2.5 h-2.5 rounded-full bg-transparent"></div>';
+      }
+    });
+
+    // Highlight selected card
+    const targetCard = document.getElementById('pro-card-' + proId);
+    if (targetCard) {
+      targetCard.className = 'pro-card cursor-pointer p-3.5 rounded-xl bg-surface-container-lowest shadow-md transition-all flex items-center gap-3 relative';
+      const ind = targetCard.querySelector('.radio-indicator');
+      if (ind) {
+        ind.className = 'radio-indicator w-5 h-5 rounded-full bg-primary flex items-center justify-center text-on-primary';
+        ind.innerHTML = '<span class="material-symbols-outlined text-[14px]">check</span>';
+      }
+    }
+
+    // Update teaser badge
+    const label = document.getElementById('current-pro-label');
+    if (label) {
+      label.textContent = currentSelection.proName;
+    }
+  }
+
+  function setOrigin(type) {
+    const btnService = document.getElementById('sim-btn-service');
+    const btnPro = document.getElementById('sim-btn-pro');
+    const btnHero = document.getElementById('sim-btn-hero');
+
+    [btnService, btnPro, btnHero].forEach(b => {
+      b.className = 'px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-all hover:bg-surface-container-highest active:scale-95 flex items-center gap-1.5';
+    });
+
+    const titleEl = document.getElementById('selected-service-title');
+    const descEl = document.getElementById('selected-service-desc');
+    const priceEl = document.getElementById('selected-service-price');
+    const timeEl = document.getElementById('selected-service-time');
+
+    if (type === 'service') {
+      btnService.className = 'px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm shadow-sm transition-all active:scale-95 flex items-center gap-1.5';
+      titleEl.textContent = 'Corte Premium + Barba Completa';
+      descEl.textContent = 'Corte a tijera o degradado pulido, toalla caliente y perfilado a navaja tradicional.';
+      priceEl.textContent = '28,00 €';
+      timeEl.innerHTML = '<span class="material-symbols-outlined text-[14px]">schedule</span> 45 minutos';
+      selectProfessional('carlos');
+    } else if (type === 'pro') {
+      btnPro.className = 'px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm shadow-sm transition-all active:scale-95 flex items-center gap-1.5';
+      titleEl.textContent = 'Corte Clásico & Estilismo';
+      descEl.textContent = 'Lavado refrescante con masaje capilar, degradado a máquina o tijera y peinado con fijador mate.';
+      priceEl.textContent = '18,00 €';
+      timeEl.innerHTML = '<span class="material-symbols-outlined text-[14px]">schedule</span> 30 minutos';
+      selectProfessional('carlos');
+    } else if (type === 'hero') {
+      btnHero.className = 'px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm shadow-sm transition-all active:scale-95 flex items-center gap-1.5';
+      titleEl.textContent = 'Servicio a convenir en local';
+      descEl.textContent = 'Selección genérica desde el botón superior. Puedes cambiarlo en el paso posterior si lo deseas.';
+      priceEl.textContent = 'Desde 16,00 €';
+      timeEl.innerHTML = '<span class="material-symbols-outlined text-[14px]">schedule</span> 30 - 45 min';
+      selectProfessional('any');
+    }
+
+    // Ensure modal is visible
+    const overlay = document.getElementById('modal-overlay');
+    if (overlay.classList.contains('hidden')) {
+      toggleModal();
+    }
+  }
+
+  function simulateChangeService() {
+    const titleEl = document.getElementById('selected-service-title');
+    const descEl = document.getElementById('selected-service-desc');
+    const priceEl = document.getElementById('selected-service-price');
+    const timeEl = document.getElementById('selected-service-time');
+
+    if (titleEl.textContent.includes('Premium')) {
+      titleEl.textContent = 'Ritual Barba Tradicional';
+      descEl.textContent = 'Afeitado tradicional con toalla caliente infusionada en menta, vapor de ozono y bálsamo calmante.';
+      priceEl.textContent = '16,00 €';
+      timeEl.innerHTML = '<span class="material-symbols-outlined text-[14px]">schedule</span> 25 minutos';
+    } else {
+      titleEl.textContent = 'Corte Premium + Barba Completa';
+      descEl.textContent = 'Corte a tijera o degradado pulido, toalla caliente y perfilado a navaja tradicional.';
+      priceEl.textContent = '28,00 €';
+      timeEl.innerHTML = '<span class="material-symbols-outlined text-[14px]">schedule</span> 45 minutos';
+    }
+  }
+
+  function toggleModal() {
+    const overlay = document.getElementById('modal-overlay');
+    const backdrop = document.getElementById('landing-backdrop');
+    const toggleLabel = document.getElementById('toggle-label');
+
+    if (overlay.classList.contains('hidden')) {
+      overlay.classList.remove('hidden');
+      overlay.classList.add('flex');
+      backdrop.classList.add('filter', 'blur-[2px]', 'opacity-40');
+      backdrop.classList.remove('opacity-100');
+      toggleLabel.textContent = 'Ocultar Modal';
+    } else {
+      overlay.classList.add('hidden');
+      overlay.classList.remove('flex');
+      backdrop.classList.remove('filter', 'blur-[2px]', 'opacity-40');
+      backdrop.classList.add('opacity-100');
+      toggleLabel.textContent = 'Mostrar Modal';
+    }
+  }
+
+  function handleContinue() {
+    alert('Simulación exitosa: ' + currentSelection.service + ' con ' + currentSelection.proName + '. Avanzando fluidamente al selector interactivo de Fecha y Hora (Paso 2).');
+  }
+</script></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_8px_rgba(0,0,0,0.02)] mt-space-xl"><div class="max-w-[1280px] mx-auto px-6 lg:px-12 py-12 lg:py-16"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12"><div class="space-y-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container"><span class="material-symbols-outlined text-[18px]">content_cut</span></div><span class="font-title-md text-title-md text-on-surface tracking-tight">Urban Cuts</span></div><p class="font-body-sm text-body-sm text-secondary max-w-xs">Experiencia premium en corte, afeitado y cuidado masculino con reserva ágil en tiempo real.</p><div class="flex items-center gap-3 pt-1"><a aria-label="Instagram" class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">photo_camera</span></a><a aria-label="Ubicación en mapas" class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">map</span></a><a aria-label="Atención telefónica" class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">call</span></a></div></div><div><h3 class="font-title-md text-title-md text-on-surface mb-4">Navegación</h3><ul class="space-y-2.5"><li class="font-body-sm text-body-sm"><a class="text-secondary hover:text-on-surface transition-colors" data-path="inicio" href="#">Inicio</a></li><li class="font-body-sm text-body-sm"><a class="text-secondary hover:text-on-surface transition-colors" data-path="servicios" href="#">Servicios &amp; Precios</a></li><li class="font-body-sm text-body-sm"><a class="text-secondary hover:text-on-surface transition-colors" data-path="profesionales" href="#">Equipo Profesional</a></li><li class="font-body-sm text-body-sm"><a class="text-secondary hover:text-on-surface transition-colors" data-path="galeria" href="#">Galería de Cortes</a></li><li class="font-body-sm text-body-sm"><a class="text-secondary hover:text-on-surface transition-colors" data-path="reseñas" href="#">Opiniones de Clientes</a></li></ul></div><div><h3 class="font-title-md text-title-md text-on-surface mb-4">Horarios &amp; Citas</h3><ul class="space-y-2 font-body-sm text-body-sm text-secondary"><li class="flex justify-between max-w-[220px]"><span>Lunes a Viernes</span><span class="font-label-md text-label-md text-on-surface">10:00 - 20:30</span></li><li class="flex justify-between max-w-[220px]"><span>Sábados</span><span class="font-label-md text-label-md text-on-surface">09:30 - 18:00</span></li><li class="flex justify-between max-w-[220px]"><span>Domingos</span><span class="text-error font-label-md text-label-md">Cerrado</span></li></ul><div class="mt-4"><a class="font-label-md text-label-md text-primary hover:text-on-primary-fixed-variant transition-colors flex items-center gap-1.5" data-path="reservar-cita" href="#">Reservar cita ahora <span class="material-symbols-outlined text-[16px]">arrow_forward</span></a></div></div><div><h3 class="font-title-md text-title-md text-on-surface mb-4">Ubicación &amp; Contacto</h3><div class="space-y-3 font-body-sm text-body-sm text-secondary"><div class="flex items-start gap-2.5"><span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">location_on</span><span>Calle Gran Vía 42, Centro<br/>28013 Madrid, España</span></div><div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-secondary text-[20px]">call</span><span>+34 912 345 678</span></div><div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-secondary text-[20px]">mail</span><span>contacto@urbancuts.es</span></div></div></div></div><div class="pt-8 mt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-surface-container"><p class="font-body-sm text-body-sm text-secondary text-center sm:text-left">© 2024 Urban Cuts. Todos los derechos reservados.</p><div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container text-secondary font-caption text-caption"><span class="material-symbols-outlined text-[16px] text-primary">calendar_month</span><span>Página creada con <strong class="font-semibold text-on-surface">Skedly</strong></span></div></div></div></footer></body></html>

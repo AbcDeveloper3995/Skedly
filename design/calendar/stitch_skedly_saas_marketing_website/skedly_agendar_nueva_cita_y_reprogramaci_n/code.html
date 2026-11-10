@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"on-secondary-fixed":"#141b2b","error-container":"#ffdad6","background":"#f7f9fb","primary":"#2c4dd6","secondary-container":"#d9dff5","on-tertiary-fixed":"#001a42","secondary-fixed-dim":"#c0c6db","surface-bright":"#f7f9fb","outline-variant":"#c4c5d7","surface-dim":"#d8dadc","surface-tint":"#2f50d8","on-error":"#ffffff","tertiary-fixed":"#d8e2ff","on-tertiary-fixed-variant":"#004395","inverse-on-surface":"#eff1f3","surface-container-lowest":"#ffffff","outline":"#747686","on-secondary-container":"#5c6274","secondary-fixed":"#dce2f7","surface-container":"#eceef0","tertiary-fixed-dim":"#adc6ff","on-background":"#191c1e","on-surface-variant":"#444654","on-tertiary-container":"#fefcff","inverse-primary":"#b9c3ff","surface-container-highest":"#e0e3e5","on-secondary-fixed-variant":"#404758","on-primary-fixed-variant":"#0233c1","error":"#ba1a1a","primary-container":"#4a68f0","on-error-container":"#93000a","inverse-surface":"#2d3133","primary-fixed":"#dee1ff","tertiary":"#0058be","tertiary-container":"#2170e4","on-surface":"#191c1e","surface-variant":"#e0e3e5","on-tertiary":"#ffffff","secondary":"#575e70","on-secondary":"#ffffff","on-primary-container":"#fffbff","surface-container-high":"#e6e8ea","on-primary":"#ffffff","primary-fixed-dim":"#b9c3ff","surface-container-low":"#f2f4f6","surface":"#f7f9fb","on-primary-fixed":"#001257"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-md":"1rem","space-xs":"0.25rem","space-xl":"2rem","space-lg":"1.5rem","margin-mobile":"1rem","gutter":"1.5rem","space-sm":"0.5rem","gutter-mobile":"1rem","margin":"2rem"},"fontFamily":{"label-sm":["Inter"],"body-lg":["Inter"],"headline-md":["Inter"],"display-hero":["Inter"],"title-md":["Inter"],"headline-lg-mobile":["Inter"],"headline-sm":["Inter"],"headline-lg":["Inter"],"body-sm":["Inter"],"caption":["Inter"],"display-hero-mobile":["Inter"],"body-md":["Inter"],"label-md":["Inter"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.015em","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"400"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"display-hero":["48px",{"lineHeight":"56px","letterSpacing":"-0.025em","fontWeight":"700"}],"title-md":["16px",{"lineHeight":"24px","letterSpacing":"-0.005em","fontWeight":"600"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","letterSpacing":"0.005em","fontWeight":"400"}],"caption":["11px",{"lineHeight":"14px","letterSpacing":"0.02em","fontWeight":"500"}],"display-hero-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"500"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="px-space-lg pt-space-lg pb-space-md flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="material-symbols-outlined text-[20px]">event_available</span></div><div class="flex flex-col"><span class="font-title-md text-title-md text-on-surface leading-tight font-bold tracking-tight">Skedly</span><span class="font-caption text-caption text-on-surface-variant">SaaS de Reservas</span></div></div><span class="px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-caption text-caption">Pro</span></div><div class="px-space-md pb-space-sm"><div class="p-space-sm rounded-xl bg-surface-container-low flex items-center justify-between"><div class="flex flex-col"><span class="font-caption text-caption text-on-surface-variant uppercase">Espacio activo</span><span class="font-label-sm text-label-sm font-semibold text-on-surface truncate max-w-[140px]">Barbería Élite Central</span></div><span class="material-symbols-outlined text-on-surface-variant text-[18px]">unfold_more</span></div></div><div class="flex flex-col gap-space-md px-space-sm py-space-sm"><nav class="flex flex-col gap-0.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><span class="px-space-sm py-1 font-caption text-caption uppercase tracking-wider text-on-surface-variant font-medium">Principal</span><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="inicio" href="#">Inicio</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="calendario" href="#">Calendario</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="citas" href="#">Citas</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="clientes" href="#">Clientes</a></nav><nav class="flex flex-col gap-0.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><span class="px-space-sm py-1 font-caption text-caption uppercase tracking-wider text-on-surface-variant font-medium">Gestión del negocio</span><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="servicios" href="#">Servicios</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="categorias" href="#">Categorías</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="equipo-de-trabajo" href="#">Equipo de trabajo</a></nav><nav class="flex flex-col gap-0.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><span class="px-space-sm py-1 font-caption text-caption uppercase tracking-wider text-on-surface-variant font-medium">Presencia online</span><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="pagina-de-reservas" href="#">Página de reservas</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="galeria" href="#">Galería</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="reseñas" href="#">Reseñas</a></nav><nav class="flex flex-col gap-0.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><span class="px-space-sm py-1 font-caption text-caption uppercase tracking-wider text-on-surface-variant font-medium">Configuración</span><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="configuracion-del-negocio" href="#">Configuración del negocio</a></nav></div></div><div class="p-space-sm m-space-sm rounded-xl bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col"><span class="font-label-sm text-label-sm font-semibold text-on-surface leading-tight">María Ramos</span><span class="font-caption text-caption text-on-surface-variant">Propietario</span></div></div><div class="flex items-center"><a class="w-7 h-7 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="configuracion-del-negocio" href="#" title="Ajustes"><span class="material-symbols-outlined text-[18px]">tune</span></a><a class="w-7 h-7 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-error transition-colors" data-path="cerrar-sesion" href="#" title="Salir"><span class="material-symbols-outlined text-[18px]">logout</span></a></div></div><div class="pt-1"><span class="font-caption text-caption text-secondary block truncate">Barbería Élite Central</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/85 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-sm font-body-sm text-body-sm text-on-surface-variant"><span class="font-medium text-on-surface">Barbería Élite Central</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-caption text-caption font-medium">Vista Propietario / Admin</span></div><div class="flex items-center gap-space-md"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[18px]">search</span><input class="h-10 pl-9 pr-12 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline focus:outline-none shadow-[0_1px_8px_rgba(0,0,0,0.04)] w-64 focus:w-80 transition-all" placeholder="Buscar citas y servicios..." readonly="" type="text"/><kbd class="absolute right-2 px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-caption text-caption">⌘K</kbd></div><a class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" data-path="pagina-de-reservas" href="#" target="_blank"><span class="material-symbols-outlined text-[18px]">open_in_new</span><span class="hidden lg:inline">Ver página pública</span></a><button aria-label="Notificaciones" class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error"></span></button><button class="flex items-center gap-space-xs px-space-md h-10 rounded-lg bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary transition-all font-label-md text-label-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="material-symbols-outlined text-[20px]">add</span><span>+ Nueva cita</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full relative">
+<!-- Backdrop simulated calendar agenda (layered context) -->
+<div class="w-full filter blur-[3px] opacity-40 pointer-events-none select-none px-space-lg py-space-md">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-md text-headline-md text-on-surface">Octubre 2025</span>
+<span class="px-space-sm py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">Semana 43</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<div class="px-space-md py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm">Hoy</div>
+<div class="px-space-md py-1.5 rounded-lg bg-surface-container-high text-on-surface-variant font-label-md text-label-md">Día</div>
+<div class="px-space-md py-1.5 rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md">Semana</div>
+</div>
+</div>
+<!-- Calendar background grid mock -->
+<div class="grid grid-cols-5 gap-space-sm">
+<div class="bg-surface-container-lowest rounded-xl p-space-sm flex flex-col gap-space-sm h-[740px]">
+<span class="font-title-md text-title-md text-on-surface">Lun 23</span>
+<div class="p-space-xs rounded-lg bg-primary-fixed text-on-primary-fixed font-body-sm text-body-sm">09:00 - Corte Clásico</div>
+<div class="p-space-xs rounded-lg bg-surface-container text-on-surface-variant font-body-sm text-body-sm">11:30 - Barba Express</div>
+<div class="p-space-xs rounded-lg bg-primary-fixed text-on-primary-fixed font-body-sm text-body-sm">15:00 - Perfilado</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-sm flex flex-col gap-space-sm h-[740px]">
+<span class="font-title-md text-title-md text-on-surface">Mar 24</span>
+<div class="p-space-xs rounded-lg bg-surface-container text-on-surface-variant font-body-sm text-body-sm">10:00 - Lavado y Corte</div>
+<div class="p-space-xs rounded-lg bg-primary-fixed text-on-primary-fixed font-body-sm text-body-sm">13:15 - Afeitado Navaja</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-sm flex flex-col gap-space-sm h-[740px]">
+<span class="font-title-md text-title-md text-on-surface">Mié 25</span>
+<div class="p-space-xs rounded-lg bg-primary-fixed text-on-primary-fixed font-body-sm text-body-sm">09:45 - Arreglo Bigote</div>
+<div class="p-space-xs rounded-lg bg-primary-fixed text-on-primary-fixed font-body-sm text-body-sm">14:00 - Degradado Skin</div>
+<div class="p-space-xs rounded-lg bg-surface-container text-on-surface-variant font-body-sm text-body-sm">16:30 - Ritual Barba</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-sm flex flex-col gap-space-sm h-[740px]">
+<span class="font-title-md text-title-md text-primary font-bold">Jue 26 (Activo)</span>
+<div class="p-space-xs rounded-lg bg-error-container text-on-error-container font-body-sm text-body-sm">09:00 - Cita Reservada</div>
+<div class="p-space-xs rounded-lg bg-primary-container text-on-primary-container font-body-sm text-body-sm shadow-sm">10:15 - Nueva Cita Manual</div>
+<div class="p-space-xs rounded-lg bg-surface-container text-on-surface-variant font-body-sm text-body-sm">11:00 - Cita Bloqueada</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-sm flex flex-col gap-space-sm h-[740px]">
+<span class="font-title-md text-title-md text-on-surface">Vie 27</span>
+<div class="p-space-xs rounded-lg bg-surface-container text-on-surface-variant font-body-sm text-body-sm">11:00 - Corte Ejecutivo</div>
+<div class="p-space-xs rounded-lg bg-primary-fixed text-on-primary-fixed font-body-sm text-body-sm">16:45 - Tinte Barba</div>
+</div>
+</div>
+</div>
+<!-- Focused Center Modal Overlay Wrapper -->
+<div class="fixed inset-0 top-16 left-64 z-50 flex items-start justify-center p-space-md sm:p-space-lg overflow-y-auto bg-inverse-surface/20 backdrop-blur-sm">
+<div class="w-full max-w-4xl bg-surface-container-lowest rounded-2xl shadow-xl flex flex-col my-auto overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+<!-- Modal Top Bar -->
+<div class="px-space-xl pt-space-lg pb-space-md bg-surface-container-low flex items-start justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[26px]">edit_calendar</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<h1 class="font-headline-sm text-headline-sm text-on-surface" id="modal-title-text">Nueva Cita Manual</h1>
+<span class="px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-caption text-caption uppercase tracking-wider">Mostrador &amp; Call</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Agenda un turno directamente en el mostrador o por llamada telefónica.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<!-- View Toggle Switch: Nueva vs Reprogramar -->
+<div class="bg-surface-container p-1 rounded-xl flex items-center gap-1 shadow-sm">
+<button class="px-space-sm py-1 rounded-lg text-on-primary-container bg-primary-container font-label-sm text-label-sm font-semibold transition-all" id="btn-mode-create" onclick="switchMode('create')" type="button">
+              Nueva Cita
+            </button>
+<button class="px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all flex items-center gap-1" id="btn-mode-reschedule" onclick="switchMode('reschedule')" type="button">
+<span class="material-symbols-outlined text-[15px]">sync_alt</span>
+<span>Reprogramar</span>
+</button>
+</div>
+<button aria-label="Cerrar modal" class="w-9 h-9 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+<!-- Reprogramming Alert Banner (Hidden by default, shown in Reschedule Mode) -->
+<div class="hidden px-space-xl py-space-sm bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-between" id="reschedule-banner">
+<div class="flex items-center gap-space-sm font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-tertiary text-[20px]">schedule</span>
+<span><strong>Modo Reprogramación Activo:</strong> Estás reasignando la cita #SK-8941 asignada originalmente para el Miércoles 25 Octubre a las 11:30.</span>
+</div>
+<span class="px-space-xs py-0.5 rounded-full bg-surface-container-lowest text-tertiary font-caption text-caption font-semibold">Sin Penalización</span>
+</div>
+<!-- Main Form Body Scrollable Container -->
+<div class="p-space-xl flex flex-col gap-space-xl max-h-[calc(88vh-140px)] overflow-y-auto">
+<!-- SECTION 1: Cliente Selection / Creation -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<label class="font-title-md text-title-md text-on-surface flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">person_search</span>
+<span>1. Cliente</span>
+</label>
+<span class="font-caption text-caption text-on-surface-variant">Obligatorio</span>
+</div>
+<!-- Customer Tabs -->
+<div class="flex items-center gap-space-xs bg-surface-container-low p-1 rounded-xl w-fit">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center gap-1.5" id="tab-existing-client" onclick="setClientTab('existing')" type="button">
+<span class="material-symbols-outlined text-[17px] text-primary">contacts</span>
+<span>Buscar cliente existente</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all flex items-center gap-1.5" id="tab-new-client" onclick="setClientTab('new')" type="button">
+<span class="material-symbols-outlined text-[17px]">person_add</span>
+<span>+ Registrar nuevo cliente</span>
+</button>
+</div>
+<!-- Existing Client Search Result State -->
+<div class="flex flex-col gap-space-xs" id="view-existing-client">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3.5 text-primary text-[20px]">search</span>
+<input class="w-full h-11 pl-11 pr-10 rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest shadow-sm transition-all" placeholder="Buscar por nombre o teléfono..." type="text" value="David Soria (+34 655 432 109)"/>
+<button class="absolute right-3 text-on-surface-variant hover:text-error transition-colors" title="Limpiar búsqueda" type="button">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+</button>
+</div>
+<!-- Client Selected Card Pill -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center font-title-md text-title-md text-on-secondary-fixed font-bold">
+                  DS
+                </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-title-md text-title-md text-on-surface font-semibold">David Soria</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-caption text-caption font-medium">Cliente Frecuente</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">+34 655 432 109 • david.soria@example.com • 3 visitas anteriores</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded-lg bg-surface-container text-on-surface-variant hover:text-primary font-label-sm text-label-sm flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">history</span>
+<span>Ver historial</span>
+</button>
+</div>
+</div>
+</div>
+<!-- New Client Form Panel (Hidden toggle) -->
+<div class="hidden grid grid-cols-1 md:grid-cols-3 gap-space-sm p-space-md rounded-xl bg-surface-container-low" id="view-new-client">
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Nombre completo *</span>
+<input class="h-10 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm focus:outline-none shadow-sm" placeholder="Ej. Alejandro Pérez" type="text"/>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Teléfono / WhatsApp *</span>
+<input class="h-10 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm focus:outline-none shadow-sm" placeholder="+34 600 000 000" type="tel"/>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Correo electrónico</span>
+<input class="h-10 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm focus:outline-none shadow-sm" placeholder="cliente@correo.com" type="email"/>
+</div>
+</div>
+</div>
+<!-- SECTION 2: Servicio y Profesional Reactivo -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+<!-- Servicio Selection -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<label class="font-title-md text-title-md text-on-surface flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">content_cut</span>
+<span>2. Servicio</span>
+</label>
+<span class="font-caption text-caption text-secondary font-medium">Duración base: 45 min</span>
+</div>
+<div class="relative">
+<select class="w-full h-11 px-space-md rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md appearance-none focus:outline-none shadow-sm font-semibold cursor-pointer">
+<option selected="" value="fade">Corte Degradado Moderno (45 min - $180 MXN ref)</option>
+<option value="beard">Arreglo de Barba Tradicional (30 min - $120 MXN ref)</option>
+<option value="pack">Combo VIP Corte + Barba + Toalla (60 min - $260 MXN ref)</option>
+<option value="classic">Corte Clásico a Tijera (40 min - $150 MXN ref)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-caption text-caption px-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">info</span>
+<span>Incluye tiempo técnico de desinfección preventiva (+10 min).</span>
+</div>
+</div>
+<!-- Reactive Staff Filtering -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<label class="font-title-md text-title-md text-on-surface flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">badge</span>
+<span>Profesional Habilitado</span>
+</label>
+<span class="font-caption text-caption text-on-surface-variant">2 disponibles para este servicio</span>
+</div>
+<!-- Professional Selection Cards List -->
+<div class="grid grid-cols-2 gap-space-xs">
+<!-- Option 1: Mateo Ramos -->
+<div class="p-space-sm rounded-xl bg-surface-container-low text-on-surface flex items-center gap-space-xs cursor-pointer hover:bg-surface-container transition-all">
+<img class="w-9 h-9 rounded-full object-cover shadow-sm" data-alt="Close up professional portrait of Mateo Ramos, a friendly male barber with a short trimmed beard and apron in a modern bright barbershop setting with warm ambient lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_JmOF-HTRjLONHiO1DfAs4XZlXCYZkTaZjYii_mZT1k9Ov9Q1UfvmFwCr6EPigjl_HtK8dh0a9oZPycVTDUtxsnpsbxI5b_sWVJS9biXLB4vujwDUqvdDn3yOk8cXpsAC2mvKhNIQIgMd37VC9Rz3Vm5kh3kNk8PN4a3FMohhL9EdkRmWZD-uNQBbc1fsTAaE-ox1rEZp7iObqqhidlyq5Whp3NSdIzL73v9gCsM4"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold truncate">Mateo Ramos</span>
+<span class="font-caption text-caption text-on-surface-variant truncate">Sillón #1 (Central)</span>
+</div>
+</div>
+<!-- Option 2: Carlos Ramírez (Selected) -->
+<div class="p-space-sm rounded-xl bg-primary-fixed text-on-primary-fixed flex items-center justify-between shadow-sm cursor-pointer">
+<div class="flex items-center gap-space-xs min-w-0">
+<img class="w-9 h-9 rounded-full object-cover shadow-sm" data-alt="Portrait of Carlos Ramirez, master barber wearing clean dark denim uniform with scissors graphic badge in an upscale bright barbershop background with soft cool tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfY8Ul8F-wtM_s4LGV9LjLpIU-9UIbGG9WOzR8PA6c0KpUJIvUFyWR22XtkvtG5IchPhTmkkOkUt1kaHEkx1ACYWgWhre6PY9S_Ym-DTP61OMytF1ix7H8VVfNSXIPc5dnX1PvMPUn-DpUIkO4kJekV0MtJg4kXxJxar0AD0-vjIX9o_vl2Im9Vl7DmMVAy3zucWQqWxZRKdbLTPkPaa_JUK6txLZ7taIk_FvO3pz4"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-bold truncate">Carlos Ramírez</span>
+<span class="font-caption text-caption text-on-primary-fixed-variant truncate">Sillón #2 (Master)</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 3: Fecha y Motor Anticolisión de Horarios -->
+<div class="flex flex-col gap-space-md p-space-lg rounded-2xl bg-surface-container-low shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">calendar_today</span>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface font-semibold">3. Fecha &amp; Franjas Horarias Disponibles</span>
+<span class="font-caption text-caption text-on-surface-variant">Motor anticolisión en tiempo real</span>
+</div>
+</div>
+<!-- Date Picker Inline Indicator -->
+<div class="flex items-center gap-space-xs bg-surface-container-lowest px-space-md py-1.5 rounded-xl shadow-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">event</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Jueves, 26 de Octubre 2025</span>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface text-[18px]" type="button">calendar_month</button>
+</div>
+</div>
+<!-- Collision Rule Engine Status Banner -->
+<div class="flex items-center gap-space-sm px-space-md py-2 rounded-xl bg-surface-container-lowest text-on-surface font-body-sm text-body-sm shadow-sm">
+<span class="material-symbols-outlined text-tertiary text-[20px]">verified</span>
+<div class="flex-1 flex flex-wrap items-center justify-between gap-space-xs">
+<span><strong>Regla de agenda:</strong> 45 min de corte + 10 min de desinfección preventiva. <em>Sin solapamiento detectado.</em></span>
+<span class="font-caption text-caption text-tertiary font-bold tracking-wide uppercase">Capacidad: 100% libre</span>
+</div>
+</div>
+<!-- Time Slots Chip Matrix -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-on-surface-variant font-caption text-caption">
+<span>Selecciona un intervalo disponible:</span>
+<div class="flex items-center gap-space-md">
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span> Seleccionado</span>
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-surface-container-highest"></span> Disponible</span>
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-surface-dim"></span> Ocupado</span>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-space-xs pt-1">
+<!-- Blocked 09:00 -->
+<div class="p-space-sm rounded-xl bg-surface-container-highest opacity-50 text-on-surface-variant flex flex-col items-center justify-center cursor-not-allowed" title="Ocupado: Cita previa agendada con Mateo Ramos">
+<span class="font-label-md text-label-md font-medium line-through">09:00</span>
+<span class="font-caption text-caption text-error">Ocupado</span>
+</div>
+<!-- Available 09:30 -->
+<button class="p-space-sm rounded-xl bg-surface-container-lowest hover:bg-surface-container text-on-surface flex flex-col items-center justify-center shadow-sm transition-all hover:scale-105" type="button">
+<span class="font-label-md text-label-md font-semibold">09:30</span>
+<span class="font-caption text-caption text-tertiary font-medium">Libre</span>
+</button>
+<!-- Selected Active Slot 10:15 -->
+<button class="p-space-sm rounded-xl bg-primary text-on-primary flex flex-col items-center justify-center shadow-md scale-105 transition-all" type="button">
+<span class="font-label-md text-label-md font-bold">10:15</span>
+<span class="font-caption text-caption text-on-primary/90 font-semibold">Elegido</span>
+</button>
+<!-- Blocked 11:00 -->
+<div class="p-space-sm rounded-xl bg-surface-container-highest opacity-50 text-on-surface-variant flex flex-col items-center justify-center cursor-not-allowed" title="Bloqueado: Turno asignado a Juan Carlos R.">
+<span class="font-label-md text-label-md font-medium line-through">11:00</span>
+<span class="font-caption text-caption text-error">Cita</span>
+</div>
+<!-- Available 11:45 -->
+<button class="p-space-sm rounded-xl bg-surface-container-lowest hover:bg-surface-container text-on-surface flex flex-col items-center justify-center shadow-sm transition-all hover:scale-105" type="button">
+<span class="font-label-md text-label-md font-semibold">11:45</span>
+<span class="font-caption text-caption text-tertiary font-medium">Libre</span>
+</button>
+<!-- Available 16:00 -->
+<button class="p-space-sm rounded-xl bg-surface-container-lowest hover:bg-surface-container text-on-surface flex flex-col items-center justify-center shadow-sm transition-all hover:scale-105" type="button">
+<span class="font-label-md text-label-md font-semibold">16:00</span>
+<span class="font-caption text-caption text-tertiary font-medium">Libre</span>
+</button>
+<!-- Available 17:30 -->
+<button class="p-space-sm rounded-xl bg-surface-container-lowest hover:bg-surface-container text-on-surface flex flex-col items-center justify-center shadow-sm transition-all hover:scale-105" type="button">
+<span class="font-label-md text-label-md font-semibold">17:30</span>
+<span class="font-caption text-caption text-tertiary font-medium">Libre</span>
+</button>
+</div>
+<!-- Active Selected Time Summary Pill -->
+<div class="mt-2 flex items-center justify-between p-space-sm rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="flex items-center gap-space-xs text-on-surface font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">timelapse</span>
+<span>Franja seleccionada: <strong>10:15 - 11:00</strong> (45 min duración de servicio)</span>
+</div>
+<span class="font-caption text-caption text-on-surface-variant font-medium">Finalización prevista: 11:00 hrs</span>
+</div>
+</div>
+</div>
+<!-- SECTION 4: Internal Notes -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-title-md text-title-md text-on-surface flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">notes</span>
+<span>4. Notas Internas para el Equipo (Opcional)</span>
+</label>
+<textarea class="w-full p-space-md rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest shadow-sm transition-all" placeholder="Ej. El cliente prefiere corte a tijera en los laterales y solicita confirmación vía WhatsApp." rows="2"></textarea>
+</div>
+<!-- REPROGRAMMING COMPARISON MODULE (Visible when in Reschedule Mode) -->
+<div class="hidden flex-col gap-space-sm p-space-md rounded-2xl bg-secondary-container text-on-secondary-container shadow-sm" id="reschedule-comparison-card">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[20px]">compare_arrows</span>
+              Comparativa de Reprogramación
+            </span>
+<span class="px-space-xs py-0.5 rounded-full bg-surface-container-lowest text-on-surface font-caption text-caption font-semibold">Validado: Sin colisiones</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-sm">
+<!-- Turno Anterior -->
+<div class="p-space-sm rounded-xl bg-surface-container-lowest text-on-surface flex flex-col gap-1 opacity-80">
+<span class="font-caption text-caption uppercase tracking-wider text-error font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">event_busy</span> Turno actual (A liberar)
+              </span>
+<span class="font-title-md text-title-md font-semibold">Mié 25 Octubre • 11:30 hrs</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Profesional: Mateo Ramos • Sillón #1</span>
+</div>
+<!-- Turno Nuevo Propuesto -->
+<div class="p-space-sm rounded-xl bg-primary text-on-primary flex flex-col gap-1 shadow-sm">
+<span class="font-caption text-caption uppercase tracking-wider text-primary-fixed font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Nuevo turno propuesto
+              </span>
+<span class="font-title-md text-title-md font-semibold">Jue 26 Octubre • 10:15 hrs</span>
+<span class="font-body-sm text-body-sm text-on-primary/80">Profesional: Carlos Ramírez • Sillón #2</span>
+</div>
+</div>
+</div>
+<!-- SECTION 5: Summary Card with Pricing -->
+<div class="p-space-lg rounded-2xl bg-surface-container-low shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface font-semibold flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">receipt_long</span>
+<span>Resumen de la Reserva</span>
+</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-caption text-caption font-semibold uppercase">En Mostrador</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md pt-space-xs">
+<div class="flex flex-col">
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Cliente</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">David Soria</span>
+<span class="font-caption text-caption text-secondary">+34 655 432 109</span>
+</div>
+<div class="flex flex-col">
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Horario &amp; Fecha</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">26 Oct 2025 • 10:15</span>
+<span class="font-caption text-caption text-secondary">Duración: 45 min</span>
+</div>
+<div class="flex flex-col">
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Profesional</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">Carlos Ramírez</span>
+<span class="font-caption text-caption text-secondary">Sillón #2 (Master)</span>
+</div>
+<div class="flex flex-col">
+<span class="font-caption text-caption text-on-surface-variant uppercase tracking-wider">Precio Referencial</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold leading-tight">$180 MXN</span>
+<span class="font-caption text-caption text-secondary">Cobro al finalizar</span>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 6: Modal Actions Footer -->
+<div class="px-space-xl py-space-md bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-md shadow-md">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-caption text-caption">
+<span class="material-symbols-outlined text-primary text-[18px]">notifications_active</span>
+<span>Se enviará recordatorio automático por SMS &amp; WhatsApp al cliente.</span>
+</div>
+<div class="flex items-center gap-space-sm w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-space-lg h-11 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold transition-colors" type="button">
+            Cancelar
+          </button>
+<button class="flex-1 sm:flex-none px-space-xl h-11 rounded-xl bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md font-bold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-space-xs" id="btn-submit-action" type="button">
+<span class="material-symbols-outlined text-[20px]">calendar_add_on</span>
+<span id="btn-action-label">Crear y agendar cita</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function switchMode(mode) {
+    const titleText = document.getElementById('modal-title-text');
+    const rescheduleBanner = document.getElementById('reschedule-banner');
+    const comparisonCard = document.getElementById('reschedule-comparison-card');
+    const btnCreate = document.getElementById('btn-mode-create');
+    const btnReschedule = document.getElementById('btn-mode-reschedule');
+    const btnActionLabel = document.getElementById('btn-action-label');
+
+    if (mode === 'reschedule') {
+      titleText.innerText = 'Reprogramar Cita #SK-8941';
+      rescheduleBanner.classList.remove('hidden');
+      comparisonCard.classList.remove('hidden');
+      comparisonCard.classList.add('flex');
+      
+      btnCreate.className = 'px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all';
+      btnReschedule.className = 'px-space-sm py-1 rounded-lg text-on-primary-container bg-primary-container font-label-sm text-label-sm font-semibold transition-all flex items-center gap-1';
+      
+      btnActionLabel.innerText = 'Confirmar y Guardar Reprogramación';
+    } else {
+      titleText.innerText = 'Nueva Cita Manual';
+      rescheduleBanner.classList.add('hidden');
+      comparisonCard.classList.add('hidden');
+      comparisonCard.classList.remove('flex');
+
+      btnCreate.className = 'px-space-sm py-1 rounded-lg text-on-primary-container bg-primary-container font-label-sm text-label-sm font-semibold transition-all';
+      btnReschedule.className = 'px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all flex items-center gap-1';
+
+      btnActionLabel.innerText = 'Crear y agendar cita';
+    }
+  }
+
+  function setClientTab(tab) {
+    const existingTab = document.getElementById('tab-existing-client');
+    const newTab = document.getElementById('tab-new-client');
+    const viewExisting = document.getElementById('view-existing-client');
+    const viewNew = document.getElementById('view-new-client');
+
+    if (tab === 'new') {
+      newTab.className = 'px-space-md py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center gap-1.5';
+      existingTab.className = 'px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all flex items-center gap-1.5';
+      viewExisting.classList.add('hidden');
+      viewNew.classList.remove('hidden');
+    } else {
+      existingTab.className = 'px-space-md py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md font-semibold shadow-sm transition-all flex items-center gap-1.5';
+      newTab.className = 'px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all flex items-center gap-1.5';
+      viewExisting.classList.remove('hidden');
+      viewNew.classList.add('hidden');
+    }
+  }
+</script></main></div></body></html>

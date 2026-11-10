@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"surface-tint":"#2f50d8","surface-variant":"#e0e3e5","surface-bright":"#f7f9fb","on-tertiary-container":"#fefcff","surface-container-lowest":"#ffffff","inverse-surface":"#2d3133","surface-container-highest":"#e0e3e5","surface-container-low":"#f2f4f6","on-primary-fixed":"#001257","background":"#f7f9fb","on-surface":"#191c1e","outline":"#747686","secondary-container":"#d9dff5","on-error":"#ffffff","secondary":"#575e70","tertiary":"#0058be","on-tertiary-fixed":"#001a42","on-secondary":"#ffffff","error-container":"#ffdad6","inverse-primary":"#b9c3ff","error":"#ba1a1a","on-secondary-container":"#5c6274","primary":"#2c4dd6","primary-fixed-dim":"#b9c3ff","secondary-fixed-dim":"#c0c6db","on-primary":"#ffffff","primary-fixed":"#dee1ff","primary-container":"#4a68f0","surface-dim":"#d8dadc","on-secondary-fixed":"#141b2b","surface-container-high":"#e6e8ea","surface-container":"#eceef0","on-background":"#191c1e","outline-variant":"#c4c5d7","on-tertiary":"#ffffff","on-secondary-fixed-variant":"#404758","on-surface-variant":"#444654","on-error-container":"#93000a","on-tertiary-fixed-variant":"#004395","inverse-on-surface":"#eff1f3","tertiary-fixed":"#d8e2ff","tertiary-container":"#2170e4","on-primary-fixed-variant":"#0233c1","on-primary-container":"#fffbff","surface":"#f7f9fb","secondary-fixed":"#dce2f7","tertiary-fixed-dim":"#adc6ff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-xl":"2rem","gutter":"1.5rem","space-sm":"0.5rem","margin-mobile":"1rem","gutter-mobile":"1rem","margin":"2rem","space-xs":"0.25rem","space-lg":"1.5rem","space-md":"1rem"},"fontFamily":{"headline-lg":["Inter"],"body-md":["Inter"],"title-md":["Inter"],"display-hero":["Inter"],"body-lg":["Inter"],"display-hero-mobile":["Inter"],"headline-lg-mobile":["Inter"],"label-sm":["Inter"],"label-md":["Inter"],"caption":["Inter"],"headline-md":["Inter"],"headline-sm":["Inter"],"body-sm":["Inter"]},"fontSize":{"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"title-md":["16px",{"lineHeight":"24px","letterSpacing":"-0.005em","fontWeight":"600"}],"display-hero":["48px",{"lineHeight":"56px","letterSpacing":"-0.025em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"400"}],"display-hero-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.015em","fontWeight":"500"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"500"}],"caption":["11px",{"lineHeight":"14px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","letterSpacing":"0.005em","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">event_available</span></div><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Skedly</span></div><span class="font-caption text-caption text-on-surface-variant bg-surface-container-high px-space-xs py-0.5 rounded">v2.4</span></div><nav class="flex flex-col px-space-md py-space-sm gap-space-md" data-active-classes="bg-primary text-on-primary font-semibold shadow-sm"><div class="flex flex-col gap-space-xs"><span class="px-space-sm py-1 font-caption text-caption text-on-surface-variant tracking-wider uppercase font-semibold">Principal</span><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="inicio" href="#">Inicio</a><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="calendario" href="#">Calendario</a><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="citas" href="#">Citas</a><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="clientes" href="#">Clientes</a></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm py-1 font-caption text-caption text-on-surface-variant tracking-wider uppercase font-semibold">Gestión del Negocio</span><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="servicios" href="#">Servicios</a><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="categorias" href="#">Categorías</a><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="equipo-de-trabajo" href="#">Equipo de trabajo</a></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm py-1 font-caption text-caption text-on-surface-variant tracking-wider uppercase font-semibold">Presencia Online</span><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="pagina-de-reservas" href="#">Página de reservas</a><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="galeria" href="#">Galería</a><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="resenas" href="#">Reseñas</a></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm py-1 font-caption text-caption text-on-surface-variant tracking-wider uppercase font-semibold">Configuración</span><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="configuracion-del-negocio" href="#">Configuración del negocio</a></div></nav></div><div class="p-space-md"><div class="bg-surface-container-low p-space-sm rounded-lg flex items-center justify-between"><div class="flex flex-col"><span class="font-caption text-caption text-on-surface-variant">Plan Studio Pro</span><span class="font-label-sm text-label-sm font-semibold text-on-surface">Ilimitado</span></div><a class="font-caption text-caption text-primary font-semibold hover:underline" href="#">Gestionar</a></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md"><button class="flex items-center gap-space-sm bg-surface-container-low hover:bg-surface-container px-space-md py-1.5 rounded-lg text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-primary text-[20px]">store</span><span class="font-label-md text-label-md font-semibold text-on-surface">Urban Cuts Grooming Studio</span><span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span></button><button class="hidden xl:flex items-center gap-space-sm bg-surface-container-low hover:bg-surface-container px-space-md py-1.5 rounded-lg text-on-surface-variant transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">search</span><span class="font-body-sm text-body-sm">Buscar citas, clientes...</span><kbd class="bg-surface-container-lowest px-1.5 py-0.5 rounded font-caption text-caption text-on-surface-variant shadow-sm">⌘K</kbd></button></div><div class="flex items-center gap-space-md"><a class="hidden sm:flex items-center gap-space-xs text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">open_in_new</span><span class="font-label-md text-label-md">Ver página pública</span></a><button aria-label="Notificaciones" class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary"></span></button><div class="h-6 w-px bg-surface-variant"></div><div class="flex items-center gap-space-sm"><div class="flex flex-col text-right hidden sm:flex"><span class="font-label-md text-label-md font-semibold text-on-surface leading-tight">María Ramos</span><span class="font-caption text-caption text-on-surface-variant">Propietario</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="w-full max-w-7xl mx-auto px-space-md sm:px-space-lg lg:px-space-xl py-space-lg flex flex-col gap-space-lg">
+<!-- HEADER BAR WITH STATUS & EXTERNAL LINK -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Configuración del negocio</h1>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-caption font-caption">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+            Sincronizado
+          </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+          Personaliza los datos de tu empresa, tu identidad de marca y cómo ven los clientes tu negocio.
+        </p>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<a class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface-container-lowest shadow-sm hover:bg-surface-container text-on-surface font-label-md text-label-md transition-all" href="https://skedly.com/urban-cuts" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[18px] text-primary">visibility</span>
+<span>Ver página pública</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">open_in_new</span>
+</a>
+<button class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md shadow-sm transition-all active:scale-[0.98]" id="save-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>Guardar cambios</span>
+</button>
+</div>
+</div>
+<!-- HORIZONTAL SUB-NAVIGATION TABS -->
+<div class="w-full overflow-x-auto no-scrollbar">
+<div class="flex items-center gap-2 p-1.5 bg-surface-container-low rounded-xl min-w-max">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">storefront</span>
+<span>Información del negocio</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">palette</span>
+<span>Identidad visual</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">language</span>
+<span>Página pública</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">share</span>
+<span>Contacto y redes</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">calendar_clock</span>
+<span>Preferencias de reservas</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span>Horarios generales</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span>Preferencias del sistema</span>
+</button>
+</div>
+</div>
+<!-- MAIN TWO-COLUMN WORKSPACE -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT CONFIGURATION COLUMN (8 COLS) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- SECTION A: INFORMACIÓN BÁSICA DEL NEGOCIO -->
+<section class="bg-surface-container-lowest rounded-2xl p-space-md sm:p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-1">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">badge</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Información general</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Detalles esenciales visibles en reservas, tickets y comprobantes.</p>
+</div>
+</div>
+<span class="font-caption text-caption text-primary bg-primary-fixed/50 px-2.5 py-1 rounded-full font-semibold">Obligatorio</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-2">
+<!-- Nombre comercial -->
+<div class="flex flex-col gap-1.5 md:col-span-2">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1" for="biz-name">
+                Nombre comercial del negocio
+                <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-3 text-[18px] text-on-surface-variant">store</span>
+<input class="w-full h-11 pl-11 pr-4 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary transition-all" id="biz-name" type="text" value="Urban Cuts Grooming Studio"/>
+</div>
+</div>
+<!-- Eslogan -->
+<div class="flex flex-col gap-1.5 md:col-span-2">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="biz-slogan">
+                Eslogan / Subtítulo breve
+              </label>
+<input class="w-full h-11 px-4 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary transition-all" id="biz-slogan" placeholder="Ej. El mejor corte y afeitado de la ciudad" type="text" value="Tu estilo, nuestra especialidad"/>
+</div>
+<!-- Categoría / Industria -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="biz-cat">
+                Industria / Categoría principal
+              </label>
+<div class="relative">
+<select class="w-full h-11 px-4 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface appearance-none focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary transition-all cursor-pointer" id="biz-cat">
+<option selected="" value="barberia">Barbería y Peluquería Masculina</option>
+<option value="salon">Salón de Belleza y Peluquería</option>
+<option value="spa">Spa, Masajes y Relajación</option>
+<option value="bienestar">Bienestar y Estética Avanzada</option>
+<option value="consultorio">Consultorio / Terapia Privada</option>
+<option value="otros">Otros servicios profesionales</option>
+</select>
+<span class="material-symbols-outlined absolute right-3.5 top-3 text-[20px] text-on-surface-variant pointer-events-none">unfold_more</span>
+</div>
+</div>
+<!-- Zona Horaria -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="biz-tz">
+                Zona horaria operativa
+              </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-3 text-[18px] text-on-surface-variant">schedule</span>
+<select class="w-full h-11 pl-11 pr-10 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface appearance-none focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary transition-all cursor-pointer" id="biz-tz">
+<option selected="" value="mexico">América/Ciudad_de_México (GMT-6)</option>
+<option value="bogota">América/Bogotá (GMT-5)</option>
+<option value="madrid">Europa/Madrid (GMT+1)</option>
+<option value="santiago">América/Santiago (GMT-4)</option>
+<option value="buenos_aires">América/Argentina/Buenos_Aires (GMT-3)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3.5 top-3 text-[20px] text-on-surface-variant pointer-events-none">unfold_more</span>
+</div>
+</div>
+<!-- Descripción del negocio -->
+<div class="flex flex-col gap-1.5 md:col-span-2">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="biz-desc">
+                  Descripción comercial
+                </label>
+<span class="font-caption text-caption text-on-surface-variant" id="char-counter">148 / 300</span>
+</div>
+<textarea class="w-full p-3.5 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary transition-all resize-none" id="biz-desc" maxlength="300" rows="3">Experiencia de barbería artesanal contemporánea en el corazón de la Roma Norte. Cortes de alta precisión, afeitado tradicional y cuidado masculino sin fricción.</textarea>
+<span class="font-caption text-caption text-on-surface-variant">Esta descripción aparecerá destacada en el banner principal de tu página de reservas en línea.</span>
+</div>
+</div>
+</section>
+<!-- CONTACTO & UBICACIÓN FÍSICA -->
+<section class="bg-surface-container-lowest rounded-2xl p-space-md sm:p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center gap-3 pb-1">
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[22px]">pin_drop</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Ubicación y Canales de Contacto</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Dirección geográfica y datos para llamadas y notificaciones automatizadas.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-2">
+<!-- Teléfono oficial -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="biz-phone">
+                Teléfono de atención al cliente
+              </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-3 text-[18px] text-on-surface-variant">call</span>
+<input class="w-full h-11 pl-11 pr-4 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary transition-all" id="biz-phone" type="tel" value="+52 55 9123 4567"/>
+</div>
+</div>
+<!-- Email oficial -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="biz-email">
+                Correo electrónico oficial
+              </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-3 text-[18px] text-on-surface-variant">mail</span>
+<input class="w-full h-11 pl-11 pr-4 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary transition-all" id="biz-email" type="email" value="contacto@urbancuts.mx"/>
+</div>
+</div>
+<!-- Calle y Número -->
+<div class="flex flex-col gap-1.5 md:col-span-2">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="biz-street">
+                Calle, número exterior e interior
+              </label>
+<input class="w-full h-11 px-4 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary transition-all" id="biz-street" type="text" value="Colima 152, Interior 3B"/>
+</div>
+<!-- Colonia / Barrio -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="biz-col">
+                Colonia / Barrio / Sector
+              </label>
+<input class="w-full h-11 px-4 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary transition-all" id="biz-col" type="text" value="Roma Norte, Cuauhtémoc"/>
+</div>
+<!-- Ciudad -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="biz-city">
+                Ciudad
+              </label>
+<input class="w-full h-11 px-4 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary transition-all" id="biz-city" type="text" value="Ciudad de México"/>
+</div>
+<!-- Estado / C.P. / País -->
+<div class="grid grid-cols-3 gap-space-sm md:col-span-2">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold truncate" for="biz-state">Estado / Prov.</label>
+<input class="w-full h-11 px-3 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary transition-all" id="biz-state" type="text" value="CDMX"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="biz-zip">Código Postal</label>
+<input class="w-full h-11 px-3 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary transition-all" id="biz-zip" type="text" value="06700"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="biz-country">País</label>
+<input class="w-full h-11 px-3 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary transition-all" id="biz-country" type="text" value="México"/>
+</div>
+</div>
+<!-- Mini mapa estático integrado -->
+<div class="md:col-span-2 mt-2">
+<div class="relative w-full h-44 rounded-xl overflow-hidden bg-surface-container shadow-inner">
+<div class="w-full h-full bg-cover bg-center" data-location="Colima 152, Roma Norte, Ciudad de Mexico" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCUeleaLa13X0RMMOBFY8XrQCzFUIPzbs3n2tZOebYgFYKCHrGRjUQJUc_8qf8lZXjFrVBuWduZzA6KLYKzP5OeMo49NUhHEQ1e1UsiHgLKeqleZeTlF1yppZK6rzBUAq2XsPPojLd7CFpBaDEMAG3Z8uu_3AheBbGd_j9UWLy81iZV9rVhYByo34FnHPv0nXD6XGmhXU_60KcyDEoFIlN5dELZSypGSgdgzVQi_f6k')"></div>
+<div class="absolute bottom-3 left-3 bg-surface-container-lowest/90 backdrop-blur-md px-3 py-1.5 rounded-lg shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Ubicación sincronizada con Google Maps</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION B: IDENTIDAD VISUAL & BRANDING -->
+<section class="bg-surface-container-lowest rounded-2xl p-space-md sm:p-space-lg shadow-sm flex flex-col gap-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[22px]">brush</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Identidad Visual &amp; Branding</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Personaliza el logotipo, portadas y la paleta de colores para tu storefront.</p>
+</div>
+</div>
+<!-- Logotipo del negocio -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md p-space-md bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-space-md">
+<div class="w-20 h-20 rounded-2xl bg-on-surface text-surface-container-lowest flex items-center justify-center font-headline-md text-headline-md font-bold tracking-tighter shadow-md select-none shrink-0" id="preview-logo-box">
+                UC
+              </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Logotipo principal</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Recomendado: PNG o SVG cuadrado de al menos 400x400px. Máximo 2MB.</span>
+<div class="flex items-center gap-2 mt-1">
+<span class="inline-flex items-center gap-1 font-caption text-caption text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">check</span> Activo
+                  </span>
+<span class="font-caption text-caption text-on-surface-variant">logo_urbancuts_2024.svg</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-center">
+<button class="px-3.5 py-2 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container font-label-sm text-label-sm shadow-sm transition-colors flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[18px]">upload</span>
+                Reemplazar
+              </button>
+<button class="p-2 rounded-lg bg-error-container text-on-error-container hover:bg-red-200 transition-colors" title="Eliminar logotipo" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Portada / Header Hero -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold">
+                Imagen de portada / Hero
+              </label>
+<button class="text-primary hover:underline font-label-sm text-label-sm font-semibold flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">add_photo_alternate</span>
+                Cambiar imagen
+              </button>
+</div>
+<div class="relative w-full h-44 rounded-xl overflow-hidden bg-surface-container group shadow-sm">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Interior of an upscale modern barbershop in Roma Norte Mexico City, polished concrete floor, leather barber chairs, warm ambient neon illumination and vintage walnut wood mirrors with clean minimalist aesthetics" id="preview-cover-bg" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCIl15BsEes42yh_8lUpw899NOM1riB21IILHJbDzfw6J0KiILhUT3YmJSJhBHxIeh3kBF0TYcbjMEhzd1nZLqQfJJNWy4hIJoqz07rzcmt5WFq2vDiVNbG3E1Co0f9VVirmsDHONpAbXpcBPWm_M8gfsWXbcXxgy_PCqQujhhnTVZi7-Y2JQWgk-h1AQS6Z71q0Rf8CAXGPgGJu_thoGr0x7dxa-sMXVDI6oV8pnnV')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-4 justify-between">
+<div class="flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-[18px]">image</span>
+<span class="font-caption text-caption font-semibold">hero_barber_interior_wide.webp • 1920x640px</span>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest/90 backdrop-blur-md text-on-surface hover:bg-surface-container-lowest font-label-sm text-label-sm shadow transition-all" type="button">
+                  Reposicionar
+                </button>
+</div>
+</div>
+<span class="font-caption text-caption text-on-surface-variant">Esta foto se exhibe en el encabezado de tu portal de reservas con overlay dinámico.</span>
+</div>
+<!-- Color de marca primario -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div>
+<label class="font-label-md text-label-md text-on-surface font-semibold">Color principal de acento</label>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Aplica a los botones de reserva, fechas activas y etiquetas principales.</p>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-lg">
+<div class="w-4 h-4 rounded-full bg-primary shadow-sm" id="color-indicator"></div>
+<span class="font-mono font-label-sm text-label-sm text-on-surface font-semibold uppercase" id="color-hex-label">#2C4DD6</span>
+</div>
+</div>
+<!-- Paleta de colores predefinidos -->
+<div class="flex items-center gap-3 flex-wrap pt-1">
+<!-- Preset 1: Skedly Blue (Active) -->
+<button class="color-preset w-11 h-11 rounded-xl bg-primary flex items-center justify-center text-white ring-4 ring-primary/25 shadow-sm transition-all transform hover:scale-105" data-color="#2c4dd6" type="button">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+<!-- Preset 2: Emerald Green -->
+<button class="color-preset w-11 h-11 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-sm transition-all transform hover:scale-105" data-color="#059669" type="button">
+<span class="material-symbols-outlined text-[20px] hidden">check</span>
+</button>
+<!-- Preset 3: Terracotta -->
+<button class="color-preset w-11 h-11 rounded-xl bg-orange-600 flex items-center justify-center text-white shadow-sm transition-all transform hover:scale-105" data-color="#ea580c" type="button">
+<span class="material-symbols-outlined text-[20px] hidden">check</span>
+</button>
+<!-- Preset 4: Charcoal Black -->
+<button class="color-preset w-11 h-11 rounded-xl bg-zinc-900 flex items-center justify-center text-white shadow-sm transition-all transform hover:scale-105" data-color="#18181b" type="button">
+<span class="material-symbols-outlined text-[20px] hidden">check</span>
+</button>
+<!-- Preset 5: Deep Purple -->
+<button class="color-preset w-11 h-11 rounded-xl bg-violet-600 flex items-center justify-center text-white shadow-sm transition-all transform hover:scale-105" data-color="#7c3aed" type="button">
+<span class="material-symbols-outlined text-[20px] hidden">check</span>
+</button>
+<!-- Custom Picker Input -->
+<div class="relative flex items-center">
+<input class="opacity-0 absolute inset-0 w-full h-full cursor-pointer z-10" id="native-color-picker" type="color" value="#2c4dd6"/>
+<div class="h-11 px-3.5 rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center gap-2 text-on-surface font-label-md text-label-md transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">colorize</span>
+<span>Personalizado</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN: LIVE MINI PREVIEW & SUMMARY (4 COLS) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md lg:sticky lg:top-24">
+<!-- CARD WIDGET: PREVIEW DEL SITIO -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary">smartphone</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Vista en vivo</span>
+</div>
+<span class="font-caption text-caption uppercase tracking-wider text-on-surface-variant font-semibold">Cliente final</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Así es como verán tu estudio tus clientes desde dispositivos móviles y de escritorio.
+          </p>
+<!-- MINI MOCKUP DE DISPOSITIVO MÓVIL / RESERVA -->
+<div class="w-full bg-surface-container rounded-2xl overflow-hidden shadow-inner flex flex-col">
+<!-- Simulated Browser Bar -->
+<div class="h-8 bg-surface-container-highest px-3 flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-red-400"></span>
+<span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+<span class="w-2 h-2 rounded-full bg-green-400"></span>
+</div>
+<span class="font-caption text-caption text-on-surface-variant font-mono">skedly.com/urban-cuts</span>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">lock</span>
+</div>
+<!-- Mini Storefront Content -->
+<div class="bg-surface-container-lowest flex flex-col pb-4">
+<!-- Cover Header -->
+<div class="relative h-28 w-full overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="Cinematic mood shot of a grooming salon with vintage equipment warm lighting and elegant atmosphere" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB2lmZY2CSn76u5hrQZNfaCPV9xDiUlEMuURZwDVWNYq3t9-Oksx_readZ9pJcOl9UhllGS_NmTY-tYzR-qcHBuv2qGusFcxiCGI3UFP3tY9k9kA2Ipd7eKGV6U8YicMrIMHnXJMG9qLm-6HoPF9brL_0JPcm-Li4zJpwoSbw9EE71wWohaP0f-4RfYi1EakI83QP_ipUnF51wJ2X58aeSRoX8QVk1hQAFj9Io0fQDN')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+</div>
+<!-- Avatar Logo Overlap -->
+<div class="px-4 flex items-end justify-between -mt-6 relative z-10">
+<div class="w-14 h-14 rounded-xl bg-on-surface text-white flex items-center justify-center font-bold text-headline-sm shadow-md ring-4 ring-surface-container-lowest" id="live-logo">
+                  UC
+                </div>
+<span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-caption font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> Abierto
+                </span>
+</div>
+<!-- Title & Slogan Dynamic -->
+<div class="px-4 pt-3 flex flex-col gap-0.5">
+<h3 class="font-title-md text-title-md text-on-surface leading-tight" id="live-title">
+                  Urban Cuts Grooming Studio
+                </h3>
+<p class="font-caption text-caption text-primary font-semibold" id="live-slogan">
+                  Tu estilo, nuestra especialidad
+                </p>
+<div class="flex items-center gap-1 text-on-surface-variant pt-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="font-caption text-caption truncate">Roma Norte, Ciudad de México</span>
+</div>
+</div>
+<!-- Simulated Service Card -->
+<div class="mx-4 mt-3 p-2.5 rounded-xl bg-surface-container-low flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Corte Signature + Barba</span>
+<span class="font-label-sm text-label-sm text-on-surface font-bold">$450 MXN</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-caption text-caption">45 min • Incluye toalla tibia</span>
+<button class="px-3 py-1 rounded-md bg-primary text-white font-caption text-caption font-semibold shadow-sm" id="live-book-btn" type="button">
+                    Elegir
+                  </button>
+</div>
+</div>
+<!-- Simulated Rating & Proof -->
+<div class="px-4 pt-3 flex items-center justify-between text-caption font-caption text-on-surface-variant">
+<div class="flex items-center gap-1 text-amber-500">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-on-surface">4.9</span>
+<span>(184 reseñas)</span>
+</div>
+<span class="text-primary font-semibold">Ver servicios (8)</span>
+</div>
+</div>
+</div>
+<!-- RECOMENDACIONES DE OPTIMIZACIÓN -->
+<div class="p-3 bg-primary-fixed/30 rounded-xl flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">lightbulb</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Tip de optimización</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+                Completar la dirección exacta y teléfono aumenta un 35% la tasa de confirmación de nuevos clientes locales.
+              </span>
+</div>
+</div>
+</div>
+<!-- ACCIONES RÁPIDAS ADICIONALES -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm flex flex-col gap-3">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Enlaces directos</span>
+<a class="flex items-center justify-between p-2.5 rounded-lg hover:bg-surface-container transition-colors group" href="#">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">qr_code_2</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface">Descargar código QR de mostrador</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-2.5 rounded-lg hover:bg-surface-container transition-colors group" href="#">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface">Copiar enlace público de reservas</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">content_copy</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- FLOATING CONFIRMATION TOAST NOTIFICATION -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none" id="toast-notification">
+<div class="bg-on-surface text-surface-container-lowest px-4 py-3 rounded-xl shadow-xl flex items-center gap-3">
+<div class="w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-white">Ajustes guardados exitosamente</span>
+<span class="font-caption text-caption text-outline-variant">La información pública ya está sincronizada.</span>
+</div>
+<button class="ml-2 text-outline hover:text-white pointer-events-auto" id="toast-close" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    // Sync Name with Live Preview
+    const nameInput = document.getElementById('biz-name');
+    const liveTitle = document.getElementById('live-title');
+    if (nameInput && liveTitle) {
+      nameInput.addEventListener('input', (e) => {
+        liveTitle.textContent = e.target.value.trim() || 'Mi Negocio';
+      });
+    }
+
+    // Sync Slogan with Live Preview
+    const sloganInput = document.getElementById('biz-slogan');
+    const liveSlogan = document.getElementById('live-slogan');
+    if (sloganInput && liveSlogan) {
+      sloganInput.addEventListener('input', (e) => {
+        liveSlogan.textContent = e.target.value.trim() || 'Servicios profesionales';
+      });
+    }
+
+    // Character counter for description
+    const descArea = document.getElementById('biz-desc');
+    const charCounter = document.getElementById('char-counter');
+    if (descArea && charCounter) {
+      descArea.addEventListener('input', (e) => {
+        const length = e.target.value.length;
+        charCounter.textContent = `${length} / 300`;
+      });
+    }
+
+    // Preset color pickers
+    const colorPresets = document.querySelectorAll('.color-preset');
+    const colorHexLabel = document.getElementById('color-hex-label');
+    const colorIndicator = document.getElementById('color-indicator');
+    const nativeColorPicker = document.getElementById('native-color-picker');
+    const liveBookBtn = document.getElementById('live-book-btn');
+    const liveSloganText = document.getElementById('live-slogan');
+
+    function updateBrandColor(hex) {
+      if (colorHexLabel) colorHexLabel.textContent = hex.toUpperCase();
+      if (colorIndicator) colorIndicator.style.backgroundColor = hex;
+      if (liveBookBtn) liveBookBtn.style.backgroundColor = hex;
+      if (liveSloganText) liveSloganText.style.color = hex;
+      if (nativeColorPicker) nativeColorPicker.value = hex;
+
+      colorPresets.forEach(btn => {
+        const checkIcon = btn.querySelector('.material-symbols-outlined');
+        if (btn.getAttribute('data-color').toLowerCase() === hex.toLowerCase()) {
+          btn.classList.add('ring-4', 'ring-primary/25');
+          if (checkIcon) checkIcon.classList.remove('hidden');
+        } else {
+          btn.classList.remove('ring-4', 'ring-primary/25');
+          if (checkIcon) checkIcon.classList.add('hidden');
+        }
+      });
+    }
+
+    colorPresets.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const color = btn.getAttribute('data-color');
+        updateBrandColor(color);
+      });
+    });
+
+    if (nativeColorPicker) {
+      nativeColorPicker.addEventListener('input', (e) => {
+        updateBrandColor(e.target.value);
+      });
+    }
+
+    // Save Changes Toast Trigger
+    const saveBtn = document.getElementById('save-btn');
+    const toast = document.getElementById('toast-notification');
+    const toastClose = document.getElementById('toast-close');
+
+    function showToast() {
+      if (!toast) return;
+      toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        hideToast();
+      }, 4000);
+    }
+
+    function hideToast() {
+      if (!toast) return;
+      toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }
+
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => {
+        const origText = saveBtn.innerHTML;
+        saveBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Guardando...</span>';
+        saveBtn.disabled = true;
+        
+        setTimeout(() => {
+          saveBtn.innerHTML = origText;
+          saveBtn.disabled = false;
+          showToast();
+        }, 600);
+      });
+    }
+
+    if (toastClose) {
+      toastClose.addEventListener('click', hideToast);
+    }
+  })();
+</script></main></div></body></html>

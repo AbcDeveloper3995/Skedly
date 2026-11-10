@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useTransition, useState } from "react";
+import React, { useEffect, useTransition, useState, Suspense } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/lib/supabase/auth-context";
@@ -83,8 +83,7 @@ function DashboardLayoutContent({
     {
       title: "Presencia Online",
       items: [
-        { name: "Página de reservas", path: "/", icon: "storefront", external: true },
-        { name: "Sucursales", path: "/dashboard/sucursales", icon: "apartment" },
+        { name: "Página de reservas", path: "/reservas/urban-cuts", icon: "storefront", external: true },
       ],
     },
     {
@@ -92,6 +91,7 @@ function DashboardLayoutContent({
       items: [
         { name: "Configuración del negocio", path: "/dashboard/configuracion", icon: "tune" },
         { name: "Horarios", path: "/dashboard/configuracion/horarios", icon: "schedule" },
+        { name: "Notificaciones", path: "/dashboard/notificaciones", icon: "notifications_active" },
       ],
     },
   ];
@@ -126,10 +126,19 @@ function DashboardLayoutContent({
                   {group.title}
                 </p>
                 {group.items.map((item) => {
-                  const isActive =
-                    item.path === "/dashboard"
-                      ? pathname === "/dashboard"
-                      : pathname.startsWith(item.path) && item.path !== "/";
+                  const isActive = (() => {
+                    if (item.path === "/dashboard") {
+                      return pathname === "/dashboard";
+                    }
+                    if (item.path === "/dashboard/configuracion") {
+                      return (
+                        (pathname === "/dashboard/configuracion" ||
+                          pathname.startsWith("/dashboard/configuracion/negocio")) &&
+                        !pathname.startsWith("/dashboard/configuracion/horarios")
+                      );
+                    }
+                    return pathname.startsWith(item.path);
+                  })();
 
                   if (item.external) {
                     return (
@@ -284,7 +293,7 @@ function DashboardLayoutContent({
         {/* Topbar Actions */}
         <div className="flex items-center gap-3">
           <Link
-            href="/"
+            href="/reservas/urban-cuts"
             target="_blank"
             className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface text-xs font-medium shadow-sm border border-surface-container hover:bg-surface-container transition-all"
           >
@@ -531,12 +540,12 @@ function DashboardLayoutContent({
                 <span>Equipo</span>
               </Link>
               <Link
-                href="/dashboard/sucursales"
+                href="/dashboard/notificaciones"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="p-3 rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center gap-2.5 text-xs font-semibold text-on-surface"
               >
-                <span className="material-symbols-outlined text-primary text-lg">apartment</span>
-                <span>Sucursales</span>
+                <span className="material-symbols-outlined text-primary text-lg">notifications_active</span>
+                <span>Notificaciones</span>
               </Link>
               <Link
                 href="/dashboard/configuracion"
@@ -581,7 +590,9 @@ export default function DashboardLayout({
 }) {
   return (
     <DashboardViewProvider>
-      <DashboardLayoutContent>{children}</DashboardLayoutContent>
+      <Suspense fallback={<div className="min-h-screen bg-surface" />}>
+        <DashboardLayoutContent>{children}</DashboardLayoutContent>
+      </Suspense>
     </DashboardViewProvider>
   );
 }

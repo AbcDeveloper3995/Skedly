@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary-fixed-dim":"#b9c3ff","surface-container-highest":"#e0e3e5","inverse-on-surface":"#eff1f3","on-tertiary-container":"#fefcff","on-secondary-container":"#5c6274","on-tertiary-fixed-variant":"#004395","error-container":"#ffdad6","secondary-fixed-dim":"#c0c6db","on-primary-fixed-variant":"#0233c1","primary-container":"#4a68f0","inverse-surface":"#2d3133","on-primary-container":"#fffbff","secondary-container":"#d9dff5","surface-dim":"#d8dadc","on-secondary":"#ffffff","surface-container":"#eceef0","tertiary-fixed":"#d8e2ff","on-error-container":"#93000a","outline-variant":"#c4c5d7","surface-bright":"#f7f9fb","on-tertiary":"#ffffff","surface-container-lowest":"#ffffff","surface-variant":"#e0e3e5","on-primary":"#ffffff","background":"#f7f9fb","secondary":"#575e70","inverse-primary":"#b9c3ff","surface-container-high":"#e6e8ea","on-tertiary-fixed":"#001a42","secondary-fixed":"#dce2f7","tertiary-fixed-dim":"#adc6ff","primary-fixed":"#dee1ff","on-secondary-fixed-variant":"#404758","tertiary-container":"#2170e4","primary":"#2c4dd6","on-background":"#191c1e","on-secondary-fixed":"#141b2b","error":"#ba1a1a","on-surface-variant":"#444654","outline":"#747686","surface-tint":"#2f50d8","on-surface":"#191c1e","surface":"#f7f9fb","on-primary-fixed":"#001257","tertiary":"#0058be","surface-container-low":"#f2f4f6","on-error":"#ffffff"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-md":"1rem","space-sm":"0.5rem","margin-mobile":"1rem","space-xl":"2rem","margin":"2rem","gutter-mobile":"1rem","space-lg":"1.5rem","gutter":"1.5rem","space-xs":"0.25rem"},fontFamily:{"headline-md":["Inter"],"headline-lg":["Inter"],"body-sm":["Inter"],"display-hero-mobile":["Inter"],"headline-sm":["Inter"],"body-lg":["Inter"],"title-md":["Inter"],"display-hero":["Inter"],"headline-lg-mobile":["Inter"],"label-sm":["Inter"],"body-md":["Inter"],"caption":["Inter"],"label-md":["Inter"]},fontSize:{"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","letterSpacing":"0.005em","fontWeight":"400"}],"display-hero-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"400"}],"title-md":["16px",{"lineHeight":"24px","letterSpacing":"-0.005em","fontWeight":"600"}],"display-hero":["48px",{"lineHeight":"56px","letterSpacing":"-0.025em","fontWeight":"700"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.015em","fontWeight":"500"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"caption":["11px",{"lineHeight":"14px","letterSpacing":"0.02em","fontWeight":"500"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"500"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-64 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary font-headline-sm text-headline-sm font-bold">S</div><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface font-bold">Skedly</span></div><span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-caption text-caption font-semibold">v2.4</span></div><nav class="px-space-sm py-space-sm flex flex-col gap-space-sm" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm"><div class="px-space-sm pt-space-xs"><span class="font-caption text-caption uppercase tracking-wider text-outline font-semibold">Principal</span></div><div class="flex flex-col gap-0.5"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="inicio" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-md text-label-md">Inicio</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendario" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="font-label-md text-label-md">Calendario</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="citas" href="#"><span class="material-symbols-outlined text-[20px]">event_available</span><span class="font-label-md text-label-md">Citas</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="clientes" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span class="font-label-md text-label-md">Clientes</span></a></div><div class="px-space-sm pt-space-sm"><span class="font-caption text-caption uppercase tracking-wider text-outline font-semibold">Gestión del Negocio</span></div><div class="flex flex-col gap-0.5"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="servicios" href="#"><span class="material-symbols-outlined text-[20px]">spa</span><span class="font-label-md text-label-md">Servicios</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="categorias" href="#"><span class="material-symbols-outlined text-[20px]">category</span><span class="font-label-md text-label-md">Categorías</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="equipo-de-trabajo" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span class="font-label-md text-label-md">Equipo de trabajo</span></a></div><div class="px-space-sm pt-space-sm"><span class="font-caption text-caption uppercase tracking-wider text-outline font-semibold">Presencia Online</span></div><div class="flex flex-col gap-0.5"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="pagina-de-reservas" href="#"><span class="material-symbols-outlined text-[20px]">storefront</span><span class="font-label-md text-label-md">Página de reservas</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="galeria" href="#"><span class="material-symbols-outlined text-[20px]">photo_library</span><span class="font-label-md text-label-md">Galería</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="resenas" href="#"><span class="material-symbols-outlined text-[20px]">reviews</span><span class="font-label-md text-label-md">Reseñas</span></a></div><div class="px-space-sm pt-space-sm"><span class="font-caption text-caption uppercase tracking-wider text-outline font-semibold">Configuración</span></div><div class="flex flex-col gap-0.5"><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-2 bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm" data-path="notificaciones" href="#"><span class="material-symbols-outlined text-[20px]">notifications_active</span><span class="font-label-md text-label-md">Notificaciones</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="configuracion-del-negocio" href="#"><span class="material-symbols-outlined text-[20px]">tune</span><span class="font-label-md text-label-md">Configuración del negocio</span></a></div></nav></div><div class="p-space-sm"><div class="rounded-xl bg-surface-container-low p-space-sm flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm font-semibold text-on-surface">Plan Studio Pro</span><span class="px-1.5 py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-caption text-caption font-bold">Ilimitado</span></div><p class="font-caption text-caption text-on-surface-variant">Sincronización multi-sede y WhatsApp activo</p><a class="mt-1 text-center py-1.5 px-space-sm rounded-lg bg-surface-container-lowest text-primary hover:bg-primary-container hover:text-on-primary-container transition-colors font-label-sm text-label-sm font-semibold shadow-sm" data-path="plan-y-facturacion" href="#">Gestionar</a></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md flex-1 max-w-xl"><div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-lowest shadow-sm cursor-pointer hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-primary text-[20px]">store</span><span class="font-label-md text-label-md font-semibold text-on-surface whitespace-nowrap">Urban Cuts Grooming Studio</span><span class="material-symbols-outlined text-outline text-[18px]">expand_more</span></div><div class="flex items-center gap-space-xs flex-1 px-space-md py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant focus-within:bg-surface-container-lowest focus-within:shadow-sm transition-all"><span class="material-symbols-outlined text-[18px] text-outline">search</span><input class="bg-transparent w-full focus:outline-none font-body-sm text-body-sm text-on-surface placeholder:text-outline" placeholder="Buscar citas, clientes, correos... ⌘K" type="text"/></div></div><div class="flex items-center gap-space-md"><a class="flex items-center gap-1.5 text-primary hover:text-tertiary transition-colors font-label-md text-label-md font-semibold" href="#" target="_blank"><span class="font-label-md text-label-md">Ver página pública</span><span class="material-symbols-outlined text-[18px]">open_in_new</span></a><div class="relative flex items-center justify-center p-2 rounded-full hover:bg-surface-container cursor-pointer transition-colors text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface"></span></div><div class="h-6 w-px bg-surface-container-highest"></div><div class="flex items-center gap-space-sm cursor-pointer group"><div class="text-right hidden sm:flex flex-col"><span class="font-label-md text-label-md font-semibold text-on-surface group-hover:text-primary transition-colors">María Ramos</span><span class="font-caption text-caption text-on-surface-variant">Propietario</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface flex-1 px-space-lg py-space-lg"><div class="flex flex-col w-full">
+<!-- Top Level Sticky Context & Actions Bar -->
+<div class="flex flex-col md:flex-row md:items-end justify-between pb-space-lg gap-space-md">
+<div class="flex flex-col gap-1 max-w-2xl">
+<div class="flex items-center gap-space-xs">
+<span class="font-caption text-caption uppercase tracking-wider text-primary font-bold">Ajustes del Sistema</span>
+<span class="text-outline text-caption">•</span>
+<span class="font-caption text-caption text-on-surface-variant font-medium">Urban Cuts Grooming Studio</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Notificaciones</h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+        Gestiona qué eventos por correo electrónico se envían a tu equipo y a tus clientes con cada movimiento de citas.
+      </p>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-space-sm self-start md:self-auto shrink-0">
+<button class="px-space-md py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-all active:scale-[0.98]" type="button">
+        Descartar
+      </button>
+<button class="flex items-center gap-2 px-space-lg py-2.5 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md shadow-sm transition-all active:scale-[0.98]" id="saveBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>Guardar cambios</span>
+</button>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex items-center gap-space-md border-b-0 pb-1 mb-space-lg">
+<a class="relative pb-2.5 px-1 font-label-md text-label-md font-semibold text-primary flex items-center gap-2 group" href="#">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+<span>Preferencias</span>
+<span class="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"></span>
+</a>
+<a class="relative pb-2.5 px-1 font-label-md text-label-md font-medium text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px] text-outline">mark_email_read</span>
+<span>Plantillas de correo</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-caption text-caption">6 activas</span>
+</a>
+<a class="relative pb-2.5 px-1 font-label-md text-label-md font-medium text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px] text-outline">history</span>
+<span>Historial de notificaciones</span>
+</a>
+</div>
+<!-- Core Rule Clarification Banner -->
+<div class="relative overflow-hidden rounded-xl bg-primary-fixed/40 p-space-md mb-space-lg shadow-sm">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shrink-0 text-on-primary shadow-sm mt-0.5">
+<span class="material-symbols-outlined text-[22px]">forward_to_inbox</span>
+</div>
+<div class="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md text-on-primary-fixed font-semibold">Cero fricción para tus clientes</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest text-primary font-caption text-caption font-bold shadow-sm">Automático</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-secondary-fixed-variant">
+            Los clientes no necesitan crear cuenta ni iniciar sesión para recibir correos; se envía automáticamente al correo proporcionado en la reserva pública.
+          </p>
+</div>
+<div class="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-lowest/80 text-on-surface font-label-sm text-label-sm font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span>Sin contraseñas</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main 2-Column Responsive Workspace Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mb-space-xl">
+<!-- Left Column: Business & Team Notifications (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg">
+<div class="rounded-xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col gap-space-lg">
+<!-- Header -->
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">store</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface font-bold">Negocio y Equipo</span>
+<span class="font-caption text-caption text-outline font-medium">Recepción interna de avisos</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-primary font-caption text-caption font-semibold">
+            Transaccional
+          </span>
+</div>
+<!-- Email Destination Config -->
+<div class="flex flex-col gap-space-sm p-space-md rounded-lg bg-surface-container-low">
+<label class="flex flex-col gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold flex items-center justify-between">
+<span>Correo de recepción principal</span>
+<span class="font-caption text-caption text-outline">Obligatorio</span>
+</span>
+<div class="flex items-center gap-2 px-space-md py-2 rounded-lg bg-surface-container-lowest shadow-sm focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+<span class="material-symbols-outlined text-outline text-[18px]">mail</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface focus:outline-none" type="email" value="contacto@urbancuts.mx"/>
+</div>
+</label>
+<span class="font-caption text-caption text-on-surface-variant">Puedes añadir correos de copia (CC) separándolos por coma.</span>
+<label class="flex items-start gap-space-sm pt-2 cursor-pointer group">
+<input checked="" class="mt-0.5 w-4 h-4 rounded text-primary focus:ring-primary/20 accent-primary cursor-pointer" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium group-hover:text-primary transition-colors">
+                Enviar copia al barbero/empleado asignado
+              </span>
+<span class="font-caption text-caption text-outline">
+                Aplica únicamente si el miembro del staff cuenta con email verificado en su perfil.
+              </span>
+</div>
+</label>
+</div>
+<!-- Triggers List -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-caption text-caption uppercase tracking-wider text-outline font-bold">Disparadores del negocio</span>
+<!-- Trigger 1 -->
+<div class="flex items-start justify-between gap-space-sm p-space-sm rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex flex-col gap-0.5 pr-2">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Nueva reserva recibida</span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Notifica de inmediato cada vez que un cliente reserva con éxito.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-container-lowest after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Trigger 2 -->
+<div class="flex items-start justify-between gap-space-sm p-space-sm rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex flex-col gap-0.5 pr-2">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Nueva solicitud pendiente</span>
+<span class="px-1.5 py-0.2 rounded bg-secondary-container text-on-secondary-container font-caption text-[10px] font-bold">Prioritario</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Alerta prioritaria si el negocio opera con aprobación manual de citas.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-container-lowest after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Trigger 3 -->
+<div class="flex items-start justify-between gap-space-sm p-space-sm rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex flex-col gap-0.5 pr-2">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Reserva cancelada por cliente</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Libera el turno en agenda y avisa al equipo para reasignar el sillón.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-container-lowest after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Trigger 4 -->
+<div class="flex items-start justify-between gap-space-sm p-space-sm rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex flex-col gap-0.5 pr-2">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Reserva reprogramada</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Informa del cambio de fecha/hora solicitado por el usuario.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-container-lowest after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Trigger 5 -->
+<div class="flex items-start justify-between gap-space-sm p-space-sm rounded-lg bg-surface-container-low/50">
+<div class="flex flex-col gap-0.5 pr-2">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface-variant font-semibold">Resumen matutino diario</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container-high text-outline font-caption text-[10px]">Opcional</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">Envía a las 08:00 AM el listado consolidado de citas y barberos del día.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-container-lowest after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Customer Notifications (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg">
+<div class="rounded-xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col gap-space-lg">
+<!-- Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-2 gap-2">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-primary-fixed text-on-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">person_check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface font-bold">Notificaciones para Clientes</span>
+<span class="font-caption text-caption text-outline font-medium">Correos directos al usuario</span>
+</div>
+</div>
+<span class="self-start sm:self-auto px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-caption text-caption font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+            Sin login requerido
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant -mt-2">
+          Se envían automáticamente al cliente que proporcionó su correo al reservar. No requiere contraseña ni registro previo en ninguna plataforma.
+        </p>
+<!-- Rule Notice Banner -->
+<div class="flex items-start gap-space-sm p-space-md rounded-lg bg-surface-container-low text-on-surface-variant">
+<span class="material-symbols-outlined text-outline text-[18px] shrink-0 mt-0.5">info</span>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Regla de despacho transaccional:</span>
+<p class="font-body-sm text-body-sm">
+              Si el cliente solo proporcionó teléfono móvil durante la reserva, no se enviará correo. Puedes marcar el campo de correo como obligatorio en <a class="text-primary hover:underline font-medium" href="#">Preferencias de Reserva</a>.
+            </p>
+</div>
+</div>
+<!-- Customer Notification Triggers Matrix -->
+<div class="flex flex-col gap-space-md">
+<!-- Item 1 -->
+<div class="flex items-start justify-between gap-space-md p-space-sm rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Confirmación instantánea de reserva</span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-caption text-caption font-bold">Incluye .ics</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Se envía de inmediato con los datos del turno y archivo adjunto compatible con Google Calendar, Apple Calendar y Outlook.
+              </p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-container-lowest after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Item 2 -->
+<div class="flex items-start justify-between gap-space-md p-space-sm rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Aviso de solicitud recibida (Pendiente de aprobación)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Tranquiliza al cliente haciéndole saber que su solicitud está en revisión por el barbero antes de ser confirmada definitivamente.
+              </p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-container-lowest after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Item 3 -->
+<div class="flex items-start justify-between gap-space-md p-space-sm rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Confirmación tras aprobación manual</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Avisa al cliente en cuanto el barbero o administrador valida su turno en el panel con enlace directo para añadir a su agenda.
+              </p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-container-lowest after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Item 4 -->
+<div class="flex items-start justify-between gap-space-md p-space-sm rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Aviso de cancelación de cita</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Notificación clara y empática con el motivo registrado y un botón destacado para volver a agendar en otro horario libre.
+              </p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-container-lowest after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Item 5 -->
+<div class="flex items-start justify-between gap-space-md p-space-sm rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Aviso de reprogramación de turno</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Muestra de forma destacada el horario anterior vs. el nuevo horario confirmado, evitando cualquier confusión en recepción.
+              </p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-container-lowest after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Item 6: Special Compound Section for Reminder -->
+<div class="flex flex-col gap-space-sm p-space-md rounded-xl bg-surface-container-low transition-colors">
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface font-bold">Recordatorio de cita previa</span>
+<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-caption text-caption font-bold">Alta efectividad</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Reduce hasta un 42% el no-show y citas olvidadas sin esfuerzo manual de tu equipo.
+                </p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-container-lowest after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Timing Selector Multiple Sub-Options -->
+<div class="mt-2 pt-space-sm flex flex-col gap-space-sm bg-surface-container-lowest p-space-md rounded-lg shadow-sm">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Momentos de envío programado:</span>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<!-- Option 1 -->
+<label class="flex items-center gap-space-sm p-space-sm rounded-lg bg-primary-fixed/30 cursor-pointer hover:bg-primary-fixed/50 transition-colors">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary/20 accent-primary cursor-pointer" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">24 horas antes</span>
+<span class="font-caption text-caption text-on-surface-variant">Recomendado (anticipación de agenda)</span>
+</div>
+</label>
+<!-- Option 2 -->
+<label class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container cursor-pointer hover:bg-surface-container-high transition-colors">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary/20 accent-primary cursor-pointer" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">2 horas antes</span>
+<span class="font-caption text-caption text-on-surface-variant">Aviso exprés el mismo día</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Callout / Infrastructure Health Status Card -->
+<div class="w-full rounded-xl bg-surface-container-lowest p-space-lg shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[28px]">verified_user</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md text-on-surface font-bold">Proveedor de infraestructura de correo</span>
+<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-caption text-caption font-bold">Dominio Verificado</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Conexión activa mediante canal transaccional dedicado con certificados SPF, DKIM y DMARC firmados para <span class="font-mono text-body-sm text-on-surface font-medium">mail.skedly.io</span>.
+        </p>
+</div>
+</div>
+<!-- Live indicator badge -->
+<div class="flex items-center gap-space-sm self-stretch sm:self-auto justify-between sm:justify-end px-space-md py-2.5 rounded-lg bg-emerald-50 text-emerald-800 shrink-0">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-600"></span>
+</span>
+<span class="font-label-md text-label-md font-semibold">Servicio operativo</span>
+</div>
+<span class="text-emerald-400 font-caption">|</span>
+<span class="font-label-sm text-label-sm font-medium">99.98% de entrega efectiva</span>
+</div>
+</div>
+</div>
+<script>
+  // Simple micro-interaction for Save action confirmation
+  document.getElementById('saveBtn')?.addEventListener('click', function() {
+    const btn = this;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Guardando...</span>`;
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">done_all</span><span>¡Preferencias guardadas!</span>`;
+      btn.classList.remove('bg-primary');
+      btn.classList.add('bg-emerald-600');
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        btn.classList.remove('bg-emerald-600');
+        btn.classList.add('bg-primary');
+      }, 2000);
+    }, 600);
+  });
+</script></main></div></body></html>

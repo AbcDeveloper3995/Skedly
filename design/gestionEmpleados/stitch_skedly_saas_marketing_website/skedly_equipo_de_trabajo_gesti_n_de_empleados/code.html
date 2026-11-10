@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"on-secondary-fixed":"#141b2b","error-container":"#ffdad6","background":"#f7f9fb","primary":"#2c4dd6","secondary-container":"#d9dff5","on-tertiary-fixed":"#001a42","secondary-fixed-dim":"#c0c6db","surface-bright":"#f7f9fb","outline-variant":"#c4c5d7","surface-dim":"#d8dadc","surface-tint":"#2f50d8","on-error":"#ffffff","tertiary-fixed":"#d8e2ff","on-tertiary-fixed-variant":"#004395","inverse-on-surface":"#eff1f3","surface-container-lowest":"#ffffff","outline":"#747686","on-secondary-container":"#5c6274","secondary-fixed":"#dce2f7","surface-container":"#eceef0","tertiary-fixed-dim":"#adc6ff","on-background":"#191c1e","on-surface-variant":"#444654","on-tertiary-container":"#fefcff","inverse-primary":"#b9c3ff","surface-container-highest":"#e0e3e5","on-secondary-fixed-variant":"#404758","on-primary-fixed-variant":"#0233c1","error":"#ba1a1a","primary-container":"#4a68f0","on-error-container":"#93000a","inverse-surface":"#2d3133","primary-fixed":"#dee1ff","tertiary":"#0058be","tertiary-container":"#2170e4","on-surface":"#191c1e","surface-variant":"#e0e3e5","on-tertiary":"#ffffff","secondary":"#575e70","on-secondary":"#ffffff","on-primary-container":"#fffbff","surface-container-high":"#e6e8ea","on-primary":"#ffffff","primary-fixed-dim":"#b9c3ff","surface-container-low":"#f2f4f6","surface":"#f7f9fb","on-primary-fixed":"#001257"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-md":"1rem","space-xs":"0.25rem","space-xl":"2rem","space-lg":"1.5rem","margin-mobile":"1rem","gutter":"1.5rem","space-sm":"0.5rem","gutter-mobile":"1rem","margin":"2rem"},"fontFamily":{"label-sm":["Inter"],"body-lg":["Inter"],"headline-md":["Inter"],"display-hero":["Inter"],"title-md":["Inter"],"headline-lg-mobile":["Inter"],"headline-sm":["Inter"],"headline-lg":["Inter"],"body-sm":["Inter"],"caption":["Inter"],"display-hero-mobile":["Inter"],"body-md":["Inter"],"label-md":["Inter"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.015em","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"400"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"display-hero":["48px",{"lineHeight":"56px","letterSpacing":"-0.025em","fontWeight":"700"}],"title-md":["16px",{"lineHeight":"24px","letterSpacing":"-0.005em","fontWeight":"600"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","letterSpacing":"0.005em","fontWeight":"400"}],"caption":["11px",{"lineHeight":"14px","letterSpacing":"0.02em","fontWeight":"500"}],"display-hero-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"500"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="px-space-lg pt-space-lg pb-space-md flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="material-symbols-outlined text-[20px]">event_available</span></div><div class="flex flex-col"><span class="font-title-md text-title-md text-on-surface leading-tight font-bold tracking-tight">Skedly</span><span class="font-caption text-caption text-on-surface-variant">SaaS de Reservas</span></div></div><span class="px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-caption text-caption">Pro</span></div><div class="px-space-md pb-space-sm"><div class="p-space-sm rounded-xl bg-surface-container-low flex items-center justify-between"><div class="flex flex-col"><span class="font-caption text-caption text-on-surface-variant uppercase">Espacio activo</span><span class="font-label-sm text-label-sm font-semibold text-on-surface truncate max-w-[140px]">Barbería Élite Central</span></div><span class="material-symbols-outlined text-on-surface-variant text-[18px]">unfold_more</span></div></div><div class="flex flex-col gap-space-md px-space-sm py-space-sm"><nav class="flex flex-col gap-0.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><span class="px-space-sm py-1 font-caption text-caption uppercase tracking-wider text-on-surface-variant font-medium">Principal</span><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="inicio" href="#">Inicio</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="calendario" href="#">Calendario</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="citas" href="#">Citas</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="clientes" href="#">Clientes</a></nav><nav class="flex flex-col gap-0.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><span class="px-space-sm py-1 font-caption text-caption uppercase tracking-wider text-on-surface-variant font-medium">Gestión del negocio</span><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="servicios" href="#">Servicios</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="categorias" href="#">Categorías</a><a aria-current="page" class="flex items-center px-space-sm py-2 transition-colors bg-primary-container text-on-primary-container font-semibold rounded-lg" data-path="equipo-de-trabajo" href="#">Equipo de trabajo</a></nav><nav class="flex flex-col gap-0.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><span class="px-space-sm py-1 font-caption text-caption uppercase tracking-wider text-on-surface-variant font-medium">Presencia online</span><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="pagina-de-reservas" href="#">Página de reservas</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="galeria" href="#">Galería</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="reseñas" href="#">Reseñas</a></nav><nav class="flex flex-col gap-0.5" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><span class="px-space-sm py-1 font-caption text-caption uppercase tracking-wider text-on-surface-variant font-medium">Configuración</span><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="configuracion-del-negocio" href="#">Configuración del negocio</a></nav></div></div><div class="p-space-sm m-space-sm rounded-xl bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col"><span class="font-label-sm text-label-sm font-semibold text-on-surface leading-tight">María Ramos</span><span class="font-caption text-caption text-on-surface-variant">Propietario</span></div></div><div class="flex items-center"><a class="w-7 h-7 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="configuracion-del-negocio" href="#" title="Ajustes"><span class="material-symbols-outlined text-[18px]">tune</span></a><a class="w-7 h-7 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-error transition-colors" data-path="cerrar-sesion" href="#" title="Salir"><span class="material-symbols-outlined text-[18px]">logout</span></a></div></div><div class="pt-1"><span class="font-caption text-caption text-secondary block truncate">Barbería Élite Central</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/85 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-sm font-body-sm text-body-sm text-on-surface-variant"><span class="font-medium text-on-surface">Barbería Élite Central</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-caption text-caption font-medium">Vista Propietario / Admin</span></div><div class="flex items-center gap-space-md"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[18px]">search</span><input class="h-10 pl-9 pr-12 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline focus:outline-none shadow-[0_1px_8px_rgba(0,0,0,0.04)] w-64 focus:w-80 transition-all" placeholder="Buscar citas y servicios..." readonly="" type="text"/><kbd class="absolute right-2 px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-caption text-caption">⌘K</kbd></div><a class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" data-path="pagina-de-reservas" href="#" target="_blank"><span class="material-symbols-outlined text-[18px]">open_in_new</span><span class="hidden lg:inline">Ver página pública</span></a><button aria-label="Notificaciones" class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error"></span></button><button class="flex items-center gap-space-xs px-space-md h-10 rounded-lg bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary transition-all font-label-md text-label-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="material-symbols-outlined text-[20px]">add</span><span>+ Nueva cita</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full">
+<div class="max-w-[1280px] w-full mx-auto px-space-md sm:px-space-lg lg:px-space-xl py-space-lg lg:py-space-xl flex flex-col gap-space-lg">
+<!-- Header Section -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs max-w-2xl">
+<div class="flex items-center gap-space-xs text-primary font-caption text-caption tracking-wider uppercase font-semibold">
+<span>Gestión operativa</span>
+<span class="text-outline">/</span>
+<span>Talento humano</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Equipo de trabajo</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Administra a las personas que forman parte de tu negocio y organiza sus servicios y horarios asignados.
+        </p>
+</div>
+<div class="flex items-center flex-wrap gap-space-sm">
+<button class="h-11 px-space-md rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container font-label-md text-label-md shadow-sm transition-all flex items-center gap-space-xs" id="toggle-availability-btn">
+<span class="material-symbols-outlined text-[20px] text-primary">calendar_month</span>
+<span>Ver disponibilidad general</span>
+</button>
+<button class="h-11 px-space-md rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container font-label-md text-label-md shadow-sm transition-all flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-secondary">file_download</span>
+<span>Exportar equipo</span>
+</button>
+<button class="h-11 px-space-lg rounded-lg bg-primary-container hover:bg-primary text-on-primary-container hover:text-on-primary font-label-md text-label-md shadow-sm transition-all flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+<span class="font-semibold">+ Agregar empleado</span>
+</button>
+</div>
+</div>
+<!-- Summary KPI Indicators -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- KPI 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex items-center justify-between relative overflow-hidden">
+<div class="flex flex-col gap-space-xs">
+<span class="font-caption text-caption uppercase tracking-wider text-on-surface-variant font-medium">Empleados activos</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">4</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">profesionales</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary flex items-center gap-1 mt-1">
+<span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+            Disponibles para reservas públicas
+          </span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-secondary-container/40 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]">badge</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex items-center justify-between relative overflow-hidden">
+<div class="flex flex-col gap-space-xs">
+<span class="font-caption text-caption uppercase tracking-wider text-on-surface-variant font-medium">Empleados inactivos</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">1</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">profesional</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary flex items-center gap-1 mt-1">
+<span class="w-2 h-2 rounded-full bg-outline inline-block"></span>
+            Pausado temporalmente
+          </span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]">pause_circle</span>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex items-center justify-between relative overflow-hidden">
+<div class="flex flex-col gap-space-xs">
+<span class="font-caption text-caption uppercase tracking-wider text-on-surface-variant font-medium">Invitaciones pendientes</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">1</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">invitación</span>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary flex items-center gap-1 mt-1">
+<span class="w-2 h-2 rounded-full bg-tertiary inline-block animate-pulse"></span>
+            Esperando activación de cuenta
+          </span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]">mark_email_unread</span>
+</div>
+</div>
+</div>
+<!-- Filters, Search & Action Bar -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm flex-1">
+<!-- Search Input -->
+<div class="relative flex-1 min-w-[240px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full h-11 pl-9 pr-space-md rounded-lg bg-surface text-on-surface font-body-sm text-body-sm placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest transition-all" id="team-search" placeholder="Buscar por nombre de colaborador..." type="text"/>
+</div>
+<!-- Service Filter Dropdown -->
+<div class="relative min-w-[210px]">
+<select class="w-full h-11 pl-space-md pr-8 rounded-lg bg-surface text-on-surface font-body-sm text-body-sm appearance-none focus:outline-none cursor-pointer" id="service-filter">
+<option value="all">Todos los servicios</option>
+<option value="cortes">Cortes de Cabello</option>
+<option value="barba">Afeitados &amp; Barba</option>
+<option value="tratamientos">Tratamientos Capilares</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
+</div>
+<!-- Access Level Dropdown -->
+<div class="relative min-w-[190px]">
+<select class="w-full h-11 pl-space-md pr-8 rounded-lg bg-surface text-on-surface font-body-sm text-body-sm appearance-none focus:outline-none cursor-pointer" id="access-filter">
+<option value="all">Acceso: Todos</option>
+<option value="activa">Con cuenta activa</option>
+<option value="pendiente">Invitación pendiente</option>
+<option value="sin-acceso">Sin acceso a Skedly</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Pill Tabs for Status -->
+<div class="flex items-center gap-1 bg-surface-container p-1 rounded-lg self-start sm:self-auto">
+<button class="filter-pill-btn h-9 px-space-md rounded-md bg-surface-container-lowest text-primary font-label-sm text-label-sm font-semibold shadow-sm transition-all flex items-center gap-1" data-status-filter="all">
+<span>Todos</span>
+<span class="px-1.5 py-0.2 rounded-full bg-secondary-container text-on-secondary-container font-caption text-caption">5</span>
+</button>
+<button class="filter-pill-btn h-9 px-space-md rounded-md text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm font-medium transition-all flex items-center gap-1" data-status-filter="active">
+<span>Activos</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface text-secondary font-caption text-caption">4</span>
+</button>
+<button class="filter-pill-btn h-9 px-space-md rounded-md text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm font-medium transition-all flex items-center gap-1" data-status-filter="inactive">
+<span>Inactivos</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface text-secondary font-caption text-caption">1</span>
+</button>
+</div>
+</div>
+<!-- Active Team Grid Container -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg" id="team-cards-grid">
+<!-- Card 1: Carlos Ramírez -->
+<div class="team-card bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between gap-space-md hover:shadow-md transition-all relative overflow-hidden" data-access="activa" data-name="Carlos Ramírez" data-service="cortes barba" data-status="active">
+<div class="flex flex-col gap-space-md">
+<!-- Profile Top -->
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="relative w-14 h-14 rounded-full overflow-hidden shadow-sm bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait photo of a master male barber in a stylish black apron, warm lighting, barbershop background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9K1aq2CRrzUepq8h6sV4VHu1mUOK6fTwdegcWm8sgYV3COjX55a4F2ta1_n3PwXxJzhdkT88eDQubfpRRSbsS7Q6QZa76m3Fop_LMSNDMHmTJRPcG4UGq8i8vSFHkINOlvdGNjG-qpnNzSB_QKTYdsTY0TgEY-AeTbUfkNB4Y5gw8c0l8zt8jP9FF96EBQ5ikn7L5IHEj_hr_zL2mv9wZaK3kp0dXHH0BnyTjbBK9"/>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-primary border-2 border-surface-container-lowest" title="Activo"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1">
+<h3 class="font-title-md text-title-md font-bold text-on-surface truncate">Carlos Ramírez</h3>
+</div>
+<p class="font-caption text-caption text-primary font-medium">Barbero Master • Especialista en fades</p>
+<span class="font-caption text-caption text-on-surface-variant">ID: EMP-0104</span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-caption text-caption font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">verified_user</span>
+<span>Cuenta activa</span>
+</span>
+</div>
+</div>
+<!-- Services badges -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption uppercase tracking-wider text-on-surface-variant font-medium">Servicios (4 vinculados)</span>
+<span class="font-caption text-caption text-primary font-medium cursor-pointer hover:underline">Ver lista</span>
+</div>
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-caption text-caption">Corte Clásico</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-caption text-caption">Corte Premium</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-caption text-caption">Corte Infantil</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-caption text-caption">+1 Barba</span>
+</div>
+</div>
+<!-- Schedule summary -->
+<div class="flex items-start gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-primary flex-shrink-0 mt-0.5">schedule</span>
+<div class="flex flex-col font-body-sm text-body-sm">
+<span class="font-medium text-on-surface">Lun a Sáb • 09:00 - 18:30</span>
+<span class="font-caption text-caption text-outline">Pausa de comida 14:00 - 15:00</span>
+</div>
+</div>
+<!-- Performance Metric Pill -->
+<div class="flex items-center justify-between px-space-sm py-1.5 rounded-lg bg-secondary-container/30">
+<div class="flex items-center gap-1 font-caption text-caption text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[16px] text-primary">event_available</span>
+<span><strong>6 citas</strong> programadas hoy</span>
+</div>
+<div class="flex items-center gap-1 font-caption text-caption font-semibold text-primary">
+<span class="material-symbols-outlined text-[15px]">star</span>
+<span>98% satisfacción</span>
+</div>
+</div>
+</div>
+<!-- Action bar -->
+<div class="pt-space-sm flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs flex-1">
+<button class="h-9 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold transition-colors flex-1 text-center">
+              Ver perfil
+            </button>
+<button class="h-9 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold transition-colors">
+              Horarios
+            </button>
+</div>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" title="Más opciones">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Luis Hernández -->
+<div class="team-card bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between gap-space-md hover:shadow-md transition-all relative overflow-hidden" data-access="pendiente" data-name="Luis Hernández" data-service="cortes barba" data-status="active">
+<div class="flex flex-col gap-space-md">
+<!-- Profile Top -->
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="relative w-14 h-14 rounded-full overflow-hidden shadow-sm bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait photo of a young professional barber smiling with neatly groomed beard in modern barbershop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7v8PoVDe2bqh-OU5vgGOBiTqWx_DBK3awLJrPP981ih9z8ymxJhEVoHNcth4RhYDQ2iYrl1gqfIOynd-hkdFmNAFWNT6kHW711D1ScBbn9aiOYOkTFE_Pa5sSd0Bp_4A4iwxQDLZ8hNrmZaru2CnJVO6joItR5oMxH6_Og2pVMdTht9WUoYDcrwA1DNBTh6XCQSSBZzbFboPKipoWbFjGT5KZ1i5NFQ86o0_DI0vS"/>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-primary border-2 border-surface-container-lowest" title="Activo"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<h3 class="font-title-md text-title-md font-bold text-on-surface truncate">Luis Hernández</h3>
+<p class="font-caption text-caption text-primary font-medium">Barbero • Clásico &amp; Afeitados</p>
+<span class="font-caption text-caption text-on-surface-variant">ID: EMP-0108</span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-caption text-caption font-semibold flex items-center gap-1" title="luis.h@barberia.com">
+<span class="material-symbols-outlined text-[13px] text-tertiary">schedule</span>
+<span>Invitación pend.</span>
+</span>
+</div>
+</div>
+<!-- Pending notice -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-1">
+<div class="flex items-center justify-between text-on-surface font-caption text-caption">
+<span class="text-on-surface-variant">Invitado a: <strong>luis.h@barberia.com</strong></span>
+<span class="text-outline">Hace 2 días</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-caption text-caption text-on-surface-variant">Aún no crea su contraseña</span>
+<button class="font-caption text-caption text-primary font-bold hover:underline flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">send</span>
+                Reenviar enlace
+              </button>
+</div>
+</div>
+<!-- Services badges -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-sm rounded-lg">
+<span class="font-caption text-caption uppercase tracking-wider text-on-surface-variant font-medium">Servicios (3 vinculados)</span>
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-caption text-caption">Corte Clásico</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-caption text-caption">Afeitado Clásico</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-caption text-caption">Perfilado Barba</span>
+</div>
+</div>
+<!-- Schedule summary -->
+<div class="flex items-start gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-primary flex-shrink-0 mt-0.5">schedule</span>
+<div class="flex flex-col font-body-sm text-body-sm">
+<span class="font-medium text-on-surface">Mar a Sáb • 10:00 - 19:00</span>
+<span class="font-caption text-caption text-outline">Descanso domingo y lunes</span>
+</div>
+</div>
+</div>
+<!-- Action bar -->
+<div class="pt-space-sm flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs flex-1">
+<button class="h-9 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold transition-colors flex-1 text-center">
+              Ver perfil
+            </button>
+<button class="h-9 px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold transition-colors">
+              Reenviar
+            </button>
+</div>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" title="Más opciones">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Card 3: Andrea Torres -->
+<div class="team-card bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between gap-space-md hover:shadow-md transition-all relative overflow-hidden" data-access="sin-acceso" data-name="Andrea Torres" data-service="cortes tratamientos" data-status="active">
+<div class="flex flex-col gap-space-md">
+<!-- Profile Top -->
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="relative w-14 h-14 rounded-full overflow-hidden shadow-sm bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait photo of a female hair stylist smiling warmly in clean modern salon with scissors and comb in chest pocket" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRGUEDDbFvNfQT1rW_rSx17oHyuNwmCd29aNNzGa3XvqnZevfePZheqkkRbofqtQ_0I32iG-w30ivdzlKY1n5M-ikCkQf5K6qcWiBDtDNbXJ9EZTRzU_jTWV3V6kQmV4nRcNbRYtCLRwRJMDOaNyVjm2_0KigCp21SJgAjbOyBRgnF9ArhIw1IRuUfO_xpduE8YLjdhIoAQpVBu6eF8-1X78X8psHhokIBVdgz9hPd"/>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-primary border-2 border-surface-container-lowest" title="Activo"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<h3 class="font-title-md text-title-md font-bold text-on-surface truncate">Andrea Torres</h3>
+<p class="font-caption text-caption text-primary font-medium">Estilista • Color &amp; Tratamientos</p>
+<span class="font-caption text-caption text-on-surface-variant">ID: EMP-0112</span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-caption text-caption font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">person_off</span>
+<span>Sin acceso</span>
+</span>
+</div>
+</div>
+<!-- Operational note -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary flex-shrink-0 mt-0.5">info</span>
+<p class="font-caption text-caption text-on-surface-variant leading-snug">
+              Solo perfil operativo. Las citas se administran desde recepción. No tiene credenciales de acceso.
+            </p>
+</div>
+<!-- Services badges -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-sm rounded-lg">
+<span class="font-caption text-caption uppercase tracking-wider text-on-surface-variant font-medium">Servicios (3 vinculados)</span>
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-caption text-caption">Tratamiento Capilar</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-caption text-caption">Corte Clásico</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-caption text-caption">Lavado Especial</span>
+</div>
+</div>
+<!-- Schedule summary -->
+<div class="flex items-start gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-primary flex-shrink-0 mt-0.5">schedule</span>
+<div class="flex flex-col font-body-sm text-body-sm">
+<span class="font-medium text-on-surface">Lun a Vie • 09:30 - 18:00</span>
+<span class="font-caption text-caption text-outline">Sábados bajo solicitud</span>
+</div>
+</div>
+</div>
+<!-- Action bar -->
+<div class="pt-space-sm flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs flex-1">
+<button class="h-9 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold transition-colors flex-1 text-center">
+              Ver perfil
+            </button>
+<button class="h-9 px-space-md rounded-lg bg-secondary-container hover:bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+<span>Invitar</span>
+</button>
+</div>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" title="Más opciones">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Card 4: Sofía Martínez -->
+<div class="team-card bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between gap-space-md hover:shadow-md transition-all relative overflow-hidden" data-access="activa" data-name="Sofía Martínez" data-service="tratamientos" data-status="active">
+<div class="flex flex-col gap-space-md">
+<!-- Profile Top -->
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="relative w-14 h-14 rounded-full overflow-hidden shadow-sm bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait photo of a professional female aesthetician and therapist in clean light blue clinic uniform with neat hair" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzFWwKJT1Zlj1TlMwlMuJ0E9mRseaBOIf1CgaGOCCfFnLpKCgaRJ5z3qj6OFCTxYhZNe1TTO9J6_yxIUJD7Irl28DlFAR_5pYAy0FMbSj8ojlBA1daTXoHN7VqlxE_fQpNM8lqgXOIgSapJYVDPBmZZ4Dy1WBnjU-fXbD_tpMvOAGhy21ZRUvFgrZfI3RnqehwKzu1jigFIZEGiV5AZhWWcLmOpOpS7NIyvi256_SY"/>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-primary border-2 border-surface-container-lowest" title="Activo"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<h3 class="font-title-md text-title-md font-bold text-on-surface truncate">Sofía Martínez</h3>
+<p class="font-caption text-caption text-primary font-medium">Tratamientos &amp; Cuidado Facial</p>
+<span class="font-caption text-caption text-on-surface-variant">ID: EMP-0115</span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-caption text-caption font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">verified_user</span>
+<span>Cuenta activa</span>
+</span>
+</div>
+</div>
+<!-- Services badges -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption uppercase tracking-wider text-on-surface-variant font-medium">Servicios (2 vinculados)</span>
+<span class="font-caption text-caption text-primary font-medium cursor-pointer hover:underline">Ver lista</span>
+</div>
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-caption text-caption">Tratamiento Capilar</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-caption text-caption">Exfoliación Facial Express</span>
+</div>
+</div>
+<!-- Schedule summary -->
+<div class="flex items-start gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-primary flex-shrink-0 mt-0.5">schedule</span>
+<div class="flex flex-col font-body-sm text-body-sm">
+<span class="font-medium text-on-surface">Mié a Dom • 11:00 - 20:00</span>
+<span class="font-caption text-caption text-outline">Horario de tarde extendido</span>
+</div>
+</div>
+<!-- Performance Metric Pill -->
+<div class="flex items-center justify-between px-space-sm py-1.5 rounded-lg bg-secondary-container/30">
+<div class="flex items-center gap-1 font-caption text-caption text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[16px] text-primary">event_available</span>
+<span><strong>4 citas</strong> programadas hoy</span>
+</div>
+<div class="flex items-center gap-1 font-caption text-caption font-semibold text-primary">
+<span class="material-symbols-outlined text-[15px]">star</span>
+<span>100% satisfacción</span>
+</div>
+</div>
+</div>
+<!-- Action bar -->
+<div class="pt-space-sm flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs flex-1">
+<button class="h-9 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold transition-colors flex-1 text-center">
+              Ver perfil
+            </button>
+<button class="h-9 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold transition-colors">
+              Horarios
+            </button>
+</div>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" title="Más opciones">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Card 5: David León (Inactive) -->
+<div class="team-card bg-surface-container-lowest/80 rounded-xl p-space-lg shadow-sm flex flex-col justify-between gap-space-md hover:shadow-md transition-all relative overflow-hidden opacity-90" data-access="activa" data-name="David León" data-service="barba" data-status="inactive">
+<div class="flex flex-col gap-space-md">
+<!-- Profile Top -->
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="relative w-14 h-14 rounded-full overflow-hidden shadow-sm bg-surface-container flex-shrink-0 grayscale">
+<img class="w-full h-full object-cover" data-alt="Portrait photo of a male professional barber in casual clothes leaning against barbershop brick wall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIvLcdVvn_27Ko-1H87HPqmo2wKFOBzW4izose7sPBsiTyjqvwe7tTEgd-iYT_ty8b09W2BMzmEgsi2y_bDchsKQOENABLEK2Xl-6girsa4t7gBHCwAt9puyH1MTWJkjLuHnkdmIwG9RrYZ1xIgwgL5wtDJnaS-doLM7Wx7x-vPm6suUKdOsAWRguKFhtmvIbwCVzSEnUvKwgvYCTmpj2-aHrBim5FRHcL8y62c3EW"/>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-outline border-2 border-surface-container-lowest" title="Inactivo"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<h3 class="font-title-md text-title-md font-bold text-on-surface truncate">David León</h3>
+<p class="font-caption text-caption text-secondary font-medium">Barbero Colaborador</p>
+<span class="font-caption text-caption text-on-surface-variant">ID: EMP-0092</span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-caption text-caption font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-error">pause</span>
+<span>Pausado</span>
+</span>
+</div>
+</div>
+<!-- Inactive notice -->
+<div class="p-space-sm rounded-lg bg-surface-container flex items-center justify-between">
+<span class="font-caption text-caption text-error font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">block</span>
+              No recibe reservas públicas
+            </span>
+<span class="font-caption text-caption text-outline">Desde 12 Ene</span>
+</div>
+<!-- Services badges -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-sm rounded-lg">
+<span class="font-caption text-caption uppercase tracking-wider text-on-surface-variant font-medium">Servicios configurados (2)</span>
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary font-caption text-caption">Afeitado Clásico</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary font-caption text-caption">Perfilado</span>
+</div>
+</div>
+<!-- Schedule summary -->
+<div class="flex items-start gap-space-xs text-secondary">
+<span class="material-symbols-outlined text-[18px] text-outline flex-shrink-0 mt-0.5">event_busy</span>
+<div class="flex flex-col font-body-sm text-body-sm">
+<span class="font-medium text-secondary">Sin turnos asignados</span>
+<span class="font-caption text-caption text-outline">Disponibilidad desactivada</span>
+</div>
+</div>
+</div>
+<!-- Action bar -->
+<div class="pt-space-sm flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs flex-1">
+<button class="h-9 px-space-md rounded-lg bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary font-label-sm text-label-sm font-semibold transition-colors flex-1 text-center">
+              Reactivar perfil
+            </button>
+<button class="h-9 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold transition-colors">
+              Historial
+            </button>
+</div>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" title="Más opciones">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Empty State Container (Simulated / Toggleable) -->
+<div class="hidden bg-surface-container-lowest rounded-2xl p-space-xl shadow-sm flex flex-col items-center justify-center text-center max-w-xl mx-auto my-space-lg" id="empty-state-view">
+<div class="w-20 h-20 rounded-full bg-secondary-container/40 text-primary flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined text-[40px]">group_off</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface mb-space-xs">No se encontraron empleados</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-lg">
+        Ajusta tus criterios de búsqueda o añade nuevos miembros a tu equipo de trabajo para asignarles servicios y horarios.
+      </p>
+<div class="flex items-center gap-space-sm">
+<button class="h-10 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold transition-colors" id="reset-filters-btn">
+          Restablecer filtros
+        </button>
+<button class="h-10 px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>+ Agregar empleado</span>
+</button>
+</div>
+</div>
+<!-- Educational Callout / Bottom Explanatory Banner -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg">
+<div class="flex items-start gap-space-md max-w-3xl">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed text-on-primary-fixed flex items-center justify-center flex-shrink-0 mt-1">
+<span class="material-symbols-outlined text-[22px]">lightbulb</span>
+</div>
+<div class="flex flex-col gap-1">
+<h4 class="font-title-md text-title-md font-bold text-on-surface">Diferencia entre Empleado y Cuenta de Skedly</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Un empleado puede estar registrado para prestar servicios y recibir reservas públicas en tu negocio <strong>sin necesidad de tener una cuenta de usuario</strong>. La invitación por correo es 100% opcional y solo es necesaria cuando deseas que el colaborador inicie sesión para consultar su propio calendario individual desde su móvil.
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm flex-shrink-0 self-end md:self-center">
+<button class="text-primary hover:text-primary-container font-label-sm text-label-sm font-semibold underline underline-offset-4 cursor-pointer transition-colors" id="toggle-sim-empty">
+          Simular estado vacío
+        </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function initTeamDashboard() {
+    const searchInput = document.getElementById('team-search');
+    const serviceFilter = document.getElementById('service-filter');
+    const accessFilter = document.getElementById('access-filter');
+    const pillButtons = document.querySelectorAll('.filter-pill-btn');
+    const cards = document.querySelectorAll('.team-card');
+    const emptyState = document.getElementById('empty-state-view');
+    const grid = document.getElementById('team-cards-grid');
+    const toggleSimBtn = document.getElementById('toggle-sim-empty');
+    const resetFiltersBtn = document.getElementById('reset-filters-btn');
+
+    let currentStatus = 'all';
+
+    function filterCards() {
+      const query = (searchInput?.value || '').toLowerCase().trim();
+      const service = serviceFilter?.value || 'all';
+      const access = accessFilter?.value || 'all';
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const name = (card.getAttribute('data-name') || '').toLowerCase();
+        const cardStatus = card.getAttribute('data-status');
+        const cardAccess = card.getAttribute('data-access');
+        const cardService = card.getAttribute('data-service') || '';
+
+        const matchesQuery = name.includes(query);
+        const matchesStatus = currentStatus === 'all' || cardStatus === currentStatus;
+        const matchesAccess = access === 'all' || cardAccess === access;
+        const matchesService = service === 'all' || cardService.includes(service);
+
+        if (matchesQuery && matchesStatus && matchesAccess && matchesService) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (visibleCount === 0) {
+        grid?.classList.add('hidden');
+        emptyState?.classList.remove('hidden');
+      } else {
+        grid?.classList.remove('hidden');
+        emptyState?.classList.add('hidden');
+      }
+    }
+
+    // Status pill listeners
+    pillButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        pillButtons.forEach(b => {
+          b.classList.remove('bg-surface-container-lowest', 'text-primary', 'font-semibold', 'shadow-sm');
+          b.classList.add('text-on-surface-variant', 'font-medium');
+        });
+        btn.classList.add('bg-surface-container-lowest', 'text-primary', 'font-semibold', 'shadow-sm');
+        btn.classList.remove('text-on-surface-variant', 'font-medium');
+        currentStatus = btn.getAttribute('data-status-filter') || 'all';
+        filterCards();
+      });
+    });
+
+    searchInput?.addEventListener('input', filterCards);
+    serviceFilter?.addEventListener('change', filterCards);
+    accessFilter?.addEventListener('change', filterCards);
+
+    // Simulation empty state toggle
+    let isForcedEmpty = false;
+    toggleSimBtn?.addEventListener('click', () => {
+      isForcedEmpty = !isForcedEmpty;
+      if (isForcedEmpty) {
+        cards.forEach(c => c.classList.add('hidden'));
+        grid?.classList.add('hidden');
+        emptyState?.classList.remove('hidden');
+        toggleSimBtn.innerText = 'Restaurar equipo completo';
+      } else {
+        filterCards();
+        toggleSimBtn.innerText = 'Simular estado vacío';
+      }
+    });
+
+    resetFiltersBtn?.addEventListener('click', () => {
+      isForcedEmpty = false;
+      if (searchInput) searchInput.value = '';
+      if (serviceFilter) serviceFilter.value = 'all';
+      if (accessFilter) accessFilter.value = 'all';
+      currentStatus = 'all';
+      pillButtons.forEach((b, idx) => {
+        if (idx === 0) {
+          b.classList.add('bg-surface-container-lowest', 'text-primary', 'font-semibold', 'shadow-sm');
+          b.classList.remove('text-on-surface-variant', 'font-medium');
+        } else {
+          b.classList.remove('bg-surface-container-lowest', 'text-primary', 'font-semibold', 'shadow-sm');
+          b.classList.add('text-on-surface-variant', 'font-medium');
+        }
+      });
+      if (toggleSimBtn) toggleSimBtn.innerText = 'Simular estado vacío';
+      filterCards();
+    });
+  })();
+</script></main></div></body></html>

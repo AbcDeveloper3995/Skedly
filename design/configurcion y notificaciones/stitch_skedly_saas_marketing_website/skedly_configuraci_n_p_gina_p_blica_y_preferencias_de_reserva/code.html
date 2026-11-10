@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"surface-tint":"#2f50d8","surface-variant":"#e0e3e5","surface-bright":"#f7f9fb","on-tertiary-container":"#fefcff","surface-container-lowest":"#ffffff","inverse-surface":"#2d3133","surface-container-highest":"#e0e3e5","surface-container-low":"#f2f4f6","on-primary-fixed":"#001257","background":"#f7f9fb","on-surface":"#191c1e","outline":"#747686","secondary-container":"#d9dff5","on-error":"#ffffff","secondary":"#575e70","tertiary":"#0058be","on-tertiary-fixed":"#001a42","on-secondary":"#ffffff","error-container":"#ffdad6","inverse-primary":"#b9c3ff","error":"#ba1a1a","on-secondary-container":"#5c6274","primary":"#2c4dd6","primary-fixed-dim":"#b9c3ff","secondary-fixed-dim":"#c0c6db","on-primary":"#ffffff","primary-fixed":"#dee1ff","primary-container":"#4a68f0","surface-dim":"#d8dadc","on-secondary-fixed":"#141b2b","surface-container-high":"#e6e8ea","surface-container":"#eceef0","on-background":"#191c1e","outline-variant":"#c4c5d7","on-tertiary":"#ffffff","on-secondary-fixed-variant":"#404758","on-surface-variant":"#444654","on-error-container":"#93000a","on-tertiary-fixed-variant":"#004395","inverse-on-surface":"#eff1f3","tertiary-fixed":"#d8e2ff","tertiary-container":"#2170e4","on-primary-fixed-variant":"#0233c1","on-primary-container":"#fffbff","surface":"#f7f9fb","secondary-fixed":"#dce2f7","tertiary-fixed-dim":"#adc6ff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-xl":"2rem","gutter":"1.5rem","space-sm":"0.5rem","margin-mobile":"1rem","gutter-mobile":"1rem","margin":"2rem","space-xs":"0.25rem","space-lg":"1.5rem","space-md":"1rem"},"fontFamily":{"headline-lg":["Inter"],"body-md":["Inter"],"title-md":["Inter"],"display-hero":["Inter"],"body-lg":["Inter"],"display-hero-mobile":["Inter"],"headline-lg-mobile":["Inter"],"label-sm":["Inter"],"label-md":["Inter"],"caption":["Inter"],"headline-md":["Inter"],"headline-sm":["Inter"],"body-sm":["Inter"]},"fontSize":{"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"title-md":["16px",{"lineHeight":"24px","letterSpacing":"-0.005em","fontWeight":"600"}],"display-hero":["48px",{"lineHeight":"56px","letterSpacing":"-0.025em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"400"}],"display-hero-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.015em","fontWeight":"500"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"500"}],"caption":["11px",{"lineHeight":"14px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","letterSpacing":"0.005em","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">event_available</span></div><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Skedly</span></div><span class="font-caption text-caption text-on-surface-variant bg-surface-container-high px-space-xs py-0.5 rounded">v2.4</span></div><nav class="flex flex-col px-space-md py-space-sm gap-space-md" data-active-classes="bg-primary text-on-primary font-semibold shadow-sm"><div class="flex flex-col gap-space-xs"><span class="px-space-sm py-1 font-caption text-caption text-on-surface-variant tracking-wider uppercase font-semibold">Principal</span><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="inicio" href="#">Inicio</a><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="calendario" href="#">Calendario</a><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="citas" href="#">Citas</a><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="clientes" href="#">Clientes</a></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm py-1 font-caption text-caption text-on-surface-variant tracking-wider uppercase font-semibold">Gestión del Negocio</span><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="servicios" href="#">Servicios</a><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="categorias" href="#">Categorías</a><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="equipo-de-trabajo" href="#">Equipo de trabajo</a></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm py-1 font-caption text-caption text-on-surface-variant tracking-wider uppercase font-semibold">Presencia Online</span><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="pagina-de-reservas" href="#">Página de reservas</a><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="galeria" href="#">Galería</a><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="resenas" href="#">Reseñas</a></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm py-1 font-caption text-caption text-on-surface-variant tracking-wider uppercase font-semibold">Configuración</span><a class="block px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md transition-colors" data-path="configuracion-del-negocio" href="#">Configuración del negocio</a></div></nav></div><div class="p-space-md"><div class="bg-surface-container-low p-space-sm rounded-lg flex items-center justify-between"><div class="flex flex-col"><span class="font-caption text-caption text-on-surface-variant">Plan Studio Pro</span><span class="font-label-sm text-label-sm font-semibold text-on-surface">Ilimitado</span></div><a class="font-caption text-caption text-primary font-semibold hover:underline" href="#">Gestionar</a></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md"><button class="flex items-center gap-space-sm bg-surface-container-low hover:bg-surface-container px-space-md py-1.5 rounded-lg text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-primary text-[20px]">store</span><span class="font-label-md text-label-md font-semibold text-on-surface">Urban Cuts Grooming Studio</span><span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span></button><button class="hidden xl:flex items-center gap-space-sm bg-surface-container-low hover:bg-surface-container px-space-md py-1.5 rounded-lg text-on-surface-variant transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">search</span><span class="font-body-sm text-body-sm">Buscar citas, clientes...</span><kbd class="bg-surface-container-lowest px-1.5 py-0.5 rounded font-caption text-caption text-on-surface-variant shadow-sm">⌘K</kbd></button></div><div class="flex items-center gap-space-md"><a class="hidden sm:flex items-center gap-space-xs text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">open_in_new</span><span class="font-label-md text-label-md">Ver página pública</span></a><button aria-label="Notificaciones" class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary"></span></button><div class="h-6 w-px bg-surface-variant"></div><div class="flex items-center gap-space-sm"><div class="flex flex-col text-right hidden sm:flex"><span class="font-label-md text-label-md font-semibold text-on-surface leading-tight">María Ramos</span><span class="font-caption text-caption text-on-surface-variant">Propietario</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="w-full max-w-7xl mx-auto px-space-md sm:px-space-lg lg:px-space-xl py-space-lg flex flex-col gap-space-xl">
+<!-- Top Bar: Header & Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-on-surface-variant font-label-sm text-label-sm">
+<span>Configuración</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-semibold">Página pública y reservas</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Configuración del negocio</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+          Gestiona la URL de tu página pública de reservas, secciones visibles y reglas de cancelación y agendamiento.
+        </p>
+</div>
+<div class="flex items-center gap-space-sm self-start md:self-auto">
+<button class="px-space-md py-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all" id="discardBtn" type="button">
+          Descartar
+        </button>
+<button class="flex items-center gap-space-xs px-space-lg py-2.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md shadow-sm transition-all active:scale-[0.99]" id="saveChangesBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span>Guardar cambios</span>
+</button>
+</div>
+</div>
+<!-- Secondary Nav Tabs -->
+<div class="w-full overflow-x-auto pb-1">
+<div class="flex items-center gap-space-xs bg-surface-container-low p-1.5 rounded-xl w-max min-w-full sm:min-w-0">
+<button class="px-space-md py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md whitespace-nowrap transition-colors" type="button">
+          Información del negocio
+        </button>
+<button class="px-space-md py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md whitespace-nowrap transition-colors" type="button">
+          Identidad visual
+        </button>
+<button class="px-space-md py-2 rounded-lg bg-surface-container-lowest text-primary font-semibold shadow-sm font-label-md text-label-md whitespace-nowrap" type="button">
+          Página pública y reservas
+        </button>
+<button class="px-space-md py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md whitespace-nowrap transition-colors" type="button">
+          Contacto y redes
+        </button>
+<button class="px-space-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" type="button">
+          Horarios y disponibilidad
+        </button>
+<button class="px-space-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" type="button">
+          Preferencias generales
+        </button>
+</div>
+</div>
+<!-- Main Configuration Workspace -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-xl items-start">
+<!-- Primary Controls (8 Cols) -->
+<div class="xl:col-span-8 flex flex-col gap-space-xl">
+<!-- SECTION A: Configuración de la Página Pública -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col gap-space-lg">
+<div class="flex items-center justify-between pb-space-sm border-b-0">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">public</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Página pública de reservas</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Tu vitrina digital personalizada para capturar clientes en piloto automático.</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-emerald-50 text-emerald-700 font-label-sm text-label-sm font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              En vivo
+            </span>
+</div>
+<!-- Slug / URL Box -->
+<div class="flex flex-col gap-space-sm bg-surface-container-low p-space-md rounded-xl">
+<label class="font-label-md text-label-md font-semibold text-on-surface flex items-center justify-between" for="businessSlug">
+<span>Enlace público personalizado (Slug)</span>
+<span class="text-emerald-600 font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                ✓ Enlace disponible y activo
+              </span>
+</label>
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm">
+<div class="flex-1 flex items-center bg-surface-container-lowest rounded-lg px-space-md py-2 shadow-sm">
+<span class="text-on-surface-variant font-body-md text-body-md select-none">skedly.com/</span>
+<input class="w-full bg-transparent font-title-md text-title-md text-on-surface focus:outline-none ml-0.5 tracking-tight font-semibold" id="businessSlug" type="text" value="urban-cuts"/>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="flex-1 sm:flex-initial flex items-center justify-center gap-space-xs px-space-md py-2.5 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-md text-label-md shadow-sm transition-colors whitespace-nowrap" id="copySlugBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+<span>Copiar enlace</span>
+</button>
+<a class="p-2.5 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface shadow-sm transition-colors flex items-center justify-center" href="#" target="_blank" title="Abrir en pestaña nueva">
+<span class="material-symbols-outlined text-[18px]">launch</span>
+</a>
+</div>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">
+              Comparte este link en tu biografía de Instagram, WhatsApp Business o códigos QR en tu mostrador.
+            </p>
+</div>
+<!-- Public Section Visibility Switches -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface">Secciones visibles para el cliente</span>
+<span class="font-caption text-caption text-on-surface-variant">Configura los bloques del flujo web</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- Switch 1 -->
+<label class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex items-start justify-between cursor-pointer group">
+<div class="flex flex-col gap-0.5 pr-2">
+<span class="font-label-md text-label-md font-semibold text-on-surface group-hover:text-primary transition-colors">Hero y presentación</span>
+<span class="font-caption text-caption text-on-surface-variant">Cabecera con logo, slogan e imágenes destacadas</span>
+</div>
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary relative flex-shrink-0"></div>
+</label>
+<!-- Switch 2 -->
+<label class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex items-start justify-between cursor-pointer group">
+<div class="flex flex-col gap-0.5 pr-2">
+<span class="font-label-md text-label-md font-semibold text-on-surface group-hover:text-primary transition-colors">Catálogo de servicios</span>
+<span class="font-caption text-caption text-on-surface-variant">Despliegue categorizado con precios y tiempos</span>
+</div>
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary relative flex-shrink-0"></div>
+</label>
+<!-- Switch 3 (Equipo) -->
+<label class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex items-start justify-between cursor-pointer group">
+<div class="flex flex-col gap-0.5 pr-2">
+<span class="font-label-md text-label-md font-semibold text-on-surface group-hover:text-primary transition-colors">Equipo de profesionales</span>
+<span class="font-caption text-caption text-on-surface-variant">Si se desactiva, los clientes reservan sin elegir barbero específico</span>
+</div>
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary relative flex-shrink-0"></div>
+</label>
+<!-- Switch 4 -->
+<label class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex items-start justify-between cursor-pointer group">
+<div class="flex flex-col gap-0.5 pr-2">
+<span class="font-label-md text-label-md font-semibold text-on-surface group-hover:text-primary transition-colors">Galería de fotos</span>
+<span class="font-caption text-caption text-on-surface-variant">Imágenes del local, antes/después y estilo visual</span>
+</div>
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary relative flex-shrink-0"></div>
+</label>
+<!-- Switch 5 -->
+<label class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex items-start justify-between cursor-pointer group">
+<div class="flex flex-col gap-0.5 pr-2">
+<span class="font-label-md text-label-md font-semibold text-on-surface group-hover:text-primary transition-colors">Reseñas verificadas</span>
+<span class="font-caption text-caption text-on-surface-variant">Testimonios auténticos y promedio de estrellas</span>
+</div>
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary relative flex-shrink-0"></div>
+</label>
+<!-- Switch 6 -->
+<label class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex items-start justify-between cursor-pointer group">
+<div class="flex flex-col gap-0.5 pr-2">
+<span class="font-label-md text-label-md font-semibold text-on-surface group-hover:text-primary transition-colors">Ubicación y mapa interactivo</span>
+<span class="font-caption text-caption text-on-surface-variant">Dirección física exacta con integración directa a Google Maps</span>
+</div>
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary relative flex-shrink-0"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- SECTION B: Preferencias de Reservas -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col gap-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">tune</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Preferencias de reservas</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Define el comportamiento y las reglas de agendamiento para tus clientes.</p>
+</div>
+</div>
+<!-- Modo de Confirmación -->
+<div class="flex flex-col gap-space-sm">
+<label class="font-label-md text-label-md font-semibold text-on-surface">Modo de confirmación de citas</label>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Option 1: Automático (Selected) -->
+<label class="relative p-space-md rounded-xl bg-primary/5 cursor-pointer flex flex-col gap-space-xs transition-all ring-2 ring-primary">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">bolt</span>
+<span class="font-title-md text-title-md text-primary font-semibold">Confirmación instantánea</span>
+</div>
+<input checked="" class="text-primary focus:ring-primary w-4 h-4" name="confirmation_mode" type="radio" value="auto"/>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">
+                  El turno queda agendado de inmediato si hay disponibilidad de horario. Máxima conversión y sin fricción manual.
+                </p>
+<span class="inline-block mt-1 font-caption text-caption text-primary font-semibold">Recomendado para barberías y spas</span>
+</label>
+<!-- Option 2: Manual -->
+<label class="relative p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container cursor-pointer flex flex-col gap-space-xs transition-all">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">pending_actions</span>
+<span class="font-title-md text-title-md text-on-surface font-semibold">Aprobación manual</span>
+</div>
+<input class="text-primary focus:ring-primary w-4 h-4" name="confirmation_mode" type="radio" value="manual"/>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  El negocio recibe la solicitud y debe aceptar la cita antes de agendarla. Útil si requieres evaluar disponibilidad técnica.
+                </p>
+<span class="inline-block mt-1 font-caption text-caption text-on-surface-variant">Requiere atención constante</span>
+</label>
+</div>
+</div>
+<!-- Anticipación y Ventanas -->
+<div class="flex flex-col gap-space-md pt-space-xs">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Reglas de anticipación y ventanas de agenda</span>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="minNotice">Tiempo mínimo de anticipación</label>
+<div class="relative">
+<select class="w-full h-11 px-space-md rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary appearance-none cursor-pointer" id="minNotice">
+<option value="1">1 hora antes</option>
+<option selected="" value="2">2 horas antes (Recomendado)</option>
+<option value="4">4 horas antes</option>
+<option value="12">12 horas antes</option>
+<option value="24">24 horas antes</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+<span class="font-caption text-caption text-on-surface-variant">Evita reservas imprevistas de última hora.</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="maxNotice">Ventana máxima de reserva futura</label>
+<div class="relative">
+<select class="w-full h-11 px-space-md rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary appearance-none cursor-pointer" id="maxNotice">
+<option value="7">7 días de anticipación</option>
+<option value="15">15 días de anticipación</option>
+<option selected="" value="30">30 días de anticipación</option>
+<option value="60">60 días de anticipación</option>
+<option value="90">90 días de anticipación</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+<span class="font-caption text-caption text-on-surface-variant">Límite para evitar cancelaciones lejanas.</span>
+</div>
+</div>
+<!-- "Cualquier profesional" Toggle -->
+<label class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex items-center justify-between cursor-pointer mt-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">groups</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Permitir seleccionar "Cualquier profesional disponible"</span>
+<span class="bg-primary/10 text-primary font-caption text-caption font-semibold px-2 py-0.5 rounded-full">+24% reservas</span>
+</div>
+<span class="font-caption text-caption text-on-surface-variant">Distribuye citas inteligentemente según disponibilidad y reduce vacíos en agenda.</span>
+</div>
+</div>
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary relative flex-shrink-0"></div>
+</label>
+</div>
+<!-- Campos Requeridos -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Datos requeridos al cliente al reservar</span>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Nombre completo</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">lock</span>
+</div>
+<span class="font-caption text-caption text-primary font-medium mt-3">Obligatorio por defecto</span>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Teléfono / WhatsApp</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">lock</span>
+</div>
+<span class="font-caption text-caption text-primary font-medium mt-3">Identificador principal</span>
+</div>
+<label class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col justify-between cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Correo electrónico</span>
+<input checked="" class="w-4 h-4 text-primary rounded focus:ring-primary" type="checkbox"/>
+</div>
+<span class="font-caption text-caption text-on-surface-variant mt-3">Opcional para comprobante</span>
+</label>
+</div>
+<!-- Zero Friction Banner -->
+<div class="p-space-md rounded-xl bg-primary/10 flex items-start gap-space-sm mt-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px] flex-shrink-0">verified_user</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-primary">Regla de Oro Skedly: Cero Fricción</span>
+<p class="font-body-sm text-body-sm text-on-surface">
+                  Los clientes nunca crean cuentas ni ingresan contraseñas para reservar. Tu proceso es 100% fluido y maximiza la confirmación de turnos.
+                </p>
+</div>
+</div>
+</div>
+<!-- Política de Cancelación -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface flex items-center justify-between" for="cancelPolicy">
+<span>Política pública de cancelación y reprogramación</span>
+<span class="font-caption text-caption text-on-surface-variant">Visible en el comprobante</span>
+</label>
+<textarea class="w-full p-space-md rounded-xl bg-surface-container-low text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary resize-none" id="cancelPolicy" rows="3">Cancelación gratuita hasta 2 horas antes de tu turno. Te agradecemos avisar con anticipación para liberar el sillón y reorganizar la agenda del barbero.</textarea>
+</div>
+</div>
+<!-- SECTION C: Zona de Estado & Pausa de Reservas -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-error/10 text-error flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">pause_circle</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Pausar temporalmente nuevas reservas online</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xl">
+                  Activa este interruptor en caso de vacaciones, reformas o exceso de demanda. Tu página pública permanecerá visible, pero los clientes verán un aviso amigable y no podrán seleccionar horarios.
+                </p>
+</div>
+</div>
+<label class="cursor-pointer relative flex-shrink-0 mt-1">
+<input class="sr-only peer" id="pauseOnlineBookingToggle" type="checkbox"/>
+<div class="w-12 h-7 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-error"></div>
+</label>
+</div>
+<div class="hidden p-space-md rounded-xl bg-error/10 text-error font-body-sm text-body-sm flex items-center gap-space-sm" id="pauseWarningNotice">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+<span>¡Atención! Las reservas públicas están detenidas. Los clientes solo podrán contactar por WhatsApp.</span>
+</div>
+</div>
+</div>
+<!-- Live Mockup / Responsive Preview (4 Cols) -->
+<div class="xl:col-span-4 flex flex-col gap-space-md sticky top-20">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">visibility</span>
+<span class="font-title-md text-title-md text-on-surface font-semibold">Vista previa en tiempo real</span>
+</div>
+<!-- Device Switcher -->
+<div class="flex items-center bg-surface-container-low p-1 rounded-lg">
+<button class="p-1.5 rounded bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center" id="viewMobileBtn" title="Vista móvil" type="button">
+<span class="material-symbols-outlined text-[18px]">smartphone</span>
+</button>
+<button class="p-1.5 rounded text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" id="viewDesktopBtn" title="Vista escritorio" type="button">
+<span class="material-symbols-outlined text-[18px]">laptop_mac</span>
+</button>
+</div>
+</div>
+<!-- Phone Shell Container -->
+<div class="w-full flex justify-center transition-all" id="previewContainer">
+<div class="w-full max-w-[340px] bg-inverse-surface text-inverse-on-surface rounded-[36px] p-3 shadow-2xl relative overflow-hidden transition-all duration-300">
+<!-- Mobile Speaker / Notch -->
+<div class="w-24 h-4 bg-inverse-surface mx-auto rounded-b-xl flex items-center justify-center absolute top-3 left-1/2 -translate-x-1/2 z-20">
+<div class="w-8 h-1 bg-surface-variant/40 rounded-full"></div>
+</div>
+<!-- Screen Surface -->
+<div class="w-full bg-surface text-on-surface rounded-[28px] overflow-hidden flex flex-col min-h-[580px] max-h-[640px] relative">
+<!-- Mock Hero Cover -->
+<div class="relative h-32 w-full bg-cover bg-center" data-alt="Interior of modern barbershop with warm wood accents, comfortable leather chairs, professional mirrors and ambient lighting, high contrast premium aesthetic" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBPNynyEcGPFOL7YwZWPcp1PiugKAqbDDiPKTzveKqiWO8AZxxP5J--8W_JfnMbZduawgnKK16OGWMxpC1aV2not3MNLmU7JiX7pwDN5sIE1_i3evVqHqMNZ_E972DIyslqBQrCbGxYaWTwuRWRlt46HlQ8Be45hFgS1BtB21vYF-SlJr40F-MprOaEO7N9hQgJKq3rnHk9hjq2VX0y2ahmmeEBcSuCIa-XeloJyF9j')">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-2 left-3 right-3 flex items-end justify-between">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 rounded-xl bg-surface-container-lowest p-1 shadow-md flex items-center justify-center font-headline-sm text-primary font-bold">
+                      U
+                    </div>
+<div class="text-white">
+<p class="font-label-md text-label-md font-semibold leading-tight drop-shadow">Urban Cuts</p>
+<p class="font-caption text-caption text-white/80">Estudio de Peluquería</p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-emerald-500/90 text-white font-caption text-caption font-semibold">Abierto</span>
+</div>
+</div>
+<!-- Mock Content Body -->
+<div class="flex-1 p-3 flex flex-col gap-3 overflow-y-auto">
+<!-- Quick Info Pill -->
+<div class="flex items-center justify-between text-on-surface-variant font-caption text-caption bg-surface-container-low p-2 rounded-lg">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-amber-500">star</span>
+                    4.9 (184 reseñas)
+                  </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">pin_drop</span>
+                    Palermo Soho
+                  </span>
+</div>
+<!-- Service Selector Snippet -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Servicios Populares</span>
+<div class="p-2.5 rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Corte Clásico &amp; Fade</span>
+<span class="font-caption text-caption text-on-surface-variant">45 min • Barba opcional</span>
+<span class="font-label-sm text-label-sm font-bold text-primary mt-0.5">$18.00</span>
+</div>
+<button class="px-2.5 py-1 rounded bg-primary text-on-primary font-caption text-caption font-semibold" type="button">
+                      Elegir
+                    </button>
+</div>
+<div class="p-2.5 rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Perfilado de Barba</span>
+<span class="font-caption text-caption text-on-surface-variant">30 min • Toalla caliente</span>
+<span class="font-label-sm text-label-sm font-bold text-primary mt-0.5">$12.00</span>
+</div>
+<button class="px-2.5 py-1 rounded bg-surface-container-low text-on-surface font-caption text-caption font-semibold" type="button">
+                      Elegir
+                    </button>
+</div>
+</div>
+<!-- Team Avatar Strip Preview -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Barberos disponibles hoy</span>
+<div class="flex items-center gap-2 overflow-x-auto pb-1">
+<div class="flex flex-col items-center flex-shrink-0">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center ring-2 ring-primary">
+<span class="material-symbols-outlined text-primary text-[18px]">groups</span>
+</div>
+<span class="font-caption text-caption text-primary font-semibold mt-1">Cualquiera</span>
+</div>
+<div class="flex flex-col items-center flex-shrink-0">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of a young friendly male barber with styled hair and apron in a bright salon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLICSw_jwuW12xzJssnwBuVc4BOT1tGwcGHIreedw8WZ2bJVqnEC3IQJ68ye0nPpscX9v2ARDL4mkGgSahHGlK1ZxoCVUXzHqlK-4lereUVKqKoxpC2gftm5OhyBY3_yBzngcWby04AOSfAc1r2bbpGhfRYSyJ4yDJ1yYNgv6zzPv2OcBmpZEM5XJ28pq0foO5L43O0diT7SGYGgifDgAgqccz--fY5FBIfrW3hsOP"/>
+<span class="font-caption text-caption text-on-surface mt-1">Mateo</span>
+</div>
+<div class="flex flex-col items-center flex-shrink-0">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of a female professional hair stylist smiling in uniform inside a modern barbershop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRIx6Uw6J6sDlM3RU05jGXkc64IloKwF3SAsnjn5tnc9QAVYALO1nQ0R8cjDvF9VHxLIzIbb_r5nKLPBfXZeGA9tHghaXs3IXhXhmfl5xS-JnQ5JJohcl81ZnblMwBzJI2zEI80NeZgOCcqfoX_-WKieULsPLeHtYArby5-GjnxpDXhJ4Etulvh8ctDLRtxvuzIFIGBj7ZF0MLCT8i9rXe-2Q44AjmHvetw0aeu44X"/>
+<span class="font-caption text-caption text-on-surface mt-1">Carla</span>
+</div>
+<div class="flex flex-col items-center flex-shrink-0">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of experienced male grooming master with neat beard in front of barbershop mirror" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1ThThnCwZROAHRgs3p8JiVOVQ7QW6vyyliWKfKUiyzhlBQ8InZFisGodQjR6uUJewWDhMkAJkkUyXJvmdrE9cr-i9sMT8Po_VLYyytfVV0Z2o62ASdIETXBKeN1A-6ZLgTCVyJA6kb9QJH7D096kcIx4x0O72WMLNVsmyI06RUG0wZ-_BoXa0rX-dEYmuoKG5YZluzdrF6ZkaHH24GQMIeD2WnObVPUDOTWcauBI0"/>
+<span class="font-caption text-caption text-on-surface mt-1">Nicolás</span>
+</div>
+</div>
+</div>
+<!-- Bottom Floating Sticky Action -->
+<div class="mt-auto pt-2">
+<div class="w-full py-2 rounded-xl bg-primary text-on-primary font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1 shadow-md">
+<span>Continuar al horario</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Direct Share Floating Card -->
+<div class="bg-surface-container-lowest p-space-md rounded-2xl shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">qr_code_2</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Código QR para tu local</span>
+<span class="font-caption text-caption text-on-surface-variant">Listo para imprimir en mesa o vitrina</span>
+</div>
+</div>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-primary font-label-sm text-label-sm font-semibold transition-colors" type="button">
+            Descargar
+          </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple micro-interactions for the business settings page
+  const copySlugBtn = document.getElementById('copySlugBtn');
+  const businessSlug = document.getElementById('businessSlug');
+  const saveBtn = document.getElementById('saveChangesBtn');
+  const pauseToggle = document.getElementById('pauseOnlineBookingToggle');
+  const pauseWarning = document.getElementById('pauseWarningNotice');
+  const viewMobileBtn = document.getElementById('viewMobileBtn');
+  const viewDesktopBtn = document.getElementById('viewDesktopBtn');
+  const previewContainer = document.getElementById('previewContainer');
+
+  if (copySlugBtn && businessSlug) {
+    copySlugBtn.addEventListener('click', () => {
+      const fullUrl = 'https://skedly.com/' + businessSlug.value.trim();
+      navigator.clipboard.writeText(fullUrl).then(() => {
+        const originalContent = copySlugBtn.innerHTML;
+        copySlugBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] text-emerald-600">done</span><span class="text-emerald-600 font-semibold">¡Copiado!</span>';
+        setTimeout(() => {
+          copySlugBtn.innerHTML = originalContent;
+        }, 2200);
+      }).catch(() => {
+        alert('Enlace copiado: ' + fullUrl);
+      });
+    });
+  }
+
+  if (pauseToggle && pauseWarning) {
+    pauseToggle.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        pauseWarning.classList.remove('hidden');
+      } else {
+        pauseWarning.classList.add('hidden');
+      }
+    });
+  }
+
+  if (saveBtn) {
+    saveBtn.addEventListener('click', () => {
+      const originalHTML = saveBtn.innerHTML;
+      saveBtn.disabled = true;
+      saveBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Guardando...</span>';
+      setTimeout(() => {
+        saveBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check_circle</span><span>¡Guardado con éxito!</span>';
+        setTimeout(() => {
+          saveBtn.innerHTML = originalHTML;
+          saveBtn.disabled = false;
+        }, 2000);
+      }, 700);
+    });
+  }
+
+  if (viewMobileBtn && viewDesktopBtn && previewContainer) {
+    viewDesktopBtn.addEventListener('click', () => {
+      viewDesktopBtn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+      viewDesktopBtn.classList.remove('text-on-surface-variant');
+      viewMobileBtn.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+      viewMobileBtn.classList.add('text-on-surface-variant');
+      
+      const phoneShell = previewContainer.querySelector('div');
+      if (phoneShell) {
+        phoneShell.classList.remove('max-w-[340px]', 'rounded-[36px]', 'p-3');
+        phoneShell.classList.add('max-w-full', 'rounded-xl', 'p-2');
+      }
+    });
+
+    viewMobileBtn.addEventListener('click', () => {
+      viewMobileBtn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+      viewMobileBtn.classList.remove('text-on-surface-variant');
+      viewDesktopBtn.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+      viewDesktopBtn.classList.add('text-on-surface-variant');
+
+      const phoneShell = previewContainer.querySelector('div');
+      if (phoneShell) {
+        phoneShell.classList.add('max-w-[340px]', 'rounded-[36px]', 'p-3');
+        phoneShell.classList.remove('max-w-full', 'rounded-xl', 'p-2');
+      }
+    });
+  }
+</script></main></div></body></html>

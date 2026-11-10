@@ -66,8 +66,9 @@ export default function DashboardOverviewPage() {
   };
 
   const copyPublicLink = () => {
-    const slug = currentBusiness?.slug || "barberia-elite";
-    const url = `https://skedly.com/${slug}`;
+    const slug = currentBusiness?.slug || "urban-cuts";
+    const origin = typeof window !== "undefined" ? window.location.origin : "https://skedly.com";
+    const url = `${origin}/reservas/${slug}`;
     if (navigator.clipboard) {
       navigator.clipboard.writeText(url);
       showToast("¡Enlace copiado al portapapeles: " + url + "!");
