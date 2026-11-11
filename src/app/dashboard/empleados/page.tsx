@@ -16,7 +16,7 @@ export default function EquipoTrabajoPage() {
   const { currentBusiness } = useAuth();
 
   // State
-  const [employees, setEmployees] = useState<FullEmployee[]>(MOCK_EMPLOYEES);
+  const [employees, setEmployees] = useState<FullEmployee[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [serviceFilter, setServiceFilter] = useState("all");
@@ -39,10 +39,14 @@ export default function EquipoTrabajoPage() {
     }, 3200);
   };
 
-  // Load from Supabase if connected
+  // Load from Supabase real data
   useEffect(() => {
     const fetchEmployees = async () => {
-      if (!currentBusiness?.id) return;
+      if (!currentBusiness?.id) {
+        setEmployees([]);
+        return;
+      }
+      setLoading(true);
       try {
         const { data, error } = await supabase
           .from("employees")
@@ -51,25 +55,38 @@ export default function EquipoTrabajoPage() {
           .order("created_at", { ascending: true });
 
         if (!error && data && data.length > 0) {
-          // Merge Supabase employees with mock details
-          const merged: FullEmployee[] = data.map((dbEmp, index) => {
-            const fallback = MOCK_EMPLOYEES[index % MOCK_EMPLOYEES.length];
-            return {
-              ...fallback,
-              id: dbEmp.id,
-              business_id: dbEmp.business_id,
-              display_name: dbEmp.display_name,
-              email: dbEmp.email || fallback.email,
-              phone: dbEmp.phone || fallback.phone,
-              bio: dbEmp.bio || fallback.bio,
-              avatar_url: dbEmp.avatar_url || fallback.avatar_url,
-              is_active: dbEmp.is_active,
-            };
-          });
-          setEmployees(merged);
+          const mapped: FullEmployee[] = data.map((dbEmp) => ({
+            id: dbEmp.id,
+            business_id: dbEmp.business_id,
+            display_name: dbEmp.display_name,
+            job_title: dbEmp.profile_id ? "Propietario / Especialista" : "Especialista",
+            email: dbEmp.email || "Sin email",
+            phone: dbEmp.phone || "Sin teléfono",
+            bio: dbEmp.bio || "",
+            avatar_url: dbEmp.avatar_url || "",
+            is_active: dbEmp.is_active,
+            role: "specialist",
+            access_status: "activo",
+            color_tag: "bg-primary-fixed text-primary",
+            location_name: "Sucursal Principal",
+            services: [],
+            weekly_hours: [],
+            exceptions: [],
+            recent_appointments: [],
+            rating: 5.0,
+            reviewsCount: 0,
+            monthlyAppointmentsCount: 0,
+            monthlyRevenueEst: 0,
+          }));
+          setEmployees(mapped);
+        } else {
+          setEmployees([]);
         }
       } catch (err) {
         console.error("Error loading employees:", err);
+        setEmployees([]);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -107,7 +124,7 @@ export default function EquipoTrabajoPage() {
       // Service
       let matchesService = true;
       if (serviceFilter !== "all") {
-        matchesService = emp.services.some((s) =>
+        matchesService = (emp.services || []).some((s) =>
           s.category.toLowerCase().includes(serviceFilter.toLowerCase()) ||
           s.name.toLowerCase().includes(serviceFilter.toLowerCase())
         );

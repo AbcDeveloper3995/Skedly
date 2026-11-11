@@ -25,114 +25,7 @@ interface NotificationLog {
   errorMessage?: string;
 }
 
-const INITIAL_LOGS: NotificationLog[] = [
-  {
-    id: "NOT-94819",
-    timestamp: "Hoy, 10:15 hrs",
-    relativeTime: "Hace 2 horas",
-    recipientName: "David Soria Gómez",
-    recipientRole: "Cliente",
-    recipientEmail: "david.soria@ejemplo.com",
-    avatar: "DS",
-    avatarBg: "bg-[#dee1ff] text-[#2c4dd6]",
-    type: "Confirmación de reserva",
-    typeIcon: "bookmark_added",
-    appointmentId: "#UC-84920",
-    serviceName: "Corte Premium · Barbería",
-    status: "Entregada",
-    subject: "Tu cita en Urban Cuts está confirmada - #UC-84920",
-    phone: "+52 55 4321 8765",
-  },
-  {
-    id: "NOT-94818",
-    timestamp: "Hoy, 09:45 hrs",
-    relativeTime: "Hace 3 horas",
-    recipientName: "Carlos Ramírez",
-    recipientRole: "Empleado",
-    recipientEmail: "carlos.barber@urbancuts.mx",
-    avatar: "CR",
-    avatarBg: "bg-[#d8e2ff] text-[#0058be]",
-    type: "Nueva cita asignada",
-    typeIcon: "person_add",
-    appointmentId: "#UC-84920",
-    serviceName: "Corte Premium",
-    status: "Entregada",
-    subject: "Nueva cita asignada: David Soria Gómez - 11:45 hrs",
-    phone: "+52 55 9876 1234",
-  },
-  {
-    id: "NOT-94815",
-    timestamp: "Ayer, 18:20 hrs",
-    relativeTime: "En reintento programado",
-    recipientName: "Alejandro Peña",
-    recipientRole: "Cliente",
-    recipientEmail: "alejandro.p@email.com",
-    avatar: "AP",
-    avatarBg: "bg-[#d9dff5] text-[#5c6274]",
-    type: "Recordatorio 24h",
-    typeIcon: "notifications_active",
-    appointmentId: "#UC-84815",
-    serviceName: "Pack Corte + Barba",
-    status: "Pendiente",
-    subject: "Recordatorio de tu cita mañana en Urban Cuts",
-    phone: "+52 55 6129 8411",
-  },
-  {
-    id: "NOT-94814",
-    timestamp: "Ayer, 16:30 hrs",
-    relativeTime: "24 Oct 2025",
-    recipientName: "Jorge Lozano",
-    recipientRole: "Cliente",
-    recipientEmail: "jorge.lozano@outlook.com",
-    avatar: "JL",
-    avatarBg: "bg-[#dee1ff] text-[#2c4dd6]",
-    type: "Reprogramación de cita",
-    typeIcon: "edit_calendar",
-    appointmentId: "#UC-84790",
-    serviceName: "Corte Clásico",
-    status: "Entregada",
-    subject: "Tu cita ha sido reprogramada con éxito - #UC-84790",
-    phone: "+52 55 9876 5432",
-  },
-  {
-    id: "NOT-94812",
-    timestamp: "23 Oct, 11:00 hrs",
-    relativeTime: "Rebote duro",
-    recipientName: "Roberto Méndez",
-    recipientRole: "Cliente",
-    recipientEmail: "correo_invalido@dominioinexistente.xyz",
-    avatar: "RM",
-    avatarBg: "bg-rose-100 text-rose-700",
-    type: "Confirmación de reserva",
-    typeIcon: "mail_lock",
-    appointmentId: "#UC-84722",
-    serviceName: "Afeitado Clásico",
-    status: "Fallida",
-    statusCode: "550",
-    subject: "Tu cita en Urban Cuts está confirmada - #UC-84722",
-    phone: "+52 55 3344 5566",
-    errorCode: "550 5.1.1 User unknown",
-    errorMessage:
-      "El servidor de destino rechazó permanentemente la entrega del mensaje con código SMTP: 550 5.1.1 User unknown. La dirección de correo destinataria no existe en el host configurado.",
-  },
-  {
-    id: "NOT-94810",
-    timestamp: "22 Oct, 14:15 hrs",
-    relativeTime: "22 Oct 2025",
-    recipientName: "Recepción Urban Cuts",
-    recipientRole: "Negocio",
-    recipientEmail: "contacto@urbancuts.mx",
-    avatar: "UC",
-    avatarBg: "bg-[#f2f4f6] text-[#191c1e]",
-    type: "Alerta de cancelación",
-    typeIcon: "event_busy",
-    appointmentId: "#UC-84690",
-    serviceName: "Perfilado de Barba",
-    status: "Entregada",
-    subject: "Aviso de cancelación de cita #UC-84690",
-    phone: "+52 55 9123 4567",
-  },
-];
+const INITIAL_LOGS: NotificationLog[] = [];
 
 const TEMPLATES = [
   {
@@ -184,8 +77,14 @@ function NotificacionesContent() {
   const [activeTab, setActiveTab] = useState<"preferences" | "templates" | "history">("preferences");
 
   // Notifications Preferences State
-  const [bizEmail, setBizEmail] = useState("contacto@urbancuts.mx");
+  const [bizEmail, setBizEmail] = useState(currentBusiness?.email || "");
   const [notifyStaff, setNotifyStaff] = useState(true);
+
+  useEffect(() => {
+    if (currentBusiness?.email) {
+      setBizEmail(currentBusiness.email);
+    }
+  }, [currentBusiness]);
 
   // Business Triggers
   const [tNewBookingBiz, setTNewBookingBiz] = useState(true);
@@ -1157,13 +1056,12 @@ function NotificacionesContent() {
               </div>
               <div className="mt-3">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-bold text-[#191c1e]">419</span>
-                  <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
-                    97.9% tasa
+                  <span className="text-2xl font-bold text-[#191c1e]">
+                    {logs.filter((l) => l.status === "Entregada").length}
                   </span>
-                </div>
-                <div className="w-full bg-[#f2f4f6] h-1.5 rounded-full mt-2.5 overflow-hidden">
-                  <div className="bg-emerald-500 h-full rounded-full" style={{ width: "97.9%" }}></div>
+                  <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+                    entregadas
+                  </span>
                 </div>
               </div>
             </div>
@@ -1180,12 +1078,11 @@ function NotificacionesContent() {
               </div>
               <div className="mt-3">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-bold text-[#191c1e]">3</span>
+                  <span className="text-2xl font-bold text-[#191c1e]">
+                    {logs.filter((l) => l.status === "Pendiente").length}
+                  </span>
                   <span className="text-xs text-amber-700 font-medium">en tránsito</span>
                 </div>
-                <span className="text-[11px] text-[#575e70] mt-1 block">
-                  Próximo lote en ~4 min
-                </span>
               </div>
             </div>
 
@@ -1201,12 +1098,10 @@ function NotificacionesContent() {
               </div>
               <div className="mt-3">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-bold text-rose-700">6</span>
-                  <span className="text-xs text-rose-600 font-medium">(1.4%)</span>
+                  <span className="text-2xl font-bold text-rose-700">
+                    {logs.filter((l) => l.status === "Fallida").length}
+                  </span>
                 </div>
-                <span className="text-[11px] text-rose-700 font-medium mt-1 block">
-                  1 caso requiere acción
-                </span>
               </div>
             </div>
           </div>
@@ -1240,12 +1135,12 @@ function NotificacionesContent() {
                   }`}
                 >
                   {st === "Todas"
-                    ? "Todas (428)"
+                    ? `Todas (${logs.length})`
                     : st === "Entregada"
-                    ? "Entregadas (419)"
+                    ? `Entregadas (${logs.filter((l) => l.status === "Entregada").length})`
                     : st === "Pendiente"
-                    ? "Pendientes (3)"
-                    : "Fallidas (6)"}
+                    ? `Pendientes (${logs.filter((l) => l.status === "Pendiente").length})`
+                    : `Fallidas (${logs.filter((l) => l.status === "Fallida").length})`}
                 </button>
               ))}
             </div>
@@ -1266,7 +1161,25 @@ function NotificacionesContent() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#eceef0]">
-                  {filteredLogs.map((log) => (
+                  {filteredLogs.length === 0 ? (
+                    <tr>
+                      <td colSpan={6} className="py-12 text-center text-xs text-[#575e70]">
+                        <div className="flex flex-col items-center justify-center gap-2">
+                          <span className="material-symbols-outlined text-[32px] text-[#747686]">
+                            mark_email_unread
+                          </span>
+                          <p className="font-semibold text-[#191c1e]">
+                            No hay registros de notificaciones
+                          </p>
+                          <p className="text-[11px] text-[#575e70] max-w-sm">
+                            El historial de correos enviados a clientes y miembros del equipo aparecerá
+                            aquí automáticamente cuando se gestionen citas en la plataforma.
+                          </p>
+                        </div>
+                      </td>
+                    </tr>
+                  ) : (
+                    filteredLogs.map((log) => (
                     <tr
                       key={log.id}
                       className={`hover:bg-[#f2f4f6]/60 transition-colors ${
@@ -1369,7 +1282,7 @@ function NotificacionesContent() {
                         </button>
                       </td>
                     </tr>
-                  ))}
+                  )))}
                 </tbody>
               </table>
             </div>
@@ -1378,7 +1291,7 @@ function NotificacionesContent() {
             <div className="px-4 py-3 bg-[#f2f4f6]/60 border-t border-[#e0e3e5] flex items-center justify-between text-xs text-[#575e70]">
               <span>
                 Mostrando <strong className="text-[#191c1e]">{filteredLogs.length}</strong> de{" "}
-                <strong className="text-[#191c1e]">428</strong> registros
+                <strong className="text-[#191c1e]">{logs.length}</strong> registros
               </span>
               <div className="flex items-center gap-1">
                 <span className="px-2 py-0.5 rounded bg-[#2c4dd6] text-white font-bold text-[11px]">

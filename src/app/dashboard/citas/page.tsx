@@ -19,82 +19,11 @@ interface AppointmentRow {
   appointment_services?: Array<{ service_name: string; unit_price: number; duration_minutes?: number }>;
 }
 
-const MOCK_APPOINTMENTS: AppointmentRow[] = [
-  {
-    id: "app-8492",
-    start_at: "2025-10-26T10:15:00",
-    end_at: "2025-10-26T11:00:00",
-    status: "confirmed",
-    customer_name_snapshot: "Alejandro Peña",
-    customer_phone_snapshot: "+34 678 123 456",
-    customer_email_snapshot: "alejandro.pena@email.com",
-    internal_notes: "Cliente prefiere corte a tijera en los laterales.",
-    employee: { display_name: "Carlos Ramírez" },
-    appointment_services: [{ service_name: "Corte Clásico & Degradado", unit_price: 180, duration_minutes: 45 }],
-  },
-  {
-    id: "app-8941",
-    start_at: "2025-10-25T11:30:00",
-    end_at: "2025-10-25T12:00:00",
-    status: "pending",
-    customer_name_snapshot: "David Soria",
-    customer_phone_snapshot: "+34 655 432 109",
-    customer_email_snapshot: "david.soria@example.com",
-    internal_notes: "Turno reservado vía web pendiente de aprobación.",
-    employee: { display_name: "Mateo Ramos" },
-    appointment_services: [{ service_name: "Arreglo de Barba Tradicional", unit_price: 120, duration_minutes: 30 }],
-  },
-  {
-    id: "app-8942",
-    start_at: "2025-10-26T12:30:00",
-    end_at: "2025-10-26T13:30:00",
-    status: "pending",
-    customer_name_snapshot: "Marcos Varela",
-    customer_phone_snapshot: "+34 612 987 654",
-    customer_email_snapshot: "marcos.varela@example.com",
-    internal_notes: "Llamada telefónica, confirmó asistencia.",
-    employee: { display_name: "Carlos Ramírez" },
-    appointment_services: [{ service_name: "Corte Clásico + Lavado", unit_price: 150, duration_minutes: 60 }],
-  },
-  {
-    id: "app-8493",
-    start_at: "2025-10-26T14:30:00",
-    end_at: "2025-10-26T15:30:00",
-    status: "confirmed",
-    customer_name_snapshot: "Raúl Mendoza",
-    customer_phone_snapshot: "+34 699 001 223",
-    customer_email_snapshot: "raul.mendoza@email.com",
-    employee: { display_name: "Sofía Gómez" },
-    appointment_services: [{ service_name: "Corte & Color Fantasía", unit_price: 320, duration_minutes: 60 }],
-  },
-  {
-    id: "app-8490",
-    start_at: "2025-10-24T09:00:00",
-    end_at: "2025-10-24T09:45:00",
-    status: "completed",
-    customer_name_snapshot: "Javier Delgado",
-    customer_phone_snapshot: "+34 644 112 233",
-    employee: { display_name: "Carlos Ramírez" },
-    appointment_services: [{ service_name: "Corte Degradado Moderno", unit_price: 180, duration_minutes: 45 }],
-  },
-  {
-    id: "app-8488",
-    start_at: "2025-10-23T16:00:00",
-    end_at: "2025-10-23T16:30:00",
-    status: "cancelled",
-    customer_name_snapshot: "Roberto Silva",
-    customer_phone_snapshot: "+34 633 445 566",
-    internal_notes: "Canceló con 24h de anticipación por viaje.",
-    employee: { display_name: "Mateo Ramos" },
-    appointment_services: [{ service_name: "Arreglo de Barba", unit_price: 120, duration_minutes: 30 }],
-  },
-];
-
 function CitasListContent() {
   const router = useRouter();
   const { currentBusiness } = useAuth();
 
-  const [appointments, setAppointments] = useState<AppointmentRow[]>(MOCK_APPOINTMENTS);
+  const [appointments, setAppointments] = useState<AppointmentRow[]>([]);
   const [loading, setLoading] = useState(false);
   const [filterStatus, setFilterStatus] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -121,11 +50,14 @@ function CitasListContent() {
         .eq("business_id", businessId)
         .order("start_at", { ascending: false });
 
-      if (data && data.length > 0) {
+      if (!error && data) {
         setAppointments(data as unknown as AppointmentRow[]);
+      } else {
+        setAppointments([]);
       }
     } catch (err) {
       console.error("Error loading appointments:", err);
+      setAppointments([]);
     } finally {
       setLoading(false);
     }
@@ -134,6 +66,8 @@ function CitasListContent() {
   useEffect(() => {
     if (currentBusiness?.id) {
       loadAppointments(currentBusiness.id);
+    } else {
+      setAppointments([]);
     }
   }, [currentBusiness]);
 

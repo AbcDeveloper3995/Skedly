@@ -20,11 +20,11 @@ function CalendarioContent() {
 
   // State
   const [viewMode, setViewMode] = useState<"semana" | "dia">(initialView);
-  const [appointments, setAppointments] = useState<CalendarAppointment[]>(MOCK_CALENDAR_APPOINTMENTS);
+  const [appointments, setAppointments] = useState<CalendarAppointment[]>([]);
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [selectedStaffFilter, setSelectedStaffFilter] = useState<string>("all");
   const [selectedDate, setSelectedDate] = useState("2025-10-25"); // Safe static initial string
-  const [selectedAppointmentId, setSelectedAppointmentId] = useState<string>("app-101");
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState<string | null>(null);
   const [isQuickDrawerOpen, setIsQuickDrawerOpen] = useState(true);
 
   // Modals & Feedback
@@ -32,7 +32,7 @@ function CalendarioContent() {
   const [rescheduleTarget, setRescheduleTarget] = useState<CalendarAppointment | null>(null);
   const [rescheduleDate, setRescheduleDate] = useState("2025-10-26");
   const [rescheduleSlot, setRescheduleSlot] = useState("11:30 - 12:30");
-  const [rescheduleStaff, setRescheduleStaff] = useState("Mateo Ramos");
+  const [rescheduleStaff, setRescheduleStaff] = useState("");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const showToast = (msg: string) => {
@@ -43,11 +43,11 @@ function CalendarioContent() {
   // Selected appointment details
   const selectedAppointment = useMemo(() => {
     return (
-      appointments.find((a) => a.id === selectedAppointmentId) || appointments[0]
+      appointments.find((a) => a.id === selectedAppointmentId) || appointments[0] || null
     );
   }, [appointments, selectedAppointmentId]);
 
-  // Load from Supabase if connected
+  // Load from Supabase real data
   useEffect(() => {
     const fetchAppointments = async () => {
       if (!currentBusiness?.id) return;
@@ -68,31 +68,40 @@ function CalendarioContent() {
           .order("start_at", { ascending: true });
 
         if (!error && data && data.length > 0) {
-          const mapped: CalendarAppointment[] = data.map((dbApp, i) => {
-            const fallback = MOCK_CALENDAR_APPOINTMENTS[i % MOCK_CALENDAR_APPOINTMENTS.length];
+          const mapped: CalendarAppointment[] = data.map((dbApp) => {
             const startDate = dbApp.start_at.split("T")[0];
             const startTime = dbApp.start_at.split("T")[1]?.slice(0, 5) || "10:00";
             const endTime = dbApp.end_at.split("T")[1]?.slice(0, 5) || "11:00";
             const srv = dbApp.appointment_services?.[0];
 
             return {
-              ...fallback,
               id: dbApp.id,
-              clientName: dbApp.customer_name_snapshot || fallback.clientName,
-              clientPhone: dbApp.customer_phone_snapshot || fallback.clientPhone,
-              serviceName: srv?.service_name || fallback.serviceName,
-              price: srv?.unit_price || fallback.price,
+              clientName: dbApp.customer_name_snapshot || "Cliente",
+              clientPhone: dbApp.customer_phone_snapshot || "",
+              serviceName: srv?.service_name || "Servicio General",
+              price: srv?.unit_price || 0,
               date: startDate,
               startTime,
               endTime,
               status: dbApp.status as any,
-              staffName: (dbApp.employee as any)?.display_name || fallback.staffName,
+              staffName: (dbApp.employee as any)?.display_name || "Especialista",
+              staffRole: "Especialista",
+              staffAvatar: (dbApp.employee as any)?.avatar_url || "/avatars/avatar-1.jpg",
+              paymentStatus: "pagado" as const,
+              dayIndex: new Date(dbApp.start_at).getDay(),
+              durationMinutes: 45,
             };
           });
           setAppointments(mapped);
+          if (mapped.length > 0) {
+            setSelectedAppointmentId(mapped[0].id);
+          }
+        } else {
+          setAppointments([]);
         }
       } catch (err) {
         console.error("Error loading appointments:", err);
+        setAppointments([]);
       }
     };
 
@@ -885,73 +894,48 @@ function CalendarioContent() {
                     </button>
                   </div>
 
-                  {/* Pending Card 1 */}
-                  <div className="p-3.5 rounded-xl bg-surface-container-low border border-surface-container flex flex-col gap-2.5 shadow-sm">
-                    <div className="flex items-center justify-between">
-                      <span className="px-2 py-0.5 rounded bg-[#fde68a] text-[#b45309] text-[10px] font-bold">
-                        Web booking
-                      </span>
-                      <span className="text-[11px] text-secondary">Hace 12 min</span>
+                  {appointments.filter((a) => a.status === "pending").length === 0 ? (
+                    <div className="p-4 text-center rounded-xl bg-surface-container-low/60 border border-dashed border-surface-container text-xs text-secondary">
+                      No tienes citas pendientes por aprobar.
                     </div>
-                    <div className="flex flex-col">
-                      <h4 className="text-xs font-bold text-on-surface">Gonzalo Rivas</h4>
-                      <p className="text-[11px] text-secondary">Arreglo Barba &amp; Navaja • 30 min</p>
-                      <div className="flex items-center gap-1 text-[11px] text-on-surface-variant mt-1">
-                        <span className="material-symbols-outlined text-[13px] text-primary">schedule</span>
-                        <span>Hoy, 10:30 - Mateo R.</span>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2 pt-1">
-                      <button
-                        onClick={(e) => handleApproveAppointment("app-103", e)}
-                        className="h-8 rounded-lg bg-primary text-on-primary text-xs font-semibold hover:bg-primary-container transition-colors flex items-center justify-center gap-1"
-                      >
-                        <span className="material-symbols-outlined text-[14px]">check</span>
-                        <span>Aceptar</span>
-                      </button>
-                      <button
-                        onClick={(e) => handleRejectAppointment("app-103", e)}
-                        className="h-8 rounded-lg bg-error-container text-on-error-container text-xs font-semibold hover:bg-error hover:text-on-error transition-colors flex items-center justify-center gap-1"
-                      >
-                        <span className="material-symbols-outlined text-[14px]">close</span>
-                        <span>Rechazar</span>
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Pending Card 2 */}
-                  <div className="p-3.5 rounded-xl bg-surface-container-low border border-surface-container flex flex-col gap-2.5 shadow-sm">
-                    <div className="flex items-center justify-between">
-                      <span className="px-2 py-0.5 rounded bg-[#fde68a] text-[#b45309] text-[10px] font-bold">
-                        App cliente
-                      </span>
-                      <span className="text-[11px] text-secondary">Hace 45 min</span>
-                    </div>
-                    <div className="flex flex-col">
-                      <h4 className="text-xs font-bold text-on-surface">Ignacio Prada</h4>
-                      <p className="text-[11px] text-secondary">Corte Degradado Niño • 45 min</p>
-                      <div className="flex items-center gap-1 text-[11px] text-on-surface-variant mt-1">
-                        <span className="material-symbols-outlined text-[13px] text-primary">schedule</span>
-                        <span>Hoy, 17:00 - Sofía G.</span>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2 pt-1">
-                      <button
-                        onClick={(e) => handleApproveAppointment("app-104", e)}
-                        className="h-8 rounded-lg bg-primary text-on-primary text-xs font-semibold hover:bg-primary-container transition-colors flex items-center justify-center gap-1"
-                      >
-                        <span className="material-symbols-outlined text-[14px]">check</span>
-                        <span>Aceptar</span>
-                      </button>
-                      <button
-                        onClick={(e) => handleRejectAppointment("app-104", e)}
-                        className="h-8 rounded-lg bg-error-container text-on-error-container text-xs font-semibold hover:bg-error hover:text-on-error transition-colors flex items-center justify-center gap-1"
-                      >
-                        <span className="material-symbols-outlined text-[14px]">close</span>
-                        <span>Rechazar</span>
-                      </button>
-                    </div>
-                  </div>
+                  ) : (
+                    appointments
+                      .filter((a) => a.status === "pending")
+                      .map((app) => (
+                        <div key={app.id} className="p-3.5 rounded-xl bg-surface-container-low border border-surface-container flex flex-col gap-2.5 shadow-sm">
+                          <div className="flex items-center justify-between">
+                            <span className="px-2 py-0.5 rounded bg-[#fde68a] text-[#b45309] text-[10px] font-bold">
+                              Pendiente
+                            </span>
+                            <span className="text-[11px] text-secondary">{app.startTime}</span>
+                          </div>
+                          <div className="flex flex-col">
+                            <h4 className="text-xs font-bold text-on-surface">{app.clientName}</h4>
+                            <p className="text-[11px] text-secondary">{app.serviceName}</p>
+                            <div className="flex items-center gap-1 text-[11px] text-on-surface-variant mt-1">
+                              <span className="material-symbols-outlined text-[13px] text-primary">schedule</span>
+                              <span>{app.date} {app.startTime} - {app.staffName}</span>
+                            </div>
+                          </div>
+                          <div className="grid grid-cols-2 gap-2 pt-1">
+                            <button
+                              onClick={(e) => handleApproveAppointment(app.id, e)}
+                              className="h-8 rounded-lg bg-primary text-on-primary text-xs font-semibold hover:bg-primary-container transition-colors flex items-center justify-center gap-1"
+                            >
+                              <span className="material-symbols-outlined text-[14px]">check</span>
+                              <span>Aceptar</span>
+                            </button>
+                            <button
+                              onClick={(e) => handleRejectAppointment(app.id, e)}
+                              className="h-8 rounded-lg bg-error-container text-on-error-container text-xs font-semibold hover:bg-error hover:text-on-error transition-colors flex items-center justify-center gap-1"
+                            >
+                              <span className="material-symbols-outlined text-[14px]">close</span>
+                              <span>Rechazar</span>
+                            </button>
+                          </div>
+                        </div>
+                      ))
+                  )}
                 </div>
 
                 {/* Upcoming Turns of Today */}
@@ -960,38 +944,28 @@ function CalendarioContent() {
                     Próximos turnos de hoy
                   </span>
                   <div className="flex flex-col gap-1.5">
-                    <div
-                      onClick={() => {
-                        setSelectedAppointmentId("app-101");
-                        setViewMode("dia");
-                      }}
-                      className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-surface-container-low transition-colors cursor-pointer"
-                    >
-                      <div className="w-8 h-8 rounded-full bg-primary-fixed text-primary flex items-center justify-center shrink-0">
-                        <span className="material-symbols-outlined text-[16px]">content_cut</span>
-                      </div>
-                      <div className="flex flex-col min-w-0 flex-1">
-                        <span className="text-xs font-bold text-on-surface truncate">Alejandro Peña (En curso)</span>
-                        <span className="text-[11px] text-secondary">11:15 • Mateo Ramos</span>
-                      </div>
-                      <span className="w-2 h-2 rounded-full bg-primary"></span>
-                    </div>
-
-                    <div
-                      onClick={() => {
-                        setSelectedAppointmentId("app-106");
-                        setViewMode("dia");
-                      }}
-                      className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-surface-container-low transition-colors cursor-pointer"
-                    >
-                      <div className="w-8 h-8 rounded-full bg-surface-container text-secondary flex items-center justify-center shrink-0">
-                        <span className="material-symbols-outlined text-[16px]">brush</span>
-                      </div>
-                      <div className="flex flex-col min-w-0 flex-1">
-                        <span className="text-xs font-bold text-on-surface truncate">Lucas Valera</span>
-                        <span className="text-[11px] text-secondary">15:30 • Carlos Ramírez</span>
-                      </div>
-                    </div>
+                    {appointments.length === 0 ? (
+                      <p className="text-xs text-secondary text-center py-2">Sin citas programadas para hoy.</p>
+                    ) : (
+                      appointments.slice(0, 5).map((app) => (
+                        <div
+                          key={app.id}
+                          onClick={() => {
+                            setSelectedAppointmentId(app.id);
+                            setViewMode("dia");
+                          }}
+                          className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-surface-container-low transition-colors cursor-pointer"
+                        >
+                          <div className="w-8 h-8 rounded-full bg-primary-fixed text-primary flex items-center justify-center shrink-0">
+                            <span className="material-symbols-outlined text-[16px]">content_cut</span>
+                          </div>
+                          <div className="flex flex-col min-w-0 flex-1">
+                            <span className="text-xs font-bold text-on-surface truncate">{app.clientName}</span>
+                            <span className="text-[11px] text-secondary">{app.startTime} • {app.staffName}</span>
+                          </div>
+                        </div>
+                      ))
+                    )}
                   </div>
                 </div>
 

@@ -16,7 +16,7 @@ function ClientesContent() {
   const { currentBusiness } = useAuth();
 
   // State
-  const [customers, setCustomers] = useState<CustomerDetail[]>(INITIAL_CUSTOMERS);
+  const [customers, setCustomers] = useState<CustomerDetail[]>([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState<"all" | "recurrent" | "new">("all");
@@ -33,10 +33,14 @@ function ClientesContent() {
   const [saving, setSaving] = useState(false);
   const [exportNotice, setExportNotice] = useState(false);
 
-  // Load from Supabase if available
+  // Load from Supabase real data
   useEffect(() => {
     async function fetchFromSupabase() {
-      if (!currentBusiness?.id) return;
+      if (!currentBusiness?.id) {
+        setCustomers([]);
+        return;
+      }
+      setLoading(true);
       try {
         const { data, error } = await supabase
           .from("customers")
@@ -45,8 +49,7 @@ function ClientesContent() {
           .order("created_at", { ascending: false });
 
         if (!error && data && data.length > 0) {
-          // Merge supabase customers with design template format
-          const mapped: CustomerDetail[] = data.map((c: any, index: number) => {
+          const mapped: CustomerDetail[] = data.map((c: any) => {
             const initials = c.full_name
               ? c.full_name
                   .split(" ")
@@ -64,29 +67,25 @@ function ClientesContent() {
               avatarBg: "bg-[#dee1ff]",
               avatarColor: "text-[#2c4dd6]",
               subtitle: "Cliente del negocio",
-              phone: c.phone || "+52 55 0000 0000",
+              phone: c.phone || "Sin teléfono",
               email: c.email || null,
-              appointmentsCount: 1,
-              statusTag: index === 0 ? "Nuevo" : "Recurrente",
-              lastAppointment: {
-                date: "Reciente",
-                service: "Corte General",
-                professional: "Equipo",
-              },
+              appointmentsCount: 0,
+              statusTag: "Nuevo",
+              lastAppointment: null,
               registeredAt: new Date(c.created_at).toLocaleDateString("es-ES", {
                 day: "2-digit",
                 month: "short",
                 year: "numeric",
               }),
-              totalSpent: 350,
-              avgTicket: 350,
-              completedAppointments: 1,
-              totalScheduled: 1,
+              totalSpent: 0,
+              avgTicket: 0,
+              completedAppointments: 0,
+              totalScheduled: 0,
               punctuality: "100%",
-              preferredProfessional: "Carlos Ramírez",
+              preferredProfessional: "Equipo",
               preferredProfessionalPct: "100%",
-              favoriteService: "Corte General",
-              favoriteServiceTime: "45 min",
+              favoriteService: "Servicio General",
+              favoriteServiceTime: "30 min",
               notes: c.notes
                 ? [
                     {
@@ -101,11 +100,15 @@ function ClientesContent() {
             };
           });
 
-          // Prepend newly added supabase customers to mock list
-          setCustomers([...mapped, ...INITIAL_CUSTOMERS.filter((m) => !mapped.some((x) => x.id === m.id))]);
+          setCustomers(mapped);
+        } else {
+          setCustomers([]);
         }
       } catch (err) {
-        console.warn("Could not fetch customers from Supabase, using mock directory:", err);
+        console.warn("Could not fetch customers from Supabase:", err);
+        setCustomers([]);
+      } finally {
+        setLoading(false);
       }
     }
 

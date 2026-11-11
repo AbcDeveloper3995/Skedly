@@ -53,9 +53,9 @@ export default function ServiciosCatalogPage() {
   // Quick create form
   const [quickName, setQuickName] = useState("");
   const [quickCategory, setQuickCategory] = useState("");
-  const [quickPrice, setQuickPrice] = useState(180);
+  const [quickPrice, setQuickPrice] = useState(0);
   const [quickDuration, setQuickDuration] = useState(30);
-  const [quickBuffer, setQuickBuffer] = useState(5);
+  const [quickBuffer, setQuickBuffer] = useState(0);
   const [quickDescription, setQuickDescription] = useState("");
   const [savingQuick, setSavingQuick] = useState(false);
 
@@ -65,101 +65,6 @@ export default function ServiciosCatalogPage() {
       setToastMessage(null);
     }, 3200);
   };
-
-  // Mock initial services matching stitch design if DB empty
-  const defaultServices: ServiceItem[] = [
-    {
-      id: "srv-1",
-      name: "Corte Clásico",
-      description: "Lavado suave, corte a tijera y máquina con estilizado premium.",
-      duration_minutes: 30,
-      buffer_minutes: 5,
-      price: 180,
-      currency: "MXN",
-      category_name: "Cortes de cabello",
-      is_active: true,
-      assigned_staff: ["MR", "SG"],
-      icon: "content_cut",
-    },
-    {
-      id: "srv-2",
-      name: "Corte Premium",
-      description: "Diagnóstico capilar, tratamiento nutritivo y terminación con cera mate.",
-      duration_minutes: 45,
-      buffer_minutes: 10,
-      price: 250,
-      currency: "MXN",
-      category_name: "Cortes de cabello",
-      is_active: true,
-      assigned_staff: ["MR"],
-      icon: "workspace_premium",
-    },
-    {
-      id: "srv-3",
-      name: "Corte Infantil",
-      description: "Especial para niños de hasta 12 años, trato paciente y amigable.",
-      duration_minutes: 30,
-      buffer_minutes: 0,
-      price: 150,
-      currency: "MXN",
-      category_name: "Cortes de cabello",
-      is_active: true,
-      assigned_staff: ["SG"],
-      icon: "child_care",
-    },
-    {
-      id: "srv-4",
-      name: "Perfilado de Barba",
-      description: "Diseño de líneas precisas con navaja y aplicación de loción refrescante.",
-      duration_minutes: 20,
-      buffer_minutes: 0,
-      price: 100,
-      currency: "MXN",
-      category_name: "Barba",
-      is_active: true,
-      assigned_staff: ["MR"],
-      icon: "brush",
-    },
-    {
-      id: "srv-5",
-      name: "Afeitado Clásico",
-      description: "Ritual de toalla caliente, espuma artesanal y afeitado tradicional a navaja.",
-      duration_minutes: 30,
-      buffer_minutes: 5,
-      price: 140,
-      currency: "MXN",
-      category_name: "Barba",
-      is_active: true,
-      assigned_staff: ["MR"],
-      icon: "auto_fix_high",
-    },
-    {
-      id: "srv-6",
-      name: "Tratamiento Capilar",
-      description: "Hidratación profunda, masaje craneal estimulante y sellado con ozono.",
-      duration_minutes: 45,
-      buffer_minutes: 15,
-      price: 300,
-      currency: "MXN",
-      category_name: "Tratamientos",
-      is_active: true,
-      assigned_staff: ["MR", "SG"],
-      icon: "water_drop",
-    },
-    {
-      id: "srv-7",
-      name: "Exfoliación Facial Express",
-      description: "Limpieza por exfoliación suave con microesferas de carbón vegetal.",
-      duration_minutes: 20,
-      buffer_minutes: 0,
-      price: 120,
-      currency: "MXN",
-      category_name: "Tratamientos",
-      is_active: false,
-      assigned_staff: ["SG"],
-      icon: "clean_hands",
-    },
-  ];
 
   const loadServices = async (businessId: string) => {
     setLoading(true);
@@ -171,15 +76,7 @@ export default function ServiciosCatalogPage() {
         .eq("business_id", businessId)
         .order("display_order", { ascending: true });
 
-      if (catData && catData.length > 0) {
-        setCategories(catData);
-      } else {
-        setCategories([
-          { id: "cat-1", name: "Cortes de cabello" },
-          { id: "cat-2", name: "Barba" },
-          { id: "cat-3", name: "Tratamientos" },
-        ]);
-      }
+      setCategories(catData || []);
 
       // 2. Load services
       const { data: srvData } = await supabase
@@ -193,23 +90,26 @@ export default function ServiciosCatalogPage() {
           id: s.id,
           name: s.name,
           description: s.description || null,
-          duration_minutes: s.duration_minutes || 30,
-          buffer_minutes: s.buffer_time_after || s.buffer_minutes || 0,
-          price: s.price_amount || s.price || 150,
-          currency: s.currency || "MXN",
+          duration_minutes: Number(s.duration_minutes) || 30,
+          buffer_minutes: Number(s.buffer_minutes) || 0,
+          price: Number(s.price) || 0,
+          currency: "MXN",
           category_id: s.category_id,
           category_name: s.category?.name || "General",
           is_active: s.is_active !== false,
-          assigned_staff: ["MR", "SG"],
-          icon: s.category?.name === "Barba" ? "brush" : s.category?.name === "Tratamientos" ? "spa" : "content_cut",
+          icon: s.category?.name?.toLowerCase().includes("barba")
+            ? "brush"
+            : s.category?.name?.toLowerCase().includes("trat")
+            ? "spa"
+            : "content_cut",
         }));
         setServices(mapped);
       } else {
-        setServices(defaultServices);
+        setServices([]);
       }
     } catch (err) {
       console.error("Error loading services:", err);
-      setServices(defaultServices);
+      setServices([]);
     } finally {
       setLoading(false);
     }
@@ -219,12 +119,8 @@ export default function ServiciosCatalogPage() {
     if (currentBusiness?.id) {
       loadServices(currentBusiness.id);
     } else {
-      setServices(defaultServices);
-      setCategories([
-        { id: "cat-1", name: "Cortes de cabello" },
-        { id: "cat-2", name: "Barba" },
-        { id: "cat-3", name: "Tratamientos" },
-      ]);
+      setServices([]);
+      setCategories([]);
       setLoading(false);
     }
   }, [currentBusiness]);

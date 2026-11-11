@@ -31,49 +31,43 @@ interface DaySchedule {
 
 export default function OnboardingPage() {
   const router = useRouter();
-  const { user, currentBusiness, loading: authLoading } = useAuth();
+  const { user, currentBusiness, loading: authLoading, refreshUserData } = useAuth();
 
   // Current Step (1 to 4)
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3 | 4>(1);
 
   // Step 1: Business Info
-  const [businessName, setBusinessName] = useState(currentBusiness?.name || "Barbería Élite Central");
-  const [businessType, setBusinessType] = useState<string>("Barbería");
-  const [phone, setPhone] = useState("600 000 000");
-  const [email, setEmail] = useState(user?.email || "contacto@minegocio.com");
+  const [businessName, setBusinessName] = useState(currentBusiness?.name || "");
+  const [businessType, setBusinessType] = useState<string>("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState(user?.email || "");
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
 
   // Step 2: Location & Hours
-  const [country, setCountry] = useState("ES");
-  const [city, setCity] = useState("Madrid");
-  const [address, setAddress] = useState("Calle Gran Vía 42, Planta 2, Puerta B");
-  const [timezone, setTimezone] = useState("Europe/Madrid");
+  const [country, setCountry] = useState("MX");
+  const [city, setCity] = useState("");
+  const [address, setAddress] = useState("");
+  const [timezone, setTimezone] = useState("America/Mexico_City");
   const [schedule, setSchedule] = useState<DaySchedule[]>([
     { day: "Lunes", isOpen: true, openTime: "09:00", closeTime: "20:00" },
     { day: "Martes", isOpen: true, openTime: "09:00", closeTime: "20:00" },
     { day: "Miércoles", isOpen: true, openTime: "09:00", closeTime: "20:00" },
     { day: "Jueves", isOpen: true, openTime: "09:00", closeTime: "20:00" },
-    { day: "Viernes", isOpen: true, openTime: "09:00", closeTime: "20:30" },
+    { day: "Viernes", isOpen: true, openTime: "09:00", closeTime: "20:00" },
     { day: "Sábado", isOpen: true, openTime: "10:00", closeTime: "18:00" },
     { day: "Domingo", isOpen: false, openTime: "10:00", closeTime: "14:00" },
   ]);
 
-  // Step 3: Services
-  const [services, setServices] = useState<ServiceItem[]>([
-    { id: "1", name: "Corte Clásico Degradado", category: "Barbería", duration: 30, price: 18, buffer: 5 },
-    { id: "2", name: "Combo Corte & Perfilado Barba", category: "Barbería", duration: 50, price: 28, buffer: 5 },
-    { id: "3", name: "Ritual Spa Capilar", category: "Tratamientos", duration: 45, price: 35, buffer: 10 },
-  ]);
+  // Step 3: Services (Starts empty, no fake mock items)
+  const [services, setServices] = useState<ServiceItem[]>([]);
   const [newServiceName, setNewServiceName] = useState("");
-  const [newServiceCategory, setNewServiceCategory] = useState("Barbería");
-  const [newServiceDuration, setNewServiceDuration] = useState(45);
-  const [newServicePrice, setNewServicePrice] = useState(25);
-  const [newServiceBuffer, setNewServiceBuffer] = useState(5);
+  const [newServiceCategory, setNewServiceCategory] = useState("General");
+  const [newServiceDuration, setNewServiceDuration] = useState(30);
+  const [newServicePrice, setNewServicePrice] = useState(0);
+  const [newServiceBuffer, setNewServiceBuffer] = useState(0);
 
-  // Step 4: Team
-  const [teamMembers, setTeamMembers] = useState<TeamMemberItem[]>([
-    { id: "1", name: "Mateo Ramos (Propietario)", email: user?.email || "mateo@skedly.com", role: "admin" },
-  ]);
+  // Step 4: Team (Starts with the authenticated business owner)
+  const [teamMembers, setTeamMembers] = useState<TeamMemberItem[]>([]);
   const [soloPractitioner, setSoloPractitioner] = useState(false);
   const [newMemberName, setNewMemberName] = useState("");
   const [newMemberEmail, setNewMemberEmail] = useState("");
@@ -81,12 +75,36 @@ export default function OnboardingPage() {
 
   // State saving
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (currentBusiness?.name) {
+    if (currentBusiness?.name && !businessName) {
       setBusinessName(currentBusiness.name);
     }
-  }, [currentBusiness]);
+    if (user?.email && !email) {
+      setEmail(user.email);
+    }
+    if (user) {
+      const ownerName =
+        (user.user_metadata?.full_name as string) ||
+        (user.user_metadata?.name as string) ||
+        (user.email ? user.email.split("@")[0] : "Propietario");
+
+      setTeamMembers((prev) => {
+        if (prev.length === 0) {
+          return [
+            {
+              id: "owner-1",
+              name: `${ownerName} (Propietario)`,
+              email: user.email || "",
+              role: "admin",
+            },
+          ];
+        }
+        return prev;
+      });
+    }
+  }, [user, currentBusiness]);
 
   // Logo upload preview
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -141,52 +159,377 @@ export default function OnboardingPage() {
   // Save all onboarding configuration into Supabase and proceed to Dashboard
   const handleFinishOnboarding = async () => {
     setIsSubmitting(true);
+    setSaveError(null);
+
     try {
-      if (currentBusiness?.id) {
-        // 1. Update business details
-        await supabase
+      // 1. Resolve current authenticated user
+      let currentUser = user;
+      if (!currentUser) {
+        const { data: authData } = await supabase.auth.getUser();
+        currentUser = authData?.user || null;
+      }
+
+      if (!currentUser) {
+        throw new Error("No hay una sesión activa de usuario. Por favor inicia sesión.");
+      }
+
+      // 2. Resolve Business ID
+      let businessId = currentBusiness?.id;
+
+      if (!businessId) {
+        const { data: membership } = await supabase
+          .from("business_memberships")
+          .select("business_id")
+          .eq("user_id", currentUser.id)
+          .limit(1)
+          .maybeSingle();
+
+        businessId = membership?.business_id;
+      }
+
+      if (!businessId) {
+        const { data: ownedBusiness } = await supabase
+          .from("businesses")
+          .select("id")
+          .eq("created_by", currentUser.id)
+          .limit(1)
+          .maybeSingle();
+
+        businessId = ownedBusiness?.id;
+      }
+
+      // If business record does not exist yet, create it
+      if (!businessId) {
+        const baseSlug =
+          businessName
+            .toLowerCase()
+            .trim()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "") || "mi-negocio";
+        const uniqueSlug = `${baseSlug}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+        const { data: newBusiness, error: createBizErr } = await supabase
+          .from("businesses")
+          .insert({
+            name: businessName.trim() || "Mi Negocio",
+            slug: uniqueSlug,
+            created_by: currentUser.id,
+            description: `${businessType} profesional`,
+            phone: phone.trim() || null,
+            email: email.trim() || currentUser.email,
+            timezone: timezone || "America/Mexico_City",
+            currency: "MXN",
+            status: "active",
+            is_published: true,
+          })
+          .select("id")
+          .single();
+
+        if (createBizErr) throw createBizErr;
+        businessId = newBusiness.id;
+
+        await supabase.from("business_memberships").insert({
+          business_id: businessId,
+          user_id: currentUser.id,
+          role: "owner",
+        });
+      } else {
+        // Update existing business record
+        const { error: updateBizErr } = await supabase
           .from("businesses")
           .update({
             name: businessName.trim(),
             description: `${businessType} profesional`,
-            phone: phone.trim(),
-            email: email.trim(),
-            timezone,
+            phone: phone.trim() || null,
+            email: email.trim() || currentUser.email,
+            timezone: timezone || "America/Mexico_City",
             is_published: true,
           })
-          .eq("id", currentBusiness.id);
+          .eq("id", businessId);
 
-        // 2. Update default location
+        if (updateBizErr) console.warn("Error updating business:", updateBizErr);
+      }
+
+      // 3. Upsert default location
+      const { data: existingLoc } = await supabase
+        .from("locations")
+        .select("id")
+        .eq("business_id", businessId)
+        .eq("is_default", true)
+        .maybeSingle();
+
+      let locationId = existingLoc?.id;
+
+      if (locationId) {
         await supabase
           .from("locations")
           .update({
-            address_line: address.trim(),
-            city: city.trim(),
-            country,
-            timezone,
-            phone: phone.trim(),
-          })
-          .eq("business_id", currentBusiness.id)
-          .eq("is_default", true);
-
-        // 3. Insert or update services
-        for (const s of services) {
-          await supabase.from("services").insert({
-            business_id: currentBusiness.id,
-            name: s.name,
-            duration_minutes: s.duration,
-            price_amount: s.price,
-            currency: "MXN",
-            buffer_time_after: s.buffer,
+            address_line: address.trim() || null,
+            city: city.trim() || null,
+            country: country || "MX",
+            timezone: timezone || "America/Mexico_City",
+            phone: phone.trim() || null,
             is_active: true,
-          });
+          })
+          .eq("id", locationId);
+      } else {
+        const { data: newLoc, error: locErr } = await supabase
+          .from("locations")
+          .insert({
+            business_id: businessId,
+            name: "Sucursal Principal",
+            address_line: address.trim() || null,
+            city: city.trim() || null,
+            country: country || "MX",
+            timezone: timezone || "America/Mexico_City",
+            phone: phone.trim() || null,
+            is_default: true,
+            is_active: true,
+          })
+          .select("id")
+          .single();
+
+        if (locErr) console.warn("Error creating default location:", locErr);
+        locationId = newLoc?.id;
+      }
+
+      // 4. Save Weekly Working Hours
+      const weekdayMap: Record<string, number> = {
+        Domingo: 0,
+        Lunes: 1,
+        Martes: 2,
+        Miércoles: 3,
+        Miercoles: 3,
+        Jueves: 4,
+        Viernes: 5,
+        Sábado: 6,
+        Sabado: 6,
+      };
+
+      // Clear previous business-level working hours
+      await supabase
+        .from("working_hours")
+        .delete()
+        .eq("business_id", businessId)
+        .is("employee_id", null);
+
+      const workingHoursRows = schedule.map((s) => {
+        let startTime = s.openTime || "09:00";
+        let endTime = s.closeTime || "18:00";
+        if (startTime.length === 5) startTime += ":00";
+        if (endTime.length === 5) endTime += ":00";
+
+        if (endTime <= startTime) {
+          endTime = "23:59:00";
+        }
+
+        return {
+          business_id: businessId,
+          location_id: locationId || null,
+          weekday: weekdayMap[s.day] ?? 1,
+          start_time: startTime,
+          end_time: endTime,
+          is_available: Boolean(s.isOpen),
+        };
+      });
+
+      if (workingHoursRows.length > 0) {
+        const { error: whErr } = await supabase.from("working_hours").insert(workingHoursRows);
+        if (whErr) console.warn("Error saving working hours:", whErr);
+      }
+
+      // 5. Save Service Categories & Services
+      const categoryNames = Array.from(
+        new Set(services.map((s) => s.category?.trim() || "General"))
+      );
+
+      const categoryMap = new Map<string, string>();
+
+      for (let i = 0; i < categoryNames.length; i++) {
+        const catName = categoryNames[i];
+        const { data: existingCat } = await supabase
+          .from("service_categories")
+          .select("id")
+          .eq("business_id", businessId)
+          .eq("name", catName)
+          .maybeSingle();
+
+        if (existingCat?.id) {
+          categoryMap.set(catName, existingCat.id);
+        } else {
+          const { data: newCat, error: catErr } = await supabase
+            .from("service_categories")
+            .insert({
+              business_id: businessId,
+              name: catName,
+              display_order: i,
+              is_active: true,
+            })
+            .select("id")
+            .single();
+
+          if (newCat?.id) {
+            categoryMap.set(catName, newCat.id);
+          } else if (catErr) {
+            console.warn("Error creating service category:", catErr);
+          }
         }
       }
-    } catch (err) {
-      console.warn("Could not sync all onboarding data to Supabase:", err);
+
+      // Insert Services
+      const createdServiceIds: string[] = [];
+      for (let i = 0; i < services.length; i++) {
+        const s = services[i];
+        const catId = categoryMap.get(s.category?.trim() || "General") || null;
+
+        const { data: newSvc, error: svcErr } = await supabase
+          .from("services")
+          .insert({
+            business_id: businessId,
+            category_id: catId,
+            name: s.name.trim(),
+            description: `${s.name.trim()} - Servicio profesional`,
+            duration_minutes: Math.max(1, Number(s.duration) || 30),
+            buffer_minutes: Math.max(0, Number(s.buffer) || 0),
+            price: Math.max(0, Number(s.price) || 0),
+            display_order: i,
+            is_active: true,
+          })
+          .select("id")
+          .single();
+
+        if (newSvc?.id) {
+          createdServiceIds.push(newSvc.id);
+        } else if (svcErr) {
+          console.warn("Error inserting service:", svcErr);
+        }
+      }
+
+      // 6. Save Employees & Junctions (employee_services, employee_locations)
+      const createdEmployeeIds: string[] = [];
+
+      const { data: existingOwnerEmp } = await supabase
+        .from("employees")
+        .select("id")
+        .eq("business_id", businessId)
+        .eq("profile_id", currentUser.id)
+        .maybeSingle();
+
+      const ownerDisplayName =
+        teamMembers[0]?.name?.trim() ||
+        (currentUser.user_metadata?.full_name as string) ||
+        (currentUser.email?.split("@")[0] ?? "Propietario");
+
+      let ownerEmpId = existingOwnerEmp?.id;
+
+      if (!ownerEmpId) {
+        const { data: newOwnerEmp, error: ownerEmpErr } = await supabase
+          .from("employees")
+          .insert({
+            business_id: businessId,
+            profile_id: currentUser.id,
+            display_name: ownerDisplayName,
+            email: currentUser.email,
+            phone: phone.trim() || null,
+            is_active: true,
+          })
+          .select("id")
+          .single();
+
+        if (newOwnerEmp?.id) {
+          ownerEmpId = newOwnerEmp.id;
+          createdEmployeeIds.push(newOwnerEmp.id);
+        } else if (ownerEmpErr) {
+          console.warn("Error creating owner employee:", ownerEmpErr);
+        }
+      } else {
+        await supabase
+          .from("employees")
+          .update({
+            display_name: ownerDisplayName,
+            phone: phone.trim() || null,
+          })
+          .eq("id", ownerEmpId);
+        createdEmployeeIds.push(ownerEmpId);
+      }
+
+      // Additional team members if not solo
+      if (!soloPractitioner && teamMembers.length > 1) {
+        for (let i = 1; i < teamMembers.length; i++) {
+          const m = teamMembers[i];
+          if (!m.name.trim()) continue;
+
+          const { data: newEmp, error: empErr } = await supabase
+            .from("employees")
+            .insert({
+              business_id: businessId,
+              display_name: m.name.trim(),
+              email: m.email?.trim() || null,
+              is_active: true,
+            })
+            .select("id")
+            .single();
+
+          if (newEmp?.id) {
+            createdEmployeeIds.push(newEmp.id);
+          } else if (empErr) {
+            console.warn("Error inserting team member employee:", empErr);
+          }
+        }
+      }
+
+      // Link employees to services and locations
+      for (const empId of createdEmployeeIds) {
+        for (const svcId of createdServiceIds) {
+          await supabase.from("employee_services").upsert(
+            {
+              business_id: businessId,
+              employee_id: empId,
+              service_id: svcId,
+            },
+            { onConflict: "employee_id,service_id" }
+          );
+        }
+
+        if (locationId) {
+          await supabase.from("employee_locations").upsert(
+            {
+              business_id: businessId,
+              employee_id: empId,
+              location_id: locationId,
+            },
+            { onConflict: "employee_id,location_id" }
+          );
+        }
+      }
+
+      // 7. Upsert Website Settings
+      await supabase.from("website_settings").upsert(
+        {
+          business_id: businessId,
+          headline: `Bienvenido a ${businessName.trim()}`,
+          about_text: `${businessType} profesional en ${city.trim() || "tu ciudad"}. Agenda tu cita en línea fácilmente.`,
+          primary_color: "#2C4DD6",
+          booking_enabled: true,
+          show_prices: true,
+          show_employee_profiles: !soloPractitioner,
+        },
+        { onConflict: "business_id" }
+      );
+
+      // 8. Refresh context and redirect to Dashboard
+      if (refreshUserData) {
+        await refreshUserData();
+      }
+      router.push("/dashboard");
+    } catch (err: unknown) {
+      const error = err as Error;
+      console.error("Critical error saving onboarding data to Supabase:", error);
+      setSaveError(error.message || "Ocurrió un error al guardar los datos en Supabase.");
     } finally {
       setIsSubmitting(false);
-      router.push("/dashboard");
     }
   };
 
@@ -885,20 +1228,28 @@ export default function OnboardingPage() {
                       </div>
                     </div>
 
-                    <div className="space-y-3">
-                      {services.map((s) => (
-                        <div
-                          key={s.id}
-                          className="p-3.5 rounded-xl bg-surface-container-low border border-surface-container-high/60 flex items-center justify-between"
-                        >
-                          <div>
-                            <span className="text-xs font-semibold text-primary block">{s.category}</span>
-                            <h4 className="text-sm font-bold text-on-surface">{s.name}</h4>
-                            <span className="text-xs text-on-surface-variant">
-                              {s.duration} min • ${s.price} • +{s.buffer} min buffer
-                            </span>
-                          </div>
-                          {services.length > 1 && (
+                    {services.length === 0 ? (
+                      <div className="p-8 text-center rounded-xl bg-surface-container-low/60 border border-dashed border-surface-container-high flex flex-col items-center justify-center gap-2">
+                        <span className="material-symbols-outlined text-[32px] text-on-surface-variant">spa</span>
+                        <p className="text-xs font-semibold text-on-surface">No has agregado servicios todavía</p>
+                        <p className="text-[11px] text-on-surface-variant max-w-xs">
+                          Usa el formulario de la izquierda para añadir servicios ahora o haz clic en Continuar para configurarlos luego en el catálogo.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        {services.map((s) => (
+                          <div
+                            key={s.id}
+                            className="p-3.5 rounded-xl bg-surface-container-low border border-surface-container-high/60 flex items-center justify-between"
+                          >
+                            <div>
+                              <span className="text-xs font-semibold text-primary block">{s.category}</span>
+                              <h4 className="text-sm font-bold text-on-surface">{s.name}</h4>
+                              <span className="text-xs text-on-surface-variant">
+                                {s.duration} min • ${s.price} • +{s.buffer} min buffer
+                              </span>
+                            </div>
                             <button
                               type="button"
                               onClick={() => handleRemoveService(s.id)}
@@ -907,10 +1258,10 @@ export default function OnboardingPage() {
                             >
                               <span className="material-symbols-outlined text-[18px]">delete</span>
                             </button>
-                          )}
-                        </div>
-                      ))}
-                    </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
 
                     {/* Navigation */}
                     <div className="flex items-center justify-between gap-3 pt-4 border-t border-surface-container-high/60">
@@ -1043,6 +1394,14 @@ export default function OnboardingPage() {
                           <span>+ Agregar al equipo</span>
                         </button>
                       </form>
+                    </div>
+                  )}
+
+                  {/* Error Notification */}
+                  {saveError && (
+                    <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs sm:text-sm font-medium flex items-center gap-2.5">
+                      <span className="material-symbols-outlined text-[20px] text-red-600 shrink-0">error</span>
+                      <span>{saveError}</span>
                     </div>
                   )}
 

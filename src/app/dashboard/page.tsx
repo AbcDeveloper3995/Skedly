@@ -77,89 +77,10 @@ export default function DashboardOverviewPage() {
     }
   };
 
-  // Mock initial appointments aligning with stitch designs
-  const initialOwnerAppointments: AppointmentItem[] = [
-    {
-      id: "apt-1",
-      start_at: "09:30",
-      end_at: "10:15",
-      status: "completed",
-      customer_name_snapshot: "Carlos Mendoza",
-      customer_phone_snapshot: "+34 612 345 678",
-      employee_name: "Mateo Ramos",
-      service_name: "Corte Degradado + Lavado Especial",
-      duration_minutes: 45,
-      price: 18,
-      notes: "Prefiere acabado mate con cera natural. Corte con máquina 0.5 a los lados.",
-    },
-    {
-      id: "apt-2",
-      start_at: "10:30",
-      end_at: "11:00",
-      status: "completed",
-      customer_name_snapshot: "Rodrigo Salinas",
-      customer_phone_snapshot: "+34 622 987 654",
-      employee_name: "Sofía Gómez",
-      service_name: "Perfilado de Barba Tradicional",
-      duration_minutes: 30,
-      price: 14,
-      notes: "Cuidado con piel sensible en cuello.",
-    },
-    {
-      id: "apt-3",
-      start_at: "11:15",
-      end_at: "12:30",
-      status: "in_progress",
-      customer_name_snapshot: "Alejandro Peña",
-      customer_phone_snapshot: "+34 633 456 789",
-      employee_name: "Mateo Ramos",
-      service_name: "Pack Completo Corte + Barba Ritual",
-      duration_minutes: 75,
-      price: 28,
-      notes: "Degradado medio, aceite de sándalo para la barba. En Sillón 02.",
-    },
-    {
-      id: "apt-4",
-      start_at: "12:45",
-      end_at: "13:15",
-      status: "confirmed",
-      customer_name_snapshot: "Javier Domínguez",
-      customer_phone_snapshot: "+34 644 112 233",
-      employee_name: "David León",
-      service_name: "Corte de Autor",
-      duration_minutes: 30,
-      price: 22,
-      notes: "Puntualidad solicitada por evento posterior.",
-    },
-    {
-      id: "apt-5",
-      start_at: "13:30",
-      end_at: "14:05",
-      status: "pending",
-      customer_name_snapshot: "Lucas Navarro",
-      customer_phone_snapshot: "+34 655 889 900",
-      employee_name: "Sofía Gómez",
-      service_name: "Ritual Completo Barba",
-      duration_minutes: 35,
-      price: 16,
-      notes: "Primera vez en el local. Solicita información de suscripción mensual.",
-    },
-    {
-      id: "apt-6",
-      start_at: "16:00",
-      end_at: "16:40",
-      status: "cancelled",
-      customer_name_snapshot: "Daniel Ortiz",
-      customer_phone_snapshot: "+34 666 778 899",
-      employee_name: "Mateo Ramos",
-      service_name: "Corte Degradado • Aviso con antelación",
-      duration_minutes: 40,
-      price: 18,
-      notes: "Canceló con 4 horas de anticipación. Espacio reasignado.",
-    },
-  ];
+  // Customers count from Supabase
+  const [customersCount, setCustomersCount] = useState<number>(0);
 
-  // Load from Supabase or fallback
+  // Load from Supabase real data
   const loadDashboardData = async (businessId: string) => {
     try {
       const { data: appData } = await supabase
@@ -176,7 +97,7 @@ export default function DashboardOverviewPage() {
         `)
         .eq("business_id", businessId)
         .order("start_at", { ascending: true })
-        .limit(20);
+        .limit(50);
 
       if (appData && appData.length > 0) {
         const mapped: AppointmentItem[] = appData.map((item: any) => {
@@ -195,16 +116,24 @@ export default function DashboardOverviewPage() {
             employee_name: item.employee?.display_name || "Especialista",
             service_name: service?.service_name || "Servicio General",
             duration_minutes: service?.duration_minutes || 45,
-            price: service?.unit_price || 20,
+            price: service?.unit_price || 0,
           };
         });
         setAppointments(mapped);
       } else {
-        setAppointments(initialOwnerAppointments);
+        setAppointments([]);
       }
+
+      // Fetch real customers count
+      const { count } = await supabase
+        .from("customers")
+        .select("id", { count: "exact", head: true })
+        .eq("business_id", businessId);
+
+      setCustomersCount(count || 0);
     } catch (err) {
       console.error("Dashboard data load error:", err);
-      setAppointments(initialOwnerAppointments);
+      setAppointments([]);
     }
   };
 
@@ -216,7 +145,6 @@ export default function DashboardOverviewPage() {
         month: "long",
         year: "numeric",
       }).format(new Date());
-      // Capitalize first letter
       setCurrentDateFormatted(today.charAt(0).toUpperCase() + today.slice(1));
     } catch {
       // fallback
@@ -225,7 +153,7 @@ export default function DashboardOverviewPage() {
     if (currentBusiness?.id) {
       loadDashboardData(currentBusiness.id);
     } else {
-      setAppointments(initialOwnerAppointments);
+      setAppointments([]);
     }
   }, [currentBusiness]);
 
@@ -393,24 +321,10 @@ export default function DashboardOverviewPage() {
                 </span>
                 <span className="material-symbols-outlined text-[15px]">arrow_outward</span>
               </Link>
-
-              {/* Simular día vacío toggle */}
-              <button
-                type="button"
-                onClick={() => setSimulateEmpty(!simulateEmpty)}
-                className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                  simulateEmpty
-                    ? "bg-primary text-on-primary shadow-sm"
-                    : "bg-surface-container text-on-surface hover:bg-surface-container-high border border-surface-container-high/60"
-                }`}
-              >
-                <span className="material-symbols-outlined text-[18px]">swap_horiz</span>
-                <span>{simulateEmpty ? "Restaurar día con citas" : "Simular día vacío"}</span>
-              </button>
             </div>
           </section>
 
-          {/* 2. KPI Metrics Grid (4 cards) */}
+          {/* 2. KPI Metrics Grid (4 cards with real Supabase calculations) */}
           <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {/* KPI 1 */}
             <div className="p-5 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col justify-between hover:shadow-md transition-shadow group">
@@ -422,13 +336,11 @@ export default function DashboardOverviewPage() {
               </div>
               <div className="space-y-1">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-on-surface">18</span>
-                  <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-semibold">
-                    <span className="material-symbols-outlined text-[13px]">trending_up</span>
-                    +4 vs ayer
-                  </span>
+                  <span className="text-3xl font-bold text-on-surface">{appointments.length}</span>
                 </div>
-                <p className="text-xs text-secondary">14 completadas o en curso</p>
+                <p className="text-xs text-secondary">
+                  {appointments.filter((a) => a.status === "completed" || a.status === "in_progress").length} completadas o en curso
+                </p>
               </div>
             </div>
 
@@ -442,12 +354,14 @@ export default function DashboardOverviewPage() {
               </div>
               <div className="space-y-1">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-on-surface">12</span>
+                  <span className="text-3xl font-bold text-on-surface">
+                    {appointments.filter((a) => a.status === "confirmed" || a.status === "pending").length}
+                  </span>
                   <span className="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant text-[11px] font-medium">
-                    Próximos 7 días
+                    Programadas
                   </span>
                 </div>
-                <p className="text-xs text-secondary">Total programadas en agenda</p>
+                <p className="text-xs text-secondary">Total activas en agenda</p>
               </div>
             </div>
 
@@ -461,13 +375,9 @@ export default function DashboardOverviewPage() {
               </div>
               <div className="space-y-1">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-on-surface">248</span>
-                  <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-semibold">
-                    <span className="material-symbols-outlined text-[13px]">arrow_upward</span>
-                    +16 este mes
-                  </span>
+                  <span className="text-3xl font-bold text-on-surface">{customersCount}</span>
                 </div>
-                <p className="text-xs text-secondary">Fidelidad recurrente del 68%</p>
+                <p className="text-xs text-secondary">Clientes en base de datos</p>
               </div>
             </div>
 
@@ -481,13 +391,18 @@ export default function DashboardOverviewPage() {
               </div>
               <div className="space-y-1">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-on-surface">8%</span>
-                  <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-semibold">
-                    <span className="material-symbols-outlined text-[13px]">trending_down</span>
-                    -2.4% vs mes ant.
+                  <span className="text-3xl font-bold text-on-surface">
+                    {appointments.length > 0
+                      ? Math.round(
+                          (appointments.filter((a) => a.status === "cancelled").length /
+                            appointments.length) *
+                            100
+                        )
+                      : 0}
+                    %
                   </span>
                 </div>
-                <p className="text-xs text-secondary">Bajo el promedio de referencia (14%)</p>
+                <p className="text-xs text-secondary">Sobre citas registradas</p>
               </div>
             </div>
           </section>
@@ -561,8 +476,8 @@ export default function DashboardOverviewPage() {
                   ))}
                 </div>
 
-                {/* Simulated Empty State or Active Appointment List */}
-                {simulateEmpty ? (
+                {/* Real Empty State or Active Appointment List */}
+                {appointments.length === 0 ? (
                   <div className="p-8 rounded-2xl bg-surface-container-low text-center flex flex-col items-center justify-center space-y-4 my-2 border border-surface-container">
                     <div className="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-primary mx-auto shadow-sm">
                       <span className="material-symbols-outlined text-[32px]">event_busy</span>
@@ -794,206 +709,29 @@ export default function DashboardOverviewPage() {
                   </div>
                 </div>
 
-                {/* Chart 1: Daily Appointments Curve (Clean SVG Graphic) */}
-                <div className="p-4 rounded-xl bg-surface-container-low/70 border border-surface-container space-y-4">
-                  <div className="flex items-center justify-between flex-wrap gap-2">
-                    <div className="space-y-0.5">
-                      <span className="text-[11px] text-secondary uppercase font-semibold tracking-wider">
-                        Evolución de reservas diarias
-                      </span>
-                      <p className="text-base font-bold text-on-surface">
-                        114 citas atendidas esta semana
+                {/* Chart: Evolución y servicios */}
+                {appointments.length === 0 ? (
+                  <div className="p-8 text-center rounded-xl bg-surface-container-low/50 border border-dashed border-surface-container flex flex-col items-center justify-center gap-2">
+                    <span className="material-symbols-outlined text-[32px] text-secondary">trending_up</span>
+                    <p className="text-xs font-semibold text-on-surface">Sin estadísticas de reservas aún</p>
+                    <p className="text-[11px] text-secondary max-w-sm">
+                      A medida que tus clientes agenden turnos o registres citas en mostrador, verás reflejada aquí la evolución de tu negocio y tus servicios más solicitados.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-6">
+                    {/* Resumen de citas */}
+                    <div className="p-4 rounded-xl bg-surface-container-low/70 border border-surface-container space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-on-surface">Resumen de actividad</span>
+                        <span className="text-xs font-semibold text-primary">{appointments.length} citas registradas</span>
+                      </div>
+                      <p className="text-xs text-secondary">
+                        {appointments.filter((a) => a.status === "completed").length} citas completadas con éxito.
                       </p>
                     </div>
-                    <span className="inline-flex items-center gap-1 text-xs text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full font-semibold">
-                      <span className="material-symbols-outlined text-[14px]">north_east</span>
-                      +18% que la semana anterior
-                    </span>
                   </div>
-
-                  {/* Inline SVG Interactive Line Chart */}
-                  <div className="relative w-full h-40 flex items-end">
-                    <svg
-                      className="w-full h-full overflow-visible"
-                      preserveAspectRatio="none"
-                      viewBox="0 0 600 140"
-                    >
-                      <defs>
-                        <linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
-                          <stop offset="0%" stopColor="#2c4dd6" stopOpacity="0.25" />
-                          <stop offset="100%" stopColor="#2c4dd6" stopOpacity="0.0" />
-                        </linearGradient>
-                      </defs>
-                      {/* Grid Lines */}
-                      <line
-                        opacity="0.4"
-                        stroke="#c4c5d7"
-                        strokeDasharray="3 3"
-                        strokeWidth="0.75"
-                        x1="0"
-                        x2="600"
-                        y1="20"
-                        y2="20"
-                      />
-                      <line
-                        opacity="0.4"
-                        stroke="#c4c5d7"
-                        strokeDasharray="3 3"
-                        strokeWidth="0.75"
-                        x1="0"
-                        x2="600"
-                        y1="65"
-                        y2="65"
-                      />
-                      <line
-                        opacity="0.6"
-                        stroke="#c4c5d7"
-                        strokeWidth="0.75"
-                        x1="0"
-                        x2="600"
-                        y1="110"
-                        y2="110"
-                      />
-
-                      {/* Area Fill */}
-                      <polygon
-                        fill="url(#chartGradient)"
-                        points="20,80 110,68 200,56 290,40 380,24 470,12 560,110 560,110 20,110"
-                      />
-                      {/* Trend Polyline */}
-                      <polyline
-                        fill="none"
-                        points="20,80 110,68 200,56 290,40 380,24 470,12 560,110"
-                        stroke="#2c4dd6"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="3"
-                      />
-
-                      {/* Data Dots */}
-                      <circle cx="20" cy="80" fill="#ffffff" r="4" stroke="#2c4dd6" strokeWidth="2.5" />
-                      <circle cx="110" cy="68" fill="#ffffff" r="4" stroke="#2c4dd6" strokeWidth="2.5" />
-                      {/* Mié (Hoy): Highlighted */}
-                      <circle cx="200" cy="56" fill="#2c4dd6" r="6" stroke="#ffffff" strokeWidth="2.5" />
-                      <circle cx="290" cy="40" fill="#ffffff" r="4" stroke="#2c4dd6" strokeWidth="2.5" />
-                      <circle cx="380" cy="24" fill="#ffffff" r="4" stroke="#2c4dd6" strokeWidth="2.5" />
-                      <circle cx="470" cy="12" fill="#ffffff" r="4" stroke="#2c4dd6" strokeWidth="2.5" />
-                      <circle cx="560" cy="110" fill="#c4c5d7" r="3" />
-                    </svg>
-                  </div>
-
-                  {/* Chart X-Axis Labels */}
-                  <div className="grid grid-cols-7 text-center text-xs text-secondary pt-1">
-                    <div>
-                      <span className="block text-on-surface font-semibold">14</span>Lun
-                    </div>
-                    <div>
-                      <span className="block text-on-surface font-semibold">16</span>Mar
-                    </div>
-                    <div className="text-primary font-bold">
-                      <span className="block text-primary font-bold">18 (Hoy)</span>Mié
-                    </div>
-                    <div>
-                      <span className="block text-on-surface font-semibold">21</span>Jue
-                    </div>
-                    <div>
-                      <span className="block text-on-surface font-semibold">25</span>Vie
-                    </div>
-                    <div>
-                      <span className="block text-on-surface font-semibold">28</span>Sáb
-                    </div>
-                    <div className="text-outline">
-                      <span className="block text-outline">0</span>Dom
-                    </div>
-                  </div>
-                </div>
-
-                {/* Chart 2: Servicios más reservados */}
-                <div className="space-y-4 pt-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-on-surface">
-                      Servicios más solicitados
-                    </span>
-                    <span className="text-[11px] text-secondary">
-                      *Valor referencial estimado en tienda (no cobrado online)
-                    </span>
-                  </div>
-
-                  <div className="space-y-3.5">
-                    {/* Item 1 */}
-                    <div className="space-y-1.5">
-                      <div className="flex justify-between items-baseline text-xs">
-                        <span className="font-medium text-on-surface">
-                          Corte Degradado Moderno
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-on-surface">54 reservas (42%)</span>
-                          <span className="text-secondary text-[11px]">~810 € ref.</span>
-                        </div>
-                      </div>
-                      <div className="w-full h-2 rounded-full bg-surface-container overflow-hidden">
-                        <div className="h-full rounded-full bg-primary" style={{ width: "42%" }}></div>
-                      </div>
-                    </div>
-
-                    {/* Item 2 */}
-                    <div className="space-y-1.5">
-                      <div className="flex justify-between items-baseline text-xs">
-                        <span className="font-medium text-on-surface">
-                          Perfilado de Barba Tradicional
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-on-surface">36 reservas (28%)</span>
-                          <span className="text-secondary text-[11px]">~432 € ref.</span>
-                        </div>
-                      </div>
-                      <div className="w-full h-2 rounded-full bg-surface-container overflow-hidden">
-                        <div
-                          className="h-full rounded-full bg-primary-container"
-                          style={{ width: "28%" }}
-                        ></div>
-                      </div>
-                    </div>
-
-                    {/* Item 3 */}
-                    <div className="space-y-1.5">
-                      <div className="flex justify-between items-baseline text-xs">
-                        <span className="font-medium text-on-surface">
-                          Pack Completo (Corte + Barba + Lavado)
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-on-surface">23 reservas (18%)</span>
-                          <span className="text-secondary text-[11px]">~575 € ref.</span>
-                        </div>
-                      </div>
-                      <div className="w-full h-2 rounded-full bg-surface-container overflow-hidden">
-                        <div
-                          className="h-full rounded-full bg-tertiary-container"
-                          style={{ width: "18%" }}
-                        ></div>
-                      </div>
-                    </div>
-
-                    {/* Item 4 */}
-                    <div className="space-y-1.5">
-                      <div className="flex justify-between items-baseline text-xs">
-                        <span className="font-medium text-on-surface">
-                          Ritual Hidratación &amp; Toalla Caliente
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-on-surface">15 reservas (12%)</span>
-                          <span className="text-secondary text-[11px]">~180 € ref.</span>
-                        </div>
-                      </div>
-                      <div className="w-full h-2 rounded-full bg-surface-container overflow-hidden">
-                        <div
-                          className="h-full rounded-full bg-secondary-fixed-dim"
-                          style={{ width: "12%" }}
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                )}
               </div>
             </div>
 

@@ -20,7 +20,6 @@ export default function CategoriasManagementPage() {
 
   const [categories, setCategories] = useState<CategoryWithServices[]>([]);
   const [loading, setLoading] = useState(true);
-  const [simulateEmpty, setSimulateEmpty] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // Modal State
@@ -44,50 +43,6 @@ export default function CategoriasManagementPage() {
       setToastMessage(null);
     }, 3200);
   };
-
-  // Mock initial categories matching Stitch design if DB empty
-  const defaultCategories: CategoryWithServices[] = [
-    {
-      id: "cat-1",
-      name: "Cortes de cabello",
-      description:
-        "Cortes clásicos, degradados modernos y estilos para niños con acabado profesional y peinado incluido.",
-      priority: 1,
-      is_active: true,
-      icon: "content_cut",
-      services: ["Corte Clásico", "Corte Premium", "Corte Infantil"],
-    },
-    {
-      id: "cat-2",
-      name: "Barba",
-      description:
-        "Arreglos precisos con navaja y toalla caliente para mantener un aspecto pulcro y definido.",
-      priority: 2,
-      is_active: true,
-      icon: "face",
-      services: ["Perfilado de Barba", "Afeitado Clásico"],
-    },
-    {
-      id: "cat-3",
-      name: "Tratamientos",
-      description:
-        "Rituales de cuidado facial y capilar con exfoliantes e hidratación profunda para revitalizar el cuero cabelludo.",
-      priority: 3,
-      is_active: true,
-      icon: "spa",
-      services: ["Tratamiento Capilar", "Exfoliación Facial"],
-    },
-    {
-      id: "cat-4",
-      name: "Coloración",
-      description:
-        "Tintes orgánicos, mechas platinadas, cobertura de canas y decoloraciones de precisión técnica.",
-      priority: 4,
-      is_active: false,
-      icon: "palette",
-      services: [],
-    },
-  ];
 
   const loadCategories = async (businessId: string) => {
     setLoading(true);
@@ -128,11 +83,11 @@ export default function CategoriasManagementPage() {
         });
         setCategories(mapped);
       } else {
-        setCategories(defaultCategories);
+        setCategories([]);
       }
     } catch (err) {
       console.error("Error loading categories:", err);
-      setCategories(defaultCategories);
+      setCategories([]);
     } finally {
       setLoading(false);
     }
@@ -142,7 +97,7 @@ export default function CategoriasManagementPage() {
     if (currentBusiness?.id) {
       loadCategories(currentBusiness.id);
     } else {
-      setCategories(defaultCategories);
+      setCategories([]);
       setLoading(false);
     }
   }, [currentBusiness]);
@@ -346,15 +301,6 @@ export default function CategoriasManagementPage() {
           <div className="flex items-center gap-2.5 self-start md:self-auto flex-wrap">
             <button
               type="button"
-              onClick={() => setSimulateEmpty(!simulateEmpty)}
-              className="px-3.5 h-10 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold transition-colors flex items-center gap-1.5 shadow-xs border border-surface-container-high/60 cursor-pointer"
-            >
-              <span className="material-symbols-outlined text-[16px]">visibility</span>
-              <span>{simulateEmpty ? "Restaurar categorías" : "Simular sin categorías"}</span>
-            </button>
-
-            <button
-              type="button"
               onClick={handleOpenCreate}
               className="px-4 h-10 rounded-lg bg-primary-container hover:bg-primary text-on-primary-container hover:text-on-primary text-xs font-semibold transition-all flex items-center gap-1.5 shadow-xs cursor-pointer"
             >
@@ -453,7 +399,7 @@ export default function CategoriasManagementPage() {
         )}
 
         {/* Rejilla de Categorías o Vista Vacía */}
-        {simulateEmpty || categories.length === 0 ? (
+        {categories.length === 0 ? (
           <div className="bg-surface-container-lowest rounded-2xl p-8 sm:p-12 shadow-sm border border-surface-container text-center flex flex-col items-center justify-center gap-4 py-16">
             <div className="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-primary shadow-xs">
               <span className="material-symbols-outlined text-[36px]">category</span>
