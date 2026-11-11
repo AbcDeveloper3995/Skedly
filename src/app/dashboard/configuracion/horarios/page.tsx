@@ -368,7 +368,7 @@ function HorariosContent() {
   };
 
   return (
-    <div className="flex flex-col w-full max-w-[1440px] mx-auto gap-6 pb-12">
+    <div className="flex flex-col w-full px-4 sm:px-6 lg:px-8 2xl:px-12 py-6 gap-6 pb-16">
       {/* Sub-header / Page Title Banner */}
       <div className="flex flex-col gap-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">

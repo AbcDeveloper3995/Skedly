@@ -6,7 +6,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/lib/supabase/auth-context";
 import { supabase } from "@/lib/supabase/client";
 import {
-  INITIAL_CUSTOMERS,
   CustomerDetail,
 } from "@/lib/customers-data";
 
@@ -21,7 +20,6 @@ function ClientesContent() {
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState<"all" | "recurrent" | "new">("all");
   const [sortBy, setSortBy] = useState<"recent" | "appointments" | "name" | "registered">("recent");
-  const [forceEmptyState, setForceEmptyState] = useState(false);
   const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
 
   // Modal State
@@ -71,6 +69,7 @@ function ClientesContent() {
               email: c.email || null,
               appointmentsCount: 0,
               statusTag: "Nuevo",
+              created_at: c.created_at,
               lastAppointment: null,
               registeredAt: new Date(c.created_at).toLocaleDateString("es-ES", {
                 day: "2-digit",
@@ -228,8 +227,6 @@ function ClientesContent() {
 
   // Filtering & Sorting
   const filteredCustomers = useMemo(() => {
-    if (forceEmptyState) return [];
-
     let list = customers.filter((c) => {
       const matchSearch =
         c.full_name.toLowerCase().includes(search.toLowerCase()) ||
@@ -261,15 +258,38 @@ function ClientesContent() {
     });
 
     return list;
-  }, [customers, search, activeTab, sortBy, forceEmptyState]);
+  }, [customers, search, activeTab, sortBy]);
 
-  // Counts for pills
+  // Real Counts & KPIs
   const totalCount = customers.length;
-  const recurrentCount = customers.filter((c) => c.statusTag === "Recurrente" || c.statusTag === "VIP").length;
-  const newCount = customers.filter((c) => c.statusTag === "Nuevo").length;
+  const recurrentCount = useMemo(() => {
+    return customers.filter(
+      (c) => c.statusTag === "Recurrente" || c.statusTag === "VIP" || c.appointmentsCount >= 2
+    ).length;
+  }, [customers]);
+
+  const newCount = useMemo(() => {
+    return customers.filter((c) => c.statusTag === "Nuevo").length;
+  }, [customers]);
+
+  const newThisMonth = useMemo(() => {
+    const now = new Date();
+    const curMonth = now.getMonth();
+    const curYear = now.getFullYear();
+    return customers.filter((c) => {
+      if ((c as any).created_at) {
+        const d = new Date((c as any).created_at);
+        return d.getMonth() === curMonth && d.getFullYear() === curYear;
+      }
+      return c.statusTag === "Nuevo";
+    }).length;
+  }, [customers]);
+
+  const recurrentPct = totalCount > 0 ? Math.round((recurrentCount / totalCount) * 100) : 0;
+  const newPct = totalCount > 0 ? Math.round((newThisMonth / totalCount) * 100) : 0;
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
+    <div className="flex flex-col gap-6 w-full px-4 sm:px-6 lg:px-8 2xl:px-12 py-6 pb-16">
       {/* EXPORT TOAST */}
       {exportNotice && (
         <div className="fixed top-20 right-6 z-50 bg-[#009842] text-white px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-2 text-xs font-semibold animate-fade-in">
@@ -330,11 +350,11 @@ function ClientesContent() {
               </span>
               <div className="flex items-baseline gap-2 mt-1">
                 <span className="text-3xl font-extrabold text-[#191c1e] tracking-tight">
-                  {348}
+                  {totalCount}
                 </span>
                 <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold text-[11px]">
                   <span className="material-symbols-outlined text-[14px]">arrow_upward</span>
-                  12% este mes
+                  {totalCount > 0 ? `${totalCount} en base de datos` : "Directorio listo"}
                 </span>
               </div>
             </div>
@@ -365,10 +385,10 @@ function ClientesContent() {
               </span>
               <div className="flex items-baseline gap-2 mt-1">
                 <span className="text-3xl font-extrabold text-[#191c1e] tracking-tight">
-                  42
+                  {newThisMonth}
                 </span>
                 <span className="text-xs text-[#575e70] font-medium">
-                  Primera visita completada
+                  {newThisMonth === 1 ? "1 nuevo registrado" : `${newThisMonth} nuevos registrados`}
                 </span>
               </div>
             </div>
@@ -379,11 +399,11 @@ function ClientesContent() {
           {/* Progress bar */}
           <div className="mt-4 flex flex-col gap-1.5">
             <div className="flex justify-between text-[11px] font-medium text-[#575e70]">
-              <span>Meta mensual</span>
-              <span className="text-[#191c1e] font-semibold">58% (42/72)</span>
+              <span>Proporción mensual</span>
+              <span className="text-[#191c1e] font-semibold">{newPct}% ({newThisMonth}/{totalCount})</span>
             </div>
             <div className="w-full h-2 rounded-full bg-[#f2f4f6] overflow-hidden">
-              <div className="h-full bg-amber-500 rounded-full" style={{ width: "58%" }}></div>
+              <div className="h-full bg-amber-500 rounded-full" style={{ width: `${Math.min(100, newPct)}%` }}></div>
             </div>
           </div>
         </div>
@@ -397,11 +417,11 @@ function ClientesContent() {
               </span>
               <div className="flex items-baseline gap-2 mt-1">
                 <span className="text-3xl font-extrabold text-[#191c1e] tracking-tight">
-                  68%
+                  {recurrentPct}%
                 </span>
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold text-[11px]">
                   <span className="material-symbols-outlined text-[13px]">verified</span>
-                  Alta fidelización
+                  {recurrentCount > 0 ? "Alta fidelización" : "Sin recurrencia aún"}
                 </span>
               </div>
             </div>
@@ -410,14 +430,14 @@ function ClientesContent() {
             </div>
           </div>
           <div className="mt-4 flex items-center justify-between text-[11px] text-[#575e70]">
-            <span>236 clientes con 2 o más citas</span>
-            <span className="font-semibold text-emerald-600">Retención 4.8★</span>
+            <span>{recurrentCount} {recurrentCount === 1 ? "cliente recurrente" : "clientes recurrentes"}</span>
+            <span className="font-semibold text-emerald-600">{recurrentPct}% retención</span>
           </div>
         </div>
       </div>
 
-      {/* PHONE IDENTIFICATION BANNER & SIMULATOR TOGGLE */}
-      <div className="rounded-2xl bg-gradient-to-r from-[#dee1ff]/40 via-white to-white p-4 sm:p-5 border border-[#dee1ff] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      {/* PHONE IDENTIFICATION BANNER */}
+      <div className="rounded-2xl bg-gradient-to-r from-[#dee1ff]/40 via-white to-white p-4 sm:p-5 border border-[#dee1ff] flex items-center justify-between gap-4">
         <div className="flex items-start gap-3">
           <div className="w-10 h-10 rounded-xl bg-[#2c4dd6] text-white flex items-center justify-center shrink-0 shadow-xs">
             <span className="material-symbols-outlined text-xl">phone_iphone</span>
@@ -432,27 +452,10 @@ function ClientesContent() {
               </span>
             </div>
             <p className="text-xs text-[#444654] mt-0.5">
-              Tus clientes reservan sin necesidad de crear contraseñas ni registrar cuentas de usuario. El número telefónico agrupa automáticamente su historial en el estudio.
+              Tus clientes reservan sin necesidad de crear contraseñas ni registrar cuentas de usuario. El número telefónico agrupa automáticamente su historial en el negocio.
             </p>
           </div>
         </div>
-
-        {/* Empty state test simulator */}
-        <button
-          onClick={() => setForceEmptyState(!forceEmptyState)}
-          type="button"
-          className={`shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors border ${
-            forceEmptyState
-              ? "bg-[#2c4dd6] text-white border-[#2c4dd6]"
-              : "bg-white text-[#575e70] border-[#c4c5d7]/60 hover:bg-[#f2f4f6]"
-          }`}
-          title="Alterna entre la lista con clientes y la vista vacía para verificar diseño"
-        >
-          <span className="material-symbols-outlined text-sm">
-            {forceEmptyState ? "toggle_on" : "toggle_off"}
-          </span>
-          <span>{forceEmptyState ? "Modo vacío activo" : "Simular vista vacía"}</span>
-        </button>
       </div>
 
       {/* DIRECTORY TABLE CONTAINER */}
@@ -552,22 +555,11 @@ function ClientesContent() {
             </p>
             <div className="flex items-center gap-3 mt-2">
               <button
-                onClick={() => {
-                  setForceEmptyState(false);
-                  setIsModalOpen(true);
-                }}
+                onClick={() => setIsModalOpen(true)}
                 className="px-4 py-2 rounded-xl bg-[#2c4dd6] hover:bg-[#4a68f0] text-white text-xs font-semibold shadow-xs"
               >
                 + Registrar primer cliente
               </button>
-              {forceEmptyState && (
-                <button
-                  onClick={() => setForceEmptyState(false)}
-                  className="px-4 py-2 rounded-xl bg-[#f2f4f6] hover:bg-[#e6e8ea] text-[#191c1e] text-xs font-semibold"
-                >
-                  Desactivar simulación vacía
-                </button>
-              )}
             </div>
           </div>
         ) : (
@@ -678,18 +670,22 @@ function ClientesContent() {
 
                       {/* Última Cita Realizada */}
                       <td className="py-4 px-4">
-                        <div className="flex flex-col">
-                          <div className="flex items-center gap-1.5 text-xs font-medium text-[#191c1e]">
-                            <span className="w-2 h-2 rounded-full bg-[#2c4dd6]"></span>
-                            <span>{c.lastAppointment.date}</span>
+                        {c.lastAppointment ? (
+                          <div className="flex flex-col">
+                            <div className="flex items-center gap-1.5 text-xs font-medium text-[#191c1e]">
+                              <span className="w-2 h-2 rounded-full bg-[#2c4dd6]"></span>
+                              <span>{c.lastAppointment.date}</span>
+                            </div>
+                            <span className="text-[11px] text-[#575e70] truncate max-w-[220px]">
+                              {c.lastAppointment.service}
+                              {c.lastAppointment.professional !== "Sin asignar" && (
+                                <> con {c.lastAppointment.professional}</>
+                              )}
+                            </span>
                           </div>
-                          <span className="text-[11px] text-[#575e70] truncate max-w-[220px]">
-                            {c.lastAppointment.service}
-                            {c.lastAppointment.professional !== "Sin asignar" && (
-                              <> con {c.lastAppointment.professional}</>
-                            )}
-                          </span>
-                        </div>
+                        ) : (
+                          <span className="text-xs text-[#575e70] italic">Sin citas previas</span>
+                        )}
                       </td>
 
                       {/* Registrado */}

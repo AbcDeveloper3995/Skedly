@@ -287,7 +287,7 @@ export default function DashboardOverviewPage() {
           VIEW 1: PROPIETARIO / ADMIN DASHBOARD
       ========================================================================== */}
       {viewMode === "owner" && (
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
+        <div className="w-full px-4 sm:px-6 lg:px-8 2xl:px-12 py-6 space-y-8">
           {/* 1. Header & Live Status Banner */}
           <section className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-1">
             <div className="space-y-1">
@@ -924,7 +924,7 @@ export default function DashboardOverviewPage() {
           VIEW 2: EMPLEADO / VISTA COLABORADOR
       ========================================================================== */}
       {viewMode === "employee" && (
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+        <div className="w-full px-4 sm:px-6 lg:px-8 2xl:px-12 py-6 space-y-6">
           {/* Role Banner & Restrictive Notice */}
           <section className="p-4 rounded-xl bg-surface-container-low border border-surface-container shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
             <div className="flex items-center gap-3 min-w-0">

@@ -127,7 +127,7 @@ function CitasListContent() {
   const completedCount = appointments.filter((a) => a.status === "completed").length;
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
+    <div className="flex flex-col gap-6 w-full px-4 sm:px-6 lg:px-8 2xl:px-12 py-6 pb-16">
       {/* Toast Feedback */}
       {actionFeedback && (
         <div className="fixed bottom-6 right-6 z-50 px-4 py-2.5 rounded-xl bg-on-surface text-surface text-xs font-semibold shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-bottom-3 duration-200">

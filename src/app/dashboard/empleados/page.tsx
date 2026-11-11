@@ -22,7 +22,6 @@ export default function EquipoTrabajoPage() {
   const [serviceFilter, setServiceFilter] = useState("all");
   const [accessFilter, setAccessFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState<"all" | "active" | "inactive">("all");
-  const [isForcedEmpty, setIsForcedEmpty] = useState(false);
 
   // Modals & Drawers
   const [showAvailabilityModal, setShowAvailabilityModal] = useState(false);
@@ -64,19 +63,24 @@ export default function EquipoTrabajoPage() {
             phone: dbEmp.phone || "Sin teléfono",
             bio: dbEmp.bio || "",
             avatar_url: dbEmp.avatar_url || "",
-            is_active: dbEmp.is_active,
-            role: "specialist",
-            access_status: "activo",
-            color_tag: "bg-primary-fixed text-primary",
-            location_name: "Sucursal Principal",
-            services: [],
-            weekly_hours: [],
-            exceptions: [],
-            recent_appointments: [],
+            internal_id: `EMP-${dbEmp.id.slice(0, 4).toUpperCase()}`,
+            access_status: "activa",
+            is_active: dbEmp.is_active ?? true,
             rating: 5.0,
-            reviewsCount: 0,
-            monthlyAppointmentsCount: 0,
-            monthlyRevenueEst: 0,
+            reviews_count: 0,
+            services: [],
+            schedule_summary: "Lun - Sáb: 09:00 - 19:00",
+            break_summary: "14:00 - 15:00",
+            today_appointments: 0,
+            satisfaction: 100,
+            weekly_hours: 48,
+            seat: "Sillón 01",
+            booking_slug: (dbEmp.display_name || "empleado").toLowerCase().replace(/\s+/g, "-"),
+            google_calendar_synced: false,
+            last_sync_mins: 0,
+            weekly_schedule: [],
+            exceptions: [],
+            recentAppointments: [],
           }));
           setEmployees(mapped);
         } else {
@@ -100,8 +104,6 @@ export default function EquipoTrabajoPage() {
 
   // Filtered Employees
   const filteredEmployees = useMemo(() => {
-    if (isForcedEmpty) return [];
-
     return employees.filter((emp) => {
       // Search
       const matchesSearch =
@@ -132,7 +134,7 @@ export default function EquipoTrabajoPage() {
 
       return matchesSearch && matchesStatus && matchesAccess && matchesService;
     });
-  }, [employees, searchQuery, statusFilter, accessFilter, serviceFilter, isForcedEmpty]);
+  }, [employees, searchQuery, statusFilter, accessFilter, serviceFilter]);
 
   // Actions
   const handleToggleActive = async (emp: FullEmployee) => {
@@ -172,36 +174,11 @@ export default function EquipoTrabajoPage() {
     }
   };
 
-  const handleExportCSV = () => {
-    const headers = ["ID", "Nombre", "Cargo", "Email", "Teléfono", "Acceso", "Estado", "Horas_Semana"];
-    const rows = employees.map((e) => [
-      e.internal_id,
-      `"${e.display_name}"`,
-      `"${e.job_title}"`,
-      e.email,
-      e.phone,
-      e.access_status,
-      e.is_active ? "Activo" : "Inactivo",
-      e.weekly_hours,
-    ]);
-
-    const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `equipo_skedly_${new Date().toISOString().slice(0, 10)}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    showToast("Exportación de equipo descargada correctamente.");
-  };
-
   const handleResetFilters = () => {
     setSearchQuery("");
     setServiceFilter("all");
     setAccessFilter("all");
     setStatusFilter("all");
-    setIsForcedEmpty(false);
   };
 
   return (
@@ -216,7 +193,7 @@ export default function EquipoTrabajoPage() {
         </div>
       )}
 
-      <div className="max-w-[1280px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 flex flex-col gap-6">
+      <div className="w-full px-4 sm:px-6 lg:px-8 2xl:px-12 py-6 lg:py-8 flex flex-col gap-6">
         {/* =========================================================================
             HEADER SECTION
         ========================================================================== */}
@@ -244,16 +221,6 @@ export default function EquipoTrabajoPage() {
                 calendar_month
               </span>
               <span>Ver disponibilidad general</span>
-            </button>
-
-            <button
-              onClick={handleExportCSV}
-              className="h-10 px-4 rounded-xl bg-surface-container-lowest text-on-surface hover:bg-surface-container text-xs font-semibold shadow-sm transition-all flex items-center gap-2 border border-surface-container"
-            >
-              <span className="material-symbols-outlined text-[18px] text-secondary">
-                file_download
-              </span>
-              <span>Exportar equipo</span>
             </button>
 
             <Link
@@ -398,10 +365,7 @@ export default function EquipoTrabajoPage() {
           {/* Pill Tabs for Status */}
           <div className="flex items-center gap-1 bg-surface-container p-1 rounded-xl self-start sm:self-auto">
             <button
-              onClick={() => {
-                setStatusFilter("all");
-                setIsForcedEmpty(false);
-              }}
+              onClick={() => setStatusFilter("all")}
               className={`h-8 px-3 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
                 statusFilter === "all"
                   ? "bg-surface-container-lowest text-primary shadow-sm"
@@ -415,10 +379,7 @@ export default function EquipoTrabajoPage() {
             </button>
 
             <button
-              onClick={() => {
-                setStatusFilter("active");
-                setIsForcedEmpty(false);
-              }}
+              onClick={() => setStatusFilter("active")}
               className={`h-8 px-3 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
                 statusFilter === "active"
                   ? "bg-surface-container-lowest text-primary shadow-sm"
@@ -432,10 +393,7 @@ export default function EquipoTrabajoPage() {
             </button>
 
             <button
-              onClick={() => {
-                setStatusFilter("inactive");
-                setIsForcedEmpty(false);
-              }}
+              onClick={() => setStatusFilter("inactive")}
               className={`h-8 px-3 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
                 statusFilter === "inactive"
                   ? "bg-surface-container-lowest text-primary shadow-sm"
@@ -454,29 +412,28 @@ export default function EquipoTrabajoPage() {
             ACTIVE TEAM GRID CONTAINER
         ========================================================================== */}
         {filteredEmployees.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
             {filteredEmployees.map((emp) => {
               const isPaused = !emp.is_active;
               return (
                 <div
                   key={emp.id}
-                  className={`bg-surface-container-lowest rounded-2xl p-5 shadow-sm border border-surface-container flex flex-col justify-between gap-4 hover:shadow-md transition-all relative overflow-visible ${
-                    isPaused ? "opacity-85" : ""
+                  className={`bg-surface-container-lowest rounded-2xl p-5 shadow-xs border border-surface-container flex flex-col justify-between gap-4 hover:shadow-md hover:border-primary/30 transition-all duration-200 relative group ${
+                    isPaused ? "opacity-85 bg-surface-container-low/30" : ""
                   }`}
                 >
                   <div className="flex flex-col gap-4">
                     {/* Profile Top */}
                     <div className="flex items-start justify-between gap-3">
-                      <div className="flex items-center gap-3 min-w-0">
-                        <div className="relative w-14 h-14 rounded-full overflow-hidden shadow-sm bg-surface-container flex-shrink-0">
-                          <img
-                            src={emp.avatar_url}
-                            alt={emp.display_name}
-                            className={`w-full h-full object-cover ${isPaused ? "grayscale" : ""}`}
-                          />
+                      <div className="flex items-center gap-3.5 min-w-0">
+                        {/* Always default camera icon placeholder */}
+                        <div className="relative w-14 h-14 rounded-2xl bg-surface-container border border-surface-container-high flex items-center justify-center flex-shrink-0 shadow-xs group-hover:border-primary/40 group-hover:bg-primary/5 transition-all">
+                          <div className="w-full h-full rounded-2xl flex flex-col items-center justify-center text-primary">
+                            <span className="material-symbols-outlined text-[26px]">photo_camera</span>
+                          </div>
                           <span
-                            className={`absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-surface-container-lowest ${
-                              emp.is_active ? "bg-primary" : "bg-outline"
+                            className={`absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full ring-2 ring-surface-container-lowest ${
+                              emp.is_active ? "bg-emerald-500" : "bg-outline"
                             }`}
                             title={emp.is_active ? "Activo" : "Inactivo"}
                           />
@@ -485,14 +442,14 @@ export default function EquipoTrabajoPage() {
                         <div className="flex flex-col min-w-0">
                           <Link
                             href={`/dashboard/empleados/${emp.id}`}
-                            className="text-sm font-bold text-on-surface hover:text-primary transition-colors truncate"
+                            className="text-base font-bold text-on-surface hover:text-primary transition-colors truncate"
                           >
                             {emp.display_name}
                           </Link>
-                          <p className="text-[11px] text-primary font-medium truncate">
+                          <p className="text-xs text-primary font-medium truncate mt-0.5">
                             {emp.job_title}
                           </p>
-                          <span className="text-[11px] text-on-surface-variant font-mono">
+                          <span className="text-[11px] text-on-surface-variant font-mono mt-0.5">
                             ID: {emp.internal_id}
                           </span>
                         </div>
@@ -501,22 +458,25 @@ export default function EquipoTrabajoPage() {
                       {/* Access Status Badge */}
                       <div className="flex items-center gap-1 flex-shrink-0">
                         {isPaused ? (
-                          <span className="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant text-[11px] font-semibold flex items-center gap-1">
+                          <span className="px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant text-[11px] font-semibold flex items-center gap-1">
                             <span className="material-symbols-outlined text-[13px] text-error">pause</span>
                             <span>Pausado</span>
                           </span>
                         ) : emp.access_status === "activa" ? (
-                          <span className="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-[11px] font-semibold flex items-center gap-1">
-                            <span className="material-symbols-outlined text-[13px]">verified_user</span>
+                          <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 text-[11px] font-semibold border border-emerald-200/60 flex items-center gap-1">
+                            <span className="material-symbols-outlined text-[13px] text-emerald-600">verified_user</span>
                             <span>Cuenta activa</span>
                           </span>
                         ) : emp.access_status === "pendiente" ? (
-                          <span className="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed text-[11px] font-semibold flex items-center gap-1" title={emp.email}>
-                            <span className="material-symbols-outlined text-[13px] text-tertiary">schedule</span>
+                          <span
+                            className="px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 text-[11px] font-semibold border border-amber-200 flex items-center gap-1"
+                            title={emp.email}
+                          >
+                            <span className="material-symbols-outlined text-[13px] text-amber-600">schedule</span>
                             <span>Invitación pend.</span>
                           </span>
                         ) : (
-                          <span className="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant text-[11px] font-semibold flex items-center gap-1">
+                          <span className="px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant text-[11px] font-semibold flex items-center gap-1">
                             <span className="material-symbols-outlined text-[13px]">person_off</span>
                             <span>Sin acceso</span>
                           </span>
@@ -524,100 +484,66 @@ export default function EquipoTrabajoPage() {
                       </div>
                     </div>
 
-                    {/* Pending Notice Box if Pending */}
-                    {emp.access_status === "pendiente" && (
-                      <div className="p-3 rounded-xl bg-surface-container-low flex flex-col gap-1 text-xs">
-                        <div className="flex items-center justify-between text-on-surface">
-                          <span className="text-on-surface-variant truncate">
-                            Invitado a: <strong className="font-semibold">{emp.email}</strong>
-                          </span>
-                          <span className="text-outline text-[11px] flex-shrink-0">{emp.invited_at || "Reciente"}</span>
-                        </div>
-                        <div className="flex items-center justify-between pt-1">
-                          <span className="text-[11px] text-on-surface-variant">Aún no crea su contraseña</span>
-                          <button
-                            onClick={() => handleResendInvite(emp)}
-                            className="text-[11px] text-primary font-bold hover:underline flex items-center gap-0.5"
-                          >
-                            <span className="material-symbols-outlined text-[14px]">send</span>
-                            <span>Reenviar enlace</span>
-                          </button>
-                        </div>
+                    {/* Contact details mini-strip */}
+                    <div className="grid grid-cols-2 gap-2 text-xs">
+                      <div className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface-container-low text-on-surface-variant truncate">
+                        <span className="material-symbols-outlined text-[15px] text-primary flex-shrink-0">call</span>
+                        <span className="truncate text-[11px]">{emp.phone || "Sin teléfono"}</span>
                       </div>
-                    )}
-
-                    {/* Operational Note if Sin Acceso */}
-                    {emp.access_status === "sin-acceso" && (
-                      <div className="p-3 rounded-xl bg-surface-container-low flex items-start gap-2">
-                        <span className="material-symbols-outlined text-[18px] text-secondary flex-shrink-0 mt-0.5">
-                          info
-                        </span>
-                        <p className="text-[11px] text-on-surface-variant leading-snug">
-                          Solo perfil operativo. Las citas se administran desde recepción. No tiene credenciales de acceso.
-                        </p>
-                      </div>
-                    )}
-
-                    {/* Inactive Notice if Paused */}
-                    {isPaused && (
-                      <div className="p-3 rounded-xl bg-surface-container flex items-center justify-between">
-                        <span className="text-xs text-error font-medium flex items-center gap-1.5">
-                          <span className="material-symbols-outlined text-[16px]">block</span>
-                          <span>No recibe reservas públicas</span>
-                        </span>
-                        <span className="text-[11px] text-outline">Pausado</span>
-                      </div>
-                    )}
-
-                    {/* Services Badges Box */}
-                    <div className="flex flex-col gap-1.5 bg-surface-container-low p-3 rounded-xl">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[11px] uppercase tracking-wider text-on-surface-variant font-semibold">
-                          Servicios ({emp.services.length} vinculados)
-                        </span>
-                        <button
-                          onClick={() => setServicesPreviewTarget(emp)}
-                          className="text-[11px] text-primary font-medium cursor-pointer hover:underline"
-                        >
-                          Ver lista
-                        </button>
-                      </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {emp.services.slice(0, 3).map((s) => (
-                          <span
-                            key={s.id}
-                            className="px-2 py-0.5 rounded-md bg-surface-container text-on-surface text-[11px] font-medium"
-                          >
-                            {s.name}
-                          </span>
-                        ))}
-                        {emp.services.length > 3 && (
-                          <span className="px-2 py-0.5 rounded-md bg-surface-container text-primary font-bold text-[11px]">
-                            +{emp.services.length - 3} más
-                          </span>
-                        )}
+                      <div className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface-container-low text-on-surface-variant truncate">
+                        <span className="material-symbols-outlined text-[15px] text-primary flex-shrink-0">mail</span>
+                        <span className="truncate text-[11px]">{emp.email || "Sin email"}</span>
                       </div>
                     </div>
 
-                    {/* Schedule Summary */}
-                    <div className="flex items-start gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[18px] text-primary flex-shrink-0 mt-0.5">
-                        schedule
-                      </span>
-                      <div className="flex flex-col text-xs">
-                        <span className="font-semibold text-on-surface">
-                          {emp.schedule_summary}
+                    {/* Services Badges Box */}
+                    <div className="flex flex-col gap-2 bg-surface-container-low/70 p-3 rounded-xl border border-surface-container/60">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] uppercase tracking-wider text-on-surface-variant font-bold flex items-center gap-1.5">
+                          <span className="material-symbols-outlined text-[15px] text-primary">content_cut</span>
+                          <span>Servicios ({emp.services.length} vinculados)</span>
                         </span>
-                        <span className="text-[11px] text-outline">
-                          {emp.break_summary}
-                        </span>
+                        {emp.services.length > 0 && (
+                          <button
+                            onClick={() => setServicesPreviewTarget(emp)}
+                            className="text-[11px] text-primary font-medium cursor-pointer hover:underline"
+                          >
+                            Ver lista
+                          </button>
+                        )}
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {emp.services.length === 0 ? (
+                          <span className="text-xs text-on-surface-variant/70 italic py-0.5">
+                            Sin servicios asignados aún
+                          </span>
+                        ) : (
+                          <>
+                            {emp.services.slice(0, 3).map((s) => (
+                              <span
+                                key={s.id}
+                                className="px-2.5 py-1 rounded-lg bg-surface-container text-on-surface text-[11px] font-medium border border-surface-container-high/50"
+                              >
+                                {s.name}
+                              </span>
+                            ))}
+                            {emp.services.length > 3 && (
+                              <button
+                                onClick={() => setServicesPreviewTarget(emp)}
+                                className="px-2 py-1 rounded-lg bg-primary-fixed text-primary font-bold text-[11px] hover:bg-primary-fixed-variant transition-colors"
+                              >
+                                +{emp.services.length - 3} más
+                              </button>
+                            )}
+                          </>
+                        )}
                       </div>
                     </div>
 
                     {/* Performance Metric Pill (if active) */}
                     {!isPaused && (
-                      <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-secondary-container/30">
-                        <div className="flex items-center gap-1.5 text-xs text-on-secondary-fixed">
+                      <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-secondary-container/20 text-xs text-on-secondary-fixed">
+                        <div className="flex items-center gap-1.5">
                           <span className="material-symbols-outlined text-[16px] text-primary">
                             event_available
                           </span>
@@ -625,7 +551,7 @@ export default function EquipoTrabajoPage() {
                             <strong>{emp.today_appointments} citas</strong> programadas hoy
                           </span>
                         </div>
-                        <div className="flex items-center gap-1 text-xs font-semibold text-primary">
+                        <div className="flex items-center gap-1 font-semibold text-primary">
                           <span className="material-symbols-outlined text-[15px]">star</span>
                           <span>{emp.satisfaction}% satisfacción</span>
                         </div>
@@ -633,95 +559,58 @@ export default function EquipoTrabajoPage() {
                     )}
                   </div>
 
-                  {/* Action Bar */}
-                  <div className="pt-2 flex items-center justify-between gap-2 border-t border-surface-container/60">
-                    <div className="flex items-center gap-2 flex-1">
-                      <Link
-                        href={`/dashboard/empleados/${emp.id}`}
-                        className="h-9 px-3 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold transition-colors flex-1 flex items-center justify-center text-center"
-                      >
-                        Ver perfil
-                      </Link>
+                  {/* Clean, well-structured Action Bar */}
+                  <div className="pt-3 flex items-center gap-2 border-t border-surface-container">
+                    <Link
+                      href={`/dashboard/empleados/${emp.id}`}
+                      className="flex-1 h-9 px-3 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 shadow-xs hover:text-primary"
+                    >
+                      <span className="material-symbols-outlined text-[16px]">visibility</span>
+                      <span>Ver perfil</span>
+                    </Link>
 
-                      {isPaused ? (
-                        <button
-                          onClick={() => handleToggleActive(emp)}
-                          className="h-9 px-3 rounded-xl bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary text-xs font-semibold transition-colors"
-                        >
-                          Reactivar
-                        </button>
-                      ) : emp.access_status === "pendiente" ? (
-                        <button
-                          onClick={() => handleResendInvite(emp)}
-                          className="h-9 px-3 rounded-xl bg-primary hover:bg-primary-container text-on-primary text-xs font-semibold transition-colors"
-                        >
-                          Reenviar
-                        </button>
-                      ) : emp.access_status === "sin-acceso" ? (
-                        <Link
-                          href={`/dashboard/empleados/nuevo?id=${emp.id}`}
-                          className="h-9 px-3 rounded-xl bg-secondary-container hover:bg-secondary-fixed text-on-secondary-fixed text-xs font-semibold transition-colors flex items-center justify-center gap-1"
-                        >
-                          <span className="material-symbols-outlined text-[15px]">mail</span>
-                          <span>Invitar</span>
-                        </Link>
-                      ) : (
-                        <Link
-                          href={`/dashboard/empleados/${emp.id}?tab=horarios`}
-                          className="h-9 px-3 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold transition-colors flex items-center justify-center"
-                        >
-                          Horarios
-                        </Link>
-                      )}
-                    </div>
+                    <Link
+                      href={`/dashboard/empleados/nuevo?id=${emp.id}`}
+                      className="h-9 px-3.5 rounded-xl bg-surface-container-lowest hover:bg-surface-container text-on-surface text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 border border-surface-container shadow-xs"
+                      title="Editar empleado"
+                    >
+                      <span className="material-symbols-outlined text-[16px] text-primary">edit</span>
+                      <span>Editar</span>
+                    </Link>
 
                     {/* More Menu Dropdown */}
                     <div className="relative">
                       <button
                         onClick={() => setActiveDropdownId(activeDropdownId === emp.id ? null : emp.id)}
-                        className="w-9 h-9 flex items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container transition-colors"
+                        className="w-9 h-9 flex items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container transition-colors border border-surface-container shadow-xs"
                         title="Más opciones"
                       >
-                        <span className="material-symbols-outlined text-[20px]">more_vert</span>
+                        <span className="material-symbols-outlined text-[18px]">more_vert</span>
                       </button>
 
                       {activeDropdownId === emp.id && (
-                        <div className="absolute right-0 bottom-full mb-1 w-48 bg-surface-container-lowest rounded-xl shadow-xl border border-surface-container py-1 z-30 animate-in fade-in zoom-in-95 duration-150">
-                          <Link
-                            href={`/dashboard/empleados/nuevo?id=${emp.id}`}
-                            className="w-full px-3 py-2 text-left text-xs text-on-surface hover:bg-surface-container flex items-center gap-2"
-                            onClick={() => setActiveDropdownId(null)}
-                          >
-                            <span className="material-symbols-outlined text-[16px] text-primary">edit</span>
-                            <span>Editar empleado</span>
-                          </Link>
-                          <Link
-                            href={`/dashboard/empleados/${emp.id}?tab=horarios`}
-                            className="w-full px-3 py-2 text-left text-xs text-on-surface hover:bg-surface-container flex items-center gap-2"
-                            onClick={() => setActiveDropdownId(null)}
-                          >
-                            <span className="material-symbols-outlined text-[16px] text-secondary">schedule</span>
-                            <span>Editar turnos</span>
-                          </Link>
+                        <div className="absolute right-0 bottom-full mb-1.5 w-48 bg-surface-container-lowest rounded-xl shadow-xl border border-surface-container py-1.5 z-30 animate-in fade-in zoom-in-95 duration-150">
                           <button
                             onClick={() => {
                               setActiveDropdownId(null);
                               setDeactivateTarget(emp);
                             }}
-                            className="w-full px-3 py-2 text-left text-xs text-on-surface hover:bg-surface-container flex items-center gap-2"
+                            className="w-full px-3.5 py-2 text-left text-xs text-on-surface hover:bg-surface-container flex items-center gap-2 font-medium transition-colors"
                           >
-                            <span className="material-symbols-outlined text-[16px] text-outline">
-                              {emp.is_active ? "pause" : "play_arrow"}
+                            <span className="material-symbols-outlined text-[16px] text-on-surface-variant">
+                              {emp.is_active ? "pause_circle" : "play_circle"}
                             </span>
                             <span>{emp.is_active ? "Pausar empleado" : "Reactivar"}</span>
                           </button>
+
                           <div className="my-1 border-t border-surface-container" />
+
                           <button
                             onClick={() => {
                               setActiveDropdownId(null);
                               setDeleteTarget(emp);
                             }}
-                            className="w-full px-3 py-2 text-left text-xs text-error hover:bg-error-container/40 flex items-center gap-2 font-medium"
+                            className="w-full px-3.5 py-2 text-left text-xs text-error hover:bg-error-container/40 flex items-center gap-2 font-medium transition-colors"
                           >
                             <span className="material-symbols-outlined text-[16px]">delete</span>
                             <span>Eliminar registro</span>
@@ -783,15 +672,6 @@ export default function EquipoTrabajoPage() {
                 <strong className="text-on-surface">sin necesidad de tener una cuenta de usuario</strong>. La invitación por correo es 100% opcional y solo es necesaria cuando deseas que el colaborador inicie sesión para consultar su propio calendario individual desde su móvil.
               </p>
             </div>
-          </div>
-
-          <div className="flex items-center gap-3 flex-shrink-0 self-end md:self-center">
-            <button
-              onClick={() => setIsForcedEmpty(!isForcedEmpty)}
-              className="text-primary hover:text-primary-container text-xs font-semibold underline underline-offset-4 cursor-pointer transition-colors"
-            >
-              {isForcedEmpty ? "Restaurar equipo completo" : "Simular estado vacío"}
-            </button>
           </div>
         </div>
       </div>

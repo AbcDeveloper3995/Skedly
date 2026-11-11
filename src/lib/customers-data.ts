@@ -35,11 +35,11 @@ export interface CustomerDetail {
   appointmentsCount: number;
   statusTag: "Recurrente" | "VIP" | "Nuevo";
   isVip?: boolean;
-  lastAppointment: {
+  lastAppointment?: {
     date: string;
     service: string;
     professional: string;
-  };
+  } | null;
   registeredAt: string;
   totalSpent: number;
   avgTicket: number;

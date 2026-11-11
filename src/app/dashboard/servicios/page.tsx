@@ -316,7 +316,7 @@ export default function ServiciosCatalogPage() {
         </div>
       )}
 
-      <div className="p-4 sm:p-6 lg:p-8 max-w-[1400px] mx-auto w-full space-y-6">
+      <div className="p-4 sm:p-6 lg:p-8 2xl:px-12 w-full space-y-6">
         {/* 1. ENCABEZADO DE MÓDULO */}
         <section className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-1">

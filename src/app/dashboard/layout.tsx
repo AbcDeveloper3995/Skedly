@@ -140,7 +140,7 @@ function DashboardLayoutContent({
                     return pathname.startsWith(item.path);
                   })();
 
-                  if (item.external) {
+                  if ("external" in item && item.external) {
                     return (
                       <Link
                         key={item.name}
