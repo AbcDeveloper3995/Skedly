@@ -7,12 +7,19 @@ import { useAuth } from "@/lib/supabase/auth-context";
 import { supabase } from "@/lib/supabase/client";
 import {
   MOCK_EMPLOYEES,
-  INITIAL_SERVICES,
   DEFAULT_WEEKLY_SCHEDULE,
   FullEmployee,
   EmployeeService,
   DaySchedule,
 } from "../mock-data";
+
+interface BusinessService {
+  id: string;
+  name: string;
+  price: number;
+  duration: number;
+  category: string;
+}
 
 function EmpleadoFormContent() {
   const router = useRouter();
@@ -23,6 +30,10 @@ function EmpleadoFormContent() {
 
   // Mode
   const isEditing = Boolean(idParam);
+
+  // Services from DB
+  const [businessServices, setBusinessServices] = useState<BusinessService[]>([]);
+  const [loadingServices, setLoadingServices] = useState(true);
 
   // Form Fields
   const [displayName, setDisplayName] = useState("");
@@ -49,27 +60,103 @@ function EmpleadoFormContent() {
     setTimeout(() => setToastMessage(null), 3200);
   };
 
-  // If editing an existing mock or db employee, preload details
+  // 1. Fetch Real Services of Business from Supabase
+  useEffect(() => {
+    if (!currentBusiness?.id) return;
+    async function loadServices() {
+      setLoadingServices(true);
+      try {
+        const { data, error } = await supabase
+          .from("services")
+          .select("id, name, price, duration_minutes, service_categories(name)")
+          .eq("business_id", currentBusiness.id)
+          .order("name", { ascending: true });
+
+        if (!error && data) {
+          const mapped: BusinessService[] = data.map((s: any) => ({
+            id: s.id,
+            name: s.name,
+            price: Number(s.price || 0),
+            duration: Number(s.duration_minutes || 30),
+            category: s.service_categories?.name || "General",
+          }));
+          setBusinessServices(mapped);
+        }
+      } catch (err) {
+        console.error("Error loading services:", err);
+      } finally {
+        setLoadingServices(false);
+      }
+    }
+    loadServices();
+  }, [currentBusiness?.id]);
+
+  // 2. Preload Real Details if editing an existing employee
   useEffect(() => {
     if (!idParam) return;
 
-    // Check Supabase first
     if (!idParam.startsWith("emp-")) {
-      supabase
-        .from("employees")
-        .select("*")
-        .eq("id", idParam)
-        .single()
-        .then(({ data, error }) => {
+      async function loadDbEmployee() {
+        try {
+          // Employee basic info
+          const { data, error } = await supabase
+            .from("employees")
+            .select("*")
+            .eq("id", idParam)
+            .single();
+
           if (data && !error) {
             setDisplayName(data.display_name || "");
             setEmail(data.email || "");
             setPhone(data.phone || "");
-            setJobTitle(data.role || data.job_title || "");
+            setJobTitle(data.role || data.job_title || "Especialista");
             setBio(data.bio || "");
             setAvatarUrl(data.avatar_url || "");
           }
-        });
+
+          // Real Assigned Services
+          const { data: empServices } = await supabase
+            .from("employee_services")
+            .select("service_id")
+            .eq("employee_id", idParam);
+
+          if (empServices && empServices.length > 0) {
+            setSelectedServiceIds(empServices.map((es: any) => es.service_id));
+          } else {
+            setSelectedServiceIds([]);
+          }
+
+          // Real Working Hours
+          const { data: wh } = await supabase
+            .from("working_hours")
+            .select("*")
+            .eq("employee_id", idParam)
+            .order("weekday", { ascending: true });
+
+          if (wh && wh.length > 0) {
+            setWeeklySchedule((prev) =>
+              prev.map((day) => {
+                const found = wh.find((w: any) => w.weekday === day.weekday);
+                if (found) {
+                  return {
+                    ...day,
+                    active: Boolean(found.is_available),
+                    start: found.start_time?.slice(0, 5) || day.start,
+                    end: found.end_time?.slice(0, 5) || day.end,
+                  };
+                }
+                return {
+                  ...day,
+                  active: false,
+                };
+              })
+            );
+          }
+        } catch (err) {
+          console.error("Error loading employee data:", err);
+        }
+      }
+      loadDbEmployee();
     } else {
       const found = MOCK_EMPLOYEES.find((e) => e.id === idParam);
       if (found) {
@@ -95,10 +182,22 @@ function EmpleadoFormContent() {
     );
   };
 
-  const handleSelectAllCategory = (categoryName: string) => {
-    const idsInCat = INITIAL_SERVICES.filter((s) => s.category.toLowerCase().includes(categoryName.toLowerCase())).map((s) => s.id);
+  const handleSelectAllCategory = (categoryName?: string) => {
+    if (!categoryName) {
+      if (selectedServiceIds.length === businessServices.length) {
+        setSelectedServiceIds([]);
+        showToast("Todos los servicios deseleccionados.");
+      } else {
+        setSelectedServiceIds(businessServices.map((s) => s.id));
+        showToast("Todos los servicios del negocio seleccionados.");
+      }
+      return;
+    }
+    const idsInCat = businessServices
+      .filter((s) => s.category.toLowerCase().includes(categoryName.toLowerCase()))
+      .map((s) => s.id);
     setSelectedServiceIds((prev) => Array.from(new Set([...prev, ...idsInCat])));
-    showToast(`Todos los servicios de ${categoryName} seleccionados.`);
+    showToast(`Servicios de ${categoryName} seleccionados.`);
   };
 
   // Copy Monday schedule to Tuesday-Friday
@@ -178,9 +277,10 @@ function EmpleadoFormContent() {
     setSaving(true);
     try {
       if (currentBusiness?.id) {
+        let employeeId = idParam;
         if (isEditing && idParam && !idParam.startsWith("emp-")) {
           // Update Supabase
-          await supabase
+          const { error: updErr } = await supabase
             .from("employees")
             .update({
               display_name: displayName.trim(),
@@ -188,21 +288,53 @@ function EmpleadoFormContent() {
               phone: phone.trim() || null,
               bio: bio.trim() || null,
               avatar_url: avatarUrl || null,
-              role: jobTitle.trim() || "Especialista",
             })
             .eq("id", idParam);
+          if (updErr) throw updErr;
         } else {
           // Insert Supabase
-          await supabase.from("employees").insert({
+          const { data: newEmp, error: insErr } = await supabase
+            .from("employees")
+            .insert({
+              business_id: currentBusiness.id,
+              display_name: displayName.trim(),
+              email: email.trim() || null,
+              phone: phone.trim() || null,
+              bio: bio.trim() || null,
+              avatar_url: avatarUrl || null,
+              is_active: true,
+            })
+            .select()
+            .single();
+          if (insErr) throw insErr;
+          if (newEmp) employeeId = newEmp.id;
+        }
+
+        if (employeeId && !employeeId.startsWith("emp-")) {
+          // 1. Sync employee_services in Supabase
+          await supabase.from("employee_services").delete().eq("employee_id", employeeId);
+          if (selectedServiceIds.length > 0) {
+            const serviceInserts = selectedServiceIds.map((sid) => ({
+              business_id: currentBusiness.id,
+              employee_id: employeeId,
+              service_id: sid,
+            }));
+            const { error: srvErr } = await supabase.from("employee_services").insert(serviceInserts);
+            if (srvErr) console.warn("Error inserting employee_services:", srvErr);
+          }
+
+          // 2. Sync working_hours in Supabase
+          await supabase.from("working_hours").delete().eq("employee_id", employeeId);
+          const scheduleInserts = weeklySchedule.map((d) => ({
             business_id: currentBusiness.id,
-            display_name: displayName.trim(),
-            email: email.trim() || null,
-            phone: phone.trim() || null,
-            bio: bio.trim() || null,
-            avatar_url: avatarUrl || null,
-            role: jobTitle.trim() || "Especialista",
-            is_active: true,
-          });
+            employee_id: employeeId,
+            weekday: d.weekday,
+            start_time: d.start.length === 5 ? d.start + ":00" : d.start,
+            end_time: d.end.length === 5 ? d.end + ":00" : d.end,
+            is_available: d.active,
+          }));
+          const { error: whErr } = await supabase.from("working_hours").insert(scheduleInserts);
+          if (whErr) console.warn("Error inserting working_hours:", whErr);
         }
       }
 
@@ -431,15 +563,19 @@ function EmpleadoFormContent() {
 
                 <div className="flex items-center gap-2 self-start sm:self-auto">
                   <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
-                    {selectedServiceIds.length} de {INITIAL_SERVICES.length} asignados
+                    {selectedServiceIds.length} de {businessServices.length} asignados
                   </span>
-                  <button
-                    type="button"
-                    onClick={() => handleSelectAllCategory("Cortes")}
-                    className="text-primary hover:underline text-xs font-semibold"
-                  >
-                    Seleccionar todos Cortes
-                  </button>
+                  {businessServices.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => handleSelectAllCategory()}
+                      className="text-primary hover:underline text-xs font-semibold"
+                    >
+                      {selectedServiceIds.length === businessServices.length
+                        ? "Deseleccionar todos"
+                        : "Seleccionar todos"}
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -448,47 +584,60 @@ function EmpleadoFormContent() {
               </p>
 
               {/* Services Checkboxes Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
-                {INITIAL_SERVICES.map((srv) => {
-                  const isChecked = selectedServiceIds.includes(srv.id);
-                  return (
-                    <label
-                      key={srv.id}
-                      className={`flex items-start gap-3 p-3.5 rounded-xl cursor-pointer transition-all border ${
-                        isChecked
-                          ? "bg-primary-fixed/20 border-primary/30 shadow-sm"
-                          : "bg-surface-container-low border-transparent hover:bg-surface-container"
-                      }`}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={isChecked}
-                        onChange={() => toggleService(srv.id)}
-                        className="mt-0.5 w-4 h-4 rounded text-primary accent-primary"
-                      />
-                      <div className="flex flex-col flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-1">
-                          <span className="text-xs font-bold text-on-surface truncate">
-                            {srv.name}
-                          </span>
-                          <span className="text-xs font-bold text-primary font-mono shrink-0">
-                            ${srv.price} MXN
-                          </span>
+              {loadingServices ? (
+                <div className="p-8 text-center text-xs text-on-surface-variant flex items-center justify-center gap-2">
+                  <span className="material-symbols-outlined text-lg animate-spin text-primary">
+                    progress_activity
+                  </span>
+                  <span>Cargando servicios del negocio...</span>
+                </div>
+              ) : businessServices.length === 0 ? (
+                <div className="p-8 text-center text-xs text-on-surface-variant bg-surface-container-low rounded-xl">
+                  No hay servicios registrados en este negocio aún.
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+                  {businessServices.map((srv) => {
+                    const isChecked = selectedServiceIds.includes(srv.id);
+                    return (
+                      <label
+                        key={srv.id}
+                        className={`flex items-start gap-3 p-3.5 rounded-xl cursor-pointer transition-all border ${
+                          isChecked
+                            ? "bg-primary-fixed/20 border-primary/30 shadow-sm"
+                            : "bg-surface-container-low border-transparent hover:bg-surface-container"
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={() => toggleService(srv.id)}
+                          className="mt-0.5 w-4 h-4 rounded text-primary accent-primary"
+                        />
+                        <div className="flex flex-col flex-1 min-w-0">
+                          <div className="flex items-center justify-between gap-1">
+                            <span className="text-xs font-bold text-on-surface truncate">
+                              {srv.name}
+                            </span>
+                            <span className="text-xs font-bold text-primary font-mono shrink-0">
+                              ${srv.price} MXN
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="text-[11px] text-on-surface-variant flex items-center gap-0.5">
+                              <span className="material-symbols-outlined text-[13px]">schedule</span>
+                              <span>{srv.duration} min</span>
+                            </span>
+                            <span className="text-[10px] px-1.5 py-0.2 rounded bg-surface-container text-on-surface-variant font-medium">
+                              {srv.category}
+                            </span>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2 mt-1">
-                          <span className="text-[11px] text-on-surface-variant flex items-center gap-0.5">
-                            <span className="material-symbols-outlined text-[13px]">schedule</span>
-                            <span>{srv.duration} min</span>
-                          </span>
-                          <span className="text-[10px] px-1.5 py-0.2 rounded bg-surface-container text-on-surface-variant font-medium">
-                            {srv.category}
-                          </span>
-                        </div>
-                      </div>
-                    </label>
-                  );
-                })}
-              </div>
+                      </label>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             {/* SECTION 3: Horario de trabajo semanal */}
@@ -826,7 +975,7 @@ function EmpleadoFormContent() {
                 {/* Specialties Badges */}
                 <div className="flex flex-wrap gap-1.5">
                   {selectedServiceIds.slice(0, 3).map((id) => {
-                    const found = INITIAL_SERVICES.find((s) => s.id === id);
+                    const found = businessServices.find((s) => s.id === id);
                     return (
                       <span
                         key={id}

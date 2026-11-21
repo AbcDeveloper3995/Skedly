@@ -132,13 +132,17 @@ function EmpleadoDetailContent({ id }: { id: string }) {
             if (foundWh) {
               return {
                 ...d,
-                active: foundWh.is_available,
+                active: Boolean(foundWh.is_available),
                 start: foundWh.start_time?.slice(0, 5) || d.start,
                 end: foundWh.end_time?.slice(0, 5) || d.end,
                 tag: foundWh.is_available ? "Turno activo" : "Descanso semanal",
               };
             }
-            return d;
+            return {
+              ...d,
+              active: false,
+              tag: "Descanso semanal",
+            };
           });
         }
 
@@ -950,80 +954,93 @@ function EmpleadoDetailContent({ id }: { id: string }) {
               </Link>
             </div>
 
-            {/* Weekly Schedule Cards Grid */}
-            <div className="grid grid-cols-1 gap-2.5 pt-1">
-              {employee.weekly_schedule.map((day, idx) => (
-                <div
-                  key={day.dayKey}
-                  className={`flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-xl transition-colors gap-2 border ${
-                    day.active
-                      ? "bg-surface-container-low hover:bg-surface-container border-surface-container/60"
-                      : "bg-surface-container-high/60 border-transparent opacity-80"
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <span
-                      className={`w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold ${
-                        day.active
-                          ? day.dayKey === "vie"
-                            ? "bg-primary-fixed text-on-primary-fixed"
-                            : "bg-surface-container-lowest text-on-surface shadow-sm"
-                          : "bg-surface-container text-outline"
-                      }`}
-                    >
-                      {day.dayShort}
-                    </span>
-                    <div className="flex flex-col">
-                      {day.active ? (
-                        <>
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs font-bold text-on-surface font-mono">
-                              {day.start} — {day.end}
-                            </span>
-                            <span className="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-medium">
-                              {day.tag || "Turno activo"}
-                            </span>
-                          </div>
-                          <span className="text-[11px] text-on-surface-variant">
-                            {day.breakTime
-                              ? `Pausa intermedia almuerzo: ${day.breakTime}`
-                              : "Sin pausa intermedia de almuerzo"}
-                          </span>
-                        </>
-                      ) : (
-                        <>
-                          <span className="text-xs font-bold text-outline">
-                            Descanso semanal
-                          </span>
-                          <span className="text-[11px] text-on-surface-variant">
-                            No laborable • La agenda pública permanece cerrada
-                          </span>
-                        </>
-                      )}
-                    </div>
-                  </div>
+            {/* Working Days List (Shows ONLY active working days configured) */}
+            {(() => {
+              const workingDays = employee.weekly_schedule
+                .map((day, idx) => ({ ...day, originalIndex: idx }))
+                .filter((d) => d.active);
 
-                  <div className="flex items-center gap-2 self-end sm:self-auto">
-                    <span
-                      className={`px-2 py-0.5 rounded text-[11px] font-medium ${
-                        day.active
-                          ? "bg-surface-container-lowest text-on-surface-variant"
-                          : "bg-surface-container text-outline font-semibold"
-                      }`}
-                    >
-                      {day.active ? day.tag || "Activo" : "Cerrado"}
-                    </span>
-                    <button
-                      onClick={() => handleOpenDayEdit(idx)}
-                      className="w-8 h-8 rounded-lg hover:bg-surface-container flex items-center justify-center text-on-surface-variant transition-colors"
-                      title={`Editar ${day.day}`}
-                    >
-                      <span className="material-symbols-outlined text-[18px]">edit</span>
-                    </button>
-                  </div>
+              const restDays = employee.weekly_schedule.filter((d) => !d.active);
+
+              return (
+                <div className="flex flex-col gap-4 pt-1">
+                  {workingDays.length === 0 ? (
+                    <div className="p-8 text-center text-xs text-on-surface-variant bg-surface-container-low rounded-xl">
+                      Este colaborador no tiene días laborales activos actualmente. Modifica sus horarios para habilitar turnos.
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 gap-2.5">
+                      {workingDays.map((day) => (
+                        <div
+                          key={day.dayKey}
+                          className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-xl transition-colors gap-2 border bg-surface-container-low hover:bg-surface-container border-surface-container/60"
+                        >
+                          <div className="flex items-center gap-3">
+                            <span className="w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold bg-surface-container-lowest text-on-surface shadow-sm">
+                              {day.dayShort}
+                            </span>
+                            <div className="flex flex-col">
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs font-bold text-on-surface font-mono">
+                                  {day.start} — {day.end}
+                                </span>
+                                <span className="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-medium">
+                                  {day.tag || "Turno activo"}
+                                </span>
+                              </div>
+                              <span className="text-[11px] text-on-surface-variant">
+                                {day.breakTime
+                                  ? `Pausa intermedia almuerzo: ${day.breakTime}`
+                                  : "Sin pausa intermedia de almuerzo"}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-2 self-end sm:self-auto">
+                            <span className="px-2.5 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/60">
+                              Laborable
+                            </span>
+                            <button
+                              onClick={() => handleOpenDayEdit(day.originalIndex)}
+                              className="w-8 h-8 rounded-lg hover:bg-surface-container flex items-center justify-center text-on-surface-variant transition-colors"
+                              title={`Editar ${day.day}`}
+                            >
+                              <span className="material-symbols-outlined text-[18px]">edit</span>
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Rest Days Summary Box */}
+                  {restDays.length > 0 && (
+                    <div className="p-4 rounded-xl bg-surface-container-low/50 border border-surface-container/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-2.5">
+                        <span className="material-symbols-outlined text-outline text-[20px]">
+                          beach_access
+                        </span>
+                        <div className="flex flex-col">
+                          <span className="text-xs font-bold text-on-surface">
+                            Días de descanso semanal ({restDays.map((d) => d.day).join(", ")})
+                          </span>
+                          <span className="text-[11px] text-on-surface-variant">
+                            No laborable • La agenda de reservas permanece cerrada estos días
+                          </span>
+                        </div>
+                      </div>
+                      <Link
+                        href={`/dashboard/empleados/nuevo?id=${employee.id}`}
+                        className="text-xs font-semibold text-primary hover:underline flex items-center gap-1 shrink-0"
+                      >
+                        <span className="material-symbols-outlined text-[15px]">add_circle</span>
+                        <span>Activar más días</span>
+                      </Link>
+                    </div>
+                  )}
                 </div>
-              ))}
-            </div>
+              );
+            })()}
           </div>
         )}
 

@@ -47,41 +47,98 @@ export default function EquipoTrabajoPage() {
       }
       setLoading(true);
       try {
-        const { data, error } = await supabase
+        const { data: emps, error } = await supabase
           .from("employees")
           .select("*")
           .eq("business_id", currentBusiness.id)
           .order("created_at", { ascending: true });
 
-        if (!error && data && data.length > 0) {
-          const mapped: FullEmployee[] = data.map((dbEmp) => ({
-            id: dbEmp.id,
-            business_id: dbEmp.business_id,
-            display_name: dbEmp.display_name,
-            job_title: dbEmp.profile_id ? "Propietario / Especialista" : "Especialista",
-            email: dbEmp.email || "Sin email",
-            phone: dbEmp.phone || "Sin teléfono",
-            bio: dbEmp.bio || "",
-            avatar_url: dbEmp.avatar_url || "",
-            internal_id: `EMP-${dbEmp.id.slice(0, 4).toUpperCase()}`,
-            access_status: "activa",
-            is_active: dbEmp.is_active ?? true,
-            rating: 5.0,
-            reviews_count: 0,
-            services: [],
-            schedule_summary: "Lun - Sáb: 09:00 - 19:00",
-            break_summary: "14:00 - 15:00",
-            today_appointments: 0,
-            satisfaction: 100,
-            weekly_hours: 48,
-            seat: "Sillón 01",
-            booking_slug: (dbEmp.display_name || "empleado").toLowerCase().replace(/\s+/g, "-"),
-            google_calendar_synced: false,
-            last_sync_mins: 0,
-            weekly_schedule: [],
-            exceptions: [],
-            recentAppointments: [],
-          }));
+        if (!error && emps && emps.length > 0) {
+          // Fetch all employee_services with services details
+          const { data: allEmpServices } = await supabase
+            .from("employee_services")
+            .select("employee_id, service_id, services(id, name, price, duration_minutes)")
+            .eq("business_id", currentBusiness.id);
+
+          // Fetch all working_hours for employees
+          const { data: allWh } = await supabase
+            .from("working_hours")
+            .select("*")
+            .eq("business_id", currentBusiness.id)
+            .not("employee_id", "is", null);
+
+          const WEEKDAY_NAMES: Record<number, string> = {
+            1: "Lun",
+            2: "Mar",
+            3: "Mié",
+            4: "Jue",
+            5: "Vie",
+            6: "Sáb",
+            0: "Dom",
+          };
+
+          const mapped: FullEmployee[] = emps.map((dbEmp) => {
+            // Filter services for this employee
+            const empServices = (allEmpServices || [])
+              .filter((es: any) => es.employee_id === dbEmp.id && es.services)
+              .map((es: any) => ({
+                id: es.services.id,
+                name: es.services.name,
+                category: "General",
+                duration: es.services.duration_minutes || 30,
+                price: Number(es.services.price || 0),
+              }));
+
+            // Filter working_hours for this employee
+            const empWh = (allWh || [])
+              .filter((w: any) => w.employee_id === dbEmp.id && w.is_available)
+              .sort((a: any, b: any) => a.weekday - b.weekday);
+
+            let scheduleText = "Sin horario configurado";
+            let totalHours = 0;
+            if (empWh.length > 0) {
+              const activeDays = empWh.map((w: any) => WEEKDAY_NAMES[w.weekday] || `Día ${w.weekday}`);
+              const first = empWh[0];
+              const timeRange = `${first.start_time?.slice(0, 5)} - ${first.end_time?.slice(0, 5)}`;
+              scheduleText = `${activeDays.join(", ")}: ${timeRange}`;
+
+              empWh.forEach((w: any) => {
+                const [sh, sm] = (w.start_time || "09:00").split(":").map(Number);
+                const [eh, em] = (w.end_time || "18:00").split(":").map(Number);
+                const diff = (eh + em / 60) - (sh + sm / 60);
+                if (diff > 0) totalHours += diff;
+              });
+            }
+
+            return {
+              id: dbEmp.id,
+              business_id: dbEmp.business_id,
+              display_name: dbEmp.display_name,
+              job_title: dbEmp.profile_id ? "Propietario / Especialista" : "Especialista",
+              email: dbEmp.email || "Sin email",
+              phone: dbEmp.phone || "Sin teléfono",
+              bio: dbEmp.bio || "",
+              avatar_url: dbEmp.avatar_url || "",
+              internal_id: `EMP-${dbEmp.id.slice(0, 4).toUpperCase()}`,
+              access_status: "activa",
+              is_active: dbEmp.is_active ?? true,
+              rating: 5.0,
+              reviews_count: 0,
+              services: empServices,
+              schedule_summary: scheduleText,
+              break_summary: "14:00 - 15:00",
+              today_appointments: 0,
+              satisfaction: 100,
+              weekly_hours: Math.round(totalHours * 10) / 10,
+              seat: "Sillón 01",
+              booking_slug: (dbEmp.display_name || "empleado").toLowerCase().replace(/\s+/g, "-"),
+              google_calendar_synced: false,
+              last_sync_mins: 0,
+              weekly_schedule: [],
+              exceptions: [],
+              recentAppointments: [],
+            };
+          });
           setEmployees(mapped);
         } else {
           setEmployees([]);
