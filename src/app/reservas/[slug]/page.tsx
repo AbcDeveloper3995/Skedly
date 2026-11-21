@@ -11,7 +11,7 @@ interface PublicService {
   name: string;
   price: number;
   duration_minutes: number;
-  category: "all" | "cabello" | "barba" | "tratamientos";
+  category: string;
   category_label: string;
   description: string;
   is_popular?: boolean;
@@ -99,74 +99,9 @@ const DEFAULT_SERVICES: PublicService[] = [
   },
 ];
 
-const DEFAULT_PROFESSIONALS: PublicProfessional[] = [
-  {
-    id: "carlos",
-    name: "Carlos Ramírez",
-    role: "Master Barber",
-    rating: 4.9,
-    reviews_count: 88,
-    experience: "8 años de experiencia",
-    specialty: "Especialista en Fades de alta precisión, cortes urbanos contemporáneos y diseño integral de barba.",
-    avatar_url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "mateo",
-    name: "Mateo Ramos",
-    role: "Barbero Principal",
-    rating: 5.0,
-    reviews_count: 54,
-    experience: "6 años de experiencia",
-    specialty: "Especialista en Estilos Clásicos a Tijera, afeitados con navaja abierta y técnicas de barbería tradicional inglesa.",
-    avatar_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "sofia",
-    name: "Sofía Gómez",
-    role: "Estilista & Tratamientos",
-    rating: 4.9,
-    reviews_count: 32,
-    experience: "5 años de experiencia",
-    specialty: "Especialista en Cuidado Capilar, terapias de hidratación profunda, peeling craneal y texturizado para cabello largo y rizado.",
-    avatar_url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
-  },
-];
+const DEFAULT_PROFESSIONALS: PublicProfessional[] = [];
 
-const DEFAULT_REVIEWS: ReviewItem[] = [
-  {
-    id: "rev-1",
-    client_name: "David Soria",
-    client_initials: "DS",
-    rating: 5,
-    time_ago: "Hace 3 días",
-    comment: "La puntualidad es impecable. Agendé desde el celular en 30 segundos, llegué y Carlos ya me tenía el sillón listo. El degradado con navaja quedó exacto a lo que pedí y el café espresso de cortesía es un gran detalle.",
-    service_used: "Corte Premium",
-    staff_used: "Carlos R.",
-    avatar_bg: "bg-primary-fixed text-on-primary-fixed",
-  },
-  {
-    id: "rev-2",
-    client_name: "Roberto Méndez",
-    client_initials: "RM",
-    rating: 5,
-    time_ago: "Hace 1 semana",
-    comment: "El ritual de toalla caliente y afeitado clásico con Mateo es una experiencia obligada si tienes barba. Sales completamente renovado. Muy buen ambiente musical y la barbería está impecable.",
-    service_used: "Afeitado Clásico",
-    staff_used: "Mateo R.",
-    avatar_bg: "bg-secondary-fixed text-on-secondary-fixed",
-  },
-  {
-    id: "rev-3",
-    client_name: "Alejandro Peña",
-    client_initials: "AP",
-    rating: 5,
-    time_ago: "Hace 2 semanas",
-    comment: "Probé el tratamiento reconstructivo con Sofía por recomendación y mi cabello recuperó vida desde la primera sesión. Te explica cada producto con mucha claridad sin intentar venderte cosas de más.",
-    service_used: "Tratamiento Capilar",
-    staff_used: "Sofía G.",
-    avatar_bg: "bg-tertiary-fixed text-on-tertiary-fixed",
-  },
-];
+const DEFAULT_REVIEWS: ReviewItem[] = [];
 
 const AVAILABLE_TIMES = ["11:30", "13:00", "15:30", "16:30", "17:15", "18:45"];
 
@@ -180,11 +115,29 @@ function PublicBookingContent() {
   // Business State
   const [businessName, setBusinessName] = useState("Urban Cuts");
   const [businessSubtitle, setBusinessSubtitle] = useState("Barbería Clásica & Moderna");
+  const [businessDescription, setBusinessDescription] = useState(
+    "Experiencia de barbería artesanal contemporánea. Cortes de alta precisión, afeitado tradicional y cuidado masculino sin fricción."
+  );
+  const [businessAddress, setBusinessAddress] = useState("Colima 152, Roma Norte, Ciudad de México");
+  const [businessPhone, setBusinessPhone] = useState("+52 55 9123 4567");
+  const [businessEmail, setBusinessEmail] = useState("contacto@urbancuts.mx");
+  const [heroCoverUrl, setHeroCoverUrl] = useState(
+    "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1600&auto=format&fit=crop&q=80"
+  );
+  const [galleryList, setGalleryList] = useState<string[]>([
+    "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800&auto=format&fit=crop&q=80",
+  ]);
   const [services, setServices] = useState<PublicService[]>(DEFAULT_SERVICES);
-  const [professionals, setProfessionals] = useState<PublicProfessional[]>(DEFAULT_PROFESSIONALS);
-  const [reviews] = useState<ReviewItem[]>(DEFAULT_REVIEWS);
+  const [professionals, setProfessionals] = useState<PublicProfessional[]>([]);
+  const [reviews, setReviews] = useState<ReviewItem[]>([]);
 
   // Filters
+  const [categories, setCategories] = useState<{ id: string; label: string }[]>([
+    { id: "all", label: "Todos" },
+  ]);
   const [activeCategory, setActiveCategory] = useState<string>("all");
 
   // Booking Modal State (Intelligent Entry Point)
@@ -194,7 +147,7 @@ function PublicBookingContent() {
 
   // Selected Booking Values
   const [selectedService, setSelectedService] = useState<PublicService>(DEFAULT_SERVICES[1]); // Default Corte Premium
-  const [selectedProId, setSelectedProId] = useState<string>("carlos");
+  const [selectedProId, setSelectedProId] = useState<string>("any");
   const [selectedDate, setSelectedDate] = useState("2025-10-26");
   const [selectedTime, setSelectedTime] = useState("13:00");
 
@@ -209,43 +162,136 @@ function PublicBookingContent() {
   const [isSubmittingBooking, setIsSubmittingBooking] = useState(false);
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
 
-  // Mobile drawer / Simulator tooling view
-  const [showSimulatorBar, setShowSimulatorBar] = useState(true);
+  // Section Visibility Flags (Controlled by Business Owner in Dashboard)
+  const [showHero, setShowHero] = useState(true);
+  const [showServices, setShowServices] = useState(true);
+  const [showStaff, setShowStaff] = useState(true);
+  const [showGallery, setShowGallery] = useState(true);
+  const [showReviews, setShowReviews] = useState(true);
+  const [showMap, setShowMap] = useState(true);
 
-  // Attempt to load dynamic business data if slug exists in Supabase
+  // Mobile drawer / Simulator tooling view (disabled for clean production experience)
+  const [showSimulatorBar, setShowSimulatorBar] = useState(false);
+
+  // Load dynamic business data from Supabase
   useEffect(() => {
-    if (!businessSlug || businessSlug === "urban-cuts") return;
+    if (!businessSlug) return;
 
     supabase
       .from("businesses")
-      .select("id, name, slug, phone, address")
+      .select("id, name, slug, phone, email, description, timezone")
       .eq("slug", businessSlug)
       .maybeSingle()
-      .then(({ data: biz }) => {
+      .then(async ({ data: biz }) => {
         if (biz) {
-          setBusinessName(biz.name);
-          // Load services
-          supabase
-            .from("services")
-            .select("id, name, price, duration_minutes, description")
+          if (biz.name) setBusinessName(biz.name);
+          if (biz.phone) setBusinessPhone(biz.phone);
+          if (biz.email) setBusinessEmail(biz.email);
+          if (biz.description) setBusinessDescription(biz.description);
+
+          // 1. Fetch website settings (cover_url, headline, gallery, section visibility)
+          const { data: webSettings } = await supabase
+            .from("website_settings")
+            .select("*")
+            .eq("business_id", biz.id)
+            .maybeSingle();
+
+          if (webSettings) {
+            if (webSettings.headline) setBusinessSubtitle(webSettings.headline);
+            if (webSettings.cover_url) setHeroCoverUrl(webSettings.cover_url);
+            if (webSettings.show_employee_profiles !== undefined && webSettings.show_employee_profiles !== null) {
+              setShowStaff(webSettings.show_employee_profiles);
+            }
+            if (webSettings.show_prices !== undefined && webSettings.show_prices !== null) {
+              setShowServices(webSettings.show_prices);
+            }
+            if (webSettings.about_text) {
+              try {
+                const parsed = JSON.parse(webSettings.about_text);
+                if (parsed.description) setBusinessDescription(parsed.description);
+                if (parsed.address) setBusinessAddress(parsed.address);
+                if (Array.isArray(parsed.gallery) && parsed.gallery.length > 0) {
+                  setGalleryList(parsed.gallery);
+                }
+                if (parsed.sections) {
+                  if (parsed.sections.showHero !== undefined) setShowHero(parsed.sections.showHero);
+                  if (parsed.sections.showServices !== undefined) setShowServices(parsed.sections.showServices);
+                  if (parsed.sections.showStaff !== undefined) setShowStaff(parsed.sections.showStaff);
+                  if (parsed.sections.showGallery !== undefined) setShowGallery(parsed.sections.showGallery);
+                  if (parsed.sections.showReviews !== undefined) setShowReviews(parsed.sections.showReviews);
+                  if (parsed.sections.showMap !== undefined) setShowMap(parsed.sections.showMap);
+                }
+              } catch {
+                setBusinessDescription(webSettings.about_text);
+              }
+            }
+          }
+
+          // 2. Load service categories & services from Supabase
+          const { data: cats } = await supabase
+            .from("service_categories")
+            .select("id, name, display_order")
             .eq("business_id", biz.id)
             .eq("is_active", true)
-            .then(({ data: srvs }) => {
-              if (srvs && srvs.length > 0) {
-                setServices(
-                  srvs.map((s, idx) => ({
-                    id: s.id,
-                    name: s.name,
-                    price: s.price,
-                    duration_minutes: s.duration_minutes,
-                    category: "all",
-                    category_label: "Servicio",
-                    description: s.description || "Atención personalizada de alta calidad.",
-                    is_popular: idx === 0,
-                  }))
-                );
-              }
-            });
+            .order("display_order", { ascending: true });
+
+          if (cats && cats.length > 0) {
+            setCategories([
+              { id: "all", label: "Todos" },
+              ...cats.map((c) => ({ id: c.id, label: c.name })),
+            ]);
+          } else {
+            setCategories([{ id: "all", label: "Todos" }]);
+          }
+
+          const { data: srvs } = await supabase
+            .from("services")
+            .select("id, name, price, duration_minutes, description, category_id")
+            .eq("business_id", biz.id)
+            .eq("is_active", true)
+            .order("display_order", { ascending: true });
+
+          if (srvs && srvs.length > 0) {
+            const catMap = new Map((cats || []).map((c) => [c.id, c.name]));
+            const mappedServices: PublicService[] = srvs.map((s, idx) => ({
+              id: s.id,
+              name: s.name,
+              price: s.price,
+              duration_minutes: s.duration_minutes,
+              category: s.category_id || "all",
+              category_label: (s.category_id && catMap.get(s.category_id)) || "Servicio",
+              description: s.description || "Atención personalizada de alta calidad.",
+              is_popular: idx === 0,
+            }));
+            setServices(mappedServices);
+            setSelectedService(mappedServices[0]);
+          }
+
+          // 3. Load employees from Supabase
+          const { data: emps, error: empsError } = await supabase
+            .from("employees")
+            .select("id, display_name, bio, avatar_url, is_active")
+            .eq("business_id", biz.id)
+            .eq("is_active", true)
+            .order("created_at", { ascending: true });
+
+          if (emps && emps.length > 0) {
+            const mappedPros: PublicProfessional[] = emps.map((e) => ({
+              id: e.id,
+              name: e.display_name,
+              role: "Especialista",
+              rating: 5.0,
+              reviews_count: 0,
+              experience: "Especialista verificado",
+              specialty: e.bio || "Atención profesional y cuidado personalizado.",
+              avatar_url: e.avatar_url || "",
+            }));
+            setProfessionals(mappedPros);
+            setSelectedProId(mappedPros[0].id);
+          } else {
+            setProfessionals([]);
+            setSelectedProId("any");
+          }
         }
       });
   }, [businessSlug]);
@@ -395,21 +441,31 @@ function PublicBookingContent() {
             <a href="#inicio" className="text-primary font-semibold transition-colors">
               Inicio
             </a>
-            <a href="#servicios" className="hover:text-on-surface transition-colors">
-              Servicios
-            </a>
-            <a href="#profesionales" className="hover:text-on-surface transition-colors">
-              Profesionales
-            </a>
-            <a href="#galeria" className="hover:text-on-surface transition-colors">
-              Galería
-            </a>
-            <a href="#reseñas" className="hover:text-on-surface transition-colors">
-              Reseñas
-            </a>
-            <a href="#contacto" className="hover:text-on-surface transition-colors">
-              Contacto
-            </a>
+            {showServices && (
+              <a href="#servicios" className="hover:text-on-surface transition-colors">
+                Servicios
+              </a>
+            )}
+            {showStaff && (
+              <a href="#profesionales" className="hover:text-on-surface transition-colors">
+                Profesionales
+              </a>
+            )}
+            {showGallery && (
+              <a href="#galeria" className="hover:text-on-surface transition-colors">
+                Galería
+              </a>
+            )}
+            {showReviews && (
+              <a href="#reseñas" className="hover:text-on-surface transition-colors">
+                Reseñas
+              </a>
+            )}
+            {showMap && (
+              <a href="#contacto" className="hover:text-on-surface transition-colors">
+                Contacto
+              </a>
+            )}
           </nav>
 
           <div className="flex items-center gap-3">
@@ -427,576 +483,642 @@ function PublicBookingContent() {
       </header>
 
       {/* ============================================================ */}
-      {/* 2. HERO SECTION                                              */}
+      {/* 2. HERO SECTION & QUICK METRICS                              */}
       {/* ============================================================ */}
-      <section id="inicio" className="relative w-full overflow-hidden bg-inverse-surface text-surface">
-        {/* Atmospheric Ambient Visual Background */}
-        <div
-          className="absolute inset-0 w-full h-full bg-cover bg-center opacity-30 mix-blend-luminosity scale-105 transition-transform duration-1000 ease-out"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1600&auto=format&fit=crop&q=80')`,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-inverse-surface via-inverse-surface/85 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-inverse-surface via-transparent to-inverse-surface/60" />
+      {showHero && (
+        <>
+          <section id="inicio" className="relative w-full overflow-hidden bg-inverse-surface text-surface">
+            {/* Vivid Natural Cover Background */}
+            <div
+              className="absolute inset-0 w-full h-full bg-cover bg-center scale-105 transition-transform duration-1000 ease-out"
+              style={{
+                backgroundImage: `url('${heroCoverUrl || "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1600&auto=format&fit=crop&q=80"}')`,
+              }}
+            />
+            {/* Natural gradient overlay that preserves vibrant colors while guaranteeing clear text contrast */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-black/35" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/40" />
 
-        <div className="relative max-w-[1280px] mx-auto px-6 lg:px-12 pt-20 pb-20 lg:pt-28 lg:pb-28 flex flex-col justify-center">
-          {/* Slogan Badge */}
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-primary-container/20 text-primary-fixed backdrop-blur-md self-start mb-5 border border-primary-fixed/20">
-            <span className="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
-            <span className="text-xs font-semibold tracking-wide">Tu estilo, nuestra especialidad</span>
-          </div>
+            <div className="relative max-w-[1280px] mx-auto px-6 lg:px-12 pt-20 pb-20 lg:pt-28 lg:pb-28 flex flex-col justify-center">
+              {/* Slogan Badge */}
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-primary-container/20 text-primary-fixed backdrop-blur-md self-start mb-5 border border-primary-fixed/20">
+                <span className="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+                <span className="text-xs font-semibold tracking-wide">{businessSubtitle || "Tu estilo, nuestra especialidad"}</span>
+              </div>
 
-          {/* Title & Description */}
-          <div className="max-w-3xl space-y-4">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-surface tracking-tight">
-              {businessName}
-            </h1>
-            <p className="text-xl sm:text-2xl text-surface-variant font-normal leading-relaxed">
-              Experiencia de barbería artesanal contemporánea en el corazón de la Roma Norte.
-            </p>
-            <p className="text-sm sm:text-base text-surface-variant/80 max-w-2xl leading-relaxed">
-              Descubre una experiencia de barbería profesional de primer nivel. Elige tu servicio, selecciona a tu barbero de confianza y agenda en segundos sin necesidad de crear contraseñas ni registrarte.
-            </p>
-          </div>
+              {/* Title & Description */}
+              <div className="max-w-3xl space-y-4">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-surface tracking-tight">
+                  {businessName}
+                </h1>
+                <p className="text-xl sm:text-2xl text-surface-variant font-normal leading-relaxed">
+                  {businessDescription || "Experiencia de barbería artesanal contemporánea."}
+                </p>
+                <p className="text-sm sm:text-base text-surface-variant/80 max-w-2xl leading-relaxed">
+                  Descubre una experiencia de calidad superior. Elige tu servicio, selecciona tu horario preferido y agenda en segundos de manera fácil y rápida.
+                </p>
+              </div>
 
-          {/* Quick Badges */}
-          <div className="flex flex-wrap items-center gap-3 pt-6 pb-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-surface/10 backdrop-blur-md text-surface text-xs shadow-sm border border-surface/10">
-              <span className="material-symbols-outlined text-amber-400 text-[18px]">star</span>
-              <span className="font-bold text-sm">4.9</span>
-              <span className="text-surface-variant text-[11px]">(142 reseñas verificadas)</span>
-            </div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-surface/10 backdrop-blur-md text-surface text-xs shadow-sm border border-surface/10">
-              <span className="material-symbols-outlined text-primary-fixed text-[18px]">location_on</span>
-              <span>Roma Norte, CDMX</span>
-            </div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-200 backdrop-blur-md text-xs shadow-sm border border-emerald-500/20">
-              <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-              <span>Abierto hoy: 10:00 - 20:00</span>
-            </div>
-          </div>
+              {/* Quick Badges */}
+              <div className="flex flex-wrap items-center gap-3 pt-6 pb-6">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-surface/10 backdrop-blur-md text-surface text-xs shadow-sm border border-surface/10">
+                  <span className="material-symbols-outlined text-amber-400 text-[18px]">star</span>
+                  <span className="font-bold text-sm">4.9</span>
+                  <span className="text-surface-variant text-[11px]">(Reseñas verificadas)</span>
+                </div>
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-surface/10 backdrop-blur-md text-surface text-xs shadow-sm border border-surface/10">
+                  <span className="material-symbols-outlined text-primary-fixed text-[18px]">location_on</span>
+                  <span>{businessAddress ? businessAddress.split(",")[0] : "Instalaciones de primer nivel"}</span>
+                </div>
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-200 backdrop-blur-md text-xs shadow-sm border border-emerald-500/20">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                  <span>Atención en local</span>
+                </div>
+              </div>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-            <button
-              type="button"
-              onClick={openBookingGeneric}
-              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-primary text-on-primary font-bold text-sm hover:bg-primary-container transition-all duration-200 shadow-lg hover:-translate-y-0.5 active:translate-y-0"
-            >
-              <span className="material-symbols-outlined text-[20px]">calendar_month</span>
-              <span>Reservar una cita</span>
-            </button>
-            <a
-              href="#servicios"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-surface-container-highest/20 text-surface hover:bg-surface-container-highest/30 backdrop-blur-md font-semibold text-xs transition-all border border-surface/10"
-            >
-              <span>Ver servicios y precios</span>
-              <span className="material-symbols-outlined text-[18px]">arrow_downward</span>
-            </a>
-          </div>
-        </div>
-      </section>
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                <button
+                  type="button"
+                  onClick={openBookingGeneric}
+                  className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-primary text-on-primary font-bold text-sm hover:bg-primary-container transition-all duration-200 shadow-lg hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                >
+                  <span className="material-symbols-outlined text-[20px]">calendar_month</span>
+                  <span>Reservar una cita</span>
+                </button>
+                {showServices && (
+                  <a
+                    href="#servicios"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-surface-container-highest/20 text-surface hover:bg-surface-container-highest/30 backdrop-blur-md font-semibold text-xs transition-all border border-surface/10"
+                  >
+                    <span>Ver servicios y precios</span>
+                    <span className="material-symbols-outlined text-[18px]">arrow_downward</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </section>
 
-      {/* ============================================================ */}
-      {/* 3. QUICK METRICS OVERLAP BAR                                 */}
-      {/* ============================================================ */}
-      <div className="max-w-[1280px] w-full mx-auto px-6 lg:px-12 -mt-8 relative z-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-5 rounded-2xl bg-surface-container-lowest shadow-md border border-outline-variant/30">
-          <div className="flex items-center gap-3.5 p-2">
-            <div className="w-11 h-11 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed shrink-0">
-              <span className="material-symbols-outlined text-[22px]">timer</span>
-            </div>
-            <div>
-              <p className="text-xs sm:text-sm font-bold text-on-surface">Puntualidad 100%</p>
-              <p className="text-[11px] text-secondary">Cero esperas de sillón</p>
-            </div>
-          </div>
+          {/* QUICK METRICS OVERLAP BAR */}
+          <div className="max-w-[1280px] w-full mx-auto px-6 lg:px-12 -mt-8 relative z-20">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-5 rounded-2xl bg-surface-container-lowest shadow-md border border-outline-variant/30">
+              <div className="flex items-center gap-3.5 p-2">
+                <div className="w-11 h-11 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed shrink-0">
+                  <span className="material-symbols-outlined text-[22px]">timer</span>
+                </div>
+                <div>
+                  <p className="text-xs sm:text-sm font-bold text-on-surface">Puntualidad 100%</p>
+                  <p className="text-[11px] text-secondary">Cero esperas innecesarias</p>
+                </div>
+              </div>
 
-          <div className="flex items-center gap-3.5 p-2">
-            <div className="w-11 h-11 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed shrink-0">
-              <span className="material-symbols-outlined text-[22px]">verified</span>
-            </div>
-            <div>
-              <p className="text-xs sm:text-sm font-bold text-on-surface">Confirmación al instante</p>
-              <p className="text-[11px] text-secondary">Vía WhatsApp y Correo</p>
-            </div>
-          </div>
+              <div className="flex items-center gap-3.5 p-2">
+                <div className="w-11 h-11 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed shrink-0">
+                  <span className="material-symbols-outlined text-[22px]">verified</span>
+                </div>
+                <div>
+                  <p className="text-xs sm:text-sm font-bold text-on-surface">Confirmación al instante</p>
+                  <p className="text-[11px] text-secondary">Vía WhatsApp y Correo</p>
+                </div>
+              </div>
 
-          <div className="flex items-center gap-3.5 p-2">
-            <div className="w-11 h-11 rounded-xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed shrink-0">
-              <span className="material-symbols-outlined text-[22px]">local_cafe</span>
-            </div>
-            <div>
-              <p className="text-xs sm:text-sm font-bold text-on-surface">Bebida de cortesía</p>
-              <p className="text-[11px] text-secondary">Espresso o cerveza artesanal</p>
-            </div>
-          </div>
+              <div className="flex items-center gap-3.5 p-2">
+                <div className="w-11 h-11 rounded-xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed shrink-0">
+                  <span className="material-symbols-outlined text-[22px]">local_cafe</span>
+                </div>
+                <div>
+                  <p className="text-xs sm:text-sm font-bold text-on-surface">Atención de cortesía</p>
+                  <p className="text-[11px] text-secondary">Bebida y confort</p>
+                </div>
+              </div>
 
-          <div className="flex items-center gap-3.5 p-2">
-            <div className="w-11 h-11 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface shrink-0">
-              <span className="material-symbols-outlined text-[22px]">payments</span>
-            </div>
-            <div>
-              <p className="text-xs sm:text-sm font-bold text-on-surface">Pago en el local</p>
-              <p className="text-[11px] text-secondary">Efectivo, Tarjeta o SPEI</p>
+              <div className="flex items-center gap-3.5 p-2">
+                <div className="w-11 h-11 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface shrink-0">
+                  <span className="material-symbols-outlined text-[22px]">payments</span>
+                </div>
+                <div>
+                  <p className="text-xs sm:text-sm font-bold text-on-surface">Pago en el local</p>
+                  <p className="text-[11px] text-secondary">Efectivo o Tarjeta bancaria</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
 
       {/* ============================================================ */}
       {/* 4. SECTION: NUESTROS SERVICIOS                               */}
       {/* ============================================================ */}
-      <section id="servicios" className="max-w-[1280px] w-full mx-auto px-6 lg:px-12 pt-24 pb-16">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-          <div>
-            <div className="inline-flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-wider mb-2">
-              <span className="material-symbols-outlined text-[16px]">tune</span>
-              <span>Catálogo de Servicios</span>
+      {showServices && (
+        <section id="servicios" className="max-w-[1280px] w-full mx-auto px-6 lg:px-12 pt-24 pb-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <div>
+              <div className="inline-flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-wider mb-2">
+                <span className="material-symbols-outlined text-[16px]">tune</span>
+                <span>Catálogo de Servicios</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-on-surface tracking-tight">Nuestros Servicios</h2>
+              <p className="text-xs sm:text-sm text-secondary mt-1">
+                Selecciona el tratamiento ideal y asegura tu horario con tu profesional de confianza.
+              </p>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-on-surface tracking-tight">Nuestros Servicios</h2>
-            <p className="text-xs sm:text-sm text-secondary mt-1">
-              Selecciona el tratamiento ideal y asegura tu horario con tu barbero favorito.
+
+            {/* Category Filter Pills (Real Business Categories) */}
+            <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-xl bg-surface-container">
+              {categories.map((cat) => {
+                const isSelected = activeCategory === cat.id;
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => setActiveCategory(cat.id)}
+                    className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+                      isSelected
+                        ? "bg-surface-container-lowest text-primary shadow-sm"
+                        : "text-secondary hover:text-on-surface"
+                    }`}
+                  >
+                    {cat.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Services Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredServices.map((service) => (
+              <div
+                key={service.id}
+                className={`relative flex flex-col justify-between p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all duration-200 border border-outline-variant/30 ${
+                  service.is_popular ? "ring-2 ring-primary/30" : ""
+                }`}
+              >
+                {service.is_popular && (
+                  <div className="absolute -top-3 right-6 px-3 py-0.5 rounded-full bg-primary text-on-primary text-[11px] font-bold shadow-sm flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[13px]">auto_awesome</span>
+                    <span>Popular</span>
+                  </div>
+                )}
+
+                <div>
+                  <div className="flex items-start justify-between gap-4 mb-3">
+                    <div>
+                      <span className="inline-block px-2.5 py-0.5 rounded-full bg-surface-container text-secondary text-[11px] font-semibold mb-2">
+                        {service.category_label}
+                      </span>
+                      <h3 className="text-base sm:text-lg font-bold text-on-surface">{service.name}</h3>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-lg font-bold text-primary">${service.price}</span>
+                      <span className="block text-[10px] text-secondary uppercase font-semibold">MXN</span>
+                    </div>
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-secondary mb-6 leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+
+                <div className="pt-4 flex items-center justify-between border-t border-surface-container-low">
+                  <div className="flex items-center gap-1.5 text-secondary text-xs">
+                    <span className="material-symbols-outlined text-[18px]">schedule</span>
+                    <span>{service.duration_minutes} min</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => openBookingFromService(service)}
+                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                      service.is_popular
+                        ? "bg-primary text-on-primary shadow-sm hover:bg-primary-container"
+                        : "bg-surface-container-low hover:bg-primary-container text-on-surface hover:text-on-primary-container"
+                    }`}
+                  >
+                    <span>Reservar</span>
+                    <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Informational Price Footnote Box */}
+          <div className="mt-8 p-4 rounded-xl bg-surface-container-low flex items-start sm:items-center gap-3 border border-outline-variant/20">
+            <span className="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5 sm:mt-0">info</span>
+            <p className="text-xs text-secondary">
+              <strong className="font-semibold text-on-surface">Información de pago:</strong> Los precios mostrados son informativos. El pago se realiza directamente en el local en efectivo o tarjeta bancaria al finalizar tu cita.
             </p>
           </div>
-
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-xl bg-surface-container">
-            {[
-              { id: "all", label: "Todos" },
-              { id: "cabello", label: "Cortes de cabello" },
-              { id: "barba", label: "Barba" },
-              { id: "tratamientos", label: "Tratamientos" },
-            ].map((cat) => {
-              const isSelected = activeCategory === cat.id;
-              return (
-                <button
-                  key={cat.id}
-                  type="button"
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
-                    isSelected
-                      ? "bg-surface-container-lowest text-primary shadow-sm"
-                      : "text-secondary hover:text-on-surface"
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredServices.map((service) => (
-            <div
-              key={service.id}
-              className={`relative flex flex-col justify-between p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all duration-200 border border-outline-variant/30 ${
-                service.is_popular ? "ring-2 ring-primary/30" : ""
-              }`}
-            >
-              {service.is_popular && (
-                <div className="absolute -top-3 right-6 px-3 py-0.5 rounded-full bg-primary text-on-primary text-[11px] font-bold shadow-sm flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[13px]">auto_awesome</span>
-                  <span>Popular</span>
-                </div>
-              )}
-
-              <div>
-                <div className="flex items-start justify-between gap-4 mb-3">
-                  <div>
-                    <span className="inline-block px-2.5 py-0.5 rounded-full bg-surface-container text-secondary text-[11px] font-semibold mb-2">
-                      {service.category_label}
-                    </span>
-                    <h3 className="text-base sm:text-lg font-bold text-on-surface">{service.name}</h3>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-lg font-bold text-primary">${service.price}</span>
-                    <span className="block text-[10px] text-secondary uppercase font-semibold">MXN</span>
-                  </div>
-                </div>
-
-                <p className="text-xs sm:text-sm text-secondary mb-6 leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
-
-              <div className="pt-4 flex items-center justify-between border-t border-surface-container-low">
-                <div className="flex items-center gap-1.5 text-secondary text-xs">
-                  <span className="material-symbols-outlined text-[18px]">schedule</span>
-                  <span>{service.duration_minutes} min</span>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => openBookingFromService(service)}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
-                    service.is_popular
-                      ? "bg-primary text-on-primary shadow-sm hover:bg-primary-container"
-                      : "bg-surface-container-low hover:bg-primary-container text-on-surface hover:text-on-primary-container"
-                  }`}
-                >
-                  <span>Reservar</span>
-                  <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Informational Price Footnote Box */}
-        <div className="mt-8 p-4 rounded-xl bg-surface-container-low flex items-start sm:items-center gap-3 border border-outline-variant/20">
-          <span className="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5 sm:mt-0">info</span>
-          <p className="text-xs text-secondary">
-            <strong className="font-semibold text-on-surface">Información de pago:</strong> Los precios mostrados son informativos. El pago se realiza directamente en el local en efectivo o tarjeta bancaria al finalizar tu cita.
-          </p>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ============================================================ */}
       {/* 5. SECTION: NUESTRO EQUIPO                                   */}
       {/* ============================================================ */}
-      <section id="profesionales" className="w-full bg-surface-container-low py-20 border-y border-outline-variant/30">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-wider mb-2">
-              <span className="material-symbols-outlined text-[18px]">badge</span>
-              <span>Especialistas</span>
+      {showStaff && (
+        <section id="profesionales" className="w-full bg-surface-container-low py-20 border-y border-outline-variant/30">
+          <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
+            <div className="text-center max-w-2xl mx-auto mb-14">
+              <div className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-wider mb-2">
+                <span className="material-symbols-outlined text-[18px]">badge</span>
+                <span>Especialistas</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-on-surface tracking-tight">Conoce a nuestro equipo</h2>
+              <p className="text-xs sm:text-sm text-secondary mt-2">
+                Profesionales capacitados para ofrecerte el mejor corte, técnica precisa y cuidado personalizado.
+              </p>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-on-surface tracking-tight">Conoce a nuestro equipo</h2>
-            <p className="text-xs sm:text-sm text-secondary mt-2">
-              Profesionales capacitados para ofrecerte el mejor corte, técnica precisa y cuidado personalizado.
-            </p>
-          </div>
 
-          {/* Professional Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-            {professionals.map((pro) => (
-              <div
-                key={pro.id}
-                className="flex flex-col bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all group border border-outline-variant/30"
-              >
-                <div className="relative h-64 w-full overflow-hidden bg-surface-container">
-                  <img
-                    src={pro.avatar_url}
-                    alt={pro.name}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md flex items-center gap-1 shadow-sm">
-                    <span className="material-symbols-outlined text-amber-500 text-[16px]">star</span>
-                    <span className="text-xs font-bold text-on-surface">{pro.rating}</span>
-                    <span className="text-[10px] text-secondary">({pro.reviews_count})</span>
-                  </div>
+            {/* Professional Cards Grid */}
+            {professionals.length === 0 ? (
+              <div className="p-8 sm:p-12 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 text-center max-w-2xl mx-auto shadow-sm flex flex-col items-center mb-10">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4">
+                  <span className="material-symbols-outlined text-3xl">diversity_3</span>
                 </div>
-
-                <div className="p-6 flex flex-col flex-1 justify-between">
-                  <div>
-                    <h3 className="text-lg font-bold text-on-surface">{pro.name}</h3>
-                    <p className="text-xs font-semibold text-primary mt-1">{pro.role}</p>
-                    <p className="text-xs text-secondary mt-2 leading-relaxed">{pro.specialty}</p>
-                    <div className="mt-4 flex items-center gap-2 text-xs text-secondary">
-                      <span className="material-symbols-outlined text-[16px] text-primary">workspace_premium</span>
-                      <span>{pro.experience}</span>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 pt-4 border-t border-surface-container">
-                    <button
-                      type="button"
-                      onClick={() => openBookingFromPro(pro.id)}
-                      className="w-full py-2.5 rounded-xl bg-surface-container-high hover:bg-primary text-on-surface hover:text-on-primary text-xs font-bold transition-all text-center"
-                    >
-                      Reservar con {pro.name.split(" ")[0]}
-                    </button>
-                  </div>
+                <h3 className="text-lg font-bold text-on-surface">Atención profesional de nuestro equipo</h3>
+                <p className="text-xs sm:text-sm text-secondary mt-2 max-w-md leading-relaxed">
+                  Todas las citas en {businessName} son atendidas directamente por especialistas verificados. Al agendar se te asignará el turno disponible más conveniente.
+                </p>
+                <div className="mt-6">
+                  <button
+                    type="button"
+                    onClick={openBookingGeneric}
+                    className="px-6 py-3 rounded-xl bg-primary text-on-primary text-xs font-bold hover:bg-primary-container transition-all flex items-center gap-2 shadow-sm"
+                  >
+                    <span className="material-symbols-outlined text-[18px]">calendar_month</span>
+                    <span>Reservar cita con nuestro equipo</span>
+                  </button>
                 </div>
               </div>
-            ))}
-          </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+                {professionals.map((pro) => (
+                  <div
+                    key={pro.id}
+                    className="flex flex-col bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all group border border-outline-variant/30"
+                  >
+                    <div className="relative h-64 w-full overflow-hidden bg-surface-container">
+                      {pro.avatar_url ? (
+                        <img
+                          src={pro.avatar_url}
+                          alt={pro.name}
+                          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-primary/10 via-surface-container to-surface-container-high text-primary">
+                          <div className="w-20 h-20 rounded-2xl bg-primary text-on-primary font-bold text-2xl flex items-center justify-center shadow-md">
+                            {pro.name.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase()}
+                          </div>
+                          <span className="text-xs font-semibold text-secondary mt-3">Especialista verificado</span>
+                        </div>
+                      )}
+                      <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md flex items-center gap-1 shadow-sm">
+                        <span className="material-symbols-outlined text-emerald-500 text-[16px]">verified</span>
+                        <span className="text-xs font-bold text-on-surface">Verificado</span>
+                      </div>
+                    </div>
 
-          {/* Helper Flexible Pill */}
-          <div className="flex items-center justify-center">
-            <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-surface-container text-on-surface text-xs border border-outline-variant/30">
-              <span className="material-symbols-outlined text-primary text-[18px]">shuffle</span>
-              <span>
-                ¿No tienes preferencia? Puedes seleccionar <strong>"Cualquier profesional disponible"</strong> al agendar para mayor flexibilidad de horarios.
-              </span>
+                    <div className="p-6 flex flex-col flex-1 justify-between">
+                      <div>
+                        <h3 className="text-lg font-bold text-on-surface">{pro.name}</h3>
+                        <p className="text-xs font-semibold text-primary mt-1">{pro.role}</p>
+                        <p className="text-xs text-secondary mt-2 leading-relaxed">{pro.specialty}</p>
+                        <div className="mt-4 flex items-center gap-2 text-xs text-secondary">
+                          <span className="material-symbols-outlined text-[16px] text-primary">workspace_premium</span>
+                          <span>{pro.experience}</span>
+                        </div>
+                      </div>
+
+                      <div className="mt-6 pt-4 border-t border-surface-container">
+                        <button
+                          type="button"
+                          onClick={() => openBookingFromPro(pro.id)}
+                          className="w-full py-2.5 rounded-xl bg-surface-container-high hover:bg-primary text-on-surface hover:text-on-primary text-xs font-bold transition-all text-center cursor-pointer"
+                        >
+                          Reservar con {pro.name.split(" ")[0]}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Helper Flexible Pill */}
+            <div className="flex items-center justify-center">
+              <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-surface-container text-on-surface text-xs border border-outline-variant/30">
+                <span className="material-symbols-outlined text-primary text-[18px]">shuffle</span>
+                <span>
+                  ¿No tienes preferencia? Puedes seleccionar <strong>"Cualquier profesional disponible"</strong> al agendar para mayor flexibilidad de horarios.
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ============================================================ */}
       {/* 6. SECTION: GALERÍA DE FOTOS (Bento Grid)                     */}
       {/* ============================================================ */}
-      <section id="galeria" className="max-w-[1280px] w-full mx-auto px-6 lg:px-12 py-20">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
-          <div>
-            <div className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-wider mb-2">
-              <span className="material-symbols-outlined text-[18px]">photo_library</span>
-              <span>Espacio & Ambiente</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-on-surface tracking-tight">Conoce nuestro espacio</h2>
-            <p className="text-xs sm:text-sm text-secondary mt-1">
-              Diseñado para desconectar, disfrutar de una buena charla y recibir un trato inigualable.
-            </p>
-          </div>
-          <div className="hidden sm:flex items-center gap-2 text-secondary text-xs">
-            <span className="material-symbols-outlined text-[18px] text-primary">touch_app</span>
-            <span>Colima 245, Roma Norte</span>
-          </div>
-        </div>
-
-        {/* 4-Photo Responsive Bento Gallery */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-5 h-auto md:h-[480px]">
-          {/* Photo 1: Big Interior View */}
-          <div className="md:col-span-6 h-72 md:h-full relative rounded-2xl overflow-hidden group shadow-sm bg-surface-container border border-outline-variant/20">
-            <img
-              src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&auto=format&fit=crop&q=80"
-              alt="Interior Urban Cuts"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-              <div className="text-surface">
-                <p className="text-sm font-bold">Sillones Ergonómicos Vintage</p>
-                <p className="text-xs text-surface-variant">Confort máximo para afeitados y cortes largos</p>
+      {showGallery && (
+        <section id="galeria" className="max-w-[1280px] w-full mx-auto px-6 lg:px-12 pt-20 pb-28">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+            <div>
+              <div className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-wider mb-2">
+                <span className="material-symbols-outlined text-[18px]">photo_library</span>
+                <span>Espacio & Ambiente</span>
               </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-on-surface tracking-tight">Conoce nuestro espacio</h2>
+              <p className="text-xs sm:text-sm text-secondary mt-1">
+                Diseñado para desconectar, disfrutar de una buena charla y recibir un trato inigualable.
+              </p>
+            </div>
+            <div className="hidden sm:flex items-center gap-2 text-secondary text-xs">
+              <span className="material-symbols-outlined text-[18px] text-primary">touch_app</span>
+              <span>{businessAddress ? businessAddress.split(",")[0] : businessName}</span>
             </div>
           </div>
 
-          {/* Photo 2: Detail + Bar + Facade */}
-          <div className="md:col-span-6 grid grid-rows-2 gap-5 h-auto md:h-full">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 h-64 md:h-auto">
-              <div className="relative rounded-2xl overflow-hidden group shadow-sm bg-surface-container h-full border border-outline-variant/20">
-                <img
-                  src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&auto=format&fit=crop&q=80"
-                  alt="Precision styling"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <span className="text-xs font-bold text-surface">Precisión Milimétrica</span>
-                </div>
-              </div>
-
-              <div className="relative rounded-2xl overflow-hidden group shadow-sm bg-surface-container h-full border border-outline-variant/20">
-                <img
-                  src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&auto=format&fit=crop&q=80"
-                  alt="Espresso Bar"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <span className="text-xs font-bold text-surface">Bar & Sala de Espera</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative rounded-2xl overflow-hidden group shadow-sm bg-surface-container h-48 md:h-auto border border-outline-variant/20">
+          {/* 4-Photo Responsive Bento Gallery (No Overflow) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-5 auto-rows-[230px]">
+            {/* Photo 1: Big Interior View */}
+            <div className="sm:col-span-2 md:col-span-6 md:row-span-2 relative rounded-2xl overflow-hidden group shadow-sm bg-surface-container border border-outline-variant/20 min-h-[230px]">
               <img
-                src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800&auto=format&fit=crop&q=80"
-                alt="Storefront"
+                src={galleryList[0] || "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&auto=format&fit=crop&q=80"}
+                alt="Instalaciones del negocio"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                 <div className="text-surface">
-                  <p className="text-sm font-bold">Fachada Colima 245</p>
-                  <p className="text-xs text-surface-variant">Ubicación accesible en el corazón de Roma Norte</p>
+                  <p className="text-sm font-bold">Instalaciones & Confort</p>
+                  <p className="text-xs text-surface-variant">{businessName}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Photo 2: Detail */}
+            <div className="md:col-span-3 md:row-span-1 relative rounded-2xl overflow-hidden group shadow-sm bg-surface-container border border-outline-variant/20 min-h-[200px]">
+              <img
+                src={galleryList[1] || "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&auto=format&fit=crop&q=80"}
+                alt="Detalles de servicio"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <span className="text-xs font-bold text-surface">Precisión y Estilo</span>
+              </div>
+            </div>
+
+            {/* Photo 3: Area */}
+            <div className="md:col-span-3 md:row-span-1 relative rounded-2xl overflow-hidden group shadow-sm bg-surface-container border border-outline-variant/20 min-h-[200px]">
+              <img
+                src={galleryList[2] || "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&auto=format&fit=crop&q=80"}
+                alt="Área de atención"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <span className="text-xs font-bold text-surface">Ambiente Exclusivo</span>
+              </div>
+            </div>
+
+            {/* Photo 4: Visítanos */}
+            <div className="sm:col-span-2 md:col-span-6 md:row-span-1 relative rounded-2xl overflow-hidden group shadow-sm bg-surface-container border border-outline-variant/20 min-h-[200px]">
+              <img
+                src={galleryList[3] || "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800&auto=format&fit=crop&q=80"}
+                alt="Fachada"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <div className="text-surface">
+                  <p className="text-sm font-bold">Visítanos</p>
+                  <p className="text-xs text-surface-variant">{businessAddress}</p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ============================================================ */}
       {/* 7. SECTION: RESEÑAS DE CLIENTES                              */}
       {/* ============================================================ */}
-      <section id="reseñas" className="w-full bg-surface-container-low py-20 border-y border-outline-variant/30">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
-          {/* Reviews Header with Score Card */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-12">
-            <div>
-              <div className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-wider mb-2">
-                <span className="material-symbols-outlined text-[18px]">verified_user</span>
-                <span>Opiniones Verificadas</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-on-surface tracking-tight">Lo que dicen nuestros clientes</h2>
-              <p className="text-xs sm:text-sm text-secondary mt-1">Calificaciones de citas reales completadas a través de nuestra plataforma.</p>
-            </div>
-
-            {/* Metric Aggregate Card */}
-            <div className="flex items-center gap-6 p-5 rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/30 self-start lg:self-auto">
-              <div className="flex flex-col items-center justify-center border-r border-surface-container pr-6">
-                <span className="text-4xl font-bold text-on-surface leading-none">4.9</span>
-                <div className="flex items-center gap-0.5 text-amber-500 mt-1">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="material-symbols-outlined text-[18px]">star</span>
-                  ))}
-                </div>
-              </div>
+      {showReviews && (
+        <section id="reseñas" className="w-full bg-surface-container-low/70 pt-24 pb-28 border-y border-outline-variant/30 mt-10">
+          <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
+            {/* Reviews Header with Score Card */}
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-12">
               <div>
-                <p className="text-sm font-bold text-on-surface">Excelente reputación</p>
-                <p className="text-xs text-secondary">Basado en 142 reseñas verificadas</p>
-                <div className="flex items-center gap-1 text-emerald-600 text-xs font-semibold mt-1">
-                  <span className="material-symbols-outlined text-[16px]">check_circle</span>
-                  <span>100% clientes reales</span>
+                <div className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-wider mb-2">
+                  <span className="material-symbols-outlined text-[18px]">verified_user</span>
+                  <span>Opiniones Verificadas</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-on-surface tracking-tight">Lo que dicen nuestros clientes</h2>
+                <p className="text-xs sm:text-sm text-secondary mt-1">Calificaciones de citas reales completadas en nuestro establecimiento.</p>
+              </div>
+
+              {/* Metric Aggregate Card */}
+              <div className="flex items-center gap-6 p-5 rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/30 self-start lg:self-auto">
+                <div className="flex flex-col items-center justify-center border-r border-surface-container pr-6">
+                  <span className="text-4xl font-bold text-on-surface leading-none">5.0</span>
+                  <div className="flex items-center gap-0.5 text-amber-500 mt-1">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className="material-symbols-outlined text-[18px]">star</span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-on-surface">Compromiso de Calidad</p>
+                  <p className="text-xs text-secondary">Opiniones 100% de clientes reales</p>
+                  <div className="flex items-center gap-1 text-emerald-600 text-xs font-semibold mt-1">
+                    <span className="material-symbols-outlined text-[16px]">check_circle</span>
+                    <span>Citas verificadas</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Review Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {reviews.map((rev) => (
-              <div
-                key={rev.id}
-                className="flex flex-col justify-between p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow border border-outline-variant/30"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-0.5 text-amber-500">
-                      {[...Array(rev.rating)].map((_, i) => (
-                        <span key={i} className="material-symbols-outlined text-[18px]">star</span>
-                      ))}
-                    </div>
-                    <span className="text-[11px] text-secondary font-medium">{rev.time_ago}</span>
-                  </div>
-                  <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed mb-6 italic">
-                    "{rev.comment}"
-                  </p>
+            {/* Review Cards Grid or Authentic Empty State */}
+            {reviews.length === 0 ? (
+              <div className="p-8 sm:p-12 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 text-center max-w-2xl mx-auto shadow-sm flex flex-col items-center">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4">
+                  <span className="material-symbols-outlined text-3xl">rate_review</span>
                 </div>
-                <div className="pt-4 border-t border-surface-container flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs ${rev.avatar_bg}`}>
-                    {rev.client_initials}
-                  </div>
-                  <div>
-                    <p className="text-xs sm:text-sm font-bold text-on-surface">{rev.client_name}</p>
-                    <p className="text-[11px] text-secondary">
-                      Servicio: <span className="font-semibold text-on-surface">{rev.service_used}</span> con {rev.staff_used}
-                    </p>
-                  </div>
+                <h3 className="text-lg font-bold text-on-surface">Sé el primero en compartir tu experiencia</h3>
+                <p className="text-xs sm:text-sm text-secondary mt-2 max-w-md leading-relaxed">
+                  En {businessName} valoramos la autenticidad. Al finalizar tu cita de servicio podrás evaluar nuestra atención y dejar tu testimonio verificado.
+                </p>
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                  <button
+                    type="button"
+                    onClick={openBookingGeneric}
+                    className="px-6 py-3 rounded-xl bg-primary text-on-primary text-xs font-bold hover:bg-primary-container transition-all flex items-center gap-2 shadow-sm"
+                  >
+                    <span className="material-symbols-outlined text-[18px]">calendar_month</span>
+                    <span>Reservar mi cita ahora</span>
+                  </button>
                 </div>
               </div>
-            ))}
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {reviews.map((rev) => (
+                  <div
+                    key={rev.id}
+                    className="flex flex-col justify-between p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow border border-outline-variant/30"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-0.5 text-amber-500">
+                          {[...Array(rev.rating)].map((_, i) => (
+                            <span key={i} className="material-symbols-outlined text-[18px]">star</span>
+                          ))}
+                        </div>
+                        <span className="text-[11px] text-secondary font-medium">{rev.time_ago}</span>
+                      </div>
+                      <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed mb-6 italic">
+                        "{rev.comment}"
+                      </p>
+                    </div>
+                    <div className="pt-4 border-t border-surface-container flex items-center gap-3">
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs ${rev.avatar_bg}`}>
+                        {rev.client_initials}
+                      </div>
+                      <div>
+                        <p className="text-xs sm:text-sm font-bold text-on-surface">{rev.client_name}</p>
+                        <p className="text-[11px] text-secondary">
+                          Servicio: <span className="font-semibold text-on-surface">{rev.service_used}</span> con {rev.staff_used}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ============================================================ */}
       {/* 8. SECTION: INFORMACIÓN DEL NEGOCIO Y CONTACTO                */}
       {/* ============================================================ */}
-      <section id="contacto" className="max-w-[1280px] w-full mx-auto px-6 lg:px-12 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
-          {/* Left Column: Business Details & Contact Cards */}
-          <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
-            <div>
-              <div className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-wider mb-2">
-                <span className="material-symbols-outlined text-[18px]">location_on</span>
-                <span>Ubicación y Contacto</span>
+      {showMap && (
+        <section id="contacto" className="max-w-[1280px] w-full mx-auto px-6 lg:px-12 py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+            {/* Left Column: Business Details & Contact Cards */}
+            <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
+              <div>
+                <div className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-wider mb-2">
+                  <span className="material-symbols-outlined text-[18px]">location_on</span>
+                  <span>Ubicación y Contacto</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-on-surface tracking-tight">
+                  {businessAddress ? `Encuéntranos en ${businessAddress.split(",")[0]}` : `Visita ${businessName}`}
+                </h2>
+                <p className="text-xs sm:text-sm text-secondary mt-1">
+                  Instalaciones modernas y confortables preparadas para brindarte la mejor experiencia.
+                </p>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-on-surface tracking-tight">Encuéntranos en Roma Norte</h2>
-              <p className="text-xs sm:text-sm text-secondary mt-1">
-                Fácil acceso peatonal, ciclovía y opciones de estacionamiento cercano sobre calle Colima.
-              </p>
+
+              {/* Address & WhatsApp Card */}
+              <div className="p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/30 space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed shrink-0">
+                    <span className="material-symbols-outlined text-[24px]">pin_drop</span>
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-on-surface">Dirección oficial</h3>
+                    <p className="text-xs text-secondary mt-1 leading-relaxed">
+                      {businessAddress || "Atención presencial en nuestras instalaciones"}
+                    </p>
+                  </div>
+                </div>
+                <div className="pt-4 border-t border-surface-container flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                  <a
+                    href={`https://wa.me/${(businessPhone || "").replace(/[^0-9]/g, "")}?text=Hola,%20quisiera%20consultar%20una%20duda%20sobre%20mi%20cita%20en%20${encodeURIComponent(businessName)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors shadow-sm"
+                  >
+                    <span className="material-symbols-outlined text-[20px]">chat</span>
+                    <span>Mensaje por WhatsApp</span>
+                  </a>
+                  <div className="flex items-center gap-2 text-secondary text-xs px-2">
+                    <span className="material-symbols-outlined text-[18px]">phone</span>
+                    <span className="font-semibold">{businessPhone || "Contacto directo"}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Business Hours Table */}
+              <div className="p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/30">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="material-symbols-outlined text-primary text-[20px]">schedule</span>
+                  <h3 className="text-sm font-bold text-on-surface">Horarios de atención</h3>
+                </div>
+                <div className="space-y-3 text-xs">
+                  <div className="flex justify-between items-center py-1.5 border-b border-surface-container">
+                    <span className="text-secondary">Lunes a Sábado</span>
+                    <span className="font-bold text-on-surface">10:00 - 20:00</span>
+                  </div>
+                  <div className="flex justify-between items-center py-1.5 border-b border-surface-container">
+                    <span className="text-secondary">Domingos</span>
+                    <span className="font-bold text-on-surface">11:00 - 17:00</span>
+                  </div>
+                  <div className="flex justify-between items-center py-1.5">
+                    <span className="text-secondary">Días festivos</span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-[10px] font-bold">
+                      Horario especial
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Social link */}
+              <div className="flex items-center gap-3 text-secondary text-xs px-1">
+                <span className="material-symbols-outlined text-[20px] text-primary">camera_alt</span>
+                <span>
+                  Síguenos en redes: <strong className="text-on-surface font-semibold hover:text-primary transition-colors cursor-pointer">@{businessSlug}</strong>
+                </span>
+              </div>
             </div>
 
-            {/* Address & WhatsApp Card */}
-            <div className="p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/30 space-y-4">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed shrink-0">
-                  <span className="material-symbols-outlined text-[24px]">pin_drop</span>
+            {/* Right Column: Interactive Map Preview Card */}
+            <div className="lg:col-span-6 flex flex-col">
+              <div className="relative w-full h-full min-h-[420px] rounded-2xl overflow-hidden shadow-md bg-surface-container flex flex-col justify-between border border-outline-variant/30">
+                {/* Real Interactive Google Maps Embed */}
+                <iframe
+                  title={`Ubicación de ${businessName}`}
+                  width="100%"
+                  height="100%"
+                  className="absolute inset-0 w-full h-full min-h-[420px] border-0"
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src={`https://maps.google.com/maps?q=${encodeURIComponent(businessAddress || businessName)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                />
+                <div className="relative m-4 self-start px-3.5 py-2 rounded-xl bg-surface-container-lowest/90 backdrop-blur-md shadow-sm flex items-center gap-2 text-on-surface border border-outline-variant/20 z-10 pointer-events-none">
+                  <span className="material-symbols-outlined text-primary text-[18px]">location_on</span>
+                  <span className="text-xs font-bold">{businessName}</span>
                 </div>
-                <div>
-                  <h3 className="text-sm font-bold text-on-surface">Dirección oficial</h3>
-                  <p className="text-xs text-secondary mt-1 leading-relaxed">
-                    Colima 245, Roma Norte, Cuauhtémoc,<br />
-                    06700 Ciudad de México, CDMX
-                  </p>
-                </div>
-              </div>
-              <div className="pt-4 border-t border-surface-container flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                <a
-                  href="https://wa.me/525591234567?text=Hola,%20quisiera%20consultar%20una%20duda%20sobre%20mi%20cita%20en%20Urban%20Cuts"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors shadow-sm"
-                >
-                  <span className="material-symbols-outlined text-[20px]">chat</span>
-                  <span>Mensaje por WhatsApp</span>
-                </a>
-                <div className="flex items-center gap-2 text-secondary text-xs px-2">
-                  <span className="material-symbols-outlined text-[18px]">phone</span>
-                  <span className="font-semibold">+52 55 9123 4567</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Business Hours Table */}
-            <div className="p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/30">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="material-symbols-outlined text-primary text-[20px]">schedule</span>
-                <h3 className="text-sm font-bold text-on-surface">Horarios de atención</h3>
-              </div>
-              <div className="space-y-3 text-xs">
-                <div className="flex justify-between items-center py-1.5 border-b border-surface-container">
-                  <span className="text-secondary">Lunes a Sábado</span>
-                  <span className="font-bold text-on-surface">10:00 - 20:00</span>
-                </div>
-                <div className="flex justify-between items-center py-1.5 border-b border-surface-container">
-                  <span className="text-secondary">Domingos</span>
-                  <span className="font-bold text-on-surface">11:00 - 17:00</span>
-                </div>
-                <div className="flex justify-between items-center py-1.5">
-                  <span className="text-secondary">Días festivos</span>
-                  <span className="px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-[10px] font-bold">
-                    Horario especial
-                  </span>
+                <div className="relative m-4 p-4 rounded-xl bg-surface-container-lowest/95 backdrop-blur-md shadow-md flex items-center justify-between gap-4 border border-outline-variant/20 z-10">
+                  <div>
+                    <p className="text-xs font-bold text-on-surface">{businessAddress ? businessAddress.split(",")[0] : businessName}</p>
+                    <p className="text-[11px] text-secondary">Ubicación y atención profesional</p>
+                  </div>
+                  <a
+                    href={`https://maps.google.com/?q=${encodeURIComponent(businessAddress || businessName)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 rounded-xl bg-primary text-on-primary text-xs font-bold hover:bg-primary-container transition-colors flex items-center gap-1.5 shrink-0 shadow-sm"
+                  >
+                    <span className="material-symbols-outlined text-[16px]">directions</span>
+                    <span>Cómo llegar</span>
+                  </a>
                 </div>
               </div>
-            </div>
-
-            {/* Social link */}
-            <div className="flex items-center gap-3 text-secondary text-xs px-1">
-              <span className="material-symbols-outlined text-[20px] text-primary">camera_alt</span>
-              <span>
-                Síguenos en Instagram: <strong className="text-on-surface font-semibold hover:text-primary transition-colors cursor-pointer">@urbancuts.cdmx</strong>
-              </span>
             </div>
           </div>
-
-          {/* Right Column: Interactive Map Preview Card */}
-          <div className="lg:col-span-6 flex flex-col">
-            <div className="relative w-full h-full min-h-[380px] rounded-2xl overflow-hidden shadow-md bg-surface-container flex flex-col justify-between border border-outline-variant/30">
-              <div
-                className="absolute inset-0 w-full h-full bg-cover bg-center"
-                style={{
-                  backgroundImage: `url('https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&auto=format&fit=crop&q=80')`,
-                }}
-              />
-              <div className="relative m-4 self-start px-3.5 py-2 rounded-xl bg-surface-container-lowest/90 backdrop-blur-md shadow-sm flex items-center gap-2 text-on-surface">
-                <span className="material-symbols-outlined text-primary text-[18px]">location_on</span>
-                <span className="text-xs font-bold">Urban Cuts Roma Norte</span>
-              </div>
-              <div className="relative m-4 p-4 rounded-xl bg-surface-container-lowest/95 backdrop-blur-md shadow-md flex items-center justify-between gap-4 border border-outline-variant/20">
-                <div>
-                  <p className="text-xs font-bold text-on-surface">Colima 245, Roma Nte.</p>
-                  <p className="text-[11px] text-secondary">A media cuadra de Plaza Río de Janeiro</p>
-                </div>
-                <a
-                  href="https://maps.google.com/?q=Colima+245+Roma+Norte+CDMX"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-xl bg-primary text-on-primary text-xs font-bold hover:bg-primary-container transition-colors flex items-center gap-1.5 shrink-0 shadow-sm"
-                >
-                  <span className="material-symbols-outlined text-[16px]">directions</span>
-                  <span>Cómo llegar</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ============================================================ */}
       {/* 9. FINAL PROMINENT BOOKING CTA BANNER                        */}
@@ -1191,11 +1313,17 @@ function PublicBookingContent() {
                                 : "bg-surface-container-low border-transparent hover:bg-surface-container"
                             }`}
                           >
-                            <img
-                              src={pro.avatar_url}
-                              alt={pro.name}
-                              className="w-10 h-10 rounded-full object-cover shrink-0 shadow-sm"
-                            />
+                            {pro.avatar_url ? (
+                              <img
+                                src={pro.avatar_url}
+                                alt={pro.name}
+                                className="w-10 h-10 rounded-full object-cover shrink-0 shadow-sm"
+                              />
+                            ) : (
+                              <div className="w-10 h-10 rounded-full bg-primary/10 text-primary font-bold text-xs flex items-center justify-center shrink-0 border border-primary/20">
+                                {pro.name.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase()}
+                              </div>
+                            )}
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-1.5">
                                 <span className="text-xs font-bold text-on-surface truncate">{pro.name}</span>
@@ -1528,15 +1656,15 @@ function PublicBookingContent() {
               <div className="space-y-3 text-xs text-secondary">
                 <div className="flex items-start gap-2.5">
                   <span className="material-symbols-outlined text-secondary text-[18px] mt-0.5">location_on</span>
-                  <span>Colima 245, Roma Norte<br />06700 Ciudad de México</span>
+                  <span>{businessAddress || "Atención presencial"}</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <span className="material-symbols-outlined text-secondary text-[18px]">call</span>
-                  <span>+52 55 9123 4567</span>
+                  <span>{businessPhone || "Contacto directo"}</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <span className="material-symbols-outlined text-secondary text-[18px]">mail</span>
-                  <span>citas@urbancuts.mx</span>
+                  <span>{businessEmail || `contacto@${businessSlug}.com`}</span>
                 </div>
               </div>
             </div>

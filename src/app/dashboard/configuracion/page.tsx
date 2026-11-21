@@ -34,8 +34,16 @@ function ConfiguracionContent() {
 
   // Visual Identity & Branding
   const [logoInitials, setLogoInitials] = useState("UC");
+  const [logoUrl, setLogoUrl] = useState("");
   const [primaryColor, setPrimaryColor] = useState("#2C4DD6");
   const presetColors = ["#2C4DD6", "#059669", "#EA580C", "#18181B", "#7C3AED"];
+  const [coverUrl, setCoverUrl] = useState("https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1600&auto=format&fit=crop&q=80");
+  const [galleryImages, setGalleryImages] = useState<string[]>([
+    "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800&auto=format&fit=crop&q=80",
+  ]);
 
   // SECTION B: Public Booking Preferences
   const [slug, setSlug] = useState("urban-cuts");
@@ -78,7 +86,7 @@ function ConfiguracionContent() {
       const initials = words.length > 1 ? `${words[0][0]}${words[1][0]}` : words[0].slice(0, 2);
       setLogoInitials(initials.toUpperCase());
 
-      // Fetch website settings
+      // Fetch website settings from Supabase
       supabase
         .from("website_settings")
         .select("*")
@@ -87,8 +95,45 @@ function ConfiguracionContent() {
         .then(({ data }) => {
           if (data) {
             if (data.primary_color) setPrimaryColor(data.primary_color);
-            if (data.slogan) setBizSlogan(data.slogan);
-            if (data.address) setBizStreet(data.address);
+            if (data.headline) setBizSlogan(data.headline);
+            if (data.cover_url) setCoverUrl(data.cover_url);
+            if (data.logo_url) setLogoUrl(data.logo_url);
+            if (data.booking_enabled !== undefined && data.booking_enabled !== null) {
+              setPauseBookings(!data.booking_enabled);
+            }
+            if (data.show_employee_profiles !== undefined && data.show_employee_profiles !== null) {
+              setShowStaff(data.show_employee_profiles);
+            }
+            if (data.show_prices !== undefined && data.show_prices !== null) {
+              setShowServices(data.show_prices);
+            }
+            if (data.about_text) {
+              try {
+                const parsed = JSON.parse(data.about_text);
+                if (parsed.description) setBizDesc(parsed.description);
+                if (Array.isArray(parsed.gallery) && parsed.gallery.length > 0) {
+                  setGalleryImages(parsed.gallery);
+                }
+                if (parsed.addressDetails) {
+                  if (parsed.addressDetails.street) setBizStreet(parsed.addressDetails.street);
+                  if (parsed.addressDetails.col) setBizCol(parsed.addressDetails.col);
+                  if (parsed.addressDetails.city) setBizCity(parsed.addressDetails.city);
+                  if (parsed.addressDetails.state) setBizState(parsed.addressDetails.state);
+                  if (parsed.addressDetails.zip) setBizZip(parsed.addressDetails.zip);
+                  if (parsed.addressDetails.country) setBizCountry(parsed.addressDetails.country);
+                }
+                if (parsed.sections) {
+                  if (parsed.sections.showHero !== undefined) setShowHero(parsed.sections.showHero);
+                  if (parsed.sections.showServices !== undefined) setShowServices(parsed.sections.showServices);
+                  if (parsed.sections.showStaff !== undefined) setShowStaff(parsed.sections.showStaff);
+                  if (parsed.sections.showGallery !== undefined) setShowGallery(parsed.sections.showGallery);
+                  if (parsed.sections.showReviews !== undefined) setShowReviews(parsed.sections.showReviews);
+                  if (parsed.sections.showMap !== undefined) setShowMap(parsed.sections.showMap);
+                }
+              } catch {
+                setBizDesc(data.about_text);
+              }
+            }
           }
         });
     }
@@ -99,6 +144,7 @@ function ConfiguracionContent() {
     setSaving(true);
     try {
       if (currentBusiness?.id) {
+        // 1. Update businesses table
         await supabase
           .from("businesses")
           .update({
@@ -110,13 +156,43 @@ function ConfiguracionContent() {
           })
           .eq("id", currentBusiness.id);
 
+        // 2. Encode gallery, description, address, and visible sections for website_settings
+        const fullAddress = [bizStreet, bizCol, bizCity, bizState, bizCountry].filter(Boolean).join(", ");
+        const aboutPayload = JSON.stringify({
+          description: bizDesc.trim(),
+          gallery: galleryImages,
+          address: fullAddress,
+          addressDetails: {
+            street: bizStreet,
+            col: bizCol,
+            city: bizCity,
+            state: bizState,
+            zip: bizZip,
+            country: bizCountry,
+          },
+          sections: {
+            showHero,
+            showServices,
+            showStaff,
+            showGallery,
+            showReviews,
+            showMap,
+          },
+        });
+
+        // 3. Upsert website_settings table
         await supabase
           .from("website_settings")
           .upsert({
             business_id: currentBusiness.id,
+            headline: bizSlogan.trim(),
+            about_text: aboutPayload,
+            cover_url: coverUrl.trim() || null,
+            logo_url: logoUrl.trim() || null,
             primary_color: primaryColor,
-            slogan: bizSlogan,
-            address: `${bizStreet}, ${bizCol}, ${bizCity}`,
+            show_prices: showServices,
+            show_employee_profiles: showStaff,
+            booking_enabled: !pauseBookings,
             updated_at: new Date().toISOString(),
           });
 
@@ -124,11 +200,11 @@ function ConfiguracionContent() {
           await refreshUserData();
         }
       }
-      setToastMsg("¡Configuración guardada exitosamente!");
+      setToastMsg("¡Configuración guardada exitosamente en la base de datos!");
       setTimeout(() => setToastMsg(null), 3500);
     } catch (err) {
       console.warn("Error saving settings:", err);
-      setToastMsg("Cambios guardados localmente.");
+      setToastMsg("Error al guardar la configuración.");
       setTimeout(() => setToastMsg(null), 3000);
     } finally {
       setSaving(false);
@@ -220,20 +296,6 @@ function ConfiguracionContent() {
             <span className="material-symbols-outlined text-[18px]">language</span>
             <span>Página pública y reservas</span>
           </button>
-          <Link
-            href="/dashboard/configuracion/horarios"
-            className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-[#575e70] hover:text-[#191c1e] hover:bg-white/50 transition-colors"
-          >
-            <span className="material-symbols-outlined text-[18px]">schedule</span>
-            <span>Horarios y disponibilidad</span>
-          </Link>
-          <Link
-            href="/dashboard/notificaciones"
-            className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-[#575e70] hover:text-[#191c1e] hover:bg-white/50 transition-colors"
-          >
-            <span className="material-symbols-outlined text-[18px]">notifications_active</span>
-            <span>Notificaciones del sistema</span>
-          </Link>
         </div>
       </div>
 
@@ -493,26 +555,33 @@ function ConfiguracionContent() {
                     </div>
                   </div>
 
-                  {/* Mini mapa simulado */}
-                  <div className="md:col-span-2 mt-1">
-                    <div className="relative w-full h-36 rounded-xl overflow-hidden bg-[#eceef0] border border-[#e0e3e5]">
-                      <div
-                        className="w-full h-full bg-cover bg-center"
-                        style={{
-                          backgroundImage:
-                            "url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80')",
-                        }}
-                      ></div>
-                      <div className="absolute inset-0 bg-black/10"></div>
-                      <div className="absolute bottom-2.5 left-2.5 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg shadow-xs flex items-center gap-1.5">
-                        <span className="material-symbols-outlined text-[#2c4dd6] text-[18px]">
-                          location_on
-                        </span>
-                        <span className="text-[11px] font-semibold text-[#191c1e]">
-                          {bizStreet}, {bizCol}, {bizCity}
-                        </span>
-                      </div>
+                  {/* Vista previa en vivo del mapa de Google Maps */}
+                  <div className="md:col-span-2 mt-2 flex flex-col gap-2">
+                    <div className="flex items-center justify-between">
+                      <label className="text-xs font-semibold text-[#191c1e] flex items-center gap-1.5">
+                        <span className="material-symbols-outlined text-[#2c4dd6] text-[18px]">map</span>
+                        <span>Ubicación en Google Maps en tiempo real</span>
+                      </label>
+                      <span className="text-[10px] text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Sincronizado con página pública
+                      </span>
                     </div>
+                    <div className="relative w-full h-48 sm:h-56 rounded-xl overflow-hidden bg-[#eceef0] border border-[#e0e3e5] shadow-xs">
+                      <iframe
+                        title="Vista previa de Google Maps"
+                        width="100%"
+                        height="100%"
+                        className="w-full h-full border-0"
+                        loading="lazy"
+                        src={`https://maps.google.com/maps?q=${encodeURIComponent(
+                          [bizStreet, bizCol, bizCity, bizState, bizCountry].filter(Boolean).join(", ") || bizName
+                        )}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                      />
+                    </div>
+                    <p className="text-[11px] text-[#575e70]">
+                      El mapa se actualiza automáticamente con la dirección ingresada arriba. Esta misma ubicación exacta y el botón de navegación interactivo se mostrarán a tus clientes en la página pública de reservas.
+                    </p>
                   </div>
                 </div>
               </section>
@@ -627,6 +696,205 @@ function ConfiguracionContent() {
                     </div>
                   </div>
                 </div>
+
+                {/* IMAGEN DE PORTADA / HERO BANNER */}
+                <div className="flex flex-col gap-3 pt-4 border-t border-[#eceef0]">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <label className="text-xs font-semibold text-[#191c1e] flex items-center gap-1.5">
+                        <span className="material-symbols-outlined text-[#2c4dd6] text-[18px]">panorama</span>
+                        <span>Imagen de Portada (Sección Hero)</span>
+                      </label>
+                      <p className="text-[11px] text-[#575e70]">
+                        Es la imagen principal de bienvenida que ven tus clientes al entrar a tu página web de reservas.
+                      </p>
+                    </div>
+                    <span className="text-[10px] text-[#2c4dd6] font-semibold bg-[#dee1ff] px-2 py-0.5 rounded-full">
+                      Recomendado 1600x900px
+                    </span>
+                  </div>
+
+                  {/* Visual Preview of Cover */}
+                  <div className="relative w-full h-44 sm:h-52 rounded-2xl overflow-hidden border border-[#e0e3e5] shadow-xs group bg-[#191c1e]">
+                    <img
+                      src={coverUrl || "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1600&auto=format&fit=crop&q=80"}
+                      alt="Portada del negocio"
+                      className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500 opacity-90"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-white text-xs font-bold leading-tight">{bizName}</p>
+                          <p className="text-white/80 text-[11px]">{bizSlogan}</p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newUrl = prompt("Ingresa la URL de la imagen de portada (Hero):", coverUrl);
+                            if (newUrl !== null && newUrl.trim()) setCoverUrl(newUrl.trim());
+                          }}
+                          className="px-3 py-1.5 rounded-xl bg-white/90 hover:bg-white text-[#191c1e] text-xs font-semibold shadow-md flex items-center gap-1.5 transition-all cursor-pointer backdrop-blur-sm"
+                        >
+                          <span className="material-symbols-outlined text-[16px]">edit</span>
+                          <span>Cambiar imagen</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Input URL Directo y Presets */}
+                  <div className="flex flex-col sm:flex-row items-center gap-2">
+                    <div className="flex-1 w-full flex items-center bg-[#f2f4f6] rounded-xl px-3 py-2 border border-[#e0e3e5]">
+                      <span className="material-symbols-outlined text-[#575e70] text-[18px] mr-2">link</span>
+                      <input
+                        type="url"
+                        placeholder="Pega la URL de tu foto de portada..."
+                        value={coverUrl}
+                        onChange={(e) => setCoverUrl(e.target.value)}
+                        className="w-full bg-transparent text-xs text-[#191c1e] outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Presets Rápidos */}
+                  <div className="flex flex-col gap-1.5 pt-1">
+                    <span className="text-[11px] font-semibold text-[#575e70]">O elige una portada recomendada:</span>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      {[
+                        { label: "Barbería Clásica", url: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1600&auto=format&fit=crop&q=80" },
+                        { label: "Estudio Vintage", url: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1600&auto=format&fit=crop&q=80" },
+                        { label: "Salón Moderno", url: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1600&auto=format&fit=crop&q=80" },
+                        { label: "Grooming & Relax", url: "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=1600&auto=format&fit=crop&q=80" },
+                      ].map((preset, idx) => (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => setCoverUrl(preset.url)}
+                          className={`relative h-16 rounded-xl overflow-hidden border text-left p-2 flex items-end transition-all ${
+                            coverUrl === preset.url
+                              ? "border-[#2c4dd6] ring-2 ring-[#2c4dd6]/40 shadow-sm"
+                              : "border-[#e0e3e5] hover:border-[#2c4dd6]/60 opacity-80 hover:opacity-100"
+                          }`}
+                        >
+                          <img src={preset.url} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                          <div className="absolute inset-0 bg-black/50"></div>
+                          <span className="relative z-10 text-[10px] font-bold text-white drop-shadow-sm truncate">
+                            {preset.label}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* SECTION 4: GALERÍA DE FOTOS DEL NEGOCIO */}
+              <section className="bg-white rounded-2xl p-5 sm:p-6 shadow-xs border border-[#e0e3e5] flex flex-col gap-5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1 border-b border-[#eceef0]">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#dee1ff] flex items-center justify-center text-[#2c4dd6]">
+                      <span className="material-symbols-outlined text-[24px]">photo_library</span>
+                    </div>
+                    <div>
+                      <h2 className="text-base font-bold text-[#191c1e]">
+                        Galería de fotos del negocio
+                      </h2>
+                      <p className="text-xs text-[#575e70]">
+                        Fotos de tus instalaciones, sillones y trabajos para mostrar en tu página pública.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-semibold text-[#575e70] bg-[#f2f4f6] px-2.5 py-1 rounded-lg">
+                      {galleryImages.length} fotos activas
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const newUrl = prompt("Ingresa la URL de la nueva foto para la galería:");
+                        if (newUrl !== null && newUrl.trim()) {
+                          setGalleryImages((prev) => [...prev, newUrl.trim()]);
+                        }
+                      }}
+                      className="px-3 py-1.5 rounded-xl bg-[#2c4dd6] hover:bg-[#4a68f0] text-white text-xs font-semibold shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
+                    >
+                      <span className="material-symbols-outlined text-[16px]">add_photo_alternate</span>
+                      <span>Agregar foto</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Grid of Current Gallery Photos */}
+                {galleryImages.length === 0 ? (
+                  <div className="py-12 px-4 rounded-xl bg-[#f2f4f6] border border-dashed border-[#e0e3e5] text-center flex flex-col items-center justify-center gap-2">
+                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[#575e70] shadow-xs">
+                      <span className="material-symbols-outlined text-[24px]">no_photography</span>
+                    </div>
+                    <p className="text-xs font-bold text-[#191c1e]">Aún no tienes fotos en la galería</p>
+                    <p className="text-[11px] text-[#575e70] max-w-sm">
+                      Agrega fotos de tu local o de tus mejores cortes para inspirar confianza en nuevos clientes.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setGalleryImages([
+                          "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&auto=format&fit=crop&q=80",
+                          "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&auto=format&fit=crop&q=80",
+                          "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&auto=format&fit=crop&q=80",
+                          "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800&auto=format&fit=crop&q=80",
+                        ])
+                      }
+                      className="mt-1 px-3 py-1.5 rounded-lg bg-white border border-[#e0e3e5] text-[#2c4dd6] text-xs font-semibold hover:bg-white shadow-xs cursor-pointer"
+                    >
+                      Cargar 4 fotos de muestra
+                    </button>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+                    {galleryImages.map((imgUrl, index) => (
+                      <div
+                        key={index}
+                        className="group relative h-36 rounded-xl overflow-hidden border border-[#e0e3e5] shadow-xs bg-[#f2f4f6]"
+                      >
+                        <img
+                          src={imgUrl}
+                          alt={`Galería ${index + 1}`}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newUrl = prompt("Editar URL de esta foto:", imgUrl);
+                              if (newUrl !== null && newUrl.trim()) {
+                                setGalleryImages((prev) =>
+                                  prev.map((item, i) => (i === index ? newUrl.trim() : item))
+                                );
+                              }
+                            }}
+                            className="w-8 h-8 rounded-full bg-white text-[#191c1e] hover:bg-[#f2f4f6] flex items-center justify-center shadow-md transition-all cursor-pointer"
+                            title="Cambiar foto"
+                          >
+                            <span className="material-symbols-outlined text-[16px]">edit</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setGalleryImages((prev) => prev.filter((_, i) => i !== index))
+                            }
+                            className="w-8 h-8 rounded-full bg-rose-600 text-white hover:bg-rose-700 flex items-center justify-center shadow-md transition-all cursor-pointer"
+                            title="Eliminar de galería"
+                          >
+                            <span className="material-symbols-outlined text-[16px]">delete</span>
+                          </button>
+                        </div>
+                        <span className="absolute bottom-1.5 left-1.5 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded font-mono">
+                          #{index + 1}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </section>
             </>
           ) : (
@@ -1182,8 +1450,7 @@ function ConfiguracionContent() {
                   <div
                     className="w-full h-full bg-cover bg-center"
                     style={{
-                      backgroundImage:
-                        "url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80')",
+                      backgroundImage: `url('${coverUrl || "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1600&auto=format&fit=crop&q=80"}')`,
                     }}
                   ></div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>

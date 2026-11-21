@@ -25,28 +25,14 @@ function EmpleadoFormContent() {
   const isEditing = Boolean(idParam);
 
   // Form Fields
-  const [displayName, setDisplayName] = useState(isEditing ? "Carlos Ramírez" : "");
-  const [email, setEmail] = useState(isEditing ? "carlos.ramirez@barberiaelite.com" : "");
-  const [phone, setPhone] = useState(isEditing ? "+34 612 345 678" : "");
-  const [jobTitle, setJobTitle] = useState(
-    isEditing ? "Barbero Master • Especialista en Fades y Degradados" : ""
-  );
-  const [bio, setBio] = useState(
-    isEditing
-      ? "Más de 8 años de experiencia en barbería tradicional y técnicas de degradado contemporáneas."
-      : ""
-  );
-  const [avatarUrl, setAvatarUrl] = useState(
-    isEditing
-      ? "https://lh3.googleusercontent.com/aida-public/AB6AXuBYw0oUHUtMZFBxLMVEymrtCWcfCUxvanGpe7nyuZh66kckxq9yoOfWeCh2rtqmJft_Yq-2ObePF1lGLwGxfFlkC9vvo4QQJb-SfRkMsvRO97o8pJK1kfn_Rnln2CWV59LMIIJqpLLq5UP0Thfrd8Occ0FebfwEsmUrbgxHA3DnzmDor0d-oLaC0q4wfhEhlGt_SCv6aOcTeUc3j6znBopx04VTFb2dViKalDypZUpa"
-      : "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
-  );
-  const [selectedServiceIds, setSelectedServiceIds] = useState<string[]>(
-    isEditing ? ["srv-1", "srv-2", "srv-3", "srv-4"] : ["srv-1", "srv-2"]
-  );
-  const [accessMode, setAccessMode] = useState<"operativo" | "invitar">(
-    isEditing ? "invitar" : "invitar"
-  );
+  const [displayName, setDisplayName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [bio, setBio] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
+  const [selectedServiceIds, setSelectedServiceIds] = useState<string[]>([]);
+  const [accessMode, setAccessMode] = useState<"operativo" | "invitar">("operativo");
   const [useGeneralSchedule, setUseGeneralSchedule] = useState(false);
   const [weeklySchedule, setWeeklySchedule] = useState<DaySchedule[]>(DEFAULT_WEEKLY_SCHEDULE);
 
@@ -67,18 +53,37 @@ function EmpleadoFormContent() {
   useEffect(() => {
     if (!idParam) return;
 
-    const found = MOCK_EMPLOYEES.find((e) => e.id === idParam);
-    if (found) {
-      setDisplayName(found.display_name);
-      setEmail(found.email);
-      setPhone(found.phone);
-      setJobTitle(found.job_title);
-      setBio(found.bio);
-      setAvatarUrl(found.avatar_url);
-      setSelectedServiceIds(found.services.map((s) => s.id));
-      setAccessMode(found.access_status === "sin-acceso" ? "operativo" : "invitar");
-      if (found.weekly_schedule?.length > 0) {
-        setWeeklySchedule(found.weekly_schedule);
+    // Check Supabase first
+    if (!idParam.startsWith("emp-")) {
+      supabase
+        .from("employees")
+        .select("*")
+        .eq("id", idParam)
+        .single()
+        .then(({ data, error }) => {
+          if (data && !error) {
+            setDisplayName(data.display_name || "");
+            setEmail(data.email || "");
+            setPhone(data.phone || "");
+            setJobTitle(data.role || data.job_title || "");
+            setBio(data.bio || "");
+            setAvatarUrl(data.avatar_url || "");
+          }
+        });
+    } else {
+      const found = MOCK_EMPLOYEES.find((e) => e.id === idParam);
+      if (found) {
+        setDisplayName(found.display_name);
+        setEmail(found.email);
+        setPhone(found.phone);
+        setJobTitle(found.job_title);
+        setBio(found.bio);
+        setAvatarUrl(found.avatar_url);
+        setSelectedServiceIds(found.services.map((s) => s.id));
+        setAccessMode(found.access_status === "sin-acceso" ? "operativo" : "invitar");
+        if (found.weekly_schedule?.length > 0) {
+          setWeeklySchedule(found.weekly_schedule);
+        }
       }
     }
   }, [idParam]);
@@ -182,7 +187,8 @@ function EmpleadoFormContent() {
               email: email.trim() || null,
               phone: phone.trim() || null,
               bio: bio.trim() || null,
-              avatar_url: avatarUrl,
+              avatar_url: avatarUrl || null,
+              role: jobTitle.trim() || "Especialista",
             })
             .eq("id", idParam);
         } else {
@@ -193,7 +199,8 @@ function EmpleadoFormContent() {
             email: email.trim() || null,
             phone: phone.trim() || null,
             bio: bio.trim() || null,
-            avatar_url: avatarUrl,
+            avatar_url: avatarUrl || null,
+            role: jobTitle.trim() || "Especialista",
             is_active: true,
           });
         }
@@ -279,14 +286,22 @@ function EmpleadoFormContent() {
               {/* Photo Upload Area */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 bg-surface-container-low rounded-xl">
                 <div className="relative">
-                  <img
-                    src={avatarUrl}
-                    alt={displayName || "Colaborador"}
-                    className="w-20 h-20 rounded-2xl object-cover shadow-sm bg-surface-container-high"
-                  />
-                  <span className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-sm">
-                    <span className="material-symbols-outlined text-[14px]">check</span>
-                  </span>
+                  {avatarUrl ? (
+                    <img
+                      src={avatarUrl}
+                      alt={displayName || "Colaborador"}
+                      className="w-20 h-20 rounded-2xl object-cover shadow-sm bg-surface-container-high"
+                    />
+                  ) : (
+                    <div className="w-20 h-20 rounded-2xl bg-surface-container-high flex flex-col items-center justify-center text-on-surface-variant shadow-sm border border-surface-container">
+                      <span className="material-symbols-outlined text-[32px] text-primary">add_a_photo</span>
+                    </div>
+                  )}
+                  {avatarUrl ? (
+                    <span className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-sm">
+                      <span className="material-symbols-outlined text-[14px]">check</span>
+                    </span>
+                  ) : null}
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <div className="flex items-center gap-2">
@@ -294,25 +309,25 @@ function EmpleadoFormContent() {
                       type="button"
                       onClick={() => {
                         const newUrl = prompt("Ingresa la URL de la foto para el colaborador:", avatarUrl);
-                        if (newUrl) setAvatarUrl(newUrl);
+                        if (newUrl !== null) setAvatarUrl(newUrl.trim());
                       }}
-                      className="px-3.5 py-2 rounded-xl bg-surface-container-lowest hover:bg-surface-container text-on-surface text-xs transition-all shadow-sm flex items-center gap-1.5 font-semibold border border-surface-container"
+                      className="px-3.5 py-2 rounded-xl bg-surface-container-lowest hover:bg-surface-container text-on-surface text-xs transition-all shadow-sm flex items-center gap-1.5 font-semibold border border-surface-container cursor-pointer"
                     >
                       <span className="material-symbols-outlined text-[16px]">photo_camera</span>
-                      <span>Cambiar foto</span>
+                      <span>{avatarUrl ? "Cambiar foto" : "Subir / Asignar foto"}</span>
                     </button>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setAvatarUrl("https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80")
-                      }
-                      className="px-3 py-2 rounded-xl text-error hover:bg-error-container/30 transition-all text-xs font-semibold"
-                    >
-                      Eliminar
-                    </button>
+                    {avatarUrl && (
+                      <button
+                        type="button"
+                        onClick={() => setAvatarUrl("")}
+                        className="px-3 py-2 rounded-xl text-error hover:bg-error-container/30 transition-all text-xs font-semibold cursor-pointer"
+                      >
+                        Quitar
+                      </button>
+                    )}
                   </div>
                   <span className="text-[11px] text-on-surface-variant leading-tight">
-                    JPG o PNG máx. 3MB. Recomendado relación 1:1 (400x400px o superior).
+                    JPG, PNG o URL web. Si se deja vacía, se mostrará el icono por defecto.
                   </span>
                 </div>
               </div>

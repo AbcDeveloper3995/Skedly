@@ -83,7 +83,12 @@ function DashboardLayoutContent({
     {
       title: "Presencia Online",
       items: [
-        { name: "Página de reservas", path: "/reservas/urban-cuts", icon: "storefront", external: true },
+        {
+          name: "Página de reservas",
+          path: `/reservas/${currentBusiness?.slug || "urban-cuts"}`,
+          icon: "storefront",
+          external: true,
+        },
       ],
     },
     {
@@ -293,7 +298,7 @@ function DashboardLayoutContent({
         {/* Topbar Actions */}
         <div className="flex items-center gap-3">
           <Link
-            href="/reservas/urban-cuts"
+            href={`/reservas/${currentBusiness?.slug || "urban-cuts"}`}
             target="_blank"
             className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface text-xs font-medium shadow-sm border border-surface-container hover:bg-surface-container transition-all"
           >
