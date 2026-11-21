@@ -930,82 +930,7 @@ function EmpleadoFormContent() {
 
           {/* ================= RIGHT COLUMN: Live Preview & Summary ================= */}
           <div className="lg:col-span-4 flex flex-col gap-6 sticky top-20">
-            {/* Card 1: Preview en Página de Reservas */}
-            <div className="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-container p-5 flex flex-col gap-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-on-surface">
-                  <span className="material-symbols-outlined text-primary text-[18px]">visibility</span>
-                  <span>Así se mostrará en tu web</span>
-                </div>
-                <span className="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant text-[11px] font-medium">
-                  Vista Cliente
-                </span>
-              </div>
-
-              {/* Realistic Mockup of the booking card */}
-              <div className="p-4 rounded-xl bg-surface-container-low flex flex-col gap-4 border border-surface-container/60">
-                <div className="flex items-start gap-3">
-                  <img
-                    src={avatarUrl}
-                    alt={displayName || "Colaborador"}
-                    className="w-16 h-16 rounded-xl object-cover shadow-sm bg-surface-container-high shrink-0"
-                  />
-                  <div className="flex flex-col min-w-0">
-                    <div className="flex items-center gap-1">
-                      <span className="text-sm font-bold text-on-surface truncate">
-                        {displayName || "Nombre Colaborador"}
-                      </span>
-                      <span className="material-symbols-outlined text-primary text-[16px] shrink-0" title="Verificado">
-                        verified
-                      </span>
-                    </div>
-                    <span className="text-xs text-on-surface-variant font-medium line-clamp-1">
-                      {jobTitle || "Especialista en servicios"}
-                    </span>
-                    <div className="flex items-center gap-1 mt-1">
-                      <span className="material-symbols-outlined text-[15px] text-amber-500 fill-current">
-                        star
-                      </span>
-                      <span className="text-xs font-bold text-on-surface">4.9</span>
-                      <span className="text-[11px] text-on-surface-variant">(128 reseñas)</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Specialties Badges */}
-                <div className="flex flex-wrap gap-1.5">
-                  {selectedServiceIds.slice(0, 3).map((id) => {
-                    const found = businessServices.find((s) => s.id === id);
-                    return (
-                      <span
-                        key={id}
-                        className="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface text-[11px] font-medium"
-                      >
-                        {found?.name || "Servicio"}
-                      </span>
-                    );
-                  })}
-                  {selectedServiceIds.length > 3 && (
-                    <span className="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-[11px] font-bold">
-                      +{selectedServiceIds.length - 3} más
-                    </span>
-                  )}
-                </div>
-
-                {/* Booking Slot Callout */}
-                <div className="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-lowest">
-                  <div className="flex flex-col">
-                    <span className="text-[11px] text-on-surface-variant">Próxima cita disponible</span>
-                    <span className="text-xs font-bold text-primary">Hoy, 16:30 hrs</span>
-                  </div>
-                  <span className="px-3 py-1.5 rounded-lg bg-primary text-on-primary text-xs font-bold shadow-sm">
-                    Seleccionar
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 2: Resumen de Disponibilidad & Capacidad */}
+            {/* Card: Resumen de Disponibilidad & Capacidad */}
             <div className="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-container p-5 flex flex-col gap-4">
               <div className="flex items-center justify-between">
                 <h3 className="text-xs font-bold text-on-surface flex items-center gap-1.5">
@@ -1024,7 +949,7 @@ function EmpleadoFormContent() {
                     {totalWeeklyHours}h
                   </span>
                   <span className="text-[11px] text-primary font-medium mt-0.5">
-                    {activeDaysCount} días activos
+                    {activeDaysCount} {activeDaysCount === 1 ? "día activo" : "días activos"}
                   </span>
                 </div>
                 <div className="p-3.5 rounded-xl bg-surface-container-low flex flex-col">
@@ -1037,32 +962,6 @@ function EmpleadoFormContent() {
                   <span className="text-[11px] text-on-surface-variant font-medium mt-0.5">
                     citas semanales
                   </span>
-                </div>
-              </div>
-
-              {/* Workload Distribution Visualizer SVG */}
-              <div className="p-3.5 rounded-xl bg-surface-container-low flex flex-col gap-2">
-                <div className="flex items-center justify-between text-xs text-on-surface-variant">
-                  <span>Distribución por día</span>
-                  <span className="font-semibold text-on-surface">Lunes a Sábado</span>
-                </div>
-                <div className="w-full">
-                  <svg className="w-full h-8 text-primary overflow-visible" viewBox="0 0 280 40">
-                    <rect className="fill-current opacity-90" height="32" rx="4" width="36" x="0" y="4" />
-                    <rect className="fill-current opacity-90" height="32" rx="4" width="36" x="46" y="4" />
-                    <rect className="fill-current opacity-90" height="32" rx="4" width="36" x="92" y="4" />
-                    <rect className="fill-current opacity-90" height="32" rx="4" width="36" x="138" y="4" />
-                    <rect className="fill-current" height="36" rx="4" width="36" x="184" y="0" />
-                    <rect className="fill-current opacity-60" height="20" rx="4" width="36" x="230" y="16" />
-                  </svg>
-                  <div className="flex justify-between text-[11px] text-on-surface-variant mt-1.5 px-1 font-mono">
-                    <span>Lun</span>
-                    <span>Mar</span>
-                    <span>Mié</span>
-                    <span>Jue</span>
-                    <span>Vie</span>
-                    <span>Sáb</span>
-                  </div>
                 </div>
               </div>
             </div>

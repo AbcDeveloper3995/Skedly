@@ -164,6 +164,20 @@ function EmpleadoDetailContent({ id }: { id: string }) {
           status: a.status === "completed" ? "Completada" : a.status === "confirmed" ? "Confirmada" : a.status === "in_progress" ? "En curso" : "Confirmada",
         }));
 
+        // Calculate dynamic weekly hours from real active schedule
+        let totalHours = 0;
+        finalSchedule.forEach((d) => {
+          if (!d.active) return;
+          const [sh, sm] = (d.start || "09:00").split(":").map(Number);
+          const [eh, em] = (d.end || "18:00").split(":").map(Number);
+          let dayHours = eh + em / 60 - (sh + sm / 60);
+          if (d.breakTime) {
+            dayHours -= 1.0;
+          }
+          if (dayHours > 0) totalHours += dayHours;
+        });
+        const calculatedWeeklyHours = Math.round(totalHours * 10) / 10;
+
         if (isMounted) {
           setEmployee({
             id: dbEmp.id,
@@ -180,11 +194,11 @@ function EmpleadoDetailContent({ id }: { id: string }) {
             rating: 5.0,
             reviews_count: 0,
             services: mappedServices,
-            schedule_summary: "Lun - Sáb: 09:00 - 19:00",
+            schedule_summary: "Horario personalizado",
             break_summary: "14:00 - 15:00",
             today_appointments: mappedAppts.length,
             satisfaction: 100,
-            weekly_hours: 48,
+            weekly_hours: calculatedWeeklyHours,
             seat: "Sillón 01",
             booking_slug: (dbEmp.display_name || "empleado").toLowerCase().replace(/\s+/g, "-"),
             google_calendar_synced: false,
@@ -206,6 +220,22 @@ function EmpleadoDetailContent({ id }: { id: string }) {
       isMounted = false;
     };
   }, [id]);
+
+  const computedWeeklyHours = useMemo(() => {
+    if (!employee?.weekly_schedule) return employee?.weekly_hours || 0;
+    let hours = 0;
+    employee.weekly_schedule.forEach((d) => {
+      if (!d.active) return;
+      const [sh, sm] = (d.start || "09:00").split(":").map(Number);
+      const [eh, em] = (d.end || "18:00").split(":").map(Number);
+      let dayHours = eh + em / 60 - (sh + sm / 60);
+      if (d.breakTime) {
+        dayHours -= 1.0;
+      }
+      if (dayHours > 0) hours += dayHours;
+    });
+    return Math.round(hours * 10) / 10;
+  }, [employee?.weekly_schedule, employee?.weekly_hours]);
 
   const personalUrl = `skedly.com/${
     currentBusiness?.slug || "barberia-demo"
@@ -615,7 +645,7 @@ function EmpleadoDetailContent({ id }: { id: string }) {
                   Carga sem.
                 </span>
                 <div className="flex items-baseline gap-1 mt-0.5">
-                  <span className="text-xl font-bold text-on-surface">{employee.weekly_hours}</span>
+                  <span className="text-xl font-bold text-on-surface">{computedWeeklyHours}</span>
                   <span className="text-[11px] text-on-surface-variant">horas</span>
                 </div>
               </div>
