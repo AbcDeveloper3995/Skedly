@@ -96,6 +96,32 @@ function CitasListContent() {
     }
   };
 
+  // Delete cancelled appointment
+  const deleteAppointment = async (id: string) => {
+    const confirmDelete = window.confirm(
+      "¿Estás seguro de que deseas eliminar permanentemente esta cita cancelada? Esta acción no se puede deshacer."
+    );
+    if (!confirmDelete) return;
+
+    try {
+      if (currentBusiness?.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) {
+        // Also cascade deletes appointment_services
+        const { error } = await supabase.from("appointments").delete().eq("id", id);
+        if (error) {
+          console.error("Error deleting appointment:", error);
+          alert(`No se pudo eliminar la cita: ${error.message}`);
+          return;
+        }
+      }
+
+      setAppointments((prev) => prev.filter((app) => app.id !== id));
+      setActionFeedback("Cita eliminada permanentemente");
+      setTimeout(() => setActionFeedback(null), 2500);
+    } catch (err) {
+      console.error("Error deleting appointment:", err);
+    }
+  };
+
   // Filtered Appointments
   const filtered = useMemo(() => {
     return appointments.filter((app) => {
@@ -310,14 +336,18 @@ function CitasListContent() {
                     weekday: "short",
                     day: "numeric",
                     month: "short",
+                    year: "numeric",
                   })
                 : "26 Oct";
               const formattedTime = !isNaN(startDate.getTime())
                 ? startDate.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })
                 : "10:15";
 
+              // Generate Clean Human Reservation Code based on UUID or sequence
+              const reservationCode = `#SK-${app.id.slice(0, 5).toUpperCase()}`;
+
               const service = app.appointment_services?.[0] || {
-                service_name: "Corte Estilizado",
+                service_name: "Corte General",
                 unit_price: 180,
                 duration_minutes: 45,
               };
@@ -332,87 +362,125 @@ function CitasListContent() {
               // WhatsApp Link generator
               const rawPhone = (app.customer_phone_snapshot || "").replace(/[^0-9]/g, "");
               const waText = encodeURIComponent(
-                `Hola ${app.customer_name_snapshot || ""}, te contactamos de Barbería Élite Central respecto a tu turno agendado para el ${formattedDate} a las ${formattedTime}.`
+                `Hola ${app.customer_name_snapshot || ""}, te contactamos de ${
+                  currentBusiness?.name || "nuestro local"
+                } respecto a tu reserva ${reservationCode} agendada para el ${formattedDate} a las ${formattedTime}.`
               );
               const waLink = rawPhone ? `https://wa.me/${rawPhone}?text=${waText}` : null;
 
               return (
                 <div
                   key={app.id}
-                  className="p-4 hover:bg-surface-container-low/50 transition-colors flex flex-col md:flex-row md:items-center justify-between gap-4 group"
+                  className="p-4 sm:p-5 hover:bg-surface-container-low/40 transition-colors flex flex-col lg:flex-row lg:items-center justify-between gap-4 group"
                 >
-                  {/* Left: Customer & Service info */}
-                  <div className="flex items-start gap-3.5 min-w-0">
-                    <div className="w-11 h-11 rounded-2xl bg-secondary-fixed flex items-center justify-center text-xs font-bold text-on-secondary-fixed shrink-0">
+                  {/* Left Column: Code, Customer info & Service */}
+                  <div className="flex items-start gap-3.5 min-w-0 flex-1">
+                    {/* Customer Avatar Initials */}
+                    <div className="w-11 h-11 rounded-2xl bg-primary/10 text-primary border border-primary/20 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
                       {initials}
                     </div>
-                    <div className="flex flex-col min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
+
+                    <div className="flex flex-col min-w-0 flex-1">
+                      {/* Top Meta Line: Reservation Code, Customer Name & Status */}
+                      <div className="flex items-center gap-2.5 flex-wrap">
+                        {/* Reservation Code Badge */}
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-surface-container text-on-surface font-mono text-[11px] font-bold border border-outline-variant/30 tracking-wider">
+                          <span className="material-symbols-outlined text-[13px] text-primary">tag</span>
+                          <span>{reservationCode}</span>
+                        </span>
+
                         <span className="text-sm font-bold text-on-surface truncate">
                           {app.customer_name_snapshot || "Cliente Anónimo"}
                         </span>
+
                         {/* Status Chip */}
                         {app.status === "confirmed" && (
-                          <span className="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-[10px] font-bold">
-                            Confirmada
+                          <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold inline-flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                            <span>Confirmada</span>
                           </span>
                         )}
                         {app.status === "pending" && (
-                          <span className="px-2 py-0.5 rounded-full bg-tertiary-fixed text-tertiary text-[10px] font-bold animate-pulse">
-                            Pendiente Aprobación
+                          <span className="px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-bold inline-flex items-center gap-1 animate-pulse">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                            <span>Pendiente Aprobación</span>
                           </span>
                         )}
                         {app.status === "completed" && (
-                          <span className="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface text-[10px] font-bold">
-                            Completada
+                          <span className="px-2.5 py-0.5 rounded-full bg-surface-container text-secondary text-[10px] font-bold inline-flex items-center gap-1">
+                            <span className="material-symbols-outlined text-[12px]">done_all</span>
+                            <span>Completada</span>
                           </span>
                         )}
                         {app.status === "cancelled" && (
-                          <span className="px-2 py-0.5 rounded-full bg-error-container text-on-error-container text-[10px] font-bold">
-                            Cancelada
+                          <span className="px-2.5 py-0.5 rounded-full bg-red-50 text-red-700 border border-red-200 text-[10px] font-bold inline-flex items-center gap-1">
+                            <span className="material-symbols-outlined text-[12px]">cancel</span>
+                            <span>Cancelada</span>
                           </span>
                         )}
                         {app.status === "no_show" && (
-                          <span className="px-2 py-0.5 rounded-full bg-error-container text-on-error-container text-[10px] font-bold">
-                            No asistió
+                          <span className="px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-700 border border-gray-300 text-[10px] font-bold inline-flex items-center gap-1">
+                            <span>No asistió</span>
                           </span>
                         )}
                       </div>
 
-                      <div className="flex items-center gap-2 text-xs text-on-surface-variant flex-wrap mt-0.5">
-                        <span className="font-semibold text-primary">{service.service_name}</span>
-                        <span>•</span>
-                        <span>{service.duration_minutes || 45} min</span>
-                        <span>•</span>
-                        <span className="font-bold text-on-surface">${service.unit_price} MXN</span>
+                      {/* Service Details & Client Contacts */}
+                      <div className="flex items-center gap-2.5 text-xs text-on-surface-variant flex-wrap mt-1.5">
+                        <span className="font-semibold text-on-surface flex items-center gap-1">
+                          <span className="material-symbols-outlined text-[15px] text-primary">content_cut</span>
+                          <span>{service.service_name}</span>
+                        </span>
+                        <span className="text-outline-variant">•</span>
+                        <span className="text-secondary flex items-center gap-1">
+                          <span className="material-symbols-outlined text-[14px]">schedule</span>
+                          <span>{service.duration_minutes || 30} min</span>
+                        </span>
+                        <span className="text-outline-variant">•</span>
+                        <span className="font-bold text-primary">${service.unit_price} MXN</span>
+
                         {app.customer_phone_snapshot && (
                           <>
-                            <span>•</span>
-                            <span>{app.customer_phone_snapshot}</span>
+                            <span className="text-outline-variant">•</span>
+                            <span className="text-secondary flex items-center gap-1">
+                              <span className="material-symbols-outlined text-[14px]">call</span>
+                              <span>{app.customer_phone_snapshot}</span>
+                            </span>
+                          </>
+                        )}
+
+                        {app.customer_email_snapshot && (
+                          <>
+                            <span className="text-outline-variant">•</span>
+                            <span className="text-secondary flex items-center gap-1">
+                              <span className="material-symbols-outlined text-[14px]">mail</span>
+                              <span>{app.customer_email_snapshot}</span>
+                            </span>
                           </>
                         )}
                       </div>
 
                       {app.internal_notes && (
-                        <p className="text-[11px] text-secondary italic mt-1 line-clamp-1">
+                        <p className="text-[11px] text-secondary italic mt-1 line-clamp-1 bg-surface-container-low px-2 py-0.5 rounded border border-outline-variant/20 inline-block self-start">
                           Nota: {app.internal_notes}
                         </p>
                       )}
                     </div>
                   </div>
 
-                  {/* Middle / Right: Date & Employee */}
-                  <div className="flex flex-wrap items-center gap-4 md:gap-6 justify-between md:justify-end">
-                    <div className="flex flex-col text-left md:text-right">
-                      <div className="flex items-center md:justify-end gap-1 text-xs font-bold text-on-surface">
-                        <span className="material-symbols-outlined text-primary text-[16px]">event</span>
-                        <span>
-                          {formattedDate} • {formattedTime}
-                        </span>
+                  {/* Middle: Scheduled Date & Assigned Specialist */}
+                  <div className="flex items-center gap-6 justify-between lg:justify-end border-t lg:border-t-0 pt-3 lg:pt-0 border-outline-variant/20">
+                    <div className="flex flex-col text-left lg:text-right min-w-[150px]">
+                      <div className="flex items-center lg:justify-end gap-1.5 text-xs font-bold text-on-surface">
+                        <span className="material-symbols-outlined text-primary text-[16px]">calendar_today</span>
+                        <span>{formattedDate}</span>
+                        <span className="text-primary font-bold">({formattedTime})</span>
                       </div>
-                      <div className="flex items-center md:justify-end gap-1 text-[11px] text-on-surface-variant mt-0.5">
-                        <span className="material-symbols-outlined text-[14px]">person</span>
-                        <span>{app.employee?.display_name || "Sin asignar"}</span>
+                      <div className="flex items-center lg:justify-end gap-1.5 text-[11px] text-secondary mt-1">
+                        <span className="material-symbols-outlined text-[15px] text-primary">badge</span>
+                        <span className="font-medium text-on-surface">
+                          {app.employee?.display_name || "Sin especialista asignado"}
+                        </span>
                       </div>
                     </div>
 
@@ -423,10 +491,10 @@ function CitasListContent() {
                           href={waLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-[#25D366] flex items-center justify-center transition-colors shadow-sm"
+                          className="w-9 h-9 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-[#25D366] flex items-center justify-center transition-colors shadow-sm"
                           title="Contactar vía WhatsApp"
                         >
-                          <span className="material-symbols-outlined text-[17px]">chat</span>
+                          <span className="material-symbols-outlined text-[18px]">chat</span>
                         </a>
                       )}
 
@@ -434,18 +502,18 @@ function CitasListContent() {
                         <button
                           type="button"
                           onClick={() => updateStatus(app.id, "confirmed")}
-                          className="px-2.5 py-1.5 rounded-lg bg-primary text-on-primary text-xs font-semibold shadow-sm hover:bg-primary-container transition-all flex items-center gap-1"
+                          className="px-3 h-9 rounded-xl bg-primary text-on-primary text-xs font-semibold shadow-sm hover:bg-primary-container transition-all flex items-center gap-1"
                         >
-                          <span className="material-symbols-outlined text-[15px]">check</span>
+                          <span className="material-symbols-outlined text-[16px]">check</span>
                           <span>Aceptar</span>
                         </button>
                       )}
 
                       <Link
                         href={`/dashboard/citas/nueva?mode=reschedule&id=${app.id}`}
-                        className="px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold transition-colors flex items-center gap-1"
+                        className="px-3 h-9 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold transition-colors flex items-center gap-1"
                       >
-                        <span className="material-symbols-outlined text-[15px]">sync_alt</span>
+                        <span className="material-symbols-outlined text-[16px]">sync_alt</span>
                         <span>Reprogramar</span>
                       </Link>
 
@@ -453,10 +521,11 @@ function CitasListContent() {
                         <button
                           type="button"
                           onClick={() => updateStatus(app.id, "completed")}
-                          className="px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold transition-colors"
+                          className="px-3 h-9 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold transition-colors flex items-center gap-1"
                           title="Marcar completada"
                         >
-                          Completar
+                          <span className="material-symbols-outlined text-[16px] text-emerald-600">done</span>
+                          <span>Completar</span>
                         </button>
                       )}
 
@@ -464,10 +533,24 @@ function CitasListContent() {
                         <button
                           type="button"
                           onClick={() => updateStatus(app.id, "cancelled")}
-                          className="px-2 py-1.5 rounded-lg hover:bg-error-container text-on-surface-variant hover:text-error text-xs font-medium transition-colors"
+                          className="px-2.5 h-9 rounded-xl hover:bg-red-50 text-secondary hover:text-red-600 text-xs font-medium transition-colors flex items-center gap-1"
                           title="Cancelar cita"
                         >
-                          Cancelar
+                          <span className="material-symbols-outlined text-[16px]">close</span>
+                          <span>Cancelar</span>
+                        </button>
+                      )}
+
+                      {/* Delete permanently if cancelled */}
+                      {app.status === "cancelled" && (
+                        <button
+                          type="button"
+                          onClick={() => deleteAppointment(app.id)}
+                          className="px-3 h-9 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 text-xs font-bold transition-colors flex items-center gap-1.5 shadow-sm border border-red-200"
+                          title="Eliminar cita definitivamente"
+                        >
+                          <span className="material-symbols-outlined text-[16px]">delete</span>
+                          <span>Eliminar</span>
                         </button>
                       )}
                     </div>

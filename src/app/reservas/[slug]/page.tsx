@@ -28,6 +28,35 @@ interface PublicProfessional {
   avatar_url: string;
 }
 
+interface WorkingHourRecord {
+  id: string;
+  business_id: string;
+  employee_id: string | null;
+  weekday: number; // 0=Dom..6=Sáb
+  start_time: string;
+  end_time: string;
+  is_available: boolean;
+}
+
+interface AvailabilityExceptionRecord {
+  id: string;
+  business_id: string;
+  employee_id: string | null;
+  exception_date: string;
+  is_available: boolean;
+  start_time: string | null;
+  end_time: string | null;
+  reason: string | null;
+}
+
+interface ExistingAppointmentRecord {
+  id: string;
+  employee_id: string | null;
+  start_at: string;
+  end_at: string;
+  status: string;
+}
+
 interface ReviewItem {
   id: string;
   client_name: string;
@@ -113,6 +142,7 @@ function PublicBookingContent() {
   const businessSlug = (params?.slug as string) || "urban-cuts";
 
   // Business State
+  const [businessId, setBusinessId] = useState<string | null>(null);
   const [businessName, setBusinessName] = useState("Urban Cuts");
   const [businessSubtitle, setBusinessSubtitle] = useState("Barbería Clásica & Moderna");
   const [businessDescription, setBusinessDescription] = useState(
@@ -134,6 +164,11 @@ function PublicBookingContent() {
   const [professionals, setProfessionals] = useState<PublicProfessional[]>([]);
   const [reviews, setReviews] = useState<ReviewItem[]>([]);
 
+  // Schedules and existing appointments state
+  const [workingHours, setWorkingHours] = useState<WorkingHourRecord[]>([]);
+  const [exceptions, setExceptions] = useState<AvailabilityExceptionRecord[]>([]);
+  const [existingAppointments, setExistingAppointments] = useState<ExistingAppointmentRecord[]>([]);
+
   // Filters
   const [categories, setCategories] = useState<{ id: string; label: string }[]>([
     { id: "all", label: "Todos" },
@@ -148,8 +183,8 @@ function PublicBookingContent() {
   // Selected Booking Values
   const [selectedService, setSelectedService] = useState<PublicService>(DEFAULT_SERVICES[1]); // Default Corte Premium
   const [selectedProId, setSelectedProId] = useState<string>("any");
-  const [selectedDate, setSelectedDate] = useState("2025-10-26");
-  const [selectedTime, setSelectedTime] = useState("13:00");
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
 
   // Customer Contact for Booking
   const [clientName, setClientName] = useState("");
@@ -184,6 +219,7 @@ function PublicBookingContent() {
       .maybeSingle()
       .then(async ({ data: biz }) => {
         if (biz) {
+          setBusinessId(biz.id);
           if (biz.name) setBusinessName(biz.name);
           if (biz.phone) setBusinessPhone(biz.phone);
           if (biz.email) setBusinessEmail(biz.email);
@@ -292,6 +328,37 @@ function PublicBookingContent() {
             setProfessionals([]);
             setSelectedProId("any");
           }
+
+          // 4. Load working_hours for business and employees
+          const { data: whData } = await supabase
+            .from("working_hours")
+            .select("id, business_id, employee_id, weekday, start_time, end_time, is_available")
+            .eq("business_id", biz.id);
+
+          if (whData) {
+            setWorkingHours(whData as WorkingHourRecord[]);
+          }
+
+          // 5. Load availability_exceptions
+          const { data: excData } = await supabase
+            .from("availability_exceptions")
+            .select("id, business_id, employee_id, exception_date, is_available, start_time, end_time, reason")
+            .eq("business_id", biz.id);
+
+          if (excData) {
+            setExceptions(excData as AvailabilityExceptionRecord[]);
+          }
+
+          // 6. Load existing appointments (status pending or confirmed) to prevent slot collisions
+          const { data: apptsData } = await supabase
+            .from("appointments")
+            .select("id, employee_id, start_at, end_at, status")
+            .eq("business_id", biz.id)
+            .in("status", ["pending", "confirmed"]);
+
+          if (apptsData) {
+            setExistingAppointments(apptsData as ExistingAppointmentRecord[]);
+          }
         }
       });
   }, [businessSlug]);
@@ -314,6 +381,209 @@ function PublicBookingContent() {
     }
     return professionals.find((p) => p.id === selectedProId) || professionals[0];
   }, [professionals, selectedProId]);
+
+  // Available weekdays for the selected professional (or business if 'any')
+  // Weekdays: 0=Domingo, 1=Lunes, 2=Martes, 3=Miércoles, 4=Jueves, 5=Viernes, 6=Sábado
+  const availableWeekdays = useMemo(() => {
+    if (selectedProId === "any") {
+      // If 'any', check if any employee is available on that day, or business hours
+      const activeDays = new Set<number>();
+      workingHours.forEach((wh) => {
+        if (wh.is_available) {
+          activeDays.add(wh.weekday);
+        }
+      });
+      // If no hours defined at all, default Monday to Saturday (1..6)
+      if (activeDays.size === 0) return [1, 2, 3, 4, 5, 6];
+      return Array.from(activeDays).sort((a, b) => a - b);
+    }
+
+    // For a specific employee
+    const empHours = workingHours.filter((wh) => wh.employee_id === selectedProId);
+    if (empHours.length > 0) {
+      return empHours.filter((wh) => wh.is_available).map((wh) => wh.weekday).sort((a, b) => a - b);
+    }
+
+    // Fallback to business hours (where employee_id is null)
+    const bizHours = workingHours.filter((wh) => wh.employee_id === null && wh.is_available);
+    if (bizHours.length > 0) {
+      return bizHours.map((wh) => wh.weekday).sort((a, b) => a - b);
+    }
+
+    return [1, 2, 3, 4, 5]; // Default Lunes a Viernes
+  }, [selectedProId, workingHours]);
+
+  const WEEKDAY_NAMES = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+
+  const availableDaysLabel = useMemo(() => {
+    if (availableWeekdays.length === 0) return "Sin días de atención disponibles";
+    if (availableWeekdays.length === 7) return "Lunes a Domingo";
+    return availableWeekdays.map((d) => WEEKDAY_NAMES[d]).join(", ");
+  }, [availableWeekdays]);
+
+  // Next 14 upcoming days calendar list
+  const upcomingDaysList = useMemo(() => {
+    const list = [];
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    for (let i = 0; i < 14; i++) {
+      const d = new Date(today);
+      d.setDate(today.getDate() + i);
+
+      // Local YYYY-MM-DD
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      const dateStr = `${year}-${month}-${day}`;
+      const weekday = d.getDay();
+
+      // Check if day is among available weekdays
+      const isWorkingDay = availableWeekdays.includes(weekday);
+
+      // Check for specific exception on this date
+      const hasFullDayOff = exceptions.some((exc) => {
+        const matchesTarget =
+          selectedProId === "any"
+            ? true
+            : exc.employee_id === selectedProId || exc.employee_id === null;
+        return matchesTarget && exc.exception_date === dateStr && !exc.is_available;
+      });
+
+      const isSelectable = isWorkingDay && !hasFullDayOff;
+
+      list.push({
+        dateStr,
+        weekday,
+        dayNumber: d.getDate(),
+        dayName: WEEKDAY_NAMES[weekday].slice(0, 3), // Lun, Mar, etc.
+        monthName: d.toLocaleDateString("es-ES", { month: "short" }),
+        isToday: i === 0,
+        isSelectable,
+      });
+    }
+
+    return list;
+  }, [availableWeekdays, exceptions, selectedProId]);
+
+  // Keep selectedDate synchronized: if current selectedDate is not selectable, pick the first selectable date
+  useEffect(() => {
+    if (!upcomingDaysList || upcomingDaysList.length === 0) return;
+
+    const currentIsValid = upcomingDaysList.some(
+      (d) => d.dateStr === selectedDate && d.isSelectable
+    );
+
+    if (!currentIsValid) {
+      const firstAvailable = upcomingDaysList.find((d) => d.isSelectable);
+      if (firstAvailable) {
+        setSelectedDate(firstAvailable.dateStr);
+      } else {
+        setSelectedDate("");
+      }
+    }
+  }, [upcomingDaysList, selectedDate]);
+
+  // Compute available dynamic time slots for selectedDate and selectedProId
+  const availableTimeSlots = useMemo(() => {
+    if (!selectedDate) return [];
+
+    const dateParts = selectedDate.split("-").map(Number);
+    if (dateParts.length !== 3) return [];
+    const targetDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+    const weekday = targetDate.getDay();
+
+    // Check if day is in availableWeekdays
+    if (!availableWeekdays.includes(weekday)) return [];
+
+    // Find working hours definition for this weekday
+    let schedule = workingHours.find(
+      (wh) =>
+        (selectedProId !== "any" ? wh.employee_id === selectedProId : true) &&
+        wh.weekday === weekday &&
+        wh.is_available
+    );
+
+    // Fallback to business default if employee didn't have custom hours
+    if (!schedule) {
+      schedule = workingHours.find(
+        (wh) => wh.employee_id === null && wh.weekday === weekday && wh.is_available
+      );
+    }
+
+    const startTimeStr = schedule?.start_time ? schedule.start_time.slice(0, 5) : "09:00";
+    const endTimeStr = schedule?.end_time ? schedule.end_time.slice(0, 5) : "18:00";
+
+    const [startH, startM] = startTimeStr.split(":").map(Number);
+    const [endH, endM] = endTimeStr.split(":").map(Number);
+
+    const startMinutes = startH * 60 + startM;
+    const endMinutes = endH * 60 + endM;
+    const duration = selectedService?.duration_minutes || 30;
+    // Step interval: 30 minutes minimum or service duration
+    const step = 30;
+
+    const slots: string[] = [];
+    const now = new Date();
+    const isToday =
+      targetDate.getFullYear() === now.getFullYear() &&
+      targetDate.getMonth() === now.getMonth() &&
+      targetDate.getDate() === now.getDate();
+    const currentMinutesNow = now.getHours() * 60 + now.getMinutes() + 15; // 15 min buffer
+
+    // Existing appointments on this date
+    const dayAppointments = existingAppointments.filter((appt) => {
+      if (selectedProId !== "any" && appt.employee_id && appt.employee_id !== selectedProId) {
+        return false;
+      }
+      return appt.start_at.startsWith(selectedDate);
+    });
+
+    for (let m = startMinutes; m + duration <= endMinutes; m += step) {
+      // If today, skip times that have already passed
+      if (isToday && m < currentMinutesNow) {
+        continue;
+      }
+
+      const h = Math.floor(m / 60);
+      const min = m % 60;
+      const slotTimeStr = `${String(h).padStart(2, "0")}:${String(min).padStart(2, "0")}`;
+
+      // Check collision with existing appointments
+      const slotStart = m;
+      const slotEnd = m + duration;
+
+      const hasConflict = dayAppointments.some((appt) => {
+        try {
+          const apptStart = new Date(appt.start_at);
+          const apptEnd = new Date(appt.end_at);
+          const aStartM = apptStart.getHours() * 60 + apptStart.getMinutes();
+          const aEndM = apptEnd.getHours() * 60 + apptEnd.getMinutes();
+          // Collision condition: slotStart < aEndM && slotEnd > aStartM
+          return slotStart < aEndM && slotEnd > aStartM;
+        } catch {
+          return false;
+        }
+      });
+
+      if (!hasConflict) {
+        slots.push(slotTimeStr);
+      }
+    }
+
+    return slots;
+  }, [selectedDate, selectedProId, availableWeekdays, workingHours, selectedService, existingAppointments]);
+
+  // Keep selectedTime synchronized: if current selectedTime is not among available slots, pick first slot
+  useEffect(() => {
+    if (availableTimeSlots.length > 0) {
+      if (!availableTimeSlots.includes(selectedTime)) {
+        setSelectedTime(availableTimeSlots[0]);
+      }
+    } else {
+      setSelectedTime("");
+    }
+  }, [availableTimeSlots, selectedTime]);
 
   // Modal Triggers
   const openBookingFromService = (service: PublicService) => {
@@ -339,25 +609,141 @@ function PublicBookingContent() {
   // Submit Final Booking
   const handleConfirmBooking = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!selectedDate || !selectedTime) {
+      alert("Por favor selecciona una fecha y hora disponibles.");
+      return;
+    }
+
     setIsSubmittingBooking(true);
 
     try {
-      // Simulate real-time appointment persistence
       const startDateTime = new Date(`${selectedDate}T${selectedTime}:00`);
-      const endDateTime = new Date(startDateTime.getTime() + (selectedService?.duration_minutes || 45) * 60000);
+      const endDateTime = new Date(startDateTime.getTime() + (selectedService?.duration_minutes || 30) * 60000);
 
-      // In real tenant mode with DB, we insert
-      // For public preview, simulate instant confirmation
+      const targetEmployeeId =
+        selectedProId !== "any"
+          ? selectedProId
+          : professionals.length > 0
+          ? professionals[0].id
+          : null;
+
+      if (businessId) {
+        // 1. Prepare Customer ID (Client-generated UUID so anon does not need SELECT permissions)
+        const newCustomerId = crypto.randomUUID();
+        let customerId: string = newCustomerId;
+
+        const { error: custErr } = await supabase
+          .from("customers")
+          .insert({
+            id: newCustomerId,
+            business_id: businessId,
+            full_name: clientName.trim() || "Cliente Web",
+            phone: clientPhone.trim() || null,
+            email: clientEmail.trim() || null,
+            notes: clientNotes.trim() || null,
+          });
+
+        if (custErr) {
+          console.error("Error al registrar cliente:", custErr);
+          alert(`No se pudo registrar los datos del cliente: ${custErr.message}`);
+          setIsSubmittingBooking(false);
+          return;
+        }
+
+        // 2. Prepare Appointment ID (Client-generated UUID)
+        const newApptId = crypto.randomUUID();
+        const { error: apptErr } = await supabase
+          .from("appointments")
+          .insert({
+            id: newApptId,
+            business_id: businessId,
+            customer_id: customerId,
+            employee_id: targetEmployeeId,
+            start_at: startDateTime.toISOString(),
+            end_at: endDateTime.toISOString(),
+            status: "confirmed",
+            source: "public_page",
+            customer_name_snapshot: clientName.trim() || "Cliente Web",
+            customer_phone_snapshot: clientPhone.trim() || null,
+            customer_email_snapshot: clientEmail.trim() || null,
+            internal_notes: clientNotes.trim() ? `Nota cliente: ${clientNotes.trim()}` : null,
+          });
+
+        if (apptErr) {
+          console.error("Error al crear cita:", apptErr);
+          alert(`No se pudo agendar la cita: ${apptErr.message}`);
+          setIsSubmittingBooking(false);
+          return;
+        }
+
+        // 3. Insert into appointment_services
+        const { error: srvErr } = await supabase.from("appointment_services").insert({
+          business_id: businessId,
+          appointment_id: newApptId,
+          service_id: selectedService.id.startsWith("srv-") ? null : selectedService.id,
+          service_name: selectedService.name,
+          unit_price: selectedService.price,
+          duration_minutes: selectedService.duration_minutes,
+          quantity: 1,
+        });
+
+        if (srvErr) {
+          console.warn("Advertencia al vincular servicio:", srvErr);
+        }
+
+        // Trigger email notification if email provided
+        if (clientEmail && clientEmail.includes("@")) {
+          fetch("/api/send-booking-email", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              clientEmail: clientEmail.trim(),
+              clientName: clientName.trim(),
+              businessName,
+              businessAddress,
+              businessPhone,
+              serviceName: selectedService.name,
+              servicePrice: selectedService.price,
+              serviceDuration: selectedService.duration_minutes,
+              proName: selectedPro.name,
+              scheduledDate: selectedDate,
+              scheduledTime,
+              reservationCode: `#SK-${newApptId.slice(0, 5).toUpperCase()}`,
+            }),
+          }).catch((e) => console.warn("Email trigger error:", e));
+        }
+
+        // Refresh existing appointments in local state
+        setExistingAppointments((prev) => [
+          ...prev,
+          {
+            id: newApptId,
+            employee_id: targetEmployeeId,
+            start_at: startDateTime.toISOString(),
+            end_at: endDateTime.toISOString(),
+            status: "confirmed",
+          },
+        ]);
+      }
+
+      setIsSubmittingBooking(false);
+      setBookingConfirmed(true);
+      setToastMessage(
+        `¡Cita confirmada para el ${selectedDate} a las ${selectedTime}! Te esperamos en ${businessName}.`
+      );
+
+      // Clean inputs
+      setClientName("");
+      setClientPhone("");
+      setClientEmail("");
+      setClientNotes("");
+
       setTimeout(() => {
-        setIsSubmittingBooking(false);
-        setBookingConfirmed(true);
-        setToastMessage(`¡Cita confirmada para el ${selectedDate} a las ${selectedTime}! Te enviamos los detalles a WhatsApp.`);
-        setTimeout(() => {
-          setIsModalOpen(false);
-          setBookingConfirmed(false);
-          setToastMessage(null);
-        }, 3500);
-      }, 900);
+        setIsModalOpen(false);
+        setBookingConfirmed(false);
+        setToastMessage(null);
+        setBookingStep(1);
+      }, 3500);
     } catch (err) {
       console.error("Booking error:", err);
       setIsSubmittingBooking(false);
@@ -1352,16 +1738,11 @@ function PublicBookingContent() {
                       <span className="material-symbols-outlined text-primary text-[22px]">event_available</span>
                       <div>
                         <p className="text-xs font-semibold text-on-surface">
-                          Primeros horarios libres hoy con <span className="font-bold text-primary">{selectedPro.name}</span>:
+                          Días de atención con <span className="font-bold text-primary">{selectedPro.name}</span>:
                         </p>
-                        <div className="flex items-center gap-2 mt-1">
-                          {AVAILABLE_TIMES.slice(0, 3).map((t) => (
-                            <span key={t} className="px-2 py-0.5 rounded bg-surface-container-lowest text-on-surface text-[11px] font-semibold shadow-sm">
-                              {t}
-                            </span>
-                          ))}
-                          <span className="text-secondary text-[11px]">+ 4 más</span>
-                        </div>
+                        <p className="text-[11px] text-secondary mt-0.5 font-medium">
+                          {availableDaysLabel}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -1371,37 +1752,118 @@ function PublicBookingContent() {
               {bookingStep === 2 && (
                 <>
                   {/* Step 2: Date, Time & Client Info */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-bold text-on-surface flex items-center gap-1">
-                        <span className="material-symbols-outlined text-primary text-[16px]">calendar_today</span>
-                        <span>Fecha del turno</span>
-                      </label>
-                      <input
-                        type="date"
-                        value={selectedDate}
-                        onChange={(e) => setSelectedDate(e.target.value)}
-                        className="h-11 px-3.5 bg-surface-container-low text-on-surface rounded-xl text-xs font-semibold border border-outline-variant/30 focus:outline-none focus:border-primary"
-                      />
+                  {/* Specialist & Available Days summary banner */}
+                  <div className="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                        <span className="material-symbols-outlined text-[20px]">badge</span>
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs font-bold text-on-surface truncate">
+                          Atención con: {selectedPro.name}
+                        </p>
+                        <p className="text-[11px] text-secondary flex items-center gap-1 mt-0.5">
+                          <span className="material-symbols-outlined text-[14px] text-primary">schedule</span>
+                          <span>Días disponibles: <strong className="text-on-surface">{availableDaysLabel}</strong></span>
+                        </p>
+                      </div>
                     </div>
+                    <button
+                      type="button"
+                      onClick={() => setBookingStep(1)}
+                      className="text-[11px] font-semibold text-primary hover:underline shrink-0"
+                    >
+                      Cambiar
+                    </button>
+                  </div>
 
-                    <div className="flex flex-col gap-1.5">
+                  {/* Day Picker Carousel */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-on-surface flex items-center justify-between">
+                      <span className="flex items-center gap-1">
+                        <span className="material-symbols-outlined text-primary text-[16px]">calendar_today</span>
+                        <span>Selecciona un día disponible</span>
+                      </span>
+                      <span className="text-[10px] font-medium text-secondary">
+                        Próximos 14 días
+                      </span>
+                    </label>
+
+                    <div className="flex gap-2 overflow-x-auto pb-2 pt-1 scrollbar-thin">
+                      {upcomingDaysList.map((d) => {
+                        const isSelected = selectedDate === d.dateStr;
+                        const isAvailable = d.isSelectable;
+
+                        return (
+                          <button
+                            key={d.dateStr}
+                            type="button"
+                            disabled={!isAvailable}
+                            onClick={() => {
+                              if (isAvailable) setSelectedDate(d.dateStr);
+                            }}
+                            className={`flex flex-col items-center justify-center min-w-[62px] py-2.5 px-1.5 rounded-xl border text-center transition-all shrink-0 ${
+                              isSelected
+                                ? "bg-primary text-on-primary border-primary shadow-sm"
+                                : isAvailable
+                                ? "bg-surface-container-low hover:bg-surface-container border-outline-variant/30 text-on-surface cursor-pointer"
+                                : "bg-surface-container-lowest/50 border-outline-variant/15 text-outline opacity-40 cursor-not-allowed"
+                            }`}
+                          >
+                            <span className="text-[10px] uppercase font-bold tracking-wider">
+                              {d.dayName}
+                            </span>
+                            <span className="text-base font-bold my-0.5">
+                              {d.dayNumber}
+                            </span>
+                            <span className="text-[9px] capitalize">
+                              {d.monthName}
+                            </span>
+                            {!isAvailable && (
+                              <span className="text-[8px] mt-0.5 font-medium text-red-400">
+                                No labora
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Dynamic Time Slots Grid */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
                       <label className="text-xs font-bold text-on-surface flex items-center gap-1">
                         <span className="material-symbols-outlined text-primary text-[16px]">schedule</span>
-                        <span>Hora preferida</span>
+                        <span>Horarios disponibles ({selectedDate || "Selecciona un día"})</span>
                       </label>
-                      <div className="grid grid-cols-3 gap-1.5">
-                        {AVAILABLE_TIMES.map((time) => {
+                      <span className="text-[10px] font-medium text-secondary">
+                        {availableTimeSlots.length} turnos libres
+                      </span>
+                    </div>
+
+                    {availableTimeSlots.length === 0 ? (
+                      <div className="p-4 rounded-xl bg-surface-container-low text-center border border-dashed border-outline-variant/40">
+                        <p className="text-xs font-semibold text-secondary">
+                          No hay turnos disponibles para esta fecha.
+                        </p>
+                        <p className="text-[11px] text-secondary/80 mt-1">
+                          Prueba seleccionando otro de los días activos del especialista.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                        {availableTimeSlots.map((time) => {
                           const isSel = selectedTime === time;
                           return (
                             <button
                               key={time}
                               type="button"
                               onClick={() => setSelectedTime(time)}
-                              className={`h-11 rounded-xl text-xs font-bold transition-all ${
+                              className={`h-10 rounded-xl text-xs font-bold transition-all ${
                                 isSel
-                                  ? "bg-primary text-on-primary shadow-sm"
-                                  : "bg-surface-container-low hover:bg-surface-container text-on-surface"
+                                  ? "bg-primary text-on-primary shadow-sm ring-2 ring-primary ring-offset-1"
+                                  : "bg-surface-container-low hover:bg-surface-container text-on-surface border border-outline-variant/20"
                               }`}
                             >
                               {time}
@@ -1409,7 +1871,7 @@ function PublicBookingContent() {
                           );
                         })}
                       </div>
-                    </div>
+                    )}
                   </div>
 
                   {/* Contact Fields */}
